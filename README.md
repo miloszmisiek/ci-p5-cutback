@@ -1,4 +1,5 @@
-# Cutback <!-- omit in toc -->
+# <div align='center'> Cutback <!-- omit in toc --> </div>
+
 ## Contents
 
 - [About](#about)
@@ -8,6 +9,7 @@
   - [Color Scheme](#color-scheme)
   - [Typography](#typography)
   - [Wireframes](#wireframes)
+  - [Acknowledgments](#acknowledgments)
 
 # About
 The Cutback is a web application which connects social and trading aspects. This project is built to help surfers trade their gear and encourage them to use second-hand equipment. Users can create posts with a gear they want to sell, but also compare products by the comments and 5-star rating system. All they need to do is create an account with an existing email. With an authorised profile, they are ready to help save our planet by taking part in a reusable community.
@@ -46,3 +48,17 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 
  [Back to contents](#contents)
 
+## Acknowledgments
+1. My family for being my biggest supporters throughout the entire time!
+3. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project.
+4. [Stack Overflow](https://stackoverflow.com/) community for the best bug-solving space ever created!
+
+[Back to contents](#contents)
+
+---
+<div align='center'>Copyright @ Milosz Misiek 2022</div> 
+<div align='center'>
+    <a href="https://www.linkedin.com/in/milosz-misiek/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+    </a>
+</div>
