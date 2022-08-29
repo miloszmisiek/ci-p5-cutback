@@ -1,18 +1,20 @@
-# <div align='center'> Cutback <!-- omit in toc --> </div>
+# <div align='center'> Cutback :surfer: <!-- omit in toc --> </div>
 
 ## Contents
 
-- [About](#about)
+- [**About**](#about)
   - [Project Goals](#project-goals)
-- [Project Architecture](#project-architecture)
-- [UX Design](#ux-design)
+- [**Project Architecture**](#project-architecture)
+- [**UX Design**](#ux-design)
   - [Color Scheme](#color-scheme)
   - [Typography](#typography)
   - [Wireframes](#wireframes)
-  - [Acknowledgments](#acknowledgments)
+- [**Acknowledgments**](#acknowledgments)
 
-# About
+# **About**
 The Cutback is a web application which connects social and trading aspects. This project is built to help surfers trade their gear and encourage them to use second-hand equipment. Users can create posts with a gear they want to sell, but also compare products by the comments and 5-star rating system. All they need to do is create an account with an existing email. With an authorised profile, they are ready to help save our planet by taking part in a reusable community.
+
+[Back to contents](#contents)
 
 ## Project Goals
 1. Build a project to trade second-hand surfing equipment.
@@ -28,10 +30,13 @@ The Cutback is a web application which connects social and trading aspects. This
 11. Allow users to filter products by useful features.
 12. Give users the ability to vote and comment on the products.
 
-# Project Architecture
+[Back to contents](#contents)
+# **Project Architecture**
 <!-- Document the reuse of components -->
 
-# UX Design
+[Back to contents](#contents)
+
+# **UX Design**
 <!-- The main theme of the application is designed to be toned, thus it gives a great contrast with elements of brighter colours requiring attention. The principle of the design is to bring a minimalistic approach to the page. -->
 ## Color Scheme
 <!-- The colour scheme is based on pastel colours with the use of bold colours to bring the user's attention. -->
@@ -48,7 +53,7 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 
  [Back to contents](#contents)
 
-## Acknowledgments
+# **Acknowledgments**
 1. My family for being my biggest supporters throughout the entire time!
 3. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project.
 4. [Stack Overflow](https://stackoverflow.com/) community for the best bug-solving space ever created!
