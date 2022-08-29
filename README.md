@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Cutback <!-- omit in toc -->
+## Contents
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [About](#about)
+  - [Project Goals](#project-goals)
+- [Project Architecture](#project-architecture)
+- [UX Design](#ux-design)
+  - [Color Scheme](#color-scheme)
+  - [Typography](#typography)
+  - [Wireframes](#wireframes)
 
-## Available Scripts
+# About
+The Cutback is a web application which connects social and trading aspects. This project is built to help surfers trade their gear and encourage them to use second-hand equipment. Users can create posts with a gear they want to sell, but also compare products by the comments and 5-star rating system. All they need to do is create an account with an existing email. With an authorised profile, they are ready to help save our planet by taking part in a reusable community.
 
-In the project directory, you can run:
+## Project Goals
+1. Build a project to trade second-hand surfing equipment.
+2. Help users to choose the best product they are interested in.
+3. Create a platform with easy access to products.
+4. Design a layout that is intuitive and focuses on content.
+5. Allow for responsiveness on different screen sizes to reach a further audience.
+6. Target multinational users to increase the app's reach.
+7. Require an account for posting offers to avoid fraudsters.
+8. Increase offers reliability with the use of visual data.
+9. Give users quick access to the best offers.
+10. Create a platform for modern needs.
+11. Allow users to filter products by useful features.
+12. Give users the ability to vote and comment on the products.
 
-### `npm start`
+# Project Architecture
+<!-- Document the reuse of components -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# UX Design
+<!-- The main theme of the application is designed to be toned, thus it gives a great contrast with elements of brighter colours requiring attention. The principle of the design is to bring a minimalistic approach to the page. -->
+## Color Scheme
+<!-- The colour scheme is based on pastel colours with the use of bold colours to bring the user's attention. -->
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Back to contents](#contents)
+## Typography
+<!-- The primary font used for the application is Inter. The logo and big headings use Karla font. Together they give great contrast but also transition smoothly between one another.  -->
+All fonts come from [Google Fonts](https://fonts.google.com/).
 
-### `npm test`
+[Back to contents](#contents)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Wireframes
+ Wireframes used in the design process can be found [here](documentation/wireframes/cutback-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
 
-### `npm run build`
+ [Back to contents](#contents)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
