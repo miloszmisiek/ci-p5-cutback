@@ -56,7 +56,7 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 [Back to contents](#contents)
 
 ---
-<div align='center'>Copyright @ Milosz Misiek 2022</div> 
+**<div align='center'>Copyright @ Milosz Misiek 2022</div>**
 <div align='center'>
     <a href="https://www.linkedin.com/in/milosz-misiek/" target="_blank">
         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
