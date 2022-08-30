@@ -4,6 +4,7 @@
 
 - [**About**](#about)
   - [Project Goals](#project-goals)
+- [**Technologies Used**](#technologies-used)
 - [**Project Architecture**](#project-architecture)
 - [**UX Design**](#ux-design)
   - [Color Scheme](#color-scheme)
@@ -12,25 +13,52 @@
 - [**Acknowledgments**](#acknowledgments)
 
 # **About**
-The Cutback is a web application which connects social and trading aspects. This project is built to help surfers trade their gear and encourage them to use second-hand equipment. Users can create posts with a gear they want to sell, but also compare products by the comments and 5-star rating system. All they need to do is create an account with an existing email. With an authorised profile, they are ready to help save our planet by taking part in a reusable community.
+The Cutback is a web application which allows users to compare surfing equipment and to find the best deal for themselves. This project is built to help surfers trade their gear and encourage them to use second-hand equipment. Users can create posts with a gear they want to sell, but also compare products by the comments and 5-star rating system. All they need to do is create an account with an existing email. With an authorised profile, they are ready to help save our planet by taking part in a reusable community.
 
 [Back to contents](#contents)
 
 ## Project Goals
-1. Build a project to trade second-hand surfing equipment.
-2. Help users to choose the best product they are interested in.
+1. Build a project to help compare surfing equipment.
+2. Help users to choose the best product they are looking for.
 3. Create a platform with easy access to products.
 4. Design a layout that is intuitive and focuses on content.
 5. Allow for responsiveness on different screen sizes to reach a further audience.
 6. Target multinational users to increase the app's reach.
-7. Require an account for posting offers to avoid fraudsters.
-8. Increase offers reliability with the use of visual data.
+7. Require an account for posting product offers to avoid fraudsters.
+8. Increase offers reliability with the use of pictures.
 9. Give users quick access to the best offers.
 10. Create a platform for modern needs.
 11. Allow users to filter products by useful features.
 12. Give users the ability to vote and comment on the products.
 
 [Back to contents](#contents)
+
+# **Technologies Used**
+- ### Languages
+    + [JS](https://www.javascript.com/): the primary language used to develop interactive components of the website.
+    + [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): the markup language used to create the website.
+    + [CSS](https://developer.mozilla.org/en-US/docs/Web/css): the styling language used to style the website.
+- ### Frameworks and libraries:
+    + [ReactJS](https://reactjs.org/): was used for building user interface
+    + [React Bootstrap](https://react-bootstrap-v4.netlify.app/): was used as a supprotive toolkit for front-end styling.
+- ### Other tools:
+    + [Git](https://git-scm.com/): the version control system used to manage the code.
+    + [Pipenv](https://pypi.org/project/pipenv/): the package manager used to install the dependencies. Pipenv combines using `pip` and `virtualenv` - they work togehter as `pipenv`.
+    + [Heroku](https://dashboard.heroku.com/): the hosting service used to host the website.
+    + [GitHub](https://github.com/): used to host the website's source code.
+    + [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
+    + [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/): was used to debug the website.
+    + [Font Awesome](https://fontawesome.com/): was used to create the icons used in the website.
+    + [Balsamiq](https://balsamiq.com/): was used to design wireframes during the design process.
+    + [W3C Validator](https://validator.w3.org/): was used to validate HTML5 code for the website.
+    + [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
+    + [JShint](https://jshint.com/): was used to validate JS code for the website.
+    + [Coolorc.co](https://coolors.co/): was used to choose pallete colors for website
+    + [CSSgradient.io](https://cssgradient.io/): was used for genertating background gradients
+    + [Grammarly](https://www.grammarly.com/): was used to check grammar and typo errors.
+
+[Back to contents](#contents)
+
 # **Project Architecture**
 <!-- Document the reuse of components -->
 
