@@ -43,7 +43,7 @@ The Cutback is a web application which allows users to compare surfing equipment
     + [React Bootstrap](https://react-bootstrap-v4.netlify.app/): was used as a supprotive toolkit for front-end styling.
 - ### Other tools:
     + [Git](https://git-scm.com/): the version control system used to manage the code.
-    + [Pipenv](https://pypi.org/project/pipenv/): the package manager used to install the dependencies. Pipenv combines using `pip` and `virtualenv` - they work togehter as `pipenv`.
+    + [Mock Service Worker](https://mswjs.io/): was used for testing API requests.
     + [Heroku](https://dashboard.heroku.com/): the hosting service used to host the website.
     + [GitHub](https://github.com/): used to host the website's source code.
     + [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
