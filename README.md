@@ -38,12 +38,17 @@ The Cutback is a web application which allows users to compare surfing equipment
     + [JS](https://www.javascript.com/): the primary language used to develop interactive components of the website.
     + [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): the markup language used to create the website.
     + [CSS](https://developer.mozilla.org/en-US/docs/Web/css): the styling language used to style the website.
-- ### Frameworks and libraries:
+- ### Frameworks:
     + [ReactJS](https://reactjs.org/): was used for building user interface
     + [React Bootstrap](https://react-bootstrap-v4.netlify.app/): was used as a supprotive toolkit for front-end styling.
+
+- ### Front-End Libraries
+    + [React Router](https://v5.reactrouter.com/): was used for handling differnt URLs rendering different pages. React Router allows for rendering pages inside Virtual DOM stopping the page from refreshing. This enhances UX.
+    + [Mock Service Worker](https://mswjs.io/): was used for testing API requests. With this tool the test server is created mocking the API requests, so that the real API request is not triggered.
+
 - ### Other tools:
-    + [Git](https://git-scm.com/): the version control system used to manage the code.
     + [Mock Service Worker](https://mswjs.io/): was used for testing API requests.
+    + [Git](https://git-scm.com/): the version control system used to manage the code.
     + [Heroku](https://dashboard.heroku.com/): the hosting service used to host the website.
     + [GitHub](https://github.com/): used to host the website's source code.
     + [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
