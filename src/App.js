@@ -1,11 +1,11 @@
-import './App.css';
-import Button from 'react-bootstrap/Button';
+import styles from './App.module.css';
 import { Route, Switch } from "react-router-dom";
+import NavBar from './componenets/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <Button variant="primary">Primary</Button>
+    <div className={styles.App}>
+      <NavBar />
     </div>
   );
 }

@@ -10,6 +10,7 @@
   - [Color Scheme](#color-scheme)
   - [Typography](#typography)
   - [Wireframes](#wireframes)
+- [**Credits**](#credits)
 - [**Acknowledgments**](#acknowledgments)
 
 # **About**
@@ -45,6 +46,11 @@ The Cutback is a web application which allows users to compare surfing equipment
 - ### Front-End Libraries
     + [React Router](https://v5.reactrouter.com/): was used for handling differnt URLs rendering different pages. React Router allows for rendering pages inside Virtual DOM stopping the page from refreshing. This enhances UX.
     + [Mock Service Worker](https://mswjs.io/): was used for testing API requests. With this tool the test server is created mocking the API requests, so that the real API request is not triggered.
+    + [styled-components](https://styled-components.com/): was used to inject CSS styling directly to component.
+      + No hunt across different files to find the styling affecting your component.
+      + Styled compoenents are independent of each other.
+      + Remove unused styles, even if they're declared in the code.
+      + Styled components generates unique class names for your styles.
 
 - ### Other tools:
     + [Mock Service Worker](https://mswjs.io/): was used for testing API requests.
@@ -76,7 +82,9 @@ The Cutback is a web application which allows users to compare surfing equipment
 
 [Back to contents](#contents)
 ## Typography
-<!-- The primary font used for the application is Inter. The logo and big headings use Karla font. Together they give great contrast but also transition smoothly between one another.  -->
+- The primary font used for the application is **Montserrat** - it is modern and elegant font-family used on most of the website. 
+- The font-family used for the logo is **Permanent Marker** - it gives contrast to primary font-family. 
+
 All fonts come from [Google Fonts](https://fonts.google.com/).
 
 [Back to contents](#contents)
@@ -85,6 +93,9 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
  Wireframes used in the design process can be found [here](documentation/wireframes/cutback-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
 
  [Back to contents](#contents)
+
+# **Credits**
+- Logo comes from [flaticon](https://www.flaticon.com/free-icon/surfboard_2045815?term=surfboard&page=1&position=1&page=1&position=1&related_id=2045815&origin=tag).
 
 # **Acknowledgments**
 1. My family for being my biggest supporters throughout the entire time!
