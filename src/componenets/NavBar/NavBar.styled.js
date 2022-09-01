@@ -1,4 +1,4 @@
-import { Button, Col, Container, FormControl, Nav, NavDropdown, Row } from 'react-bootstrap'
+import { Col, Container, FormControl, Nav, NavDropdown, Row } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const StyledFormControl = styled(FormControl)`
@@ -24,10 +24,13 @@ export const StyledLogo = styled.span`
     width: 100%;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled.button`
+    color: #73ad70;
+    background: transparent;
+    padding: 0 15px;
     max-width: 30%;
     border: none;
-    backgorund-color: transparent;
+    background-color: transparent;
     &:hover {
         background-color: transparent;
         color: black;
@@ -51,6 +54,27 @@ export const StyledDropdown = styled(NavDropdown)`
     .dropdown-menu {
         top: 50px;
         right: 0px;
+    };
+    &.show:before {
+        position: absolute;
+        display: inline-block;
+        content: "";
+        top: 42px;
+        right: 32px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid rgba(0,0,0,0.175);
+    }
+    &.show:after {
+        position: absolute;
+        display: inline-block;
+        content: "";
+        top: 43px;
+        right: 31px;
+        border-left: 11px solid transparent;
+        border-right: 11px solid transparent;
+        border-bottom: 11px solid #fff;
+        z-index: 1001;
     }
 `;
 
@@ -58,12 +82,22 @@ export const StyledSearchBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid green;
+    border: 1px solid #b4d3b2;
     border-radius: 20px;
     margin: 0 auto;
     width: 100%;
     @media (max-width: 768px) {
         max-width: 80%;
     }
-
 `;
+
+export const StyledSignedInMsg = styled.div`
+    cursor: default;
+    margin: auto;
+    width: 100%;
+    padding-left: 15px;
+
+    &:hover {
+        background-color: transparent;
+    }
+`

@@ -1,6 +1,6 @@
 import styles from './App.module.css';
 import { Route, Switch } from "react-router-dom";
-import NavBar from './componenets/NavBar/NavBar';
+import NavBar from './componenets/navbar/NavBar';
 
 function App() {
   return (

@@ -2,8 +2,34 @@ import React from 'react'
 import { Col, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import logo from '../../assets/logo.png';
-import { StyledButton, StyledContainer, StyledDropdown, StyledFormControl, StyledLogo, StyledNavCol, StyledRow, StyledSearchBarContainer } from './NavBar.styled';
+import Avatar from '../avatar/Avatar';
+import {
+    StyledButton,
+    StyledContainer,
+    StyledDropdown,
+    StyledFormControl,
+    StyledLogo,
+    StyledNavCol,
+    StyledRow,
+    StyledSearchBarContainer,
+    StyledSignedInMsg
+} from './NavBar.styled';
 
+
+const loggedOutIcons = (
+    <>
+        <Nav.Link
+            to="/signin"
+        >
+            Sign in
+        </Nav.Link>
+        <Nav.Link
+            to="/signup"
+        >
+            Sign up
+        </Nav.Link>
+    </>
+);
 
 
 const NavBar = () => {
@@ -15,21 +41,22 @@ const NavBar = () => {
                         <StyledLogo><img src={logo} alt='Logo' height="45"></img>Cutback</StyledLogo>
                     </Col>
                     <StyledNavCol sm={6} md={{ span: 4, order: 'last' }}>
-                        <Nav.Link>Sign in</Nav.Link>
-                        <Nav.Link>Sign up</Nav.Link>
-                        <StyledDropdown title="Profile" id="basic-nav-dropdown">
-                            <NavDropdown.Item>Equipment</NavDropdown.Item>
-                            <NavDropdown.Item>Ratings</NavDropdown.Item>
-                            <NavDropdown.Item>Profile</NavDropdown.Item>
+                        {loggedOutIcons}
+                        <StyledDropdown title={<Avatar src={logo} height={40} />} id="basic-nav-dropdown">
+                            <StyledSignedInMsg> Signed in as <br /> <strong>username</strong></StyledSignedInMsg>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item>Logout</NavDropdown.Item>
+                            <NavDropdown.Item><i class="fas fa-warehouse"></i> Your Gear</NavDropdown.Item>
+                            <NavDropdown.Item><i class="fas fa-star"></i> Your Ratings</NavDropdown.Item>
+                            <NavDropdown.Item><i class="far fa-id-badge"></i> Your Profile</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item><i class="fas fa-sign-out-alt"></i> Logout</NavDropdown.Item>
                         </StyledDropdown>
                     </StyledNavCol>
                     <Col xs={12} md={4}>
                         <Form inline>
                             <StyledSearchBarContainer>
                                 <StyledFormControl type="text" placeholder="Search" className="mr-sm-2" />
-                                <StyledButton variant="outline-success"><i class="fas fa-search"></i></StyledButton>
+                                <StyledButton onClick={(e) => e.preventDefault()}><i class="fas fa-search"></i></StyledButton>
                             </StyledSearchBarContainer>
                         </Form>
                     </Col>
