@@ -14,7 +14,11 @@ export const StyledRow = styled(Row)`
 
 export const StyledContainer = styled(Container)`
     width: 100%;
+    max-width: 95vw;
     justify-content: space-around !important;
+    @media (max-width: 440px) {
+        max-width: 100%;
+    }
 `
 
 export const StyledLogo = styled.span`
@@ -22,6 +26,9 @@ export const StyledLogo = styled.span`
     font-size: 2rem;
     margin: auto;
     width: 100%;
+    @media (max-width: 440px) {
+        font-size: 1.5rem;
+    }
 `;
 
 export const StyledButton = styled.button`
@@ -38,10 +45,20 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledNavCol = styled(Col)`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1vh 0;
+    ${props => props.nav ?
+        `display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1vh 0;
+        @media (max-width: 440px) {
+            width: 40%;
+            font-size: 0.8rem !important;
+        }
+        ` :
+        `@media (max-width: 440px) {
+            width: 60%;
+        `
+    }
 `;
 
 export const StyledNav = styled(Nav)`
@@ -86,8 +103,9 @@ export const StyledSearchBarContainer = styled.div`
     border-radius: 20px;
     margin: 0 auto;
     width: 100%;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         max-width: 80%;
+        margin-top: 15px;
     }
 `;
 

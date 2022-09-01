@@ -31,28 +31,28 @@ const loggedOutIcons = (
     </>
 );
 
-
+// TODO: styling for logged-in user navbar
 const NavBar = () => {
     return (
         <Navbar bg="light" expand="md" fixed='top'>
             <StyledContainer>
                 <StyledRow>
-                    <Col xs={{ span: 12 }} sm={6} md={4}>
+                    <StyledNavCol xs={6} sm={6} md={4} lg={3}>
                         <StyledLogo><img src={logo} alt='Logo' height="45"></img>Cutback</StyledLogo>
-                    </Col>
-                    <StyledNavCol sm={6} md={{ span: 4, order: 'last' }}>
-                        {loggedOutIcons}
+                    </StyledNavCol>
+                    <StyledNavCol nav xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
+                        {/* {loggedOutIcons} */}
                         <StyledDropdown title={<Avatar src={logo} height={40} />} id="basic-nav-dropdown">
                             <StyledSignedInMsg> Signed in as <br /> <strong>username</strong></StyledSignedInMsg>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item><i class="fas fa-warehouse"></i> Your Gear</NavDropdown.Item>
-                            <NavDropdown.Item><i class="fas fa-star"></i> Your Ratings</NavDropdown.Item>
-                            <NavDropdown.Item><i class="far fa-id-badge"></i> Your Profile</NavDropdown.Item>
+                            <NavDropdown.Item>Your Equipment</NavDropdown.Item>
+                            <NavDropdown.Item>Your Ratings</NavDropdown.Item>
+                            <NavDropdown.Item>Your Profile</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item><i class="fas fa-sign-out-alt"></i> Logout</NavDropdown.Item>
                         </StyledDropdown>
                     </StyledNavCol>
-                    <Col xs={12} md={4}>
+                    <Col xs={12} md={4} lg={6}>
                         <Form inline>
                             <StyledSearchBarContainer>
                                 <StyledFormControl type="text" placeholder="Search" className="mr-sm-2" />
