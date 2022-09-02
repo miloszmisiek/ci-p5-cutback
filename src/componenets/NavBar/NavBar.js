@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Form, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
@@ -33,7 +33,7 @@ const loggedOutIcons = (
     </>
 );
 
-// TODO: remove padding-rigth for small screen in logo container, loggedOut icons (signup border issue)
+// TODO: remove padding-right for small screen in logo container, loggedOut icons (signup border issue)
 const NavBar = () => {
     return (
         <Navbar bg="light" expand="md" fixed='top'>

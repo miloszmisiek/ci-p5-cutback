@@ -52,7 +52,7 @@ export const StyledCol = styled(Col)`
         align-items: center;
         padding: 1vh 0;
         @media (max-width: 440px) {
-            width: 40%;
+            width: ${props.loggedOut ? '45' : '40' }%;
             font-size: 0.8rem !important;
         }
         @media (min-width: 768px) and (max-width: 991px) {
@@ -60,7 +60,9 @@ export const StyledCol = styled(Col)`
         }
         ` : props.logo ? 
         `@media (max-width: 440px) {
-            width: 60%;
+            width: 55%;
+            padding-right: 0;
+            padding-left: 5px;
         }`
         :
         `@media (min-width: 768px) and (max-width: 991px) {
@@ -135,5 +137,8 @@ export const StyledNavLink = styled(NavLink)`
     padding: 5px;
     &:hover {
         border-color: #b4d3b2;
+    }
+    @media (max-width: 440px) {
+        margin-left: 7px;
     }
 `;
