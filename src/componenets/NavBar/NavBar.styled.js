@@ -1,12 +1,22 @@
-import { Col, Container, FormControl, Nav, NavDropdown, Row } from 'react-bootstrap'
+import { Col, Container, FormControl, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
+
+export const StyledNavbar = styled(Navbar)`
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+`;
 
 export const StyledFormControl = styled(FormControl)`
     display: inline-block;
     width: 100%;
     background-color: transparent;
     border: none;
+    &:focus {
+        outline:none !important;
+        outline-width: 0 !important;
+        box-shadow: none;
+        z-index: -1;
+    }
 `;
 export const StyledRow = styled(Row)`
     align-items: center;
@@ -32,6 +42,12 @@ export const StyledLogo = styled.span`
     }
 `;
 
+export const StyledLogoName = styled.span`
+    @media (max-width: 300px) {
+        display: none;
+    }
+`;
+
 export const StyledButton = styled.button`
     color: #73ad70;
     background: transparent;
@@ -48,25 +64,25 @@ export const StyledButton = styled.button`
 export const StyledCol = styled(Col)`
     ${props => props.nav ?
         `display: flex;
-        justify-content: ${props.loggedOut ? 'space-around' : 'flex-end' } ;
+        justify-content: ${props.loggedOut ? 'space-around' : 'flex-end'} ;
         align-items: center;
         padding: 1vh 0;
         @media (max-width: 440px) {
-            width: ${props.loggedOut ? '45' : '40' }%;
+            width: ${props.loggedOut ? '45' : '40'}%;
             font-size: 0.8rem !important;
         }
         @media (min-width: 768px) and (max-width: 991px) {
-            width: ${props.loggedOut ? `${100/12*4}%` :`${100/12*2}%`};
+            width: ${props.loggedOut ? `${100 / 12 * 4}%` : `${100 / 12 * 2}%`};
         }
-        ` : props.logo ? 
-        `@media (max-width: 440px) {
+        ` : props.logo ?
+            `@media (max-width: 440px) {
             width: 55%;
             padding-right: 0;
             padding-left: 5px;
         }`
-        :
-        `@media (min-width: 768px) and (max-width: 991px) {
-            width: ${props.loggedOut ? `${100/12*4}%` :`${100/12*6}%`};
+            :
+            `@media (min-width: 768px) and (max-width: 991px) {
+            width: ${props.loggedOut ? `${100 / 12 * 4}%` : `${100 / 12 * 6}%`};
         }`
     }
 
@@ -116,7 +132,7 @@ export const StyledSearchBarContainer = styled.div`
     width: 100%;
     @media (max-width: 767px) {
         max-width: 80%;
-        margin-top: 15px;
+        margin: 15px auto 10px;
     }
 `;
 
@@ -140,5 +156,23 @@ export const StyledNavLink = styled(NavLink)`
     }
     @media (max-width: 440px) {
         margin-left: 7px;
+    }
+    ${props => props.dropdownItem ?
+        `
+        display: block;
+        width: 100%;
+        padding: 0.25rem 1rem;
+        clear: both;
+        font-weight: 400;
+        text-align: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        
+        &:hover {
+            background-color: #f8f8f8;
+        }
+        ` : null
     }
 `;

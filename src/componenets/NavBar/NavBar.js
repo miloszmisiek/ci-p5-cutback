@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Nav, Navbar } from 'react-bootstrap';
+import { Form, NavDropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
@@ -15,6 +15,8 @@ import {
     StyledSearchBarContainer,
     StyledSignedInMsg,
     StyledNavLink,
+    StyledNavbar,
+    StyledLogoName,
 } from './NavBar.styled';
 
 
@@ -33,33 +35,41 @@ const loggedOutIcons = (
     </>
 );
 
-// TODO: remove padding-right for small screen in logo container, loggedOut icons (signup border issue)
+// TODO: logged-in styling width 425-768 - adjust search bar responsiveness
 const NavBar = () => {
     return (
-        <Navbar bg="light" expand="md" fixed='top'>
+        <StyledNavbar
+            bg="white"
+            expand="md"
+            fixed='top'
+        >
             <StyledContainer>
                 <StyledRow>
-                    <StyledCol loggedOut logo xs={6} sm={6} md={4} lg={3}>
+                    <StyledCol logo xs={6} sm={6} md={4} lg={3}>
                         <StyledLogo>
                             <NavLink to="/">
                                 <img src={logo} alt='Logo' height="45"></img>
-                                Cutback
+                                <StyledLogoName>Cutback</StyledLogoName>
                             </NavLink>
                         </StyledLogo>
                     </StyledCol>
-                    <StyledCol loggedOut nav xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
-                        {loggedOutIcons}
-                        {/* <StyledDropdown title={<Avatar src={logo} height={40} />} id="basic-nav-dropdown">
+                    <StyledCol nav xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
+                        {/* {loggedOutIcons} */}
+                        <StyledDropdown title={<Avatar src={logo} height={40} />} id="basic-nav-dropdown">
                             <StyledSignedInMsg> Signed in as <br /> <strong>username</strong></StyledSignedInMsg>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item>Your Equipment</NavDropdown.Item>
-                            <NavDropdown.Item>Your Ratings</NavDropdown.Item>
-                            <NavDropdown.Item>Your Profile</NavDropdown.Item>
+                            {/* TODO: add routes for dropdown section */}
+                            <StyledNavLink dropdownItem to="/">Your Equipment</StyledNavLink>
+                            <StyledNavLink dropdownItem to="/">Your Ratings</StyledNavLink>
+                            <StyledNavLink dropdownItem to="/">Your Profile</StyledNavLink>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item><i class="fas fa-sign-out-alt"></i> Logout</NavDropdown.Item>
-                        </StyledDropdown> */}
+                            {/* TODO: add onClick logout handler */}
+                            <StyledNavLink dropdownItem to="/">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </StyledNavLink>
+                        </StyledDropdown>
                     </StyledCol>
-                    <StyledCol loggedOut xs={12} md={6} lg={6}>
+                    <StyledCol xs={12} md={6} lg={6}>
                         <Form inline>
                             <StyledSearchBarContainer>
                                 <StyledFormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -69,7 +79,7 @@ const NavBar = () => {
                     </StyledCol>
                 </StyledRow>
             </StyledContainer>
-        </Navbar>
+        </StyledNavbar>
     )
 }
 
