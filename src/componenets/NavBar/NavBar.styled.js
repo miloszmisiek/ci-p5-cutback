@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const StyledFormControl = styled(FormControl)`
     display: inline-block;
-    max-width: 70%;
+    width: 100%;
     background-color: transparent;
     border: none;
 `;
@@ -26,8 +26,8 @@ export const StyledLogo = styled.span`
     font-size: 2rem;
     margin: auto;
     width: 100%;
-    @media (max-width: 440px) {
-        font-size: 1.5rem;
+    @media (max-width: 351px) {
+        font-size: 1.5rem !important;
     }
 `;
 
@@ -44,21 +44,29 @@ export const StyledButton = styled.button`
     }
 `;
 
-export const StyledNavCol = styled(Col)`
+export const StyledCol = styled(Col)`
     ${props => props.nav ?
         `display: flex;
-        justify-content: space-around;
+        justify-content: ${props.loggedOut ? 'space-around' : 'flex-end' } ;
         align-items: center;
         padding: 1vh 0;
         @media (max-width: 440px) {
             width: 40%;
             font-size: 0.8rem !important;
         }
-        ` :
+        @media (min-width: 768px) and (max-width: 991px) {
+            width: ${props.loggedOut ? `${100/12*4}%` :`${100/12*2}%`};
+        }
+        ` : props.logo ? 
         `@media (max-width: 440px) {
             width: 60%;
-        `
+        }`
+        :
+        `@media (min-width: 768px) and (max-width: 991px) {
+            width: ${props.loggedOut ? `${100/12*4}%` :`${100/12*6}%`};
+        }`
     }
+
 `;
 
 export const StyledNav = styled(Nav)`
