@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, NavDropdown } from 'react-bootstrap';
+import { Dropdown, Form, NavDropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
@@ -17,6 +17,7 @@ import {
     StyledNavLink,
     StyledNavbar,
     StyledLogoName,
+    StyledCategoriesDropdown,
 } from './NavBar.styled';
 
 
@@ -72,10 +73,21 @@ const NavBar = () => {
                     <StyledCol xs={12} md={6} lg={6}>
                         <Form inline>
                             <StyledSearchBarContainer>
-                                <StyledFormControl type="text" placeholder="Search" className="mr-sm-2" />
-                                <StyledButton onClick={(e) => e.preventDefault()}><i class="fas fa-search"></i></StyledButton>
+                                <StyledFormControl type="text" placeholder="&#xF002; Search" className="mr-sm-2" />
+                                {/* <StyledButton onClick={(e) => e.preventDefault()}><i class="fas fa-search"></i></StyledButton> */}
+                                <Dropdown>
+                                    <StyledCategoriesDropdown variant="success" id="dropdown-basic">
+                                        Categories
+                                    </StyledCategoriesDropdown>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </StyledSearchBarContainer>
                         </Form>
+
                     </StyledCol>
                 </StyledRow>
             </StyledContainer>

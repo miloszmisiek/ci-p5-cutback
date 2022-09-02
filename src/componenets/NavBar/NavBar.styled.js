@@ -1,12 +1,14 @@
-import { Col, Container, FormControl, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap'
+import { Col, Container, Dropdown, FormControl, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 
 export const StyledNavbar = styled(Navbar)`
-    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 `;
 
 export const StyledFormControl = styled(FormControl)`
+    font-family: 'Font Awesome\ 5 Free', 'Montserrat', sans-serif;
+    font-weight: 600;
     display: inline-block;
     width: 100%;
     background-color: transparent;
@@ -126,9 +128,9 @@ export const StyledSearchBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
     border: 1px solid #b4d3b2;
     border-radius: 20px;
-    margin: 0 auto;
     width: 100%;
     @media (max-width: 767px) {
         max-width: 80%;
@@ -176,3 +178,24 @@ export const StyledNavLink = styled(NavLink)`
         ` : null
     }
 `;
+
+export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
+    background-color: rgba(180, 211, 178, 1) !important;
+    color: black !important;
+    font-weight: 600;
+    border: 0;
+    border-radius: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    &:hover {
+        // background-color: rgba(180, 211, 178, 0.4) !important;
+        color: #f8f8f8 !important;
+    }
+    &:focus {
+        outline:none !important;
+        outline-width: 0 !important;
+        box-shadow: none;
+        z-index: -1;
+    }
+`;
+
