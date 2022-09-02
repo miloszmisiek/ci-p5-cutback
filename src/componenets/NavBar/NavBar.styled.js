@@ -133,7 +133,7 @@ export const StyledSearchBarContainer = styled.div`
     border-radius: 20px;
     width: 100%;
     @media (max-width: 767px) {
-        max-width: 80%;
+        max-width: 95%;
         margin: 15px auto 10px;
     }
 `;
@@ -188,8 +188,7 @@ export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     &:hover {
-        // background-color: rgba(180, 211, 178, 0.4) !important;
-        color: #f8f8f8 !important;
+        background-color: rgba( 180, 193, 185, 1) !important;
     }
     &:focus {
         outline:none !important;

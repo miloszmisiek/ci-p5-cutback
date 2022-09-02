@@ -74,9 +74,9 @@ const NavBar = () => {
                         <Form inline>
                             <StyledSearchBarContainer>
                                 <StyledFormControl type="text" placeholder="&#xF002; Search" className="mr-sm-2" />
-                                {/* <StyledButton onClick={(e) => e.preventDefault()}><i class="fas fa-search"></i></StyledButton> */}
+                                {/* TODO: dropdown menu for small screens - adjust font-size and padding */}
                                 <Dropdown>
-                                    <StyledCategoriesDropdown variant="success" id="dropdown-basic">
+                                    <StyledCategoriesDropdown id="dropdown-basic">
                                         Categories
                                     </StyledCategoriesDropdown>
                                     <Dropdown.Menu>
@@ -87,7 +87,6 @@ const NavBar = () => {
                                 </Dropdown>
                             </StyledSearchBarContainer>
                         </Form>
-
                     </StyledCol>
                 </StyledRow>
             </StyledContainer>
