@@ -1,4 +1,5 @@
 import { Col, Container, FormControl, Nav, NavDropdown, Row } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 
 export const StyledFormControl = styled(FormControl)`
@@ -126,4 +127,13 @@ export const StyledSignedInMsg = styled.div`
     &:hover {
         background-color: transparent;
     }
-`
+`;
+
+export const StyledNavLink = styled(NavLink)`
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    &:hover {
+        border-color: #b4d3b2;
+    }
+`;
