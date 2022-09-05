@@ -1,6 +1,6 @@
 // This code comes from Code Institute Moments Tutorial Video
 import React from "react";
-import { StyledAvatar } from "./Avatar.styled";
+import { StyledAvatar } from "./styles.js";
 
 const Avatar = ({ src, height = 45, text }) => {
   return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { StyledLogo } from '../navbar/NavBar.styled';
+import { StyledLogo } from '../navbar/styles';
 
 export const StyledFooter = styled.div`
     margin-top: auto;

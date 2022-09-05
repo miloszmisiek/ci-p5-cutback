@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { StyledLogoName } from '../navbar/NavBar.styled'
-import { StyledFooter, StyledFooterLogo, StyledRights, StyledSocialLinks } from './Footer.styled'
+import { StyledLogoName } from '../navbar/styles'
+import { StyledFooter, StyledFooterLogo, StyledRights, StyledSocialLinks } from './styles'
 import footer from '../../assets/logo-footer.png';
 
 const Footer = () => {

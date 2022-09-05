@@ -3,7 +3,7 @@ import { Dropdown, Form, NavDropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
-import Avatar from '../avatar/Avatar';
+import Avatar from '../avatar/index.js';
 import {
     StyledButton,
     StyledContainer,
@@ -18,7 +18,7 @@ import {
     StyledNavbar,
     StyledLogoName,
     StyledCategoriesDropdown,
-} from './NavBar.styled';
+} from './styles.js';
 
 
 const loggedOutIcons = (
