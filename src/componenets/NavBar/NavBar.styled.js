@@ -159,7 +159,7 @@ export const StyledNavLink = styled(NavLink)`
     @media (max-width: 440px) {
         margin-left: 7px;
     }
-    ${props => props.dropdownItem ?
+    ${props => props.dropdownitem ?
         `
         display: block;
         width: 100%;

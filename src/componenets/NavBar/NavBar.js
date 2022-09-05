@@ -46,7 +46,7 @@ const NavBar = () => {
         >
             <StyledContainer>
                 <StyledRow>
-                    <StyledCol logo xs={6} sm={6} md={4} lg={3}>
+                    <StyledCol logo="true" xs={6} sm={6} md={4} lg={3}>
                         <StyledLogo>
                             <NavLink to="/">
                                 <img src={logo} alt='Logo' height="45"></img>
@@ -54,19 +54,19 @@ const NavBar = () => {
                             </NavLink>
                         </StyledLogo>
                     </StyledCol>
-                    <StyledCol nav xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
+                    <StyledCol nav="true" xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
                         {/* {loggedOutIcons} */}
                         <StyledDropdown title={<Avatar src={logo} height={40} />} id="basic-nav-dropdown">
                             <StyledSignedInMsg> Signed in as <br /> <strong>username</strong></StyledSignedInMsg>
                             <NavDropdown.Divider />
                             {/* TODO: add routes for dropdown section */}
-                            <StyledNavLink dropdownItem to="/">Your Equipment</StyledNavLink>
-                            <StyledNavLink dropdownItem to="/">Your Ratings</StyledNavLink>
-                            <StyledNavLink dropdownItem to="/">Your Profile</StyledNavLink>
+                            <StyledNavLink dropdownitem="true" to="/">Your Equipment</StyledNavLink>
+                            <StyledNavLink dropdownitem="true" to="/">Your Ratings</StyledNavLink>
+                            <StyledNavLink dropdownitem="true" to="/">Your Profile</StyledNavLink>
                             <NavDropdown.Divider />
                             {/* TODO: add onClick logout handler */}
-                            <StyledNavLink dropdownItem to="/">
-                                <i class="fas fa-sign-out-alt"></i> Logout
+                            <StyledNavLink dropdownitem="true" to="/">
+                                <i className="fas fa-sign-out-alt"></i> Logout
                             </StyledNavLink>
                         </StyledDropdown>
                     </StyledCol>
@@ -78,12 +78,12 @@ const NavBar = () => {
                                 <Dropdown>
                                     <StyledCategoriesDropdown id="dropdown-basic">
                                         <span className='d-none' id='categories'>Categories</span>
-                                        <span className='d-inline' id='categories-icon'><i class="fas fa-th-list"></i></span>
+                                        <span className='d-inline' id='categories-icon'><i className="fas fa-th-list"></i></span>
                                     </StyledCategoriesDropdown>
                                     <Dropdown.Menu className='end-0'>
-                                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                        <Dropdown.Item>Boards</Dropdown.Item>
+                                        <Dropdown.Item>Kites</Dropdown.Item>
+                                        <Dropdown.Item>Wetsuits</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </StyledSearchBarContainer>
