@@ -77,9 +77,10 @@ const NavBar = () => {
                                 {/* TODO: dropdown menu for small screens - adjust font-size and padding */}
                                 <Dropdown>
                                     <StyledCategoriesDropdown id="dropdown-basic">
-                                        Categories
+                                        <span className='d-none' id='categories'>Categories</span>
+                                        <span className='d-inline' id='categories-icon'><i class="fas fa-th-list"></i></span>
                                     </StyledCategoriesDropdown>
-                                    <Dropdown.Menu>
+                                    <Dropdown.Menu className='end-0'>
                                         <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                                         <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                                         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>

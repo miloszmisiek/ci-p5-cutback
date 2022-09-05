@@ -196,5 +196,13 @@ export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
         box-shadow: none;
         z-index: -1;
     }
+    
+    @media (min-width: 500px) {
+        & #categories {
+            display: inline !important;
+        }
+        & #categories-icon {
+            display: none !important;
+        }
+    }
 `;
-
