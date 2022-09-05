@@ -72,7 +72,8 @@ The Cutback is a web application which allows users to compare surfing equipment
 
 # **Project Architecture**
 <!-- Document the reuse of components -->
-1. The project files structure.
+1. **The project files structure.**
+
    Files organization is inspired by [Spectrum](https://github.com/withspectrum/spectrum/tree/alpha/src/components)'s code base, where [Max Stoiber](https://github.com/mxstbr), the creator of styled-components, contributes heavily on this project.
 
 [Back to contents](#contents)
