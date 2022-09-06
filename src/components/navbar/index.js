@@ -1,7 +1,6 @@
 import React from 'react'
 import { Dropdown, Form, NavDropdown } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import Avatar from '../avatar/index.js';
 import {
@@ -21,11 +20,11 @@ import {
 
 const loggedOutIcons = (
     <>
-        <Link
-            to={"/signin"}
+        <NavLink
+            to="/signin"
         >
             Sign in
-        </Link>
+        </NavLink>
         <StyledNavLink
             to="/signup"
         >
