@@ -26,5 +26,16 @@ ul {
 }
 
 .Main {
+    height: 100%;
+}
+
+.Main_Container {
     padding-top: 5.5rem;
+    height: 100%;
+  }
+
+  @media (max-width:767px) {
+    .Main-Container {
+        padding-top: 10rem;
+    }
   }

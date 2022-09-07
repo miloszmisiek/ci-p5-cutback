@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { StyledCol, StyledForm, StyledFormGroup } from './styles'
+import { CenteredForm, Header, SubmitButton, Column, FormControl, FormGroup, FormLabel, FullRow } from './styles'
 
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
@@ -12,53 +11,54 @@ const SignUpForm = () => {
   const { email, username, password1, password2 } = signUpData;
 
   return (
-    <Container>
-      <Row>
-        <StyledCol xs={12} lg={6}>
-          <StyledForm>
-            <StyledFormGroup controlId="username">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
+      <FullRow>
+        <Column xs={12} lg={6}>
+          <CenteredForm>
+            <Header>
+              sign up
+            </Header>
+            <FormGroup controlId="username">
+              <FormLabel>Username</FormLabel>
+              <FormControl
                 type="text"
                 placeholder="Username"
                 name='username'
                 value={username}
               />
-            </StyledFormGroup>
-            <StyledFormGroup controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
+            </FormGroup>
+            <FormGroup controlId="email">
+              <FormLabel>Email address</FormLabel>
+              <FormControl
                 type="email"
-                placeholder="Enter email"
+                placeholder="Email Address"
                 name='email'
                 value={email}
               />
-            </StyledFormGroup>
-            <StyledFormGroup controlId="password1">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            </FormGroup>
+            <FormGroup controlId="password1">
+              <FormLabel>Password</FormLabel>
+              <FormControl
                 type="password"
                 placeholder="Password"
                 name='password1'
                 value={password1}
               />
-            </StyledFormGroup>
-            <StyledFormGroup controlId="password2">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
+            </FormGroup>
+            <FormGroup controlId="password2">
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl
                 type="password"
                 placeholder="Confirm Password"
                 name='password2'
                 value={password2}
               />
-            </StyledFormGroup>
-            <Button variant="primary" type="submit" onClick={(e) => e.preventDefault()}>
+            </FormGroup>
+            <SubmitButton type="submit" onClick={(e) => e.preventDefault()}>
               Submit
-            </Button>
-          </StyledForm>
-        </StyledCol>
-      </Row>
-    </Container>
+            </SubmitButton>
+          </CenteredForm>
+        </Column>
+      </FullRow>
   )
 }
 
