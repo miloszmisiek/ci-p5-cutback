@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { StyledLogo } from '../navbar/styles';
 
 export const StyledFooter = styled.div`
+    position: relative;
     margin-top: auto;
     padding: 1rem;
     display: flex;

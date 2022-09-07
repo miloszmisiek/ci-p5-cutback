@@ -6,6 +6,7 @@ export const FullRow = styled(Row)`
     height: 100%;
     margin-left: 1rem;
     margin-right: 1rem;
+    position: relative;
 `;
 
 export const Column = styled(Col)`
