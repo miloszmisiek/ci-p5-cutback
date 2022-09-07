@@ -1,29 +1,15 @@
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
-
 export const FullRow = styled(Row)`
-    height: calc(100% - 1.5rem);
-    background-color: #f8f8f8;
+    height: 100%;
     margin-left: 1rem;
     margin-right: 1rem;
-
-    @media (max-width:767px) {
-        height: calc(100% - 2rem);
-      }
 `;
 
 export const Column = styled(Col)`
-    padding: 2rem;
-    background-color: white;
-    box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;
-    margin-top: auto;
-    margin-bottom: auto;
-`;
-
-export const CenteredForm = styled(Form)`
-    width: 100%;
-    text-align: center;
+    margin: auto 1rem auto auto;
 `;
 
 export const FormGroup = styled(Form.Group) `
@@ -58,4 +44,33 @@ export const FormLabel = styled(Form.Label)`
 
 export const FormControl = styled(Form.Control)`
     text-align: center;
+`;
+
+export const SignUpContainer = styled(Container)`
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #dbd9d9;
+    padding: ${props => props.form ? "2rem" : "1rem"};
+    box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;
+    border-radius: 20px;
+    margin-top: ${props => props.form ? null : "1rem"};
+`;
+
+export const SignInLink = styled(Link)`
+    color: #93a85c;
+    font-weight: 600;
+
+    &:hover{
+        color: black;
+    }
+`;
+
+export const SignUpImage = styled(Image)`
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;
 `;

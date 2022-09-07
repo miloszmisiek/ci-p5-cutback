@@ -5,13 +5,30 @@ import Footer from './components/footer/index';
 import './api/axiosDefaults';
 import SignUpForm from './pages/signUpForm/index';
 import { Container } from 'react-bootstrap';
+import { useState } from 'react';
+import styled from 'styled-components';
 
+
+export const Main = styled.main`
+    height: 100%;
+    ${props => props.background ?
+    `
+      background-image: url('https://res.cloudinary.com/milo-milo/image/upload/v1662569444/signup-background_oljnys.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 0 60%;
+      `
+    :
+    null
+  };
+`;
 
 function App() {
+  const [signUp, setSignUp] = useState();
   return (
     <div className={styles.App}>
-      <NavBar />
-      <main className={styles.Main}>
+      <NavBar singUp={signUp} setSignUp={setSignUp} />
+      <Main background={signUp}>
         <Container className={styles.Main_Container}>
           <Switch>
             <Route exact path="/" render={() => <h1>Home Page</h1>} />
@@ -20,7 +37,7 @@ function App() {
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>
         </Container>
-      </main>
+      </Main>
       <Footer />
     </div>
   );

@@ -25,17 +25,16 @@ ul {
 
 }
 
-.Main {
-    height: 100%;
-}
 
 .Main_Container {
-    padding-top: 5.5rem;
+    padding-top: calc(67px + 1rem);
+    padding-bottom: 1rem;
     height: 100%;
   }
 
   @media (max-width:767px) {
-    .Main-Container {
-        padding-top: 10rem;
+    .Main_Container {
+        padding-top: calc(130px + 1rem);
+        padding-bottom: 1rem;
     }
   }

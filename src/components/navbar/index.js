@@ -18,20 +18,6 @@ import {
     StyledCategoriesDropdown,
 } from './styles.js';
 
-const loggedOutIcons = (
-    <>
-        <NavLink
-            to="/signin"
-        >
-            Sign in
-        </NavLink>
-        <StyledNavLink
-            to="/signup"
-        >
-            Sign up
-        </StyledNavLink>
-    </>
-);
 
 const loggedInMenu = (
     <StyledDropdown title={<Avatar src={logo} height={40} />} id="basic-nav-dropdown">
@@ -62,11 +48,6 @@ const logoCol = (
     </StyledCol>
 );
 
-const navMenuCol = (
-    <StyledCol nav="true" xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
-        {loggedOutIcons}
-    </StyledCol>
-);
 
 const searchBarCol = (
     <StyledCol xs={12} md={6} lg={6}>
@@ -90,7 +71,8 @@ const searchBarCol = (
 );
 
 // TODO: logged-in styling width 425-768 - adjust search bar responsiveness
-const NavBar = () => {
+const NavBar = (props) => {
+    const handleChange = () => props.setSignUp("true");
     return (
         <StyledNavbar
             bg="white"
@@ -100,7 +82,22 @@ const NavBar = () => {
             <StyledContainer>
                 <StyledRow>
                     {logoCol}
-                    {navMenuCol}
+                    <StyledCol nav="true" xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
+                        <>
+                            <NavLink
+                                to="/signin"
+                            >
+                                Sign in
+
+                            </NavLink>
+                            <StyledNavLink
+                            to="/signup"
+                            isActive={(match) => { props.setSignUp(match ? "true" : null) }}
+                            >
+                                Sign up
+                            </StyledNavLink>
+                        </>
+                    </StyledCol>
                     {searchBarCol}
                 </StyledRow>
             </StyledContainer>
