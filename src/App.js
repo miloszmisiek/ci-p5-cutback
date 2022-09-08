@@ -7,6 +7,7 @@ import SignUpForm from './pages/signUpForm/index';
 import { Container, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import styled from 'styled-components';
+import SignInForm from './pages/signInForm';
 
 
 export const Main = styled.main`
@@ -26,17 +27,20 @@ export const BackgroundImage = styled(Image)`
 `;
 
 function App() {
-  const [signUp, setSignUp] = useState();
+  const [background, setBackground] = useState();
   return (
     <div className={styles.App}>
       <NavBar />
       <Main >
-        {signUp ? <BackgroundImage src='https://res.cloudinary.com/milo-milo/image/upload/v1662569444/signup-background_oljnys.jpg' /> : null}
+        {background ? <BackgroundImage src={background.signIn ?
+          'https://res.cloudinary.com/milo-milo/image/upload/v1662642961/signin-section_spvixz.jpg'
+          : 'https://res.cloudinary.com/milo-milo/image/upload/v1662646113/signup-section_japbut.jpg'
+        } /> : null}
         <Container className={styles.Main_Container}>
           <Switch>
             <Route exact path="/" render={() => <h1>Home Page</h1>} />
-            <Route exact path="/signin" render={() => <h1>Sign in</h1>} />
-            <Route exact path="/signup" render={() => <SignUpForm setSignUp={setSignUp} />} />
+            <Route exact path="/signin" render={() => <SignInForm setBackground={setBackground} />} />
+            <Route exact path="/signup" render={() => <SignUpForm setBackground={setBackground} />} />
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>
         </Container>
