@@ -20,6 +20,7 @@ export const BackgroundImage = styled(Image)`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: ${props => props.signin ? "bottom 0px right 62%" : null};
     
     @media (max-width: 767px) {
       display: none;
@@ -32,10 +33,15 @@ function App() {
     <div className={styles.App}>
       <NavBar />
       <Main >
-        {background ? <BackgroundImage src={background.signIn ?
-          'https://res.cloudinary.com/milo-milo/image/upload/v1662642961/signin-section_spvixz.jpg'
-          : 'https://res.cloudinary.com/milo-milo/image/upload/v1662646113/signup-section_japbut.jpg'
-        } /> : null}
+        {background ? 
+        <BackgroundImage 
+        src={background.signIn ?
+            'https://res.cloudinary.com/milo-milo/image/upload/v1662642961/signin-section_spvixz.jpg'
+          : 
+            'https://res.cloudinary.com/milo-milo/image/upload/v1662646113/signup-section_japbut.jpg'
+        }
+        signin={background.signIn ? "true" : null} 
+        /> : null}
         <Container className={styles.Main_Container}>
           <Switch>
             <Route exact path="/" render={() => <h1>Home Page</h1>} />

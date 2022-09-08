@@ -21,7 +21,6 @@ import {
     StyledCategoriesDropdown,
 } from './styles.js';
 
-// TODO: logged-in styling width 425-768 - adjust search bar responsiveness
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
@@ -37,7 +36,7 @@ const NavBar = () => {
     };
 
     const loggedOutIcons = (
-        <StyledCol nav="true" xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
+        <StyledCol loggedout="true" nav="true" xs={6} sm={6} md={{ span: 4, order: 'last' }} lg={3}>
                 <NavLink
                     to="/signin"
                 >
@@ -63,7 +62,6 @@ const NavBar = () => {
                 <StyledNavLink dropdownitem="true" to="/">Your Ratings</StyledNavLink>
                 <StyledNavLink dropdownitem="true" to="/">Your Profile</StyledNavLink>
                 <NavDropdown.Divider />
-                {/* TODO: add onClick logout handler */}
                 <StyledNavLink dropdownitem="true" to="/" onClick={handleSignOut}>
                     <i className="fas fa-sign-out-alt"></i> Logout
                 </StyledNavLink>
@@ -72,7 +70,7 @@ const NavBar = () => {
     );
 
     const logoCol = (
-        <StyledCol logo="true" xs={6} sm={6} md={4} lg={3}>
+        <StyledCol loggedout={currentUser ? null : "true"} logo="true" xs={6} sm={6} md={4} lg={3}>
             <StyledLogo>
                 <NavLink to="/">
                     <img src={logo} alt='Logo' height="45"></img>
@@ -84,7 +82,7 @@ const NavBar = () => {
 
 
     const searchBarCol = (
-        <StyledCol xs={12} md={6} lg={6}>
+        <StyledCol xs={12} md={6}>
             <Form inline>
                 <StyledSearchBarContainer>
                     <StyledFormControl type="text" placeholder="&#xF002; Search" className="mr-sm-2" />

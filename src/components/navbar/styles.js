@@ -39,6 +39,9 @@ export const StyledLogo = styled.span`
     font-size: 2rem;
     margin: auto;
     width: 100%;
+    @media (min-width: 768px) and (max-width: 991px) {
+        font-size: 1.6rem !important;
+    }
     @media (max-width: 351px) {
         font-size: 1.5rem !important;
     }
@@ -66,26 +69,28 @@ export const StyledButton = styled.button`
 export const StyledCol = styled(Col)`
     ${props => props.nav ?
         `display: flex;
-        justify-content: ${props.loggedOut ? 'space-around' : 'flex-end'} ;
+        justify-content: ${props.loggedout ? 'space-around' : 'flex-end'} ;
         align-items: center;
         padding: 1vh 0;
         @media (max-width: 440px) {
-            width: ${props.loggedOut ? '45' : '40'}%;
+            width: ${props.loggedout ? '45' : '40'}%;
             font-size: 0.8rem !important;
         }
         @media (min-width: 768px) and (max-width: 991px) {
-            width: ${props.loggedOut ? `${100 / 12 * 4}%` : `${100 / 12 * 2}%`};
+            width: ${props.loggedout ? `${100 / 12 * 3}%` : `${100 / 12 * 2}%`};
         }
         ` : props.logo ?
             `@media (max-width: 440px) {
-            width: 55%;
-            padding-right: 0;
-            padding-left: 5px;
-        }`
+                width: 55%;
+                padding-right: 0;
+                padding-left: 5px;
+            }
+            
+            @media (min-width: 768px) and (max-width: 991px) {
+                width: ${props.loggedout ? `${100 / 12 * 3}%` : `${100 / 12 * 6}%`};
+            }`
             :
-            `@media (min-width: 768px) and (max-width: 991px) {
-            width: ${props.loggedOut ? `${100 / 12 * 4}%` : `${100 / 12 * 6}%`};
-        }`
+            null
     }
 
 `;
@@ -106,7 +111,7 @@ export const StyledDropdown = styled(NavDropdown)`
         display: inline-block;
         content: "";
         top: 42px;
-        right: 32px;
+        right: 22px;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-bottom: 10px solid rgba(0,0,0,0.175);
@@ -116,7 +121,7 @@ export const StyledDropdown = styled(NavDropdown)`
         display: inline-block;
         content: "";
         top: 43px;
-        right: 31px;
+        right: 21px;
         border-left: 11px solid transparent;
         border-right: 11px solid transparent;
         border-bottom: 11px solid #fff;

@@ -53,6 +53,9 @@ export const FormLabel = styled(Form.Label)`
 
 export const FormControl = styled(Form.Control)`
     text-align: center;
+    @media (max-width: 299px) {
+        font-size: 0.8rem;
+    };
 `;
 
 export const SignUpContainer = styled(Container)`
