@@ -71,7 +71,7 @@ const searchBarCol = (
 );
 
 // TODO: logged-in styling width 425-768 - adjust search bar responsiveness
-const NavBar = (props) => {
+const NavBar = () => {
     return (
         <StyledNavbar
             bg="white"
@@ -90,7 +90,6 @@ const NavBar = (props) => {
 
                             </NavLink>
                             <StyledNavLink
-                                isActive={(match) => { props.setSignUp(match ? true : null) }}
                                 to="/signup"
                             >
                                 Sign up

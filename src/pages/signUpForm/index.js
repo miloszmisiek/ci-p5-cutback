@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { Form, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Header, SubmitButton, Column, FormControl, FormGroup, FormLabel, FullRow, SignUpContainer, SignInLink, SignUpImage, Background } from './styles'
+import React, { useEffect, useState } from 'react'
+import { Form } from 'react-bootstrap';
+import { Header, SubmitButton, Column, FormControl, FormGroup, FormLabel, FullRow, SignUpContainer, SignInLink } from './styles'
 
-const SignUpForm = () => {
+const SignUpForm = (props) => {
   const [signUpData, setSignUpData] = useState({
     email: "",
     username: "",
@@ -11,6 +10,13 @@ const SignUpForm = () => {
     password2: "",
   });
   const { email, username, password1, password2 } = signUpData;
+
+  useEffect(() => {
+    props.setSignUp(true)
+    return () => { 
+      props.setSignUp(null)
+    }
+  }, [props]);
 
   return (
       <FullRow>

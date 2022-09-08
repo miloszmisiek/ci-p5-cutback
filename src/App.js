@@ -25,14 +25,14 @@ function App() {
   const [signUp, setSignUp] = useState();
   return (
     <div className={styles.App}>
-      <NavBar singUp={signUp} setSignUp={setSignUp} />
+      <NavBar />
       <Main >
         {signUp ? <BackgroundImage src='https://res.cloudinary.com/milo-milo/image/upload/v1662569444/signup-background_oljnys.jpg'/> : null}
         <Container className={styles.Main_Container}>
           <Switch>
             <Route exact path="/" render={() => <h1>Home Page</h1>} />
             <Route exact path="/signin" render={() => <h1>Sign in</h1>} />
-            <Route exact path="/signup" render={() => <SignUpForm />} />
+            <Route exact path="/signup" render={() => <SignUpForm setSignUp={setSignUp} />} />
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>
         </Container>
