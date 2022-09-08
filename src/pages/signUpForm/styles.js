@@ -7,13 +7,21 @@ export const FullRow = styled(Row)`
     margin-left: 1rem;
     margin-right: 1rem;
     position: relative;
+    @media (max-width:992px) {
+        margin-right: 0;
+        margin-left: 0;
+    }
 `;
 
 export const Column = styled(Col)`
     margin: auto 1rem auto auto;
+    @media (max-width:992px) {
+        padding-right: 0;
+        padding-left: 0;
+    }
 `;
 
-export const FormGroup = styled(Form.Group) `
+export const FormGroup = styled(Form.Group)`
     margin-bottom: 1rem;
 `;
 

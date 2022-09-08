@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import { Header, SubmitButton, Column, FormControl, FormGroup, FormLabel, FullRow, SignUpContainer, SignInLink } from './styles'
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const SignUpForm = (props) => {
   const [signUpData, setSignUpData] = useState({
@@ -10,19 +12,39 @@ const SignUpForm = (props) => {
     password2: "",
   });
   const { email, username, password1, password2 } = signUpData;
+  const [errors, setErrors] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     props.setSignUp(true)
     return () => { 
-      props.setSignUp(null)
+      props.setSignUp(false)
     }
   }, [props]);
 
+  const handleChange = (event) => {
+    setSignUpData({
+      // below you select the signUpData and update only fields that are changing with the ... notation
+      ...signUpData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post("/dj-rest-auth/registration/", signUpData);
+      history.push("/signin");
+    } catch (err) {
+      setErrors(err.response?.data);
+    }
+  };
+
   return (
       <FullRow>
-        <Column xs={12} lg={6}>
+        <Column xs={12} md={6}>
           <SignUpContainer form="true">
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Header>
                 sign up
               </Header>
@@ -32,7 +54,9 @@ const SignUpForm = (props) => {
                   type="text"
                   placeholder="Username"
                   name='username'
+                  autoComplete="on"
                   value={username}
+                  onChange={handleChange}
                 />
               </FormGroup>
               <FormGroup controlId="email">
@@ -41,7 +65,9 @@ const SignUpForm = (props) => {
                   type="email"
                   placeholder="Email Address"
                   name='email'
+                  autoComplete="on"
                   value={email}
+                  onChange={handleChange}
                 />
               </FormGroup>
               <FormGroup controlId="password1">
@@ -49,8 +75,10 @@ const SignUpForm = (props) => {
                 <FormControl
                   type="password"
                   placeholder="Password"
+                  autoComplete="on"
                   name='password1'
                   value={password1}
+                  onChange={handleChange}
                 />
               </FormGroup>
               <FormGroup controlId="password2">
@@ -58,11 +86,13 @@ const SignUpForm = (props) => {
                 <FormControl
                   type="password"
                   placeholder="Confirm Password"
+                  autoComplete="on"
                   name='password2'
                   value={password2}
+                  onChange={handleChange}
                 />
               </FormGroup>
-              <SubmitButton type="submit" onClick={(e) => e.preventDefault()}>
+              <SubmitButton type="submit">
                 Submit
               </SubmitButton>
             </Form>

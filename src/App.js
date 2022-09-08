@@ -19,6 +19,10 @@ export const BackgroundImage = styled(Image)`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    
+    @media (max-width: 767px) {
+      display: none;
+    }
 `;
 
 function App() {
@@ -27,7 +31,7 @@ function App() {
     <div className={styles.App}>
       <NavBar />
       <Main >
-        {signUp ? <BackgroundImage src='https://res.cloudinary.com/milo-milo/image/upload/v1662569444/signup-background_oljnys.jpg'/> : null}
+        {signUp ? <BackgroundImage src='https://res.cloudinary.com/milo-milo/image/upload/v1662569444/signup-background_oljnys.jpg' /> : null}
         <Container className={styles.Main_Container}>
           <Switch>
             <Route exact path="/" render={() => <h1>Home Page</h1>} />
