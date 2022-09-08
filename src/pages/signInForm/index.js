@@ -37,7 +37,6 @@ const SignInForm = (props) => {
             history.push("/");
         } catch (err) {
             setErrors(err.response?.data);
-            console.error(err);
         }
     };
 
