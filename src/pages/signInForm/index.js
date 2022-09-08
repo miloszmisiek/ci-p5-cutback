@@ -7,11 +7,10 @@ import { useHistory } from "react-router-dom";
 const SignInForm = (props) => {
     const { setBackground } = props;
     const [signInData, setsignInData] = useState({
-        email: "",
         username: "",
         password: "",
     });
-    const { email, username, password } = signInData;
+    const { username, password } = signInData;
     const [errors, setErrors] = useState({});
     const history = useHistory();
 
@@ -49,10 +48,10 @@ const SignInForm = (props) => {
                             sign in
                         </Header>
                         <FormGroup controlId="username">
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel>Username/Email</FormLabel>
                             <FormControl
                                 type="text"
-                                placeholder="Username"
+                                placeholder="Username or Email"
                                 name='username'
                                 autoComplete="on"
                                 value={username}
@@ -63,17 +62,6 @@ const SignInForm = (props) => {
                                     {message}
                                 </Alert>
                             ))}
-                        </FormGroup>
-                        <FormGroup controlId="email">
-                            <FormLabel>Email address</FormLabel>
-                            <FormControl
-                                type="email"
-                                placeholder="Email Address"
-                                name='email'
-                                autoComplete="on"
-                                value={email}
-                                onChange={handleChange}
-                            />
                             {errors.email?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>
                                     {message}
