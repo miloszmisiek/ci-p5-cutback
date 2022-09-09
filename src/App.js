@@ -8,7 +8,7 @@ import { Container, Image } from "react-bootstrap";
 import { useState } from "react";
 import styled from "styled-components";
 import SignInForm from "./pages/auth/signInForm/index";
-import ProductsPage from "./pages/productsPage/index";
+import ProductsPage from "./pages/products/productsPage";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -56,7 +56,7 @@ function App() {
         ) : null}
         <Container className={styles.Main_Container}>
           <Switch>
-            <Route exact path="/" render={() => <ProductsPage />} />
+            <Route exact path="/" render={() => <ProductsPage/>} />
             <Route
               exact
               path="/signin"

@@ -1,7 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import Avatar from "../../components/avatar";
+import Avatar from "../../../components/avatar";
+
 import {
   CardHeader,
   CardInfo,
