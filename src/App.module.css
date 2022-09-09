@@ -13,14 +13,13 @@ ul {
   padding: 0;
 }
 
-
 .Main_Container {
   padding-top: calc(67px + 1rem);
   padding-bottom: 1rem;
   height: 100%;
 }
 
-@media (max-width:992px) {
+@media (max-width: 992px) {
   .Main_Container {
     padding-left: 0;
     padding-right: 0;
@@ -28,7 +27,7 @@ ul {
   }
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .Main_Container {
     padding: calc(130px + 1rem) 0 1rem 0;
     max-width: 80%;

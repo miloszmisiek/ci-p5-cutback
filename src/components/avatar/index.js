@@ -5,12 +5,7 @@ import { StyledAvatar } from "./styles.js";
 const Avatar = ({ src, height = 45, text }) => {
   return (
     <span>
-      <StyledAvatar
-        src={src}
-        height={height}
-        width={height}
-        alt="avatar"
-      />
+      <StyledAvatar src={src} height={height} width={height} alt="avatar" />
       {text}
     </span>
   );
