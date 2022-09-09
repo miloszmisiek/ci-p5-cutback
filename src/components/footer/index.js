@@ -6,7 +6,7 @@ import footer from '../../assets/logo-footer.png';
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className='mt-auto'>
             <StyledFooter>
                 <StyledFooterLogo>
                     <NavLink to="/">

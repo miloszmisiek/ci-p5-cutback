@@ -3,15 +3,27 @@ import { Route, Switch } from "react-router-dom";
 import NavBar from './components/navbar/index';
 import Footer from './components/footer/index';
 import './api/axiosDefaults';
-import SignUpForm from './pages/signUpForm/index';
+import SignUpForm from './pages/auth/signUpForm/index';
 import { Container, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import styled from 'styled-components';
-import SignInForm from './pages/signInForm';
+import SignInForm from './pages/auth/signInForm/index';
+import ProductsPage from './pages/productsPage/index';
 
+
+export const AppWrapper = styled.div`
+  font-family: "Montserrat", sans-serif;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Main = styled.main`
-    height: 100%;
+  background-color: #f8f8f8;
+  height: ${props => props.home ? null : "100%"};
 `;
 
 export const BackgroundImage = styled(Image)`
@@ -30,9 +42,9 @@ export const BackgroundImage = styled(Image)`
 function App() {
   const [background, setBackground] = useState();
   return (
-    <div className={styles.App}>
+    <AppWrapper>
       <NavBar />
-      <Main >
+      <Main home={background ? null : "true"}>
         {background ? 
         <BackgroundImage 
         src={background.signIn ?
@@ -44,7 +56,7 @@ function App() {
         /> : null}
         <Container className={styles.Main_Container}>
           <Switch>
-            <Route exact path="/" render={() => <h1>Home Page</h1>} />
+            <Route exact path="/" render={() => <ProductsPage />} />
             <Route exact path="/signin" render={() => <SignInForm setBackground={setBackground} />} />
             <Route exact path="/signup" render={() => <SignUpForm setBackground={setBackground} />} />
             <Route render={() => <h1>Page not found!</h1>} />
@@ -52,7 +64,7 @@ function App() {
         </Container>
       </Main>
       <Footer />
-    </div>
+    </AppWrapper>
   );
 }
 

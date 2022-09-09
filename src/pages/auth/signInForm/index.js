@@ -3,8 +3,8 @@ import { Alert, Form } from 'react-bootstrap';
 import { Header, SubmitButton, Column, FormControl, FormGroup, FormLabel, FullRow, SignUpContainer, SignInLink } from '../signUpForm/styles'
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
-import { setTokenTimestamp } from '../../utils/utils';
+import { useSetCurrentUser } from '../../../contexts/CurrentUserContext';
+import { setTokenTimestamp } from '../../../utils/utils';
 
 const SignInForm = (props) => {
     const setCurrentUser = useSetCurrentUser();

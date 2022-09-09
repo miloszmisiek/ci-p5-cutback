@@ -13,17 +13,6 @@ ul {
   padding: 0;
 }
 
-.App {
-  font-family: "Montserrat", sans-serif;
-  background-color: #f8f8f8;
-  min-height: 100vh;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-
-}
-
 
 .Main_Container {
   padding-top: calc(67px + 1rem);
