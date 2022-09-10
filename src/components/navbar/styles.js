@@ -131,13 +131,14 @@ export const StyledDropdown = styled(NavDropdown)`
   .dropdown-menu {
     top: 50px;
     right: 0px;
+    left: auto;
   }
   &.show:before {
     position: absolute;
     display: inline-block;
     content: "";
     top: 42px;
-    right: 22px;
+    right: 37px;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid rgba(0, 0, 0, 0.175);
@@ -147,7 +148,7 @@ export const StyledDropdown = styled(NavDropdown)`
     display: inline-block;
     content: "";
     top: 43px;
-    right: 21px;
+    right: 36px;
     border-left: 11px solid transparent;
     border-right: 11px solid transparent;
     border-bottom: 11px solid #fff;
@@ -183,18 +184,11 @@ export const StyledSignedInMsg = styled.div`
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  margin-left: 1rem;
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
   &:hover {
     border-color: #b4d3b2;
-  }
-  @media (min-width: 1000px) {
-    margin-left: 3rem;
-  }
-  @media (max-width: 320px) {
-    margin-left: 0.8rem;
   }
   ${(props) =>
     props.dropdownitem

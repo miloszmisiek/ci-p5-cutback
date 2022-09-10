@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import styled from "styled-components";
 import { Column } from "../productCard/styles";
 import Form from "react-bootstrap/Form";
@@ -9,7 +9,8 @@ export const CreateCard = styled(Card)``;
 export const CreateColumn = styled(Column)``;
 
 export const Thumbnails = styled(Card.Body)`
-  border: 1px solid black;
+  border-top: 1px solid rgba(0,0,0,.125);
+  border-bottom: 1px solid rgba(0,0,0,.125);
   display: flex;
 `;
 
@@ -33,4 +34,31 @@ export const FormSwitch = styled(Form.Switch)`
 
 export const AddImageButton = styled(SubmitButton)`
     max-width: 33% !important;
+`;
+
+export const TitleWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+`;
+
+export const TitleText = styled.div`
+    font-size: 2rem;
+    margin-bottom: 1rem;
+`;
+
+export const AddProductButton = styled(AddImageButton)`
+    border-radius: 5px;
+`;
+
+export const ButtonsWrapper = styled(Form.Group)`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid #adb5bd;
+    padding-top: 1rem;
+`;
+
+export const FormControlMt = styled(Form.Control)`
+    margin-top: 1rem; 
 `;
