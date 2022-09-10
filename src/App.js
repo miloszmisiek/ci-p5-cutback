@@ -9,6 +9,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import SignInForm from "./pages/auth/signInForm/index";
 import ProductsPage from "./pages/products/productsPage";
+import ProductCreateForm from "./pages/products/productCreateForm";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -67,6 +68,7 @@ function App() {
               path="/signup"
               render={() => <SignUpForm setBackground={setBackground} />}
             />
+            <Route exact path="/products/create" render={() => <ProductCreateForm />} />
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>
         </Container>
