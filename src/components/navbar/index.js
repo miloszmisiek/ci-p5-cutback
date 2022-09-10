@@ -22,6 +22,9 @@ import {
   StyledNavbar,
   StyledLogoName,
   StyledCategoriesDropdown,
+  SearchBarForm,
+  SearchBardDropdown,
+  SearchBarDropdown,
 } from "./styles.js";
 
 const NavBar = () => {
@@ -108,7 +111,7 @@ const NavBar = () => {
             placeholder="&#xF002; Search"
             className="mr-sm-2"
           />
-          <Dropdown>
+          <SearchBarDropdown>
             <StyledCategoriesDropdown id="dropdown-basic">
               <span className="d-none" id="categories">
                 Categories
@@ -122,7 +125,7 @@ const NavBar = () => {
               <Dropdown.Item>Kites</Dropdown.Item>
               <Dropdown.Item>Wetsuits</Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown>
+          </SearchBarDropdown>
         </StyledSearchBarContainer>
       </Form>
     </StyledCol>

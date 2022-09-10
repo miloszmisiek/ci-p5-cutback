@@ -2,6 +2,7 @@ import {
   Col,
   Container,
   Dropdown,
+  Form,
   FormControl,
   Nav,
   Navbar,
@@ -32,6 +33,7 @@ export const StyledFormControl = styled(FormControl)`
 export const StyledRow = styled(Row)`
   align-items: center;
   width: 100%;
+  margin: 0;
 `;
 
 export const StyledContainer = styled(Container)`
@@ -51,7 +53,7 @@ export const StyledLogo = styled.span`
   @media (min-width: 768px) and (max-width: 991px) {
     font-size: 1.6rem !important;
   }
-  @media (max-width: 351px) {
+  @media (max-width: 368px) {
     font-size: 1.5rem !important;
   }
 `;
@@ -79,31 +81,43 @@ export const StyledCol = styled(Col)`
   ${(props) =>
     props.nav
       ? `display: flex;
-        justify-content: ${props.loggedout ? "space-around" : "flex-end"} ;
+        justify-content: flex-end;
         align-items: center;
         padding: 1vh 0;
-        @media (max-width: 440px) {
-            width: ${props.loggedout ? "45" : "40"}%;
+        @media (max-width: 300px) {
+                max-width: ${
+                  props.loggedout ? `${(100 / 12) * 6}% !important` : null
+                };
+            }
+        @media (max-width: 355px) {
             font-size: 0.8rem !important;
         }
+        @media (max-width: 440px) {
+            max-width: ${props.loggedout ? "45" : "40"}%;
+        }
         @media (min-width: 768px) and (max-width: 991px) {
-            width: ${
+            max-width: ${
               props.loggedout ? `${(100 / 12) * 3}%` : `${(100 / 12) * 2}%`
             };
-        }
+
         `
       : props.logo
-      ? `@media (max-width: 440px) {
-                width: 55%;
-                padding-right: 0;
-                padding-left: 5px;
+      ? `
+        padding: 0;
+        @media (max-width: 440px) {
+                max-width: 55%;
+                flex: 0 0 55%;
             }
             
-            @media (min-width: 768px) and (max-width: 991px) {
-                width: ${
-                  props.loggedout ? `${(100 / 12) * 3}%` : `${(100 / 12) * 6}%`
-                };
-            }`
+        @media (min-width: 768px) and (max-width: 991px) {
+            max-width: ${
+              props.loggedout ? `${(100 / 12) * 3}%` : `${(100 / 12) * 6}%`
+            };
+        };
+        @media (max-width: 300px) {
+            max-width: ${(100 / 12) * 6}%;
+        }
+        `
       : null}
 `;
 
@@ -142,6 +156,8 @@ export const StyledDropdown = styled(NavDropdown)`
 `;
 
 export const StyledSearchBarContainer = styled.div`
+  position: relative;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -167,14 +183,18 @@ export const StyledSignedInMsg = styled.div`
 `;
 
 export const StyledNavLink = styled(NavLink)`
+  margin-left: 1rem;
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
   &:hover {
     border-color: #b4d3b2;
   }
-  @media (max-width: 440px) {
-    margin-left: 7px;
+  @media (min-width: 1000px) {
+    margin-left: 3rem;
+  }
+  @media (max-width: 320px) {
+    margin-left: 0.8rem;
   }
   ${(props) =>
     props.dropdownitem
@@ -198,6 +218,7 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
+  height: 100%;
   background-color: rgba(180, 211, 178, 1) !important;
   color: black !important;
   font-weight: 600;
@@ -223,4 +244,10 @@ export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
       display: none !important;
     }
   }
+`;
+
+export const SearchBarDropdown = styled(Dropdown)`
+  position: absolute;
+  right: 0;
+  height: 100%;
 `;
