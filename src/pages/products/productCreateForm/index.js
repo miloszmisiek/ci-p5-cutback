@@ -10,12 +10,15 @@ import {
   ButtonsWrapper,
   CreateCard,
   CreateColumn,
+  CurrencySelect,
   FormControlMt,
   FormSwitch,
   LinkSpan,
+  PriceInput,
   Thumbnails,
   TitleText,
   TitleWrapper,
+  TransparentInput,
 } from "./styles";
 
 const ProductCreateForm = () => {
@@ -50,6 +53,7 @@ const ProductCreateForm = () => {
             <Card.Img
               variant="top"
               src="https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+
             />
             <Thumbnails>
               <LinkSpan>Link</LinkSpan>
@@ -72,10 +76,30 @@ const ProductCreateForm = () => {
           </CreateCard>
         </CreateColumn>
         <CreateColumn xs={12} md={6}>
-          <TitleWrapper>
-            <TitleText>Title</TitleText>
-            <TitleText>$ 0.00</TitleText>
-          </TitleWrapper>
+          <Form.Group controlId="titlePriceSelect">
+            <TitleWrapper title="true">
+              <TransparentInput type="text" placeholder="Title" />
+              <TitleWrapper>
+                <CurrencySelect as="select">
+                  <option disabled selected>
+                    $
+                  </option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </CurrencySelect>
+                <TransparentInput
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  price="true"
+                />
+              </TitleWrapper>
+            </TitleWrapper>
+          </Form.Group>
           <Form.Group controlId="categoriesSelect">
             <Form.Label className="d-none">Categories</Form.Label>
             <Form.Control as="select">
@@ -88,19 +112,6 @@ const ProductCreateForm = () => {
               <option>4</option>
               <option>5</option>
             </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="currencySelect">
-            <Form.Label className="d-none">Currency</Form.Label>
-            <Form.Control as="select">
-              <option disabled selected>
-                Choose Currency
-              </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </Form.Control>
-            <FormControlMt type="text" placeholder="Price" />
           </Form.Group>
           <Form.Group controlId="locationGroup">
             <Form.Label>Location</Form.Label>
