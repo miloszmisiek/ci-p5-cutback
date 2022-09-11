@@ -241,6 +241,11 @@ export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
 `;
 
 export const SearchBarDropdown = styled(Dropdown)`
+  .dropdown-menu {
+      left: auto;
+      right: 0;
+  }
+
   position: absolute;
   right: 0;
   height: 100%;
