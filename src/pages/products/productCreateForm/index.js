@@ -1,7 +1,10 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button, Card, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import Asset from "../../../components/asset";
+import Avatar from "../../../components/avatar";
 import {
   ActionBody,
   ActionButtonsWrapper,
@@ -11,7 +14,10 @@ import {
   CreateCard,
   CreateColumn,
   CurrencySelect,
+  Figure,
+  FormControlMb,
   FormControlMt,
+  FormLabel,
   FormSwitch,
   LinkSpan,
   PriceInput,
@@ -39,29 +45,121 @@ const ProductCreateForm = () => {
     product: 0,
     image: "",
   });
+  const { product, image } = galleryData;
+  const {
+    category,
+    title,
+    description,
+    brand,
+    inStock,
+    price,
+    currency,
+    street,
+    city,
+    country,
+  } = productData;
+  const [choices, setChoices] = useState({
+    categories: [],
+    currencies: [],
+    countires: [],
+  });
+  const { categories, currencies, countires } = choices;
   const [isSwitchOn, setIsSwitchOn] = useState(false);
-
+  const imageInput = useRef(null);
   const onSwitchAction = () => {
     setIsSwitchOn(!isSwitchOn);
   };
+
+  useEffect(() => {
+    const getOptions = async () => {
+      try {
+        const { data } = await axios.options("/products/");
+        const countires = data.actions.POST.country.choices;
+        const currencies = data.actions.POST.price_currency.choices;
+        const categories = data.actions.POST.category.choices;
+        setChoices({ categories, currencies, countires });
+      } catch (err) {
+        console.log(err);
+        // if (err.response?.status !== 401) {
+        //     setErrors(err.response?.data);
+        // }
+      }
+    };
+    getOptions();
+  }, []);
+
+  const handleChangeImage = (event) => {
+    if (event.target.files.length) {
+      URL.revokeObjectURL(image);
+      setGalleryData({
+        ...galleryData,
+        image: URL.createObjectURL(event.target.files[0]),
+      });
+    }
+  };
+
+  const thumbnails = (
+    <Thumbnails>
+      <Avatar
+        height={60}
+        src={
+          image
+            ? image
+            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+        }
+      />
+      <Avatar
+        height={60}
+        src={
+          image
+            ? image
+            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+        }
+      />
+      <Avatar
+        height={60}
+        src={
+          image
+            ? image
+            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+        }
+      />
+      <Avatar
+        height={60}
+        src={
+          image
+            ? image
+            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+        }
+      />
+    </Thumbnails>
+  );
 
   return (
     <Form>
       <Row>
         <CreateColumn xs={12} md={6}>
           <CreateCard>
-            <Card.Img
-              variant="top"
-              src="https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-
+            <FormLabel htmlFor="image-upload">
+              <Figure>
+                <Card.Img
+                  variant="top"
+                  src={
+                    image
+                      ? image
+                      : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+                  }
+                />
+              </Figure>
+            </FormLabel>
+            <Form.File
+              className="d-none"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleChangeImage}
+              ref={imageInput}
             />
-            <Thumbnails>
-              <LinkSpan>Link</LinkSpan>
-              <LinkSpan>Link</LinkSpan>
-              <LinkSpan>Link</LinkSpan>
-              <LinkSpan>Link</LinkSpan>
-            </Thumbnails>
-
+            {thumbnails}
             <ActionBody>
               <FormSwitch
                 onChange={onSwitchAction}
@@ -81,14 +179,9 @@ const ProductCreateForm = () => {
               <TransparentInput type="text" placeholder="Title" />
               <TitleWrapper>
                 <CurrencySelect as="select">
-                  <option disabled selected>
-                    $
-                  </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                  {currencies?.map((currency, idx) => (
+                    <option key={idx}>{currency.display_name}</option>
+                  ))}
                 </CurrencySelect>
                 <TransparentInput
                   type="number"
@@ -106,18 +199,23 @@ const ProductCreateForm = () => {
               <option disabled selected>
                 Categories
               </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              {categories?.map((category, idx) => (
+                <option key={idx}>{category.display_name}</option>
+              ))}
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="locationGroup">
             <Form.Label>Location</Form.Label>
-            <Form.Control type="text" placeholder="Street Name" />
-            <FormControlMt type="text" placeholder="City" />
-            <FormControlMt type="text" placeholder="Country" />
+            <FormControlMb type="text" placeholder="Street Name" />
+            <FormControlMb type="text" placeholder="City" />
+            <Form.Control as="select">
+              <option disabled selected>
+                Country
+              </option>
+              {countires?.map((country, idx) => (
+                <option key={idx}>{country.display_name}</option>
+              ))}
+            </Form.Control>
           </Form.Group>
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
@@ -125,7 +223,9 @@ const ProductCreateForm = () => {
             <FormControlMt type="text" placeholder="Brand" />
           </Form.Group>
           <ButtonsWrapper>
-            <AddProductButton variant="primary">Add product</AddProductButton>
+            <AddProductButton variant="primary">
+              <i className="fas fa-plus"></i> Add product
+            </AddProductButton>
           </ButtonsWrapper>
         </CreateColumn>
       </Row>

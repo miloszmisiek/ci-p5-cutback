@@ -187,6 +187,7 @@ export const StyledNavLink = styled(NavLink)`
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
+  margin-left: ${props => props.dropdownitem ? null : "1rem"};
   &:hover {
     border-color: #b4d3b2;
   }
@@ -209,6 +210,9 @@ export const StyledNavLink = styled(NavLink)`
         }
         `
       : null}
+  @media (max-width: 320px) {
+    margin-left: ${props => props.dropdownitem ? null : "0.6rem"};
+  }
 `;
 
 export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`

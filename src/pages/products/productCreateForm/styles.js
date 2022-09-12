@@ -24,7 +24,7 @@ export const ActionBody = styled(Card.Body)`
   justify-content: space-between;
   align-items: center;
 
-  @media(max-width: 370px) {
+  @media (max-width: 370px) {
     flex-direction: column;
   }
 `;
@@ -34,7 +34,7 @@ export const FormSwitch = styled(Form.Switch)`
     border-color: rgba(180, 211, 178, 1);
     background-color: rgba(180, 211, 178, 1);
   }
-  @media(max-width: 370px) {
+  @media (max-width: 370px) {
     margin-bottom: 1rem;
   }
 `;
@@ -72,6 +72,10 @@ export const FormControlMt = styled(Form.Control)`
   margin-top: 1rem;
 `;
 
+export const FormControlMb = styled(Form.Control)`
+  margin-bottom: 1rem;
+`;
+
 export const CurrencySelect = styled(Form.Control)`
   -webkit-appearance: none;
   border: none;
@@ -107,4 +111,17 @@ export const TransparentInput = styled(Form.Control)`
   @media (min-width: 1200px) {
     max-width: 30%;
   }
+`;
+
+export const Figure = styled.figure`
+  margin: 0;
+  cursor: pointer;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+`;
+
+export const FormLabel = styled(Form.Label)`
+  margin-bottom: 0;
 `;
