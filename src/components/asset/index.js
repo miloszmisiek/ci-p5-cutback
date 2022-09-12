@@ -4,7 +4,7 @@ import { AssetWrapper } from "./styles";
 
 const Asset = ({ spinner, src, message, signin }) => {
   return (
-    <AssetWrapper signin={signin}>
+    <AssetWrapper signin={`${signin}`}>
       {spinner && <Spinner animation="border" />}
       {src && <img src={src} alt={message} />}
       {message && <p className="mt-4">{message}</p>}

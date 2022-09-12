@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button, Card, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { axiosRes } from "../../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import Avatar from "../../../components/avatar";
 import {
@@ -42,11 +42,8 @@ const ProductCreateForm = () => {
     city: "",
     country: "",
   });
-  const [galleryData, setGalleryData] = useState({
-    product: 0,
-    image: "",
-  });
-  const { product, image } = galleryData;
+  const [file, setFile] = useState([]);
+  //   const { product, image } = galleryData;
   const {
     category,
     title,
@@ -70,14 +67,15 @@ const ProductCreateForm = () => {
   const onSwitchAction = () => {
     setIsSwitchOn(!isSwitchOn);
   };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const getOptions = async () => {
+    const handleMount = async () => {
       try {
-        const { data } = await axiosRes.options("/products/");
-        const countires = data.actions.POST.country.choices;
-        const currencies = data.actions.POST.price_currency.choices;
-        const categories = data.actions.POST.category.choices;
+        const { data } = await axiosReq.options("/products/");
+        const countires = data.actions?.POST.country.choices;
+        const currencies = data.actions?.POST.price_currency.choices;
+        const categories = data.actions?.POST.category.choices;
         setChoices({ categories, currencies, countires });
       } catch (err) {
         console.log(err);
@@ -86,81 +84,102 @@ const ProductCreateForm = () => {
         // }
       }
     };
-    getOptions();
+    handleMount();
   }, []);
 
-  const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(image);
-      setGalleryData({
-        ...galleryData,
-        image: URL.createObjectURL(event.target.files[0]),
-      });
-    }
+  //   useEffect(() => {
+  //     const handleGalleryUpdate = async () => {
+  //       const { gallery } = await axiosReq.get();
+  //     };
+  //   }, []);
+
+  //   const handleChangeImage = (event) => {
+  //     if (event.target.files.length) {
+  //       URL.revokeObjectURL(image);
+  //       setGalleryData({
+  //         ...galleryData,
+  //         image: URL.createObjectURL(event.target.files[0]),
+  //       });
+  //     }
+  //   };
+
+  const handleImageUpload = (e) => {
+    setFile([...file, URL.createObjectURL(e.target.files[0])]);
+    console.log("file", file);
   };
 
-  const thumbnails = (
-    <Thumbnails>
-      <Avatar
-        height={60}
-        src={
-          image
-            ? image
-            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-        }
-      />
-      <Avatar
-        height={60}
-        src={
-          image
-            ? image
-            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-        }
-      />
-      <Avatar
-        height={60}
-        src={
-          image
-            ? image
-            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-        }
-      />
-      <Avatar
-        height={60}
-        src={
-          image
-            ? image
-            : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-        }
-      />
-    </Thumbnails>
-  );
+  const upload = (e) => {
+    e.preventDefault();
+    console.log(file);
+  };
+
+  //   const thumbnails = (
+  //     <Thumbnails>
+  //       <Avatar
+  //         height={60}
+  //         src={
+  //           image
+  //             ? image
+  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+  //         }
+  //       />
+  //       <Avatar
+  //         height={60}
+  //         src={
+  //           image
+  //             ? image
+  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+  //         }
+  //       />
+  //       <Avatar
+  //         height={60}
+  //         src={
+  //           image
+  //             ? image
+  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+  //         }
+  //       />
+  //       <Avatar
+  //         height={60}
+  //         src={
+  //           image
+  //             ? image
+  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+  //         }
+  //       />
+  //     </Thumbnails>
+  //   );
 
   return (
     <Form>
       <Row>
         <CreateColumn xs={12} md={6}>
           <CreateCard>
-            <FormLabel htmlFor="image-upload">
-              <Figure>
-                <Card.Img
-                  variant="top"
-                  src={
-                    image
-                      ? image
-                      : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-                  }
-                />
-              </Figure>
-            </FormLabel>
-            <Form.File
-              className="d-none"
-              id="image-upload"
-              accept="image/*"
-              onChange={handleChangeImage}
-              ref={imageInput}
-            />
-            {thumbnails}
+            <div>
+              {file.length > 0 &&
+                file.map((item, index) => {
+                  return (
+                    <div key={item}>
+                      <img src={item} alt="" />
+                    </div>
+                  );
+                })}
+            </div>
+            <div className="form-group">
+              <input
+                type="file"
+                disabled={file.length === 5}
+                className="form-control"
+                onChange={handleImageUpload}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary btn-block"
+              onClick={upload}
+            >
+              Upload
+            </button>
             <ActionBody>
               <FormSwitch
                 onChange={onSwitchAction}
@@ -179,14 +198,16 @@ const ProductCreateForm = () => {
             <TitleWrapper title="true">
               <TransparentInput type="text" placeholder="Title" />
               <TitleWrapper>
-                {currencies.length ? (
+                {currencies?.length ? (
                   <CurrencySelect as="select">
                     {currencies.map((currency, idx) => (
-                      <option key={idx}>{currency.display_name}</option>
+                      <option key={idx} value={currency.value}>
+                        {currency.display_name}
+                      </option>
                     ))}
                   </CurrencySelect>
                 ) : (
-                  <Asset spinner signin="true" />
+                  <Asset spinner signin />
                 )}
                 <TransparentInput
                   type="number"
@@ -200,34 +221,38 @@ const ProductCreateForm = () => {
           </Form.Group>
           <Form.Group controlId="categoriesSelect">
             <Form.Label className="d-none">Categories</Form.Label>
-            {categories.length ? (
-              <Form.Control as="select">
-                <option disabled selected>
+            {categories?.length ? (
+              <Form.Control as="select" defaultValue={""}>
+                <option disabled value={""}>
                   Categories
                 </option>
                 {categories?.map((category, idx) => (
-                  <option key={idx}>{category.display_name}</option>
+                  <option key={idx} value={category.value}>
+                    {category.display_name}
+                  </option>
                 ))}
               </Form.Control>
             ) : (
-              <Asset spinner signin="true" />
+              <Asset spinner signin />
             )}
           </Form.Group>
           <Form.Group controlId="locationGroup">
             <Form.Label>Location</Form.Label>
             <FormControlMb type="text" placeholder="Street Name" />
             <FormControlMb type="text" placeholder="City" />
-            {countires.length ? (
-              <Form.Control as="select">
-                <option disabled selected>
-                  Countries
+            {countires?.length ? (
+              <Form.Control as="select" defaultValue={""}>
+                <option disabled value={""}>
+                  Countires
                 </option>
                 {countires?.map((country, idx) => (
-                  <option key={idx}>{country.display_name}</option>
+                  <option key={idx} value={country.value}>
+                    {country.display_name}
+                  </option>
                 ))}
               </Form.Control>
             ) : (
-              <Asset spinner signin="true" />
+              <Asset spinner signin />
             )}
           </Form.Group>
           <Form.Group controlId="description">

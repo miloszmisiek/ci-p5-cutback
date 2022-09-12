@@ -10,6 +10,7 @@ import styled from "styled-components";
 import SignInForm from "./pages/auth/signInForm/index";
 import ProductsPage from "./pages/products/productsPage";
 import ProductCreateForm from "./pages/products/productCreateForm";
+import ProductGallery from "./components/productGallery";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -69,6 +70,7 @@ function App() {
               render={() => <SignUpForm setBackground={setBackground} />}
             />
             <Route exact path="/products/create" render={() => <ProductCreateForm />} />
+            <Route exact path="/products/gallery" render={() => <ProductGallery />} />
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>
         </Container>
