@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button, Card, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import Avatar from "../../../components/avatar";
 import {
@@ -73,7 +74,7 @@ const ProductCreateForm = () => {
   useEffect(() => {
     const getOptions = async () => {
       try {
-        const { data } = await axios.options("/products/");
+        const { data } = await axiosRes.options("/products/");
         const countires = data.actions.POST.country.choices;
         const currencies = data.actions.POST.price_currency.choices;
         const categories = data.actions.POST.category.choices;
@@ -178,11 +179,15 @@ const ProductCreateForm = () => {
             <TitleWrapper title="true">
               <TransparentInput type="text" placeholder="Title" />
               <TitleWrapper>
-                <CurrencySelect as="select">
-                  {currencies?.map((currency, idx) => (
-                    <option key={idx}>{currency.display_name}</option>
-                  ))}
-                </CurrencySelect>
+                {currencies.length ? (
+                  <CurrencySelect as="select">
+                    {currencies.map((currency, idx) => (
+                      <option key={idx}>{currency.display_name}</option>
+                    ))}
+                  </CurrencySelect>
+                ) : (
+                  <Asset spinner signin="true" />
+                )}
                 <TransparentInput
                   type="number"
                   step="0.01"
@@ -195,27 +200,35 @@ const ProductCreateForm = () => {
           </Form.Group>
           <Form.Group controlId="categoriesSelect">
             <Form.Label className="d-none">Categories</Form.Label>
-            <Form.Control as="select">
-              <option disabled selected>
-                Categories
-              </option>
-              {categories?.map((category, idx) => (
-                <option key={idx}>{category.display_name}</option>
-              ))}
-            </Form.Control>
+            {categories.length ? (
+              <Form.Control as="select">
+                <option disabled selected>
+                  Categories
+                </option>
+                {categories?.map((category, idx) => (
+                  <option key={idx}>{category.display_name}</option>
+                ))}
+              </Form.Control>
+            ) : (
+              <Asset spinner signin="true" />
+            )}
           </Form.Group>
           <Form.Group controlId="locationGroup">
             <Form.Label>Location</Form.Label>
             <FormControlMb type="text" placeholder="Street Name" />
             <FormControlMb type="text" placeholder="City" />
-            <Form.Control as="select">
-              <option disabled selected>
-                Country
-              </option>
-              {countires?.map((country, idx) => (
-                <option key={idx}>{country.display_name}</option>
-              ))}
-            </Form.Control>
+            {countires.length ? (
+              <Form.Control as="select">
+                <option disabled selected>
+                  Countries
+                </option>
+                {countires?.map((country, idx) => (
+                  <option key={idx}>{country.display_name}</option>
+                ))}
+              </Form.Control>
+            ) : (
+              <Asset spinner signin="true" />
+            )}
           </Form.Group>
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
