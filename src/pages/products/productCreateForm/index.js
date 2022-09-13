@@ -1,14 +1,13 @@
-import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Card, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
+import { useHistory } from "react-router";
 import Avatar from "../../../components/avatar";
 import {
   ActionBody,
-  ActionButtonsWrapper,
   AddImageButton,
   AddProductButton,
   ButtonsWrapper,
@@ -20,53 +19,36 @@ import {
   FormControlMt,
   FormLabel,
   FormSwitch,
-  LinkSpan,
-  PriceInput,
   Thumbnails,
-  TitleText,
   TitleWrapper,
   TransparentInput,
 } from "./styles";
-
 const ProductCreateForm = () => {
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
-    category: [],
+    category: "",
     title: "",
     description: "",
     brand: "",
-    inStock: false,
+    in_stock: false,
     price: "",
-    currency: [],
+    price_currency: "",
     street: "",
     city: "",
     country: "",
   });
   const [gallery, setGallery] = useState([]);
-  const {
-    category,
-    title,
-    description,
-    brand,
-    inStock,
-    price,
-    currency,
-    street,
-    city,
-    country,
-  } = productData;
+  const { title, description, brand, in_stock, price, street, city } =
+    productData;
   const [choices, setChoices] = useState({
     categories: [],
     currencies: [],
     countires: [],
   });
   const { categories, currencies, countires } = choices;
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
   const imageInput = useRef(null);
-  const onSwitchAction = () => {
-    setIsSwitchOn(!isSwitchOn);
-  };
   const [activeIndex, setActiveIndex] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -76,6 +58,7 @@ const ProductCreateForm = () => {
         const currencies = data.actions?.POST.price_currency.choices;
         const categories = data.actions?.POST.category.choices;
         setChoices({ categories, currencies, countires });
+        setProductData({ ...productData, price_currency: currencies[0].value });
       } catch (err) {
         console.log(err);
         // if (err.response?.status !== 401) {
@@ -90,21 +73,54 @@ const ProductCreateForm = () => {
     if (event.target.files.length) {
       const newState = gallery.map((obj) => {
         if (obj === gallery[activeIndex]) {
-          return URL.createObjectURL(event.target.files[0]);
+          return {
+            ...obj,
+            image: URL.createObjectURL(event.target.files[0]),
+            product: 2,
+          };
         }
         return obj;
       });
       setGallery(newState);
+      console.log(gallery);
     }
   };
 
   const handleImageUpload = (e) => {
-    setGallery([...gallery, URL.createObjectURL(e.target.files[0])]);
+    setGallery([
+      ...gallery,
+      { product: "", image: URL.createObjectURL(e.target.files[0]) },
+    ]);
   };
 
-  const upload = (e) => {
+  const upload = async (e) => {
     e.preventDefault();
-    console.log(gallery);
+    const productFormData = new FormData();
+    const galleryFormData = new FormData();
+    for (const property in productData) {
+      productFormData.append(`${property}`, productData[property]);
+    }
+    try {
+      const { data } = await axiosRes.post("/products/", productFormData);
+      history.push(`/products/${data.id}`);
+    } catch (err) {
+      console.log(err.response?.data);
+      // if (err.response?.status !== 401) {
+      //     setErrors(err.response?.data);
+      // }
+    }
+
+    gallery.forEach(async (image) => {
+      let blob = await fetch(image.image).then((r) => r.blob());
+      const productId = history.location.pathname.slice(-2);
+      galleryFormData.append("product", productId);
+      galleryFormData.append("image", blob, "image.jpg");
+      try {
+        await axiosRes.post("/products/images/", galleryFormData);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    });
   };
 
   const handleClick = (e) => {
@@ -114,14 +130,24 @@ const ProductCreateForm = () => {
 
   const onAmountChange = (e) => {
     const amount = e.target.value;
-
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       setProductData({ ...productData, [e.target.name]: amount });
     }
   };
 
+  const onSwitchAction = (e) => {
+    setProductData({ ...productData, [e.target.name]: !in_stock });
+  };
+
+  const handleChange = (e) => {
+    setProductData({
+      ...productData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
-    <Form>
+    <Form onSubmit={upload}>
       <Row>
         <CreateColumn xs={12} md={6}>
           <CreateCard>
@@ -131,7 +157,7 @@ const ProductCreateForm = () => {
                   variant="top"
                   src={
                     gallery[activeIndex]
-                      ? gallery[activeIndex]
+                      ? gallery[activeIndex].image
                       : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
                   }
                 />
@@ -152,29 +178,19 @@ const ProductCreateForm = () => {
                     key={i}
                     height={60}
                     data-index={i}
-                    src={item}
+                    src={item.image}
                     onClick={handleClick}
                   />
                 ))}
             </Thumbnails>
-
-            {/* 
-                TODO: get previews styled as thumbnails, 
-                work on preview indexing with thumbnail (productGallery inspiration) 
-            */}
-            <button
-              type="button"
-              className="btn btn-primary btn-block"
-              onClick={upload}
-            >
-              Upload
-            </button>
             <ActionBody>
               <FormSwitch
                 onChange={onSwitchAction}
+                name="in_stock"
                 id="custom-switch"
                 label="In Stock"
-                checked={isSwitchOn}
+                checked={in_stock}
+                value={in_stock}
               />
               <FormLabel htmlFor="image-upload">
                 <AddImageButton>
@@ -195,11 +211,21 @@ const ProductCreateForm = () => {
         <CreateColumn xs={12} md={6}>
           <Form.Group controlId="titlePriceSelect">
             <TitleWrapper title="true">
-              <TransparentInput type="text" placeholder="Title" />
+              <TransparentInput
+                type="text"
+                placeholder="Title"
+                name="title"
+                value={title}
+                onChange={handleChange}
+              />
               <TitleWrapper>
                 {currencies?.length ? (
-                  <CurrencySelect as="select">
-                    {currencies.map((currency, idx) => (
+                  <CurrencySelect
+                    as="select"
+                    name="price_currency"
+                    onChange={handleChange}
+                  >
+                    {currencies?.map((currency, idx) => (
                       <option key={idx} value={currency.value}>
                         {currency.display_name}
                       </option>
@@ -222,7 +248,12 @@ const ProductCreateForm = () => {
           <Form.Group controlId="categoriesSelect">
             <Form.Label className="d-none">Categories</Form.Label>
             {categories?.length ? (
-              <Form.Control as="select" defaultValue={""}>
+              <Form.Control
+                as="select"
+                defaultValue={""}
+                name="category"
+                onChange={handleChange}
+              >
                 <option disabled value={""}>
                   Categories
                 </option>
@@ -238,10 +269,27 @@ const ProductCreateForm = () => {
           </Form.Group>
           <Form.Group controlId="locationGroup">
             <Form.Label>Location</Form.Label>
-            <FormControlMb type="text" placeholder="Street Name" />
-            <FormControlMb type="text" placeholder="City" />
+            <FormControlMb
+              type="text"
+              placeholder="Street Name"
+              name="street"
+              value={street}
+              onChange={handleChange}
+            />
+            <FormControlMb
+              type="text"
+              placeholder="City"
+              name="city"
+              value={city}
+              onChange={handleChange}
+            />
             {countires?.length ? (
-              <Form.Control as="select" defaultValue={""}>
+              <Form.Control
+                as="select"
+                defaultValue={""}
+                name="country"
+                onChange={handleChange}
+              >
                 <option disabled value={""}>
                   Countires
                 </option>
@@ -257,11 +305,23 @@ const ProductCreateForm = () => {
           </Form.Group>
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" rows={5} />
-            <FormControlMt type="text" placeholder="Brand" />
+            <Form.Control
+              as="textarea"
+              rows={5}
+              name="description"
+              value={description}
+              onChange={handleChange}
+            />
+            <FormControlMt
+              type="text"
+              placeholder="Brand"
+              name="brand"
+              value={brand}
+              onChange={handleChange}
+            />
           </Form.Group>
           <ButtonsWrapper>
-            <AddProductButton variant="primary">
+            <AddProductButton variant="primary" type="submit">
               <i className="fas fa-plus"></i> Add product
             </AddProductButton>
           </ButtonsWrapper>
