@@ -39,7 +39,16 @@ export const FormSwitch = styled(Form.Switch)`
   }
 `;
 
-export const AddImageButton = styled(SubmitButton)`
+export const AddImageButton = styled.div`
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: rgba(180, 211, 178, 1) !important;
+  border: none;
+  color: black;
+  font-weight: 600;
+  border-radius: 20px;
   width: auto;
   max-width: max-content;
 `;
@@ -56,7 +65,9 @@ export const TitleText = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const AddProductButton = styled(AddImageButton)`
+export const AddProductButton = styled(SubmitButton)`
+  width: auto;
+  max-width: max-content;
   border-radius: 5px;
 `;
 

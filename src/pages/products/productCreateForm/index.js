@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { Button, Card, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
@@ -42,8 +42,7 @@ const ProductCreateForm = () => {
     city: "",
     country: "",
   });
-  const [file, setFile] = useState([]);
-  //   const { product, image } = galleryData;
+  const [gallery, setGallery] = useState([]);
   const {
     category,
     title,
@@ -87,92 +86,82 @@ const ProductCreateForm = () => {
     handleMount();
   }, []);
 
-  //   useEffect(() => {
-  //     const handleGalleryUpdate = async () => {
-  //       const { gallery } = await axiosReq.get();
-  //     };
-  //   }, []);
-
-  //   const handleChangeImage = (event) => {
-  //     if (event.target.files.length) {
-  //       URL.revokeObjectURL(image);
-  //       setGalleryData({
-  //         ...galleryData,
-  //         image: URL.createObjectURL(event.target.files[0]),
-  //       });
-  //     }
-  //   };
+  const handleChangeImage = (event) => {
+    if (event.target.files.length) {
+      const newState = gallery.map((obj) => {
+        if (obj === gallery[activeIndex]) {
+          return URL.createObjectURL(event.target.files[0]);
+        }
+        return obj;
+      });
+      setGallery(newState);
+    }
+  };
 
   const handleImageUpload = (e) => {
-    setFile([...file, URL.createObjectURL(e.target.files[0])]);
-    console.log("file", file);
+    setGallery([...gallery, URL.createObjectURL(e.target.files[0])]);
   };
 
   const upload = (e) => {
     e.preventDefault();
-    console.log(file);
+    console.log(gallery);
   };
 
-  //   const thumbnails = (
-  //     <Thumbnails>
-  //       <Avatar
-  //         height={60}
-  //         src={
-  //           image
-  //             ? image
-  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-  //         }
-  //       />
-  //       <Avatar
-  //         height={60}
-  //         src={
-  //           image
-  //             ? image
-  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-  //         }
-  //       />
-  //       <Avatar
-  //         height={60}
-  //         src={
-  //           image
-  //             ? image
-  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-  //         }
-  //       />
-  //       <Avatar
-  //         height={60}
-  //         src={
-  //           image
-  //             ? image
-  //             : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-  //         }
-  //       />
-  //     </Thumbnails>
-  //   );
+  const handleClick = (e) => {
+    const activeIndex = e.target.getAttribute("data-index");
+    setActiveIndex(activeIndex);
+  };
+
+  const onAmountChange = (e) => {
+    const amount = e.target.value;
+
+    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+      setProductData({ ...productData, [e.target.name]: amount });
+    }
+  };
 
   return (
     <Form>
       <Row>
         <CreateColumn xs={12} md={6}>
           <CreateCard>
-            <div>
-              {file.length > 0 &&
-                file.map((item, index) => {
-                  return (
-                    <div key={item}>
-                      <img src={item} alt="" />
-                    </div>
-                  );
-                })}
-            </div>
-            <div className="form-group">
-              <input
-                type="file"
-                disabled={file.length === 5}
-                className="form-control"
-                onChange={handleImageUpload}
-              />
-            </div>
+            <FormLabel htmlFor="image-change">
+              <Figure>
+                <Card.Img
+                  variant="top"
+                  src={
+                    gallery[activeIndex]
+                      ? gallery[activeIndex]
+                      : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
+                  }
+                />
+              </Figure>
+            </FormLabel>
+            <Form.File
+              className="d-none"
+              id="image-change"
+              accept="image/*"
+              onChange={handleChangeImage}
+              disabled={!gallery.length}
+              ref={imageInput}
+            />
+            <Thumbnails>
+              {gallery.length > 0 &&
+                gallery.map((item, i) => (
+                  <img
+                    key={i}
+                    height={60}
+                    data-index={i}
+                    src={item}
+                    onClick={handleClick}
+                  />
+                ))}
+            </Thumbnails>
+
+            {/* 
+                TODO: get previews styled as thumbnails, 
+                work on preview indexing with thumbnail (productGallery inspiration) 
+            */}
             <button
               type="button"
               className="btn btn-primary btn-block"
@@ -187,9 +176,19 @@ const ProductCreateForm = () => {
                 label="In Stock"
                 checked={isSwitchOn}
               />
-              <AddImageButton>
-                <i className="fas fa-plus"></i> Add image
-              </AddImageButton>
+              <FormLabel htmlFor="image-upload">
+                <AddImageButton>
+                  <i className="fas fa-plus"></i> Add image
+                </AddImageButton>
+              </FormLabel>
+              <Form.File
+                className="d-none"
+                id="image-upload"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={gallery.length === 5}
+                ref={imageInput}
+              />
             </ActionBody>
           </CreateCard>
         </CreateColumn>
@@ -210,9 +209,10 @@ const ProductCreateForm = () => {
                   <Asset spinner signin />
                 )}
                 <TransparentInput
-                  type="number"
-                  step="0.01"
-                  min="0"
+                  type="text"
+                  name="price"
+                  value={price}
+                  onChange={onAmountChange}
                   placeholder="0.00"
                   price="true"
                 />
