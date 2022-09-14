@@ -1,5 +1,5 @@
 import { Button, Card } from "react-bootstrap";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Column } from "../productCard/styles";
 import Form from "react-bootstrap/Form";
 import { SubmitButton } from "../../auth/signUpForm/styles";
@@ -12,6 +12,9 @@ export const Thumbnails = styled(Card.Body)`
   border-top: 1px solid rgba(0, 0, 0, 0.125);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   display: flex;
+  gap: 1rem;
+  overflow: auto;
+  min-height: 5rem;
 `;
 
 export const LinkSpan = styled.span`
@@ -44,7 +47,8 @@ export const AddImageButton = styled.div`
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  background-color: rgba(180, 211, 178, 1) !important;
+  background-color: ${(props) =>
+    props.disabled ? "#df2c14" : "rgba(180, 211, 178, 1)"}!important;
   border: none;
   color: black;
   font-weight: 600;
@@ -135,4 +139,15 @@ export const Figure = styled.figure`
 
 export const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
+`;
+
+export const Thumbnail = styled.img`
+  margin-right: 1rem;
+  cursor: pointer;
+
+`;
+
+export const ImagePreview = styled(Card.Img)`
+  max-height: 300px;
+  object-fit: fill;
 `;

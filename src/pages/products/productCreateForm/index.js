@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { Card, Row } from "react-bootstrap";
+import { Alert, Card, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
@@ -19,10 +19,13 @@ import {
   FormControlMt,
   FormLabel,
   FormSwitch,
+  ImagePreview,
+  Thumbnail,
   Thumbnails,
   TitleWrapper,
   TransparentInput,
 } from "./styles";
+import Message from "../../../components/Alert";
 const ProductCreateForm = () => {
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
@@ -48,6 +51,7 @@ const ProductCreateForm = () => {
   const { categories, currencies, countires } = choices;
   const imageInput = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isShown, setIsShown] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -82,7 +86,6 @@ const ProductCreateForm = () => {
         return obj;
       });
       setGallery(newState);
-      console.log(gallery);
     }
   };
 
@@ -91,9 +94,10 @@ const ProductCreateForm = () => {
       ...gallery,
       { product: "", image: URL.createObjectURL(e.target.files[0]) },
     ]);
+    setActiveIndex(gallery.length);
   };
 
-  const upload = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const productFormData = new FormData();
     const galleryFormData = new FormData();
@@ -104,7 +108,7 @@ const ProductCreateForm = () => {
       const { data } = await axiosRes.post("/products/", productFormData);
       history.push(`/products/${data.id}`);
     } catch (err) {
-      console.log(err.response?.data);
+      console.log(err.response.data);
       // if (err.response?.status !== 401) {
       //     setErrors(err.response?.data);
       // }
@@ -123,10 +127,9 @@ const ProductCreateForm = () => {
     });
   };
 
-  const handleClick = (e) => {
-    const activeIndex = e.target.getAttribute("data-index");
-    setActiveIndex(activeIndex);
-  };
+  //   const handleClick = (e) => {
+  //     setActiveIndex(e.target.dataset.index);
+  //   };
 
   const onAmountChange = (e) => {
     const amount = e.target.value;
@@ -144,16 +147,25 @@ const ProductCreateForm = () => {
       ...productData,
       [e.target.name]: e.target.value,
     });
+    console.log(e.target.name);
+  };
+
+  const handleError = (e) => {
+    setErrors({
+      ...errors,
+      [e.target.dataset.name]: e.target.dataset.message,
+    });
+    setIsShown(!isShown);
   };
 
   return (
-    <Form onSubmit={upload}>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <CreateColumn xs={12} md={6}>
           <CreateCard>
             <FormLabel htmlFor="image-change">
               <Figure>
-                <Card.Img
+                <ImagePreview
                   variant="top"
                   src={
                     gallery[activeIndex]
@@ -174,12 +186,17 @@ const ProductCreateForm = () => {
             <Thumbnails>
               {gallery.length > 0 &&
                 gallery.map((item, i) => (
-                  <img
+                  <Thumbnail
                     key={i}
+                    className={
+                      activeIndex === i ? "border border-dark" : "border-0"
+                    }
                     height={60}
                     data-index={i}
                     src={item.image}
-                    onClick={handleClick}
+                    onClick={(e) => {
+                      setActiveIndex(e.target.dataset.index);
+                    }}
                   />
                 ))}
             </Thumbnails>
@@ -193,8 +210,18 @@ const ProductCreateForm = () => {
                 value={in_stock}
               />
               <FormLabel htmlFor="image-upload">
-                <AddImageButton>
-                  <i className="fas fa-plus"></i> Add image
+                <AddImageButton
+                  disabled={errors.imagePreview}
+                  data-name="imagePreview"
+                  data-message={"Max. allowed images per product are 5"}
+                  onClick={gallery.length === 5 ? handleError : undefined}
+                >
+                  {errors.imagePreview ? (
+                    <i className="fas fa-times"></i>
+                  ) : (
+                    <i className="fas fa-plus"></i>
+                  )}{" "}
+                  Add image
                 </AddImageButton>
               </FormLabel>
               <Form.File
@@ -206,6 +233,14 @@ const ProductCreateForm = () => {
                 ref={imageInput}
               />
             </ActionBody>
+            {isShown && (
+              <Message
+                variant={"warning"}
+                children={errors.imagePreview}
+                isShown={isShown}
+                setIsShown={setIsShown}
+              />
+            )}
           </CreateCard>
         </CreateColumn>
         <CreateColumn xs={12} md={6}>
