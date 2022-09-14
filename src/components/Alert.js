@@ -9,12 +9,12 @@ const Message = ({ variant, children, isShown, setIsShown }) => {
       // After 3 seconds set the show value to false
       setShow(false);
       setIsShown(false);
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout(timeId);
     };
-  }, [isShown]);
+  }, [isShown, setIsShown]);
 
   // If show is false the component will return null and stop here
   if (!show) {
