@@ -37,12 +37,17 @@ export const AddImageButton = styled.div`
 `;
 
 export const Figure = styled.figure`
+  position: relative;
   margin: 0;
-  cursor: pointer;
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-      rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  /* ${(props) =>
+    !props.disabled &&
+    `&:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }`} */
 `;
 
 export const FormLabel = styled(Form.Label)`
@@ -60,8 +65,12 @@ export const FormSwitch = styled(Form.Switch)`
 `;
 
 export const ImagePreview = styled(Card.Img)`
+  opacity: 1;
   max-height: 300px;
-  object-fit: fill;
+  object-fit: contain;
+  /* &:hover {
+    opacity: 0.3;
+  } */
 `;
 
 export const Thumbnail = styled.img`
@@ -76,4 +85,41 @@ export const Thumbnails = styled(Card.Body)`
   gap: 1rem;
   overflow: auto;
   min-height: 5rem;
+`;
+
+export const OverlayContainer = styled.div`
+  cursor: pointer;
+  position: absolute;
+  font-weight: 600;
+  font-size: 2vw;
+  padding: 0 0.5rem;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  @media (min-width: 700px) {
+    opacity: 0;
+    z-index: 1000;
+    display: flex;
+    letter-spacing: 0.2rem;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    &:hover {
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+`;
+
+export const OverlayText = styled.div`
+  @media (max-width: 699px) {opacity: 0.7;}
 `;

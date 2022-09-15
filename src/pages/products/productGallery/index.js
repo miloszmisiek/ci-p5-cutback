@@ -8,11 +8,14 @@ import {
   FormLabel,
   FormSwitch,
   ImagePreview,
+  OverlayContainer,
+  OverlayText,
   Thumbnail,
   Thumbnails,
 } from "./styles";
 import Message from "../../../components/Alert";
 import { Alert, Form } from "react-bootstrap";
+import Asset from "../../../components/asset";
 
 const ProductGallery = ({
   productData,
@@ -25,7 +28,7 @@ const ProductGallery = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isShown, setIsShown] = useState(false);
   const imageInput = useRef(null);
-  
+
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       const newState = gallery.map((obj) => {
@@ -66,15 +69,19 @@ const ProductGallery = ({
     <CreateColumn xs={12} md={6}>
       <CreateCard>
         <FormLabel htmlFor="image-change">
-          <Figure>
-            <ImagePreview
-              variant="top"
-              src={
-                gallery[activeIndex]
-                  ? gallery[activeIndex].image
-                  : "https://res.cloudinary.com/milo-milo/image/upload/v1658395557/default_post_iixybg.jpg"
-              }
-            />
+          <Figure disabled={gallery[activeIndex] ? false : true}>
+            {gallery.length > 0 && (
+              <OverlayContainer><OverlayText>Click on image to change.</OverlayText></OverlayContainer>
+            )}
+            {gallery[activeIndex] ? (
+              <ImagePreview variant="top" src={gallery[activeIndex].image} />
+            ) : (
+              <Asset
+                src={
+                  "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
+                }
+              />
+            )}
           </Figure>
         </FormLabel>
         <Form.File
