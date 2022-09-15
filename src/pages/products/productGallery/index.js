@@ -36,7 +36,6 @@ const ProductGallery = ({
           return {
             ...obj,
             image: URL.createObjectURL(event.target.files[0]),
-            product: 2,
           };
         }
         return obj;

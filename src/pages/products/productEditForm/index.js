@@ -4,7 +4,7 @@ import { Alert, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import {
   AddProductButton,
   ButtonsWrapper,
@@ -14,10 +14,10 @@ import {
   FormControlMt,
   TitleWrapper,
   TransparentInput,
-} from "./styles";
+} from "../productCreateForm/styles";
 import ProductGallery from "../productGallery";
-const ProductCreateForm = () => {
-  const [gallery, setGallery] = useState([]);
+const ProductEditForm = () => {
+  const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
     category: "",
@@ -30,8 +30,21 @@ const ProductCreateForm = () => {
     street: "",
     city: "",
     country: "",
+    gallery: [],
   });
-  const { title, description, brand, price, street, city } = productData;
+  const {
+    category,
+    country,
+    title,
+    description,
+    price_currency,
+    brand,
+    price,
+    street,
+    city,
+    in_stock,
+    gallery,
+  } = productData;
   const [choices, setChoices] = useState({
     categories: [],
     currencies: [],
@@ -39,6 +52,7 @@ const ProductCreateForm = () => {
   });
   const { categories, currencies, countires } = choices;
   const history = useHistory();
+  const { id } = useParams();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -48,26 +62,67 @@ const ProductCreateForm = () => {
         const currencies = data.actions?.POST.price_currency.choices;
         const categories = data.actions?.POST.category.choices;
         setChoices({ categories, currencies, countires });
-        setProductData((prev) => ({
-          ...prev,
-          price_currency: currencies[0].value,
-        }));
+      } catch (err) {
+        console.log(err);
+      }
+
+      try {
+        const { data } = await axiosReq.get(`/products/${id}/`);
+        const {
+          category,
+          country,
+          price_currency,
+          title,
+          description,
+          brand,
+          price,
+          street,
+          city,
+          gallery,
+          is_owner,
+          in_stock,
+        } = data;
+
+        // console.log(data);
+        // check if current user is post owner, else redirect to home page
+        if (is_owner) {
+          setProductData({
+            category,
+            country: country.code,
+            price_currency,
+            title,
+            description,
+            brand,
+            price,
+            street,
+            city,
+            is_owner,
+            in_stock,
+            gallery,
+          });
+          setImages(gallery);
+        } else {
+          history.push("/");
+        }
       } catch (err) {
         console.log(err);
       }
     };
     handleMount();
-  }, []);
+  }, [history, id]);
 
   const handleImageSubmit = (history) => {
     const galleryFormData = new FormData();
-    gallery.forEach(async (image) => {
+    images.forEach(async (image) => {
       let blob = await fetch(image.image).then((r) => r.blob());
-      const productId = history.location.pathname.slice(-2);
-      galleryFormData.append("product", productId);
+      galleryFormData.append("product", id);
       galleryFormData.append("image", blob, "image.jpg");
+
+    //   for (var pair of galleryFormData.entries()) {
+    //     console.log(pair[0], pair[1]);
+    //   }
       try {
-        await axiosRes.post("/products/images/", galleryFormData);
+        await axiosRes.put(`/products/images/${image.id}/`, galleryFormData);
       } catch (err) {
         if (err.response?.status !== 401) {
           setErrors({ ...errors, galleryErrors: err.response?.data });
@@ -79,23 +134,23 @@ const ProductCreateForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // await axiosRes.delete(`/products/13/`);
+    // await axiosRes.delete(`/products/14/`);
+    // await axiosRes.delete(`/products/15/`);
+    // await axiosRes.delete(`/products/16/`);
     const productFormData = new FormData();
 
     for (const property in productData) {
       productFormData.append(`${property}`, productData[property]);
     }
-    // for (var pair of productFormData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
     try {
-      const{data} = await axiosRes.post("/products/", productFormData);
-      history.push(`/products/${data.id}`);
+      await axiosRes.put(`/products/${id}/`, productFormData);
+      history.push(`/products/${id}`);
       handleImageSubmit(history);
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors({ ...errors, productErrors: err.response?.data });
       }
-      // console.log(err.response.data);
     }
   };
 
@@ -129,6 +184,7 @@ const ProductCreateForm = () => {
               <CurrencySelect
                 as="select"
                 name="price_currency"
+                value={price_currency || ""}
                 onChange={handleChange}
               >
                 {currencies?.map((currency, idx) => (
@@ -173,7 +229,7 @@ const ProductCreateForm = () => {
         {categories?.length ? (
           <Form.Control
             as="select"
-            defaultValue={""}
+            value={category || ""}
             name="category"
             onChange={handleChange}
           >
@@ -226,8 +282,8 @@ const ProductCreateForm = () => {
         {countires?.length ? (
           <Form.Control
             as="select"
-            defaultValue={""}
             name="country"
+            value={country || ""}
             onChange={handleChange}
           >
             <option disabled value={""}>
@@ -291,8 +347,8 @@ const ProductCreateForm = () => {
         <ProductGallery
           productData={productData}
           setProductData={setProductData}
-          gallery={gallery}
-          setGallery={setGallery}
+          gallery={images}
+          setGallery={setImages}
           errors={errors}
           setErrors={setErrors}
         />
@@ -302,4 +358,4 @@ const ProductCreateForm = () => {
   );
 };
 
-export default ProductCreateForm;
+export default ProductEditForm;
