@@ -71,7 +71,7 @@ const ProductGallery = ({
         <FormLabel htmlFor="image-change">
           <Figure disabled={gallery[activeIndex] ? false : true}>
             {gallery.length > 0 && (
-              <OverlayContainer><OverlayText>Click on image to change.</OverlayText></OverlayContainer>
+              <OverlayContainer><OverlayText>Click the image to change.</OverlayText></OverlayContainer>
             )}
             {gallery[activeIndex] ? (
               <ImagePreview variant="top" src={gallery[activeIndex].image} />

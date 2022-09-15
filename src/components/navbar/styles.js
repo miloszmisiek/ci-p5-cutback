@@ -2,7 +2,6 @@ import {
   Col,
   Container,
   Dropdown,
-  Form,
   FormControl,
   Nav,
   Navbar,
@@ -132,6 +131,7 @@ export const StyledDropdown = styled(NavDropdown)`
     top: 50px;
     right: 0px;
     left: auto;
+    margin-top: 7px !important;
   }
   &.show:before {
     position: absolute;
@@ -142,6 +142,7 @@ export const StyledDropdown = styled(NavDropdown)`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid rgba(0, 0, 0, 0.175);
+    margin-top: 7px;
   }
   &.show:after {
     position: absolute;
@@ -153,6 +154,7 @@ export const StyledDropdown = styled(NavDropdown)`
     border-right: 11px solid transparent;
     border-bottom: 11px solid #fff;
     z-index: 1001;
+    margin-top: 7px;
   }
 `;
 

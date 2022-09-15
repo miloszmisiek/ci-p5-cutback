@@ -43,11 +43,11 @@ export const Figure = styled.figure`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  /* ${(props) =>
+  ${(props) =>
     !props.disabled &&
     `&:hover {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  }`} */
+    cursor: pointer;
+  }`}
 `;
 
 export const FormLabel = styled(Form.Label)`
@@ -76,6 +76,10 @@ export const ImagePreview = styled(Card.Img)`
 export const Thumbnail = styled.img`
   margin-right: 1rem;
   cursor: pointer;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
 `;
 
 export const Thumbnails = styled(Card.Body)`
@@ -121,5 +125,7 @@ export const OverlayContainer = styled.div`
 `;
 
 export const OverlayText = styled.div`
-  @media (max-width: 699px) {opacity: 0.7;}
+  @media (max-width: 699px) {
+    opacity: 0.7;
+  }
 `;
