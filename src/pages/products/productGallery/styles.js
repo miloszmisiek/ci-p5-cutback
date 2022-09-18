@@ -5,10 +5,13 @@ import { Column } from "../productCard/styles";
 export const CreateColumn = styled(Column)``;
 export const CreateCard = styled(Card)``;
 
-export const ActionBody = styled(Card.Body)`
+export const ActionBody = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  width: 60%;
+  background-color: #f8f8f8;
+  margin: 1rem auto;
 
   @media (max-width: 370px) {
     flex-direction: column;
@@ -54,15 +57,15 @@ export const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
 `;
 
-export const FormSwitch = styled(Form.Switch)`
-  .custom-control-input:checked ~ .custom-control-label::before {
-    border-color: rgba(180, 211, 178, 1);
-    background-color: rgba(180, 211, 178, 1);
-  }
-  @media (max-width: 370px) {
-    margin-bottom: 1rem;
-  }
-`;
+// export const FormSwitch = styled(Form.Switch)`
+//   .custom-control-input:checked ~ .custom-control-label::before {
+//     border-color: rgba(180, 211, 178, 1);
+//     background-color: rgba(180, 211, 178, 1);
+//   }
+//   @media (max-width: 370px) {
+//     margin-bottom: 1rem;
+//   }
+// `;
 
 export const ImagePreview = styled(Card.Img)`
   opacity: 1;
@@ -127,5 +130,15 @@ export const OverlayContainer = styled.div`
 export const OverlayText = styled.div`
   @media (max-width: 699px) {
     opacity: 0.7;
+  }
+`;
+
+export const DeleteImageButton = styled(AddImageButton)`
+  background-color: transparent !important;
+  color: red;
+  font-size: 1.5rem;
+
+  &:hover {
+    color: inherit;
   }
 `;

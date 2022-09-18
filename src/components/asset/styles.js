@@ -7,4 +7,5 @@ export const AssetWrapper = styled.div`
     justify-content: center;
     align-items: center;
     min-height: ${props => props.signin ? null : "120px" };
+    width: 100%;
 `;

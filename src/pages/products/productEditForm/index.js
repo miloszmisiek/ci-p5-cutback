@@ -7,17 +7,23 @@ import Asset from "../../../components/asset";
 import { useHistory, useParams } from "react-router";
 import {
   AddProductButton,
-  ButtonsWrapper,
   CreateColumn,
   CurrencySelect,
   FormControlMb,
-  FormControlMt,
   TitleWrapper,
   TransparentInput,
 } from "../productCreateForm/styles";
 import ProductGallery from "../productGallery";
+import {
+  Brand,
+  EditButtonsWrapper,
+  FormSwitch,
+  InStockBrandWrapper,
+  ProductDeleteButton,
+} from "./styles";
 const ProductEditForm = () => {
   const [images, setImages] = useState([]);
+  const [deletedImages, setDeletedImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
     category: "",
@@ -43,7 +49,6 @@ const ProductEditForm = () => {
     street,
     city,
     in_stock,
-    gallery,
   } = productData;
   const [choices, setChoices] = useState({
     categories: [],
@@ -65,7 +70,6 @@ const ProductEditForm = () => {
       } catch (err) {
         console.log(err);
       }
-
       try {
         const { data } = await axiosReq.get(`/products/${id}/`);
         const {
@@ -111,33 +115,56 @@ const ProductEditForm = () => {
     handleMount();
   }, [history, id]);
 
-  const handleImageSubmit = (history) => {
+  const handleImageSubmit = () => {
+    
     const galleryFormData = new FormData();
+    
+    deletedImages.forEach(async (image) => {
+      if (image.id) {
+        console.log("deleted image >>> ", image);
+        try {
+          await axiosReq.delete(
+            `/products/images/${image.id}/`
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    });
+
     images.forEach(async (image) => {
       let blob = await fetch(image.image).then((r) => r.blob());
       galleryFormData.append("product", id);
       galleryFormData.append("image", blob, "image.jpg");
 
-    //   for (var pair of galleryFormData.entries()) {
-    //     console.log(pair[0], pair[1]);
-    //   }
+      //   for (var pair of galleryFormData.entries()) {
+      //     console.log(pair[0], pair[1]);
+      //   }
       try {
-        await axiosRes.put(`/products/images/${image.id}/`, galleryFormData);
+        if (image.id) {
+          console.log("image to put >>> ", image);
+          await axiosRes.put(`/products/images/${image.id}/`, galleryFormData);
+        } else {
+          console.log("image to post >>> ", image);
+          await axiosRes.post("/products/images/", galleryFormData);
+        }
+        // image.id
+        //   ? await axiosRes.put(`/products/images/${image.id}/`, galleryFormData)
+        //   : await axiosRes.post("/products/images/", galleryFormData);
+        // ? console.log("image to put >>> ", image)
+        // : console.log("image to post >>> ", image);
       } catch (err) {
         if (err.response?.status !== 401) {
           setErrors({ ...errors, galleryErrors: err.response?.data });
         }
-        // console.log(err.response.data);
+        console.log(err.response.data);
       }
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // await axiosRes.delete(`/products/13/`);
-    // await axiosRes.delete(`/products/14/`);
-    // await axiosRes.delete(`/products/15/`);
-    // await axiosRes.delete(`/products/16/`);
+
     const productFormData = new FormData();
 
     for (const property in productData) {
@@ -146,12 +173,12 @@ const ProductEditForm = () => {
     try {
       await axiosRes.put(`/products/${id}/`, productFormData);
       history.push(`/products/${id}`);
-      handleImageSubmit(history);
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors({ ...errors, productErrors: err.response?.data });
       }
     }
+    handleImageSubmit();
   };
 
   const onAmountChange = (e) => {
@@ -167,6 +194,12 @@ const ProductEditForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const onSwitchAction = (e) => {
+    setProductData({ ...productData, [e.target.name]: !productData.in_stock });
+  };
+
+  const handleProductDelete = () => {};
 
   const productFields = (
     <CreateColumn xs={12} md={6}>
@@ -320,24 +353,35 @@ const ProductEditForm = () => {
             {message}
           </Alert>
         ))}
-        <FormControlMt
-          type="text"
-          placeholder="Brand"
-          name="brand"
-          value={brand}
-          onChange={handleChange}
-        />
+        <InStockBrandWrapper>
+          <Brand
+            type="text"
+            placeholder="Brand"
+            name="brand"
+            value={brand}
+            onChange={handleChange}
+          />
+          <FormSwitch
+            onChange={onSwitchAction}
+            name="in_stock"
+            id="custom-switch"
+            label="In Stock"
+            checked={in_stock}
+            value={in_stock}
+          />
+        </InStockBrandWrapper>
       </Form.Group>
       {errors.productErrors?.brand?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
-      <ButtonsWrapper>
+      <EditButtonsWrapper>
         <AddProductButton variant="primary" type="submit">
           <i className="fas fa-plus"></i> Add product
         </AddProductButton>
-      </ButtonsWrapper>
+        <ProductDeleteButton>Delete product</ProductDeleteButton>
+      </EditButtonsWrapper>
     </CreateColumn>
   );
 
@@ -345,12 +389,12 @@ const ProductEditForm = () => {
     <Form onSubmit={handleSubmit}>
       <Row>
         <ProductGallery
-          productData={productData}
-          setProductData={setProductData}
           gallery={images}
           setGallery={setImages}
           errors={errors}
           setErrors={setErrors}
+          deletedImages={deletedImages}
+          setDeletedImages={setDeletedImages}
         />
         {productFields}
       </Row>
