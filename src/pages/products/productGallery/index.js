@@ -16,10 +16,7 @@ import {
 import Message from "../../../components/Alert";
 import { Alert, Form } from "react-bootstrap";
 import Asset from "../../../components/asset";
-import {
-  useSetModalContext,
-} from "../../../contexts/ModalContext";
-import ModalCustom from "../../../components/modal";
+import { useSetModalContext } from "../../../contexts/ModalContext";
 
 const ProductGallery = ({
   gallery,
@@ -78,35 +75,11 @@ const ProductGallery = ({
     setIsShown(!isShown);
   };
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
-  // const modal = (
-  //   <Modal show={show} onHide={handleClose}>
-  //     <Modal.Header closeButton>
-  //       <Modal.Title>Modal heading</Modal.Title>
-  //     </Modal.Header>
-  //     <Modal.Body>
-  //       Are you sure you want to delete this image?
-  //       <Button variant="danger" onClick={handleImageDelete}>
-  //         Yes
-  //       </Button>
-  //       <Button variant="secondary" onClick={handleClose}>
-  //         Close
-  //       </Button>
-  //     </Modal.Body>
-  //     <Modal.Footer></Modal.Footer>
-  //   </Modal>
-  // );
-
   return (
     <CreateColumn xs={12} md={6}>
       {/* {gallery[activeIndex] ? ( */}
       <>
-        <ModalCustom
-          handleDelete={handleImageDelete}
-          deleteItem="image"
-        />
+        {/* <ModalCustom /> */}
         <CreateCard>
           <FormLabel htmlFor="image-change">
             <Figure disabled={gallery[activeIndex] ? false : true}>
@@ -182,7 +155,7 @@ const ProductGallery = ({
               data-message={"Max. allowed images per product are 5"}
               onClick={() => handleShow("image", handleImageDelete)}
             >
-              <i className="fas fa-trash-alt"></i>
+              <i className="fas fa-minus"></i>
             </DeleteImageButton>
           )}
         </ActionBody>

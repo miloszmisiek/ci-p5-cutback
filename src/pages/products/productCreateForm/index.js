@@ -16,6 +16,7 @@ import {
   TransparentInput,
 } from "./styles";
 import ProductGallery from "../productGallery";
+import { Brand, FormSwitch, InStockBrandWrapper } from "../productEditForm/styles";
 const ProductCreateForm = () => {
   const [gallery, setGallery] = useState([]);
   const [errors, setErrors] = useState({});
@@ -31,7 +32,7 @@ const ProductCreateForm = () => {
     city: "",
     country: "",
   });
-  const { title, description, brand, price, street, city } = productData;
+  const { title, description, brand, price, street, city, in_stock } = productData;
   const [choices, setChoices] = useState({
     categories: [],
     currencies: [],
@@ -111,6 +112,10 @@ const ProductCreateForm = () => {
       ...productData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const onSwitchAction = (e) => {
+    setProductData({ ...productData, [e.target.name]: !productData.in_stock });
   };
 
   const productFields = (
@@ -264,13 +269,23 @@ const ProductCreateForm = () => {
             {message}
           </Alert>
         ))}
-        <FormControlMt
-          type="text"
-          placeholder="Brand"
-          name="brand"
-          value={brand}
-          onChange={handleChange}
-        />
+        <InStockBrandWrapper>
+          <Brand
+            type="text"
+            placeholder="Brand"
+            name="brand"
+            value={brand}
+            onChange={handleChange}
+          />
+          <FormSwitch
+            onChange={onSwitchAction}
+            name="in_stock"
+            id="custom-switch"
+            label="In Stock"
+            checked={in_stock}
+            value={in_stock}
+          />
+        </InStockBrandWrapper>
       </Form.Group>
       {errors.productErrors?.brand?.map((message, idx) => (
         <Alert variant="warning" key={idx}>

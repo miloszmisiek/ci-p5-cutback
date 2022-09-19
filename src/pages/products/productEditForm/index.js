@@ -386,10 +386,14 @@ const ProductEditForm = () => {
       ))}
       <EditButtonsWrapper>
         <AddProductButton variant="primary" type="submit">
-          <i className="fas fa-plus"></i> Add product
+          <i className="fas fa-save"></i> Save
         </AddProductButton>
         <ModalCustom handleDelete={handleProductDelete} deleteItem="product" />
-        <ProductDeleteButton onClick={() => handleShow("product", handleProductDelete)}>Delete product</ProductDeleteButton>
+        <ProductDeleteButton
+          onClick={() => handleShow("product", handleProductDelete)}
+        >
+          <i className="fas fa-trash-alt"></i> Delete
+        </ProductDeleteButton>
       </EditButtonsWrapper>
     </CreateColumn>
   );

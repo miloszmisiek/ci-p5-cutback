@@ -57,15 +57,6 @@ export const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
 `;
 
-// export const FormSwitch = styled(Form.Switch)`
-//   .custom-control-input:checked ~ .custom-control-label::before {
-//     border-color: rgba(180, 211, 178, 1);
-//     background-color: rgba(180, 211, 178, 1);
-//   }
-//   @media (max-width: 370px) {
-//     margin-bottom: 1rem;
-//   }
-// `;
 
 export const ImagePreview = styled(Card.Img)`
   opacity: 1;
@@ -134,11 +125,5 @@ export const OverlayText = styled.div`
 `;
 
 export const DeleteImageButton = styled(AddImageButton)`
-  background-color: transparent !important;
-  color: red;
-  font-size: 1.5rem;
-
-  &:hover {
-    color: inherit;
-  }
+  background-color: #df2c14 !important;
 `;
