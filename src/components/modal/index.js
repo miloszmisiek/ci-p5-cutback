@@ -4,26 +4,29 @@ import {
   useSetModalContext,
 } from "../../contexts/ModalContext";
 import { Button, Modal } from "react-bootstrap";
+import { ModalBody } from "./styles";
 
-const ModalCustom = ({handleDelete, deleteItem}) => {
+const ModalCustom = () => {
   const showModal = useModalContext();
   const { handleClose } = useSetModalContext();
+  const { modalIsOpen, deleteItem, deleteFunc } = showModal;
 
   return (
-    <Modal show={showModal} onHide={handleClose}>
+    <Modal show={modalIsOpen} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Delete {deleteItem}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <ModalBody text="true">
         Are you sure you want to delete this {deleteItem}?
-        <Button variant="danger" onClick={handleDelete}>
-          Yes
-        </Button>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-      </Modal.Body>
-      <Modal.Footer></Modal.Footer>
+        <ModalBody>
+          <Button variant="danger" onClick={deleteFunc}>
+            Delete
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </ModalBody>
+      </ModalBody>
     </Modal>
   );
 };

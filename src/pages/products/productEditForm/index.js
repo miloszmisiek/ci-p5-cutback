@@ -21,6 +21,8 @@ import {
   InStockBrandWrapper,
   ProductDeleteButton,
 } from "./styles";
+import ModalCustom from "../../../components/modal";
+import { useSetModalContext } from "../../../contexts/ModalContext";
 const ProductEditForm = () => {
   const [images, setImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
@@ -58,6 +60,7 @@ const ProductEditForm = () => {
   const { categories, currencies, countires } = choices;
   const history = useHistory();
   const { id } = useParams();
+  const { handleClose, handleShow } = useSetModalContext();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -116,16 +119,13 @@ const ProductEditForm = () => {
   }, [history, id]);
 
   const handleImageSubmit = () => {
-    
     const galleryFormData = new FormData();
-    
+
     deletedImages.forEach(async (image) => {
       if (image.id) {
         console.log("deleted image >>> ", image);
         try {
-          await axiosReq.delete(
-            `/products/images/${image.id}/`
-          );
+          await axiosReq.delete(`/products/images/${image.id}/`);
         } catch (err) {
           console.log(err);
         }
@@ -199,7 +199,15 @@ const ProductEditForm = () => {
     setProductData({ ...productData, [e.target.name]: !productData.in_stock });
   };
 
-  const handleProductDelete = () => {};
+  const handleProductDelete = async () => {
+    try {
+      await axiosRes.delete(`/products/${id}`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+    handleClose();
+  };
 
   const productFields = (
     <CreateColumn xs={12} md={6}>
@@ -380,7 +388,8 @@ const ProductEditForm = () => {
         <AddProductButton variant="primary" type="submit">
           <i className="fas fa-plus"></i> Add product
         </AddProductButton>
-        <ProductDeleteButton>Delete product</ProductDeleteButton>
+        <ModalCustom handleDelete={handleProductDelete} deleteItem="product" />
+        <ProductDeleteButton onClick={() => handleShow("product", handleProductDelete)}>Delete product</ProductDeleteButton>
       </EditButtonsWrapper>
     </CreateColumn>
   );

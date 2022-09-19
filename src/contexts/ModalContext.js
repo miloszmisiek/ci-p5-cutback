@@ -7,19 +7,23 @@ export const useModalContext = () => useContext(ModalContext);
 export const useSetModalContext = () => useContext(SetModalContext);
 
 export const ModalProvider = ({ children }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState({
+    modalIsOpen: false,
+    deleteItem: "",
+    deleteFunc: null,
+  });
   const handleClose = () => {
-    setShowModal(false);
-    console.log("show");
+    setShowModal({ ...showModal, modalIsOpen: false });
   };
-  const handleShow = () => {
-    setShowModal(true);
-    console.log("show");
+  const handleShow = (deleteItem, deleteFunc) => {
+    setShowModal({ ...showModal, modalIsOpen: true, deleteItem: deleteItem, deleteFunc: deleteFunc});
   };
 
   return (
     <ModalContext.Provider value={showModal}>
-      <SetModalContext.Provider value={{setShowModal, handleClose, handleShow}}>
+      <SetModalContext.Provider
+        value={{ setShowModal, handleClose, handleShow }}
+      >
         {children}
       </SetModalContext.Provider>
     </ModalContext.Provider>

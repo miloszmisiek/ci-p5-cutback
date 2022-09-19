@@ -14,10 +14,9 @@ import {
   Thumbnails,
 } from "./styles";
 import Message from "../../../components/Alert";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 import Asset from "../../../components/asset";
 import {
-  useModalContext,
   useSetModalContext,
 } from "../../../contexts/ModalContext";
 import ModalCustom from "../../../components/modal";
@@ -32,10 +31,9 @@ const ProductGallery = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isShown, setIsShown] = useState(false);
-  const [show, setShow] = useState(false);
-  const showModal = useModalContext();
+
+  // const showModal = useModalContext();
   const { handleClose, handleShow } = useSetModalContext();
-  console.log(showModal);
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
@@ -103,103 +101,103 @@ const ProductGallery = ({
 
   return (
     <CreateColumn xs={12} md={6}>
-      {gallery[activeIndex] ? (
-        <>
-          {<ModalCustom handleDelete={handleImageDelete} deleteItem="image" />}
-          <CreateCard>
-            <FormLabel htmlFor="image-change">
-              <Figure disabled={gallery[activeIndex] ? false : true}>
-                {gallery.length > 0 && (
-                  <OverlayContainer>
-                    <OverlayText>Click the image to change.</OverlayText>
-                  </OverlayContainer>
-                )}
-                {gallery[activeIndex] ? (
-                  <ImagePreview
-                    variant="top"
-                    src={gallery[activeIndex].image}
-                  />
-                ) : (
-                  <Asset
-                    src={
-                      "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
-                    }
-                  />
-                )}
-              </Figure>
-            </FormLabel>
-            <Form.File
-              className="d-none"
-              id="image-change"
-              accept="image/*"
-              onChange={handleChangeImage}
-              disabled={gallery.length <= 0}
-            />
-            <Thumbnails>
-              {gallery.length > 0 &&
-                gallery?.map((item, i) => (
-                  <Thumbnail
-                    key={i}
-                    height={60}
-                    data-index={i}
-                    src={item?.image}
-                    onClick={(e) => {
-                      setActiveIndex(parseInt(e.target.dataset.index));
-                    }}
-                  />
-                ))}
-            </Thumbnails>
-            {errors.productErrors?.in_stock?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-          </CreateCard>
-          <ActionBody>
-            <FormLabel htmlFor="image-upload">
-              <AddImageButton
-                disabled={errors.imagePreview}
-                data-name="imagePreview"
-                data-message={"Max. allowed images per product are 5"}
-                onClick={gallery.length === 5 ? handleError : undefined}
-              >
-                {errors.imagePreview ? (
-                  <i className="fas fa-times"></i>
-                ) : (
-                  <i className="fas fa-plus"></i>
-                )}{" "}
-              </AddImageButton>
-            </FormLabel>
-            <Form.File
-              className="d-none"
-              id="image-upload"
-              accept="image/*"
-              onChange={handleImageUpload}
-              disabled={gallery.length === 5}
-            />
-            {gallery.length > 0 && (
-              <DeleteImageButton
-                disabled={errors.imagePreview}
-                data-name="imagePreview"
-                data-message={"Max. allowed images per product are 5"}
-                onClick={handleShow}
-              >
-                <i className="fas fa-trash-alt"></i>
-              </DeleteImageButton>
-            )}
-          </ActionBody>
-          {isShown && (
-            <Message
-              variant={"warning"}
-              children={errors.imagePreview}
-              isShown={isShown}
-              setIsShown={setIsShown}
-            />
+      {/* {gallery[activeIndex] ? ( */}
+      <>
+        <ModalCustom
+          handleDelete={handleImageDelete}
+          deleteItem="image"
+        />
+        <CreateCard>
+          <FormLabel htmlFor="image-change">
+            <Figure disabled={gallery[activeIndex] ? false : true}>
+              {gallery.length > 0 && (
+                <OverlayContainer>
+                  <OverlayText>Click the image to change.</OverlayText>
+                </OverlayContainer>
+              )}
+              {gallery[activeIndex] ? (
+                <ImagePreview variant="top" src={gallery[activeIndex].image} />
+              ) : (
+                <Asset
+                  src={
+                    "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
+                  }
+                />
+              )}
+            </Figure>
+          </FormLabel>
+          <Form.File
+            className="d-none"
+            id="image-change"
+            accept="image/*"
+            onChange={handleChangeImage}
+            disabled={gallery.length <= 0}
+          />
+          <Thumbnails>
+            {gallery.length > 0 &&
+              gallery?.map((item, i) => (
+                <Thumbnail
+                  key={i}
+                  height={60}
+                  data-index={i}
+                  src={item?.image}
+                  onClick={(e) => {
+                    setActiveIndex(parseInt(e.target.dataset.index));
+                  }}
+                />
+              ))}
+          </Thumbnails>
+          {errors.productErrors?.in_stock?.map((message, idx) => (
+            <Alert variant="warning" key={idx}>
+              {message}
+            </Alert>
+          ))}
+        </CreateCard>
+        <ActionBody>
+          <FormLabel htmlFor="image-upload">
+            <AddImageButton
+              disabled={errors.imagePreview}
+              data-name="imagePreview"
+              data-message={"Max. allowed images per product are 5"}
+              onClick={gallery.length === 5 ? handleError : undefined}
+            >
+              {errors.imagePreview ? (
+                <i className="fas fa-times"></i>
+              ) : (
+                <i className="fas fa-plus"></i>
+              )}{" "}
+            </AddImageButton>
+          </FormLabel>
+          <Form.File
+            className="d-none"
+            id="image-upload"
+            accept="image/*"
+            onChange={handleImageUpload}
+            disabled={gallery.length === 5}
+          />
+          {gallery.length > 0 && (
+            <DeleteImageButton
+              disabled={errors.imagePreview}
+              data-name="imagePreview"
+              data-message={"Max. allowed images per product are 5"}
+              onClick={() => handleShow("image", handleImageDelete)}
+            >
+              <i className="fas fa-trash-alt"></i>
+            </DeleteImageButton>
           )}
-        </>
-      ) : (
-        <Asset spinner />
-      )}
+        </ActionBody>
+        {isShown && (
+          <Message
+            variant={"warning"}
+            children={errors.imagePreview}
+            isShown={isShown}
+            setIsShown={setIsShown}
+          />
+        )}
+      </>
+      {/* ) : (
+         <Asset spinner />
+       )} */}
     </CreateColumn>
   );
 };
