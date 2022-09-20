@@ -61,6 +61,7 @@ const SignUpForm = (props) => {
               <FormLabel>Username</FormLabel>
               <FormControl
                 type="text"
+                maxLength="15"
                 placeholder="Username"
                 name="username"
                 autoComplete="on"

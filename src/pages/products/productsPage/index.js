@@ -17,13 +17,11 @@ const ProductsPage = () => {
     handleMount();
   }, []);
   return (
-    <div>
       <Row>
         {results.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </Row>
-    </div>
   );
 };
 

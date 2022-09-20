@@ -4,31 +4,46 @@ import { NavLink } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Avatar from "../../../components/avatar";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
+import StarRatings from "react-star-ratings";
 
 import {
+  AvgScore,
+  CardBody,
   CardHeader,
   CardInfo,
   CardTitle,
   CardWrapper,
   Column,
+  NavLinkProduct,
   PriceComponent,
   RatingComponent,
+  StarRatingsCustom,
   UserContainer,
+  Username,
 } from "./styles";
 
 const ProductCard = (props) => {
   const [errors, setErrors] = useState({});
-  const { profile_image, owner, gallery, title, price_currency_symbol, price } =
-    props;
+  const {
+    id,
+    profile_id,
+    profile_image,
+    owner,
+    gallery,
+    title,
+    price_currency_symbol,
+    price,
+    scores,
+  } = props;
 
   return (
     <Column xs={12} sm={6} md={4}>
       <CardWrapper>
         <CardHeader>
-          <NavLink to="/">
+          <NavLink to={`/profiles/${profile_id}/`}>
             <UserContainer>
               <Avatar src={profile_image} height={40} />
-              <div>{owner}</div>
+              <Username>{owner}</Username>
             </UserContainer>
           </NavLink>
         </CardHeader>
@@ -51,19 +66,26 @@ const ProductCard = (props) => {
             </Carousel.Item>
           ))}
         </CarouselStyled>
-        <Card.Body>
+        <CardBody>
           <CardTitle>
-            <NavLink to="/">{title}</NavLink>
+            <NavLinkProduct to={`/products/${id}/`}>{title}</NavLinkProduct>
           </CardTitle>
-          <CardInfo>
-            <RatingComponent>
-              Rating <div>component</div>
-            </RatingComponent>
-            <PriceComponent>
-              {price_currency_symbol} {price}
-            </PriceComponent>
-          </CardInfo>
-        </Card.Body>
+          {/* <CardInfo> */}
+          <PriceComponent>
+            {price_currency_symbol} {price}
+          </PriceComponent>
+          <RatingComponent>
+            <AvgScore>2.4</AvgScore>
+            <StarRatings
+              rating={2.403}
+              starDimension="20px"
+              starSpacing="2px"
+              starEmptyColor="rgb(180,211,178)"
+              starRatedColor="green"
+            />
+          </RatingComponent>
+          {/* </CardInfo> */}
+        </CardBody>
       </CardWrapper>
     </Column>
   );
