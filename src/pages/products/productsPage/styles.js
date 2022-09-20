@@ -1,3 +1,4 @@
+import ReactPaginate from "react-paginate";
 import { Carousel } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -19,5 +20,29 @@ export const CarouselStyled = styled(Carousel)`
   .carousel-indicators li {
     border: 1px solid black !important;
     margin-bottom: 10px;
+  }
+`;
+
+export const ReactPaginateStyled = styled(ReactPaginate)`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 5rem;
+  .page-item:first-child {
+    margin-right: 1rem;
+  }
+  .page-item:last-child {
+    margin-left: 1rem;
+  }
+  .page-item:first-child .page-link,
+  .page-item:last-child .page-link {
+    border-radius: 50% !important;
+  }
+
+  .page-item.active .page-link {
+    background: transparent;
+    border: 0;
+    color: green;
+    font-weight: 600;
   }
 `;

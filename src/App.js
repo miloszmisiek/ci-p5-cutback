@@ -58,7 +58,7 @@ function App() {
         ) : null}
         <Container className={styles.Main_Container}>
           <Switch>
-            <Route exact path="/" render={() => <ProductsPage/>} />
+            <Route exact path="/" render={() => <ProductsPage itemsPerPage={9}/>} />
             <Route
               exact
               path="/signin"
