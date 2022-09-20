@@ -41,7 +41,7 @@ const ProductCard = (props) => {
         /> */}
         <CarouselStyled interval={null}>
           {gallery.map((image) => (
-            <Carousel.Item>
+            <Carousel.Item key={image.id}>
               <CarouselImg
                 className="d-block w-100"
                 src={image.image}
