@@ -189,7 +189,7 @@ export const StyledNavLink = styled(NavLink)`
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
-  margin-left: ${props => props.dropdownitem ? null : "1rem"};
+  margin-left: ${(props) => (props.dropdownitem ? null : "1rem")};
   &:hover {
     border-color: #b4d3b2;
   }
@@ -213,7 +213,7 @@ export const StyledNavLink = styled(NavLink)`
         `
       : null}
   @media (max-width: 320px) {
-    margin-left: ${props => props.dropdownitem ? null : "0.6rem"};
+    margin-left: ${(props) => (props.dropdownitem ? null : "0.6rem")};
   }
 `;
 
@@ -248,11 +248,24 @@ export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
 
 export const SearchBarDropdown = styled(Dropdown)`
   .dropdown-menu {
-      left: auto;
-      right: 0;
+    left: auto;
+    right: 0;
+  }
+  .dropdown-menu.show {
+    margin-top: 0.5rem !important;
   }
 
   position: absolute;
   right: 0;
   height: 100%;
+`;
+
+export const CategoriesLinks = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 0;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
 `;

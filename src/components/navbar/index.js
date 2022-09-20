@@ -1,7 +1,8 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown, Form, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
 import logo from "../../assets/logo.png";
 import {
   useCurrentUser,
@@ -25,11 +26,26 @@ import {
   SearchBarForm,
   SearchBardDropdown,
   SearchBarDropdown,
+  CategoriesLinks,
 } from "./styles.js";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.options("/products/");
+        const categories = data.actions?.POST.category.choices;
+        setCategories(categories);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handleMount();
+  }, []);
 
   const handleSignOut = async () => {
     try {
@@ -121,9 +137,11 @@ const NavBar = () => {
               </span>
             </StyledCategoriesDropdown>
             <Dropdown.Menu className="end-0">
-              <Dropdown.Item>Boards</Dropdown.Item>
-              <Dropdown.Item>Kites</Dropdown.Item>
-              <Dropdown.Item>Wetsuits</Dropdown.Item>
+              {categories.map((cat) => (
+                <CategoriesLinks key={cat.value} to={`/`}>
+                  {cat.display_name}
+                </CategoriesLinks>
+              ))}
             </Dropdown.Menu>
           </SearchBarDropdown>
         </StyledSearchBarContainer>
