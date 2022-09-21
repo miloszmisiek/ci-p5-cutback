@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { AvgScore } from "../productCard/styles";
 import { CreateColumn } from "../productCreateForm/styles";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
+import ReactCountryFlag from "react-country-flag";
 
 export const ProductPageColumn = styled(CreateColumn)`
   background-color: white;
@@ -79,4 +81,21 @@ export const ContactData = styled.div`
   a {
     padding-right: 0.3rem;
   }
+`;
+
+export const RatingsWrapper = styled.div`
+  display: flex;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-top: 1rem;
+  padding: 1rem;
+`;
+
+export const ProductAvgScore = styled(AvgScore)`
+  margin-right: 0.8rem;
+`;
+
+export const CountryFlag = styled(ReactCountryFlag)`
+  margin-left: 0.3rem;
+  font-size: 1.5rem;
 `;
