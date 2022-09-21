@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Dropdown, Form, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
 import logo from "../../assets/logo.png";
+import { useCategories } from "../../contexts/CategoriesContext";
 import {
   useCurrentUser,
   useSetCurrentUser,
@@ -23,8 +23,6 @@ import {
   StyledNavbar,
   StyledLogoName,
   StyledCategoriesDropdown,
-  SearchBarForm,
-  SearchBardDropdown,
   SearchBarDropdown,
   CategoriesLinks,
 } from "./styles.js";
@@ -32,20 +30,7 @@ import {
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { data } = await axiosReq.options("/products/");
-        const categories = data.actions?.POST.category.choices;
-        setCategories(categories);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    handleMount();
-  }, []);
+  const categories = useCategories();
 
   const handleSignOut = async () => {
     try {
@@ -137,8 +122,8 @@ const NavBar = () => {
               </span>
             </StyledCategoriesDropdown>
             <Dropdown.Menu className="end-0">
-              {categories.map((cat) => (
-                <CategoriesLinks key={cat.value} to={`/`}>
+              {categories?.map((cat) => (
+                <CategoriesLinks key={cat.value} to={`/${cat.display_name}`}>
                   {cat.display_name}
                 </CategoriesLinks>
               ))}

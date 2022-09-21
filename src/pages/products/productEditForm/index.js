@@ -23,6 +23,7 @@ import {
 } from "./styles";
 import ModalCustom from "../../../components/modal";
 import { useSetModalContext } from "../../../contexts/ModalContext";
+import { useCategories } from "../../../contexts/CategoriesContext";
 const ProductEditForm = () => {
   const [images, setImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
@@ -53,11 +54,11 @@ const ProductEditForm = () => {
     in_stock,
   } = productData;
   const [choices, setChoices] = useState({
-    categories: [],
     currencies: [],
     countires: [],
   });
-  const { categories, currencies, countires } = choices;
+  const { currencies, countires } = choices;
+  const categories = useCategories();
   const history = useHistory();
   const { id } = useParams();
   const { handleClose, handleShow } = useSetModalContext();
@@ -68,8 +69,7 @@ const ProductEditForm = () => {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
         const currencies = data.actions?.POST.price_currency.choices;
-        const categories = data.actions?.POST.category.choices;
-        setChoices({ categories, currencies, countires });
+        setChoices({ currencies, countires });
       } catch (err) {
         console.log(err);
       }

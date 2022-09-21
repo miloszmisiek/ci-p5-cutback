@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import { axiosReq } from "../../../api/axiosDefaults";
 import ProductCard from "../productCard";
-import ReactPaginate from "react-paginate";
 import { ReactPaginateStyled } from "./styles";
 
-const ProductsPage = ({ itemsPerPage }) => {
+const ProductsPage = ({ itemsPerPage, filter = "", message }) => {
   const [results, setResults] = useState([]);
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -17,7 +16,7 @@ const ProductsPage = ({ itemsPerPage }) => {
 
     const handleMount = async () => {
       try {
-        const { data } = await axiosReq.get(`/products/`);
+        const { data } = await axiosReq.get(`/products/?${filter}`);
         setResults(data.results);
         setCurrentItems(data.results.slice(itemOffset, endOffset));
         setPageCount(Math.ceil(data.results.length / itemsPerPage));
@@ -26,7 +25,7 @@ const ProductsPage = ({ itemsPerPage }) => {
       }
     };
     handleMount();
-  }, [itemOffset, itemsPerPage]);
+  }, [itemOffset, itemsPerPage, filter]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % results.length;

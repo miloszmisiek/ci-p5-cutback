@@ -18,7 +18,8 @@ export const CardWrapper = styled(Card)`
 `;
 
 export const CardHeader = styled(Card.Header)`
-  display: flex;
+  /* display: flex; */
+  display: none;
   justify-content: space-between;
   align-items: center;
 `;

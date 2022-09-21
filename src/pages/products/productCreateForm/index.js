@@ -11,12 +11,12 @@ import {
   CreateColumn,
   CurrencySelect,
   FormControlMb,
-  FormControlMt,
   TitleWrapper,
   TransparentInput,
 } from "./styles";
 import ProductGallery from "../productGallery";
 import { Brand, FormSwitch, InStockBrandWrapper } from "../productEditForm/styles";
+import { useCategories } from "../../../contexts/CategoriesContext";
 const ProductCreateForm = () => {
   const [gallery, setGallery] = useState([]);
   const [errors, setErrors] = useState({});
@@ -34,11 +34,11 @@ const ProductCreateForm = () => {
   });
   const { title, description, brand, price, street, city, in_stock } = productData;
   const [choices, setChoices] = useState({
-    categories: [],
     currencies: [],
     countires: [],
   });
-  const { categories, currencies, countires } = choices;
+  const { currencies, countires } = choices;
+  const categories = useCategories()
   const history = useHistory();
 
   useEffect(() => {
@@ -47,7 +47,6 @@ const ProductCreateForm = () => {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
         const currencies = data.actions?.POST.price_currency.choices;
-        const categories = data.actions?.POST.category.choices;
         setChoices({ categories, currencies, countires });
         setProductData((prev) => ({
           ...prev,
@@ -58,7 +57,7 @@ const ProductCreateForm = () => {
       }
     };
     handleMount();
-  }, []);
+  }, [categories]);
 
   const handleImageSubmit = (history) => {
     const galleryFormData = new FormData();

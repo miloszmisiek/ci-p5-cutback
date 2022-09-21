@@ -11,6 +11,7 @@ import SignInForm from "./pages/auth/signInForm/index";
 import ProductsPage from "./pages/products/productsPage";
 import ProductCreateForm from "./pages/products/productCreateForm";
 import ProductEditForm from "./pages/products/productEditForm";
+import { useCategories } from "./contexts/CategoriesContext";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -42,6 +43,7 @@ export const BackgroundImage = styled(Image)`
 
 function App() {
   const [background, setBackground] = useState();
+  const categories = useCategories();
   return (
     <AppWrapper>
       <NavBar />
@@ -58,19 +60,65 @@ function App() {
         ) : null}
         <Container className={styles.Main_Container}>
           <Switch>
-            <Route exact path="/" render={() => <ProductsPage itemsPerPage={9}/>} />
+            <Route
+              exact
+              path="/"
+              render={() => <ProductsPage itemsPerPage={12} />}
+            />
             <Route
               exact
               path="/signin"
               render={() => <SignInForm setBackground={setBackground} />}
+            />
+            {categories?.map((cat) => (
+              <Route
+                key={cat.value}
+                exact
+                path={`/${cat.display_name}`}
+                render={() => (
+                  <ProductsPage
+                    filter={`category=${cat.value}`}
+                    itemsPerPage={12}
+                  />
+                )}
+              />
+            ))}
+
+            <Route
+              exact
+              path="/kites"
+              render={() => <ProductsPage itemsPerPage={12} />}
+            />
+            <Route
+              exact
+              path="/wetsuits"
+              render={() => <ProductsPage itemsPerPage={12} />}
+            />
+            <Route
+              exact
+              path="/harnesses"
+              render={() => <ProductsPage itemsPerPage={12} />}
+            />
+            <Route
+              exact
+              path="/others"
+              render={() => <ProductsPage itemsPerPage={12} />}
             />
             <Route
               exact
               path="/signup"
               render={() => <SignUpForm setBackground={setBackground} />}
             />
-            <Route exact path="/products/create" render={() => <ProductCreateForm />} />
-            <Route exact path="/products/:id/edit" render={() => <ProductEditForm />} />
+            <Route
+              exact
+              path="/products/create"
+              render={() => <ProductCreateForm />}
+            />
+            <Route
+              exact
+              path="/products/:id/edit"
+              render={() => <ProductEditForm />}
+            />
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>
         </Container>
