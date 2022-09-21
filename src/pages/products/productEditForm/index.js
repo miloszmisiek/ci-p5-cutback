@@ -86,13 +86,13 @@ const ProductEditForm = () => {
           street,
           city,
           gallery,
-          is_owner,
+          owner_profile,
           in_stock,
         } = data;
 
         // console.log(data);
         // check if current user is post owner, else redirect to home page
-        if (is_owner) {
+        if (owner_profile.is_owner) {
           setProductData({
             category,
             country: country.code,
@@ -103,7 +103,6 @@ const ProductEditForm = () => {
             price,
             street,
             city,
-            is_owner,
             in_stock,
             gallery,
           });

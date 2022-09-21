@@ -12,6 +12,7 @@ import ProductsPage from "./pages/products/productsPage";
 import ProductCreateForm from "./pages/products/productCreateForm";
 import ProductEditForm from "./pages/products/productEditForm";
 import { useCategories } from "./contexts/CategoriesContext";
+import ProductPage from "./pages/products/productPage";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -83,7 +84,7 @@ function App() {
                 )}
               />
             ))}
-
+            <Route exact path="/products/:id" render={() => <ProductPage />} />
             <Route
               exact
               path="/kites"

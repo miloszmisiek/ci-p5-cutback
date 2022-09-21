@@ -26,9 +26,7 @@ const ProductCard = (props) => {
   const [errors, setErrors] = useState({});
   const {
     id,
-    profile_id,
-    profile_image,
-    owner,
+    owner_profile,
     gallery,
     title,
     price_currency_symbol,
@@ -40,10 +38,10 @@ const ProductCard = (props) => {
     <Column xs={12} sm={6} md={4}>
       <CardWrapper>
         <CardHeader>
-          <NavLink to={`/profiles/${profile_id}/`}>
+          <NavLink to={`/profiles/${owner_profile.id}/`}>
             <UserContainer>
-              <Avatar src={profile_image} height={40} />
-              <Username>{owner}</Username>
+              <Avatar src={owner_profile.image} height={40} />
+              <Username>{owner_profile.owner}</Username>
             </UserContainer>
           </NavLink>
         </CardHeader>
