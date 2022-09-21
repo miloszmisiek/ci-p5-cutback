@@ -26,8 +26,11 @@ export const CardHeader = styled(Card.Header)`
 
 export const CardTitle = styled(Card.Title)`
   text-align: center;
-  /* border-bottom: 1px solid black; */
+  min-height: 58px;
+  display: flex;
   font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 860px) {
     font-size: 1.2rem;

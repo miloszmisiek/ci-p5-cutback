@@ -63,8 +63,8 @@ function App() {
           <Switch>
             <Route
               exact
-              path="/"
-              render={() => <ProductsPage itemsPerPage={12} />}
+              path="/products/create"
+              render={() => <ProductCreateForm />}
             />
             <Route
               exact
@@ -87,38 +87,18 @@ function App() {
             <Route exact path="/products/:id" render={() => <ProductPage />} />
             <Route
               exact
-              path="/kites"
-              render={() => <ProductsPage itemsPerPage={12} />}
-            />
-            <Route
-              exact
-              path="/wetsuits"
-              render={() => <ProductsPage itemsPerPage={12} />}
-            />
-            <Route
-              exact
-              path="/harnesses"
-              render={() => <ProductsPage itemsPerPage={12} />}
-            />
-            <Route
-              exact
-              path="/others"
-              render={() => <ProductsPage itemsPerPage={12} />}
-            />
-            <Route
-              exact
               path="/signup"
               render={() => <SignUpForm setBackground={setBackground} />}
             />
             <Route
               exact
-              path="/products/create"
-              render={() => <ProductCreateForm />}
+              path="/products/:id/edit"
+              render={() => <ProductEditForm />}
             />
             <Route
               exact
-              path="/products/:id/edit"
-              render={() => <ProductEditForm />}
+              path="/"
+              render={() => <ProductsPage itemsPerPage={12} />}
             />
             <Route render={() => <h1>Page not found!</h1>} />
           </Switch>

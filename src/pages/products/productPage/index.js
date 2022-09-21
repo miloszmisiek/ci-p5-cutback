@@ -17,11 +17,13 @@ import {
   Price,
   ProductAvgScore,
   ProductPageColumn,
+  Rating,
   RatingsWrapper,
   Title,
   Wrapper,
 } from "./styles";
 import ReactCountryFlag from "react-country-flag";
+import { RatingComponent } from "../productCard/styles";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -30,6 +32,7 @@ const ProductPage = () => {
   const [rating, setRating] = useState({
     avg: 0,
     currentUserRating: null,
+    scores: {},
   });
   const [profile, setProfile] = useState({
     profile_id: null,
@@ -52,9 +55,8 @@ const ProductPage = () => {
     city: "",
     country: {},
     gallery: [],
-    scores: {},
   });
-  const { avg, currentUserRating } = rating;
+  const { avg, currentUserRating, scores } = rating;
   const { profile_id, owner, email, first_name, last_name, phone_number } =
     profile;
   const {
@@ -115,7 +117,6 @@ const ProductPage = () => {
           city,
           in_stock,
           gallery,
-          scores,
         });
         setProfile({
           profile_id,
@@ -125,7 +126,11 @@ const ProductPage = () => {
           last_name,
           phone_number,
         });
-        setRating({ ...rating, avg: scores?.statistics?.avg });
+        setRating((prev) => ({
+          ...prev,
+          avg: scores?.statistics?.avg,
+          scores: scores?.statistics?.scores,
+        }));
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -149,16 +154,31 @@ const ProductPage = () => {
 
   const ratingProductPage = (
     <RatingsWrapper>
-      <ProductAvgScore>{parseFloat(avg).toFixed(1)}</ProductAvgScore>
-      <StarRatings
-        rating={avg}
-        starHoverColor="red"
-        starDimension="20px"
-        starSpacing="2px"
-        starEmptyColor="rgb(180,211,178)"
-        starRatedColor="green"
-        changeRating={!currentUserRating ? handleRating : null}
-      />
+      <Rating>
+        <ProductAvgScore>{parseFloat(avg).toFixed(1)}</ProductAvgScore>
+        <StarRatings
+          rating={avg}
+          starHoverColor="green"
+          starDimension="20px"
+          starSpacing="2px"
+          starEmptyColor="rgb(180,211,178)"
+          starRatedColor="green"
+          changeRating={!currentUserRating ? handleRating : null}
+        />
+      </Rating>
+      <Divider />
+      {Object.entries(scores).map((score) => (
+        <Rating key={parseInt(score[0].split("star_")[1])} scores>
+          <StarRatings
+            rating={parseInt(score[0].split("star_")[1])}
+            starDimension="20px"
+            starSpacing="2px"
+            starEmptyColor="rgb(180,211,178)"
+            starRatedColor="green"
+          />
+          <ProductAvgScore>{score[1]}</ProductAvgScore>
+        </Rating>
+      ))}
     </RatingsWrapper>
   );
   const productPageTest = (
@@ -206,7 +226,7 @@ const ProductPage = () => {
       <Divider />
       <Wrapper>
         <ContactInformation>
-          <i className="fas fa-map-marker"></i> Location
+          <i className="fas fa-map-pin"></i> Location
         </ContactInformation>
         <ContactData>
           <strong>Address: </strong>
@@ -216,8 +236,7 @@ const ProductPage = () => {
           <strong>City:</strong> {city}
         </ContactData>
         <ContactData>
-          <strong>Country:</strong>{" "}
-          {country.name}
+          <strong>Country:</strong> {country.name}
           {<CountryFlag svg countryCode={country?.code} />}
         </ContactData>
       </Wrapper>

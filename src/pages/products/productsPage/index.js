@@ -7,6 +7,7 @@ import { ReactPaginateStyled } from "./styles";
 const ProductsPage = ({ itemsPerPage, filter = "", message }) => {
   const [results, setResults] = useState([]);
   const [currentItems, setCurrentItems] = useState(null);
+  console.log(currentItems);
   const [pageCount, setPageCount] = useState(0);
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.

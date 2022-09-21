@@ -214,7 +214,7 @@ const ProductEditForm = () => {
         <TitleWrapper title="true">
           <TransparentInput
             type="text"
-            maxLength="15"
+            maxLength="30"
             placeholder="Title"
             name="title"
             value={title}
