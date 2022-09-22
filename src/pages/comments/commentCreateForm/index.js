@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import { Divider } from "../../products/productPage/styles";
@@ -40,15 +40,16 @@ const CommentCreateForm = ({ productData, setProductData, setComments }) => {
       <TypeBox>
         <CommentText>
           <CommentInput
-            type="text"
+            as="textarea"
             placeholder="Comment..."
             onChange={handleCommentChange}
             name="comment"
             value={comment}
+            rows={2}
           />
         </CommentText>
         <PostBox>
-          <PostButton variant="primary" type="submit">
+          <PostButton variant="success" type="submit">
             Post
           </PostButton>
         </PostBox>

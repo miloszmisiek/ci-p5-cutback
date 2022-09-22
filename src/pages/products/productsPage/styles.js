@@ -38,13 +38,21 @@ export const ReactPaginateStyled = styled(ReactPaginate)`
   .page-item:first-child .page-link,
   .page-item:last-child .page-link {
     border-radius: 50% !important;
+    background-color: white;
+    border: 1px solid #dee2e6;
+  }
+
+  .page-link {
+    background: transparent;
+    border: none;
+    color: black;
   }
 
   .page-item.active .page-link {
     background: transparent;
     border: 0;
     color: green;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   @media (max-width: 575px) {

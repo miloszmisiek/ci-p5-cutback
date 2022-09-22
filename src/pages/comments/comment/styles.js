@@ -10,6 +10,7 @@ export const InfoContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin-bottom: 0.5rem;
 `;
 
 export const OwnerSpan = styled.span`

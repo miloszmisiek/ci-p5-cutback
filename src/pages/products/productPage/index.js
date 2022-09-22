@@ -201,7 +201,7 @@ const ProductPage = ({ itemsPerPage }) => {
           starEmptyColor="rgb(180,211,178)"
           starRatedColor="green"
           changeRating={
-            !!rating_data?.filter((rating) => rating.is_owner).length
+            rating_data?.some((rating) => rating.is_owner)
               ? editCurrentUserRating
               : currentUser && handleRating
           }

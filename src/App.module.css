@@ -10,6 +10,10 @@ svg {
 a:hover {
   color: inherit;
 }
+div {
+  cursor: default;
+  word-break: break-all;
+}
 
 ul {
   list-style-type: none;
