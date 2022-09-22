@@ -287,18 +287,28 @@ const ProductPage = ({ itemsPerPage }) => {
   );
   const carouselProductPage = (
     <ProductPageColumn xs={12} md={7}>
-      <CarouselProductPage>
-        {gallery?.map((image) => (
-          <Carousel.Item key={image.id}>
-            <CarouselImgProductPage
-              className="d-block w-100"
-              src={image.image}
-              alt="Product image"
-              height={300}
-            />
-          </Carousel.Item>
-        ))}
-      </CarouselProductPage>
+      {!!gallery.length ? (
+        <CarouselProductPage>
+          {gallery?.map((image) => (
+            <Carousel.Item key={image.id}>
+              <CarouselImgProductPage
+                className="d-block w-100"
+                src={image.image}
+                alt="Product image"
+                height={300}
+              />
+            </Carousel.Item>
+          ))}
+        </CarouselProductPage>
+      ) : (
+        <Asset
+          src={
+            "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
+          }
+          height={200}
+          productCard
+        />
+      )}
       {ratingProductPage}
       <CommentContainer>
         {currentUser && (

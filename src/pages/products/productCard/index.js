@@ -17,6 +17,7 @@ import {
   UserContainer,
   Username,
 } from "./styles";
+import Asset from "../../../components/asset";
 
 const ProductCard = (props) => {
   const [errors, setErrors] = useState({});
@@ -40,18 +41,28 @@ const ProductCard = (props) => {
             </UserContainer>
           </NavLink>
         </CardHeader>
-        <CarouselStyled interval={null}>
-          {gallery.map((image) => (
-            <Carousel.Item key={image.id}>
-              <CarouselImg
-                className="d-block w-100"
-                src={image.image}
-                alt="Product image"
-                height={200}
-              />
-            </Carousel.Item>
-          ))}
-        </CarouselStyled>
+        {!!gallery.length ? (
+          <CarouselStyled interval={null}>
+            {gallery.map((image) => (
+              <Carousel.Item key={image.id}>
+                <CarouselImg
+                  className="d-block w-100"
+                  src={image.image}
+                  alt="Product image"
+                  height={200}
+                />
+              </Carousel.Item>
+            ))}
+          </CarouselStyled>
+        ) : (
+          <Asset
+            src={
+              "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
+            }
+            height={200}
+            productCard
+          />
+        )}
         <CardBody>
           <CardTitle>
             <NavLinkProduct to={`/products/${id}/`}>{title}</NavLinkProduct>
