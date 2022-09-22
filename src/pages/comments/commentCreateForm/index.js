@@ -12,7 +12,13 @@ import {
   TypeBox,
 } from "./styles";
 
-const CommentCreateForm = ({ productData, setProductData, setComments }) => {
+const CommentCreateForm = ({
+  productData,
+  setProductData,
+  comments,
+  setComments,
+  // setPageCount,
+}) => {
   const { id } = useParams();
   const [comment, setComment] = useState("");
   const handleCommentSubmit = async (e) => {
@@ -22,12 +28,18 @@ const CommentCreateForm = ({ productData, setProductData, setComments }) => {
     commentFormData.append("product", id);
     try {
       const { data } = await axiosRes.post("/comments/", commentFormData);
-      // setComments((prev) => [data, ...prev]);
+      setComments((prev) => ({
+        ...prev,
+        results: [data, ...prev.results],
+      }));
       setProductData((prev) => ({
         ...prev,
         comments_count: prev.comments_count + 1,
       }));
       setComment("");
+      // setPageCount(
+      //   Math.ceil(comments.count + 1 / comments.results?.length)
+      // );
     } catch (err) {
       console.log(err);
     }

@@ -34,13 +34,14 @@ const ProductPage = ({ itemsPerPage }) => {
   const currentUser = useCurrentUser();
   const [errors, setErrors] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
+
   const [rating, setRating] = useState({
     rating_data: [],
     avg: 0,
     currentUserRating: null,
     scores: {},
   });
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState({});
   const [profile, setProfile] = useState({
     profile_id: null,
     owner: "",
@@ -143,7 +144,7 @@ const ProductPage = ({ itemsPerPage }) => {
           avg: scores?.statistics?.avg,
           scores: scores?.statistics?.scores,
         }));
-        setComments(commentsData.results);
+        setComments(commentsData);
         setPageCount(
           !!commentsData.next
             ? Math.ceil(commentsData?.count / commentsData?.results?.length)
@@ -155,7 +156,7 @@ const ProductPage = ({ itemsPerPage }) => {
       }
     };
     handleMount();
-  }, [id, currentUserRating, comments_count]);
+  }, [id, currentUserRating, comments_count, pageCount]);
 
   const handleRating = async (newRating) => {
     try {
@@ -183,7 +184,7 @@ const ProductPage = ({ itemsPerPage }) => {
       const { data } = await axiosReq.get(
         `comments/?page=${e.selected + 1}&product=${id}`
       );
-      setComments(data.results);
+      setComments(data);
     } catch (err) {
       console.log(err);
     }
@@ -314,12 +315,14 @@ const ProductPage = ({ itemsPerPage }) => {
         {currentUser && (
           <CommentCreateForm
             productData={productData}
+            comments={comments}
             setProductData={setProductData}
             setComments={setComments}
+            // setPageCount={setPageCount}
           />
         )}
-        {!!comments.length &&
-          comments.map((comment) => (
+        {!!comments.results?.length &&
+          comments.results?.map((comment) => (
             <Comment
               key={comment.id}
               setProductData={setProductData}

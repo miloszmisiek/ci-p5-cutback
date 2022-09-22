@@ -11,7 +11,6 @@ export const TypeBox = styled.div`
 export const CommentText = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 0.5rem;
 `;
 
 export const PostBox = styled.div`
