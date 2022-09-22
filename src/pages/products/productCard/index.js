@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import Avatar from "../../../components/avatar";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import StarRatings from "react-star-ratings";
-
 import {
   AvgScore,
   CardBody,
@@ -18,9 +17,11 @@ import {
   UserContainer,
   Username,
 } from "./styles";
+import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 const ProductCard = (props) => {
   const [errors, setErrors] = useState({});
+  const currentUser = useCurrentUser();
   const {
     id,
     owner_profile,

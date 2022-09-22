@@ -24,16 +24,20 @@ import {
 } from "./styles";
 import ReactCountryFlag from "react-country-flag";
 import { RatingComponent } from "../productCard/styles";
+import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 const ProductPage = () => {
   const { id } = useParams();
+  const currentUser = useCurrentUser();
   const [errors, setErrors] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
   const [rating, setRating] = useState({
+    rating_data: [],
     avg: 0,
     currentUserRating: null,
     scores: {},
   });
+
   const [profile, setProfile] = useState({
     profile_id: null,
     owner: "",
@@ -56,7 +60,8 @@ const ProductPage = () => {
     country: {},
     gallery: [],
   });
-  const { avg, currentUserRating, scores } = rating;
+
+  const { rating_data, avg, currentUserRating, scores } = rating;
   const { profile_id, owner, email, first_name, last_name, phone_number } =
     profile;
   const {
@@ -128,6 +133,7 @@ const ProductPage = () => {
         });
         setRating((prev) => ({
           ...prev,
+          rating_data: scores?.data,
           avg: scores?.statistics?.avg,
           scores: scores?.statistics?.scores,
         }));
@@ -148,9 +154,18 @@ const ProductPage = () => {
     setRating({ ...rating, currentUserRating: newRating });
   };
 
-  // const handleRating = (newRating) => {
-  //   setRating(newRating);
-  // };
+  const editCurrentUserRating = async (newRating) => {
+    const currentUserRating = rating_data?.filter((rating) => rating.is_owner);
+    try {
+      await axiosRes.put(`ratings/${currentUserRating[0]?.id}`, {
+        product: id,
+        score: newRating,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    setRating({ ...rating, currentUserRating: newRating })
+  };
 
   const ratingProductPage = (
     <RatingsWrapper>
@@ -163,7 +178,11 @@ const ProductPage = () => {
           starSpacing="2px"
           starEmptyColor="rgb(180,211,178)"
           starRatedColor="green"
-          changeRating={!currentUserRating ? handleRating : null}
+          changeRating={
+            !rating_data?.filter((rating) => rating.is_owner)
+              ? currentUser && handleRating
+              : editCurrentUserRating
+          }
         />
       </Rating>
       <Divider />
