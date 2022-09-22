@@ -5,11 +5,10 @@ import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import ReactCountryFlag from "react-country-flag";
 
 export const ProductPageColumn = styled(CreateColumn)`
-  background-color: white;
+  background-color: transparent;
   width: 100%;
-  height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;
+  height: fit-content;
+  padding: 0.5rem;
 `;
 
 export const CarouselProductPage = styled(CarouselStyled)``;
@@ -17,6 +16,16 @@ export const CarouselProductPage = styled(CarouselStyled)``;
 export const CarouselImgProductPage = styled(CarouselImg)`
   max-height: 400px;
   /* box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px; */
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;
+  padding: 1rem;
 `;
 
 export const Wrapper = styled.div`
@@ -92,6 +101,8 @@ export const RatingsWrapper = styled.div`
   padding: 1rem;
 `;
 
+export const CommentContainer = styled(RatingsWrapper)``;
+
 export const ProductAvgScore = styled(AvgScore)`
   margin-right: 0.8rem;
 `;
@@ -103,5 +114,4 @@ export const CountryFlag = styled(ReactCountryFlag)`
 
 export const Rating = styled(RatingComponent)`
   justify-content: ${(props) => (props.scores ? "space-around" : "center")};
-
 `;

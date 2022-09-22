@@ -17,11 +17,9 @@ import {
   UserContainer,
   Username,
 } from "./styles";
-import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 const ProductCard = (props) => {
   const [errors, setErrors] = useState({});
-  const currentUser = useCurrentUser();
   const {
     id,
     owner_profile,

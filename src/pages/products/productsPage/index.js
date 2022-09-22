@@ -4,39 +4,37 @@ import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import ProductCard from "../productCard";
 import { ReactPaginateStyled } from "./styles";
+import ReactPaginate from "react-paginate";
+import { fetchMoreData } from "../../../utils/utils";
 
-const ProductsPage = ({ itemsPerPage, filter = "", message }) => {
+const ProductsPage = ({ filter = "", message }) => {
   const [results, setResults] = useState([]);
-  const [currentItems, setCurrentItems] = useState(null);
   const [hasLoaded, setHasLoaded] = useState(false);
-  console.log(currentItems);
   const [pageCount, setPageCount] = useState(0);
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0);
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
 
+  useEffect(() => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/products/?${filter}`);
-        setResults(data.results);
-        setCurrentItems(data.results.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(data.results.length / itemsPerPage));
+        setResults(data);
+        setPageCount(
+          !!data.next ? Math.ceil(data?.count / data?.results?.length) : 0
+        );
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
     handleMount();
-  }, [itemOffset, itemsPerPage, filter]);
+  }, [filter]);
 
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % results.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+  const handlePageClick = async (e) => {
+    try {
+      const { data } = await axiosReq.get(`/products/?page=${e.selected + 1}`);
+      setResults(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -44,7 +42,7 @@ const ProductsPage = ({ itemsPerPage, filter = "", message }) => {
       {hasLoaded ? (
         <>
           <Row>
-            {currentItems?.map((product) => (
+            {results?.results.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
           </Row>

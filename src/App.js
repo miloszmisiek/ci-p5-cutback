@@ -84,7 +84,7 @@ function App() {
                 )}
               />
             ))}
-            <Route exact path="/products/:id" render={() => <ProductPage />} />
+            <Route exact path="/products/:id" render={() => <ProductPage itemsPerPage={10}/>} />
             <Route
               exact
               path="/signup"
