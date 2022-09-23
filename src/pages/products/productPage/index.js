@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Carousel } from "react-bootstrap";
+import { Alert, Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { NavLink, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import { FullRow } from "../../auth/signUpForm/styles";
@@ -28,6 +28,11 @@ import CommentCreateForm from "../../comments/commentCreateForm";
 import Comment from "../../comments/comment";
 import Asset from "../../../components/asset/index";
 import { ReactPaginateStyled } from "../productsPage/styles";
+import Message from "../../../components/Alert";
+import {
+  useAlertContext,
+  useSetAlertContext,
+} from "../../../contexts/AlertContext";
 
 const ProductPage = ({ itemsPerPage }) => {
   const { id } = useParams();
@@ -66,6 +71,13 @@ const ProductPage = ({ itemsPerPage }) => {
   });
   const [pageCount, setPageCount] = useState(0);
 
+  const { handleShowAlert } = useSetAlertContext();
+  // const [showAlert, setShowAlert] = useState(false);
+  // const [alertData, setAlertData] = useState({
+  //   alertVariant: "",
+  //   alertMessage: "",
+  // });
+  // const { alertVariant, alertMessage } = alertData;
   const { rating_data, avg, currentUserRating, scores } = rating;
   const { profile_id, owner, email, first_name, last_name, phone_number } =
     profile;
@@ -83,6 +95,7 @@ const ProductPage = ({ itemsPerPage }) => {
     gallery,
     comments_count,
   } = productData;
+  const is_owner = currentUser?.username === owner;
 
   useEffect(() => {
     const handleMount = async () => {
@@ -165,6 +178,11 @@ const ProductPage = ({ itemsPerPage }) => {
       console.log(err);
     }
     setRating({ ...rating, currentUserRating: newRating });
+    // setAlertData({
+    //   alertVariant: "success",
+    //   alertMessage: "Your vote has been registered!",
+    // });
+    handleShowAlert("success", "Your vote has been registered!");
   };
 
   const editCurrentUserRating = async (newRating) => {
@@ -178,6 +196,12 @@ const ProductPage = ({ itemsPerPage }) => {
       console.log(err);
     }
     setRating({ ...rating, currentUserRating: newRating });
+    // setAlertData({
+    //   alertVariant: "secondary",
+    //   alertMessage: "Your vote has been updated.",
+    // });
+    // setShowAlert(true);
+    handleShowAlert("secondary", "Your vote has been updated.");
   };
   const handlePageClick = async (e) => {
     try {
@@ -194,19 +218,35 @@ const ProductPage = ({ itemsPerPage }) => {
     <RatingsWrapper>
       <Rating>
         <ProductAvgScore>{parseFloat(avg).toFixed(1)}</ProductAvgScore>
-        <StarRatings
-          rating={avg}
-          starHoverColor="green"
-          starDimension="20px"
-          starSpacing="2px"
-          starEmptyColor="rgb(180,211,178)"
-          starRatedColor="green"
-          changeRating={
-            rating_data?.some((rating) => rating.is_owner)
-              ? editCurrentUserRating
-              : currentUser && handleRating
-          }
-        />
+        {is_owner ? (
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>You can't rate your own post!</Tooltip>}
+          >
+            <StarRatings
+              rating={avg}
+              starHoverColor="green"
+              starDimension="20px"
+              starSpacing="2px"
+              starEmptyColor="rgb(180,211,178)"
+              starRatedColor="green"
+            />
+          </OverlayTrigger>
+        ) : (
+          <StarRatings
+            rating={avg}
+            starHoverColor="green"
+            starDimension="20px"
+            starSpacing="2px"
+            starEmptyColor="rgb(180,211,178)"
+            starRatedColor="green"
+            changeRating={
+              rating_data?.some((rating) => rating.is_owner)
+                ? editCurrentUserRating
+                : currentUser && handleRating
+            }
+          />
+        )}
       </Rating>
       <Divider />
       {Object.entries(scores).map((score) => (
@@ -224,7 +264,7 @@ const ProductPage = ({ itemsPerPage }) => {
     </RatingsWrapper>
   );
   const productPageTest = (
-    <ProductPageColumn text="true" xs={12} md={5}>
+    <ProductPageColumn text="true" xs={12} md={{ span: 5, order: "last" }}>
       <TextContainer>
         <Wrapper>
           <Price>
@@ -363,13 +403,17 @@ const ProductPage = ({ itemsPerPage }) => {
 
   return (
     <>
-      {hasLoaded && (
-        <FullRow>
-          {carouselProductPage}
-          {productPageTest}
-        </FullRow>
+      {hasLoaded ? (
+        <>
+          <Message />
+          <FullRow>
+            {productPageTest}
+            {carouselProductPage}
+          </FullRow>
+        </>
+      ) : (
+        <Asset spinner />
       )}
-      ;
     </>
   );
 };

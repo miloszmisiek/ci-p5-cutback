@@ -68,7 +68,7 @@ const NavBar = () => {
         </StyledSignedInMsg>
         <NavDropdown.Divider />
         {/* TODO: add routes for dropdown section */}
-        <StyledNavLink dropdownitem="true" to="/">
+        <StyledNavLink dropdownitem="true" to={`/profiles/${currentUser?.profile_id}/products`}>
           Your Equipment
         </StyledNavLink>
         <StyledNavLink dropdownitem="true" to="/">

@@ -29,7 +29,7 @@ const ProductsPage = ({ filter = "", message }) => {
       }
     };
     handleMount();
-  }, [filter]);
+  }, [filter, inStock]);
 
   const handlePageClick = async (e) => {
     try {

@@ -16,7 +16,12 @@ export const ModalProvider = ({ children }) => {
     setShowModal({ ...showModal, modalIsOpen: false });
   };
   const handleShow = (deleteItem, deleteFunc) => {
-    setShowModal({ ...showModal, modalIsOpen: true, deleteItem: deleteItem, deleteFunc: deleteFunc});
+    setShowModal({
+      ...showModal,
+      modalIsOpen: true,
+      deleteItem: deleteItem,
+      deleteFunc: deleteFunc,
+    });
   };
 
   return (

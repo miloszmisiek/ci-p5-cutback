@@ -1,4 +1,4 @@
-import { Button, Media } from "react-bootstrap";
+import { Button, Media, Popover } from "react-bootstrap";
 import styled from "styled-components";
 
 export const MediaBody = styled(Media.Body)`
@@ -91,4 +91,9 @@ export const VerticalDivider = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: inline;
   font-size: 1.5rem;
+`;
+
+export const PopOver = styled(Popover)`
+  z-index: 1040 !important;
+  margin-right: 0.5rem !important;
 `;

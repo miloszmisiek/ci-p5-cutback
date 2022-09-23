@@ -13,6 +13,7 @@ import ProductCreateForm from "./pages/products/productCreateForm";
 import ProductEditForm from "./pages/products/productEditForm";
 import { useCategories } from "./contexts/CategoriesContext";
 import ProductPage from "./pages/products/productPage";
+import ProfilePage from "./pages/profiles/profilePage";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -63,6 +64,11 @@ function App() {
           <Switch>
             <Route
               exact
+              path="/profiles/:id/products"
+              render={() => <ProfilePage />}
+            />
+            <Route
+              exact
               path="/products/create"
               render={() => <ProductCreateForm />}
             />
@@ -84,7 +90,11 @@ function App() {
                 )}
               />
             ))}
-            <Route exact path="/products/:id" render={() => <ProductPage itemsPerPage={10}/>} />
+            <Route
+              exact
+              path="/products/:id"
+              render={() => <ProductPage itemsPerPage={10} />}
+            />
             <Route
               exact
               path="/signup"

@@ -13,7 +13,10 @@ import {
   OwnerSpan,
   UpdatedAtSpan,
   VerticalDivider,
+  PopOver,
 } from "./styles";
+import ModalCustom from "../../../components/modal";
+import { useSetModalContext } from "../../../contexts/ModalContext";
 
 const Comment = (props) => {
   const {
@@ -28,6 +31,7 @@ const Comment = (props) => {
     id,
   } = props;
   const [showEditForm, setShowEditForm] = useState(false);
+  const { handleClose, handleShow } = useSetModalContext();
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`);
@@ -38,19 +42,23 @@ const Comment = (props) => {
     } catch (err) {
       console.log(err);
     }
+    handleClose();
   };
   const popover = (
-    <Popover id="popover-basic">
+    <PopOver id="popover-basic">
       <Popover.Content>
         <ActionButton onClick={() => setShowEditForm(true)}>
           <i className="fas fa-edit"></i>
         </ActionButton>
         <VerticalDivider></VerticalDivider>
-        <ActionButton delete onClick={handleDelete}>
+        <ActionButton
+          delete
+          onClick={() => handleShow("comment", handleDelete)}
+        >
           <i className="fas fa-trash-alt"></i>
         </ActionButton>
       </Popover.Content>
-    </Popover>
+    </PopOver>
   );
   return (
     <>
@@ -75,6 +83,7 @@ const Comment = (props) => {
             <p>{content}</p>
           )}
         </MediaBody>
+        <ModalCustom handleDelete={handleDelete} deleteItem="comment" />
         {is_owner && !showEditForm && (
           <OverlayTrigger
             trigger="click"
