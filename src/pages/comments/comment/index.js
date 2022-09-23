@@ -17,6 +17,7 @@ import {
 } from "./styles";
 import ModalCustom from "../../../components/modal";
 import { useSetModalContext } from "../../../contexts/ModalContext";
+import { MoreDropdown, ThreeDots } from "../../../components/moreDropdown";
 
 const Comment = (props) => {
   const {
@@ -44,22 +45,6 @@ const Comment = (props) => {
     }
     handleClose();
   };
-  const popover = (
-    <PopOver id="popover-basic">
-      <Popover.Content>
-        <ActionButton onClick={() => setShowEditForm(true)}>
-          <i className="fas fa-edit"></i>
-        </ActionButton>
-        <VerticalDivider></VerticalDivider>
-        <ActionButton
-          delete
-          onClick={() => handleShow("comment", handleDelete)}
-        >
-          <i className="fas fa-trash-alt"></i>
-        </ActionButton>
-      </Popover.Content>
-    </PopOver>
-  );
   return (
     <>
       <Divider />
@@ -84,16 +69,20 @@ const Comment = (props) => {
           )}
         </MediaBody>
         {is_owner && !showEditForm && (
-          <OverlayTrigger
-            trigger="click"
-            rootClose
-            placement="left"
-            overlay={popover}
-          >
-            <MoreButton>
-              <i className="fas fa-ellipsis-v"></i>
-            </MoreButton>
-          </OverlayTrigger>
+          // <OverlayTrigger
+          //   trigger="click"
+          //   rootClose
+          //   placement="left"
+          //   overlay={popover}
+          // >
+          //   <MoreButton>
+          //     <i className="fas fa-ellipsis-v"></i>
+          //   </MoreButton>
+          // </OverlayTrigger>
+          <MoreDropdown
+            handleEdit={() => setShowEditForm(true)}
+            handleDelete={() => handleShow("comment", handleDelete)}
+          />
         )}
       </Media>
     </>

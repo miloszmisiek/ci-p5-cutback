@@ -112,7 +112,14 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 # **Credits**
 
 - Logo comes from [flaticon](https://www.flaticon.com/free-icon/surfboard_2045815?term=surfboard&page=1&position=1&page=1&position=1&related_id=2045815&origin=tag).
-- SingUpForm component's submit, change and error handlers comes from [Code Institute](https://codeinstitute.net/global/) Walkthrough **Moments** project.
+- Elements inspired or copied from [Code Institute](https://codeinstitute.net/global/) Walkthrough **Moments** project by Adam Lapinski:
+  - SingUpForm component's submit, change and error handlers,
+  - MoreDropdown component structure,
+  - Comment, CommentEditForm and CommentCreateForm components elements,
+  - Avatar component structure,
+  - Asset component structure,
+  - CurrentUserContext structure,
+
 - Function `checkIfEmailInString` copied from [Stack Overflow](https://stackoverflow.com/questions/16424659/check-if-a-string-contains-an-email-address).
 
 # **Acknowledgments**
