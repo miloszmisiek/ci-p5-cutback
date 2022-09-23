@@ -1,4 +1,4 @@
-import { Media } from "react-bootstrap";
+import { Button, Media } from "react-bootstrap";
 import styled from "styled-components";
 
 export const MediaBody = styled(Media.Body)`
@@ -24,4 +24,22 @@ export const UpdatedAtSpan = styled.span`
 export const Divider = styled.hr`
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+`;
+
+export const MoreButton = styled(Button)`
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+
+  &:active,
+  :focus,
+  :hover {
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+  }
 `;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Media } from "react-bootstrap";
+import { Button, Media, OverlayTrigger, Popover } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Avatar from "../../../components/avatar/index";
@@ -8,6 +8,7 @@ import {
   Divider,
   InfoContainer,
   MediaBody,
+  MoreButton,
   OwnerSpan,
   UpdatedAtSpan,
 } from "./styles";
@@ -36,6 +37,14 @@ const Comment = (props) => {
       console.log(err);
     }
   };
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Content>
+        <button onClick={() => setShowEditForm(true)}>Edit</button>
+        <button onClick={handleDelete}>Delete</button>
+      </Popover.Content>
+    </Popover>
+  );
   return (
     <>
       <Divider />
@@ -58,10 +67,11 @@ const Comment = (props) => {
           ) : (
             <p>{content}</p>
           )}
-          <button onClick={handleDelete}>Delete</button>
         </MediaBody>
         {is_owner && !showEditForm && (
-          <button onClick={() => setShowEditForm(true)}>Edit</button>
+          <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
+            <MoreButton><i className="fas fa-ellipsis-v"></i></MoreButton>
+          </OverlayTrigger>
         )}
       </Media>
     </>
