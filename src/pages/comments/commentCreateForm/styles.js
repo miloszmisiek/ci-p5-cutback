@@ -35,8 +35,14 @@ export const PostButton = styled(Button)`
   border: none;
   color: black;
   font-weight: 600;
-  &:hover {
+  
+  &:active,
+  :focus,
+  :hover {
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
     background-color: rgba(180, 193, 185, 1) !important;
-    color: black;
+    color: black !important;
   }
 `;

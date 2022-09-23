@@ -5,12 +5,14 @@ import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Avatar from "../../../components/avatar/index";
 import CommentEditForm from "../commentEditForm";
 import {
+  ActionButton,
   Divider,
   InfoContainer,
   MediaBody,
   MoreButton,
   OwnerSpan,
   UpdatedAtSpan,
+  VerticalDivider,
 } from "./styles";
 
 const Comment = (props) => {
@@ -40,8 +42,13 @@ const Comment = (props) => {
   const popover = (
     <Popover id="popover-basic">
       <Popover.Content>
-        <button onClick={() => setShowEditForm(true)}>Edit</button>
-        <button onClick={handleDelete}>Delete</button>
+        <ActionButton onClick={() => setShowEditForm(true)}>
+          <i className="fas fa-edit"></i>
+        </ActionButton>
+        <VerticalDivider></VerticalDivider>
+        <ActionButton delete onClick={handleDelete}>
+          <i className="fas fa-trash-alt"></i>
+        </ActionButton>
       </Popover.Content>
     </Popover>
   );
@@ -69,8 +76,15 @@ const Comment = (props) => {
           )}
         </MediaBody>
         {is_owner && !showEditForm && (
-          <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
-            <MoreButton><i className="fas fa-ellipsis-v"></i></MoreButton>
+          <OverlayTrigger
+            trigger="click"
+            rootClose
+            placement="left"
+            overlay={popover}
+          >
+            <MoreButton>
+              <i className="fas fa-ellipsis-v"></i>
+            </MoreButton>
           </OverlayTrigger>
         )}
       </Media>
