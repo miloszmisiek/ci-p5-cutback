@@ -5,12 +5,17 @@ import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import Avatar from "../../../components/avatar";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
+import { AvgScore, RatingComponent } from "../../products/productCard/styles";
 import ProductsPage from "../../products/productsPage";
+import StarRatings from "react-star-ratings";
 import {
   ProfileData,
   ProfileInfoContainer,
   ProfileName,
   Stats,
+  StatsContainer,
+  StatsTitle,
+  StatsValues,
 } from "./styles";
 
 const ProfilePage = () => {
@@ -38,14 +43,37 @@ const ProfilePage = () => {
         <>
           <Row>
             <ProfileInfoContainer>
-              <Avatar src={profileData.image} height={150} />
+              <Avatar src={profileData.image} height={120} />
               <ProfileData>
                 <ProfileName>{profileData.owner}</ProfileName>
-                <Stats>
-                  <span>{}</span>
-                  <span></span>
-                  <span></span>
-                </Stats>
+                <StatsContainer>
+                  <Stats>
+                    <StatsTitle>Products</StatsTitle>
+                    <StatsValues>{profileData.products_count}</StatsValues>
+                  </Stats>
+                  <Stats>
+                    <StatsTitle>Avg Rating</StatsTitle>
+                    <RatingComponent>
+                      <AvgScore>
+                        {parseFloat(profileData.avg_score).toFixed(1)}
+                      </AvgScore>
+                      <StarRatings
+                        rating={profileData.avg_score}
+                        numberOfStars={Math.ceil(
+                          parseFloat(profileData.avg_score)
+                        )}
+                        starDimension="20px"
+                        starSpacing="2px"
+                        starEmptyColor="rgb(180,211,178)"
+                        starRatedColor="green"
+                      />
+                    </RatingComponent>
+                  </Stats>
+                  <Stats>
+                    <StatsTitle>All Ratings</StatsTitle>
+                    <StatsValues>{profileData.all_scores}</StatsValues>
+                  </Stats>
+                </StatsContainer>
               </ProfileData>
             </ProfileInfoContainer>
           </Row>

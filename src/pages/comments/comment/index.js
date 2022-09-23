@@ -1,23 +1,18 @@
 import React, { useState } from "react";
-import { Button, Media, OverlayTrigger, Popover } from "react-bootstrap";
+import { Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
+import { axiosRes } from "../../../api/axiosDefaults";
 import Avatar from "../../../components/avatar/index";
 import CommentEditForm from "../commentEditForm";
 import {
-  ActionButton,
   Divider,
   InfoContainer,
   MediaBody,
-  MoreButton,
   OwnerSpan,
   UpdatedAtSpan,
-  VerticalDivider,
-  PopOver,
 } from "./styles";
-import ModalCustom from "../../../components/modal";
 import { useSetModalContext } from "../../../contexts/ModalContext";
-import { MoreDropdown, ThreeDots } from "../../../components/moreDropdown";
+import { MoreDropdown} from "../../../components/moreDropdown";
 
 const Comment = (props) => {
   const {
@@ -69,16 +64,6 @@ const Comment = (props) => {
           )}
         </MediaBody>
         {is_owner && !showEditForm && (
-          // <OverlayTrigger
-          //   trigger="click"
-          //   rootClose
-          //   placement="left"
-          //   overlay={popover}
-          // >
-          //   <MoreButton>
-          //     <i className="fas fa-ellipsis-v"></i>
-          //   </MoreButton>
-          // </OverlayTrigger>
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
             handleDelete={() => handleShow("comment", handleDelete)}
