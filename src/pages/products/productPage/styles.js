@@ -101,7 +101,9 @@ export const RatingsWrapper = styled.div`
   padding: 1rem;
 `;
 
-export const CommentContainer = styled(RatingsWrapper)``;
+export const CommentContainer = styled(RatingsWrapper)`
+  color: rgba(0, 0, 0, 0.6);
+`;
 
 export const ProductAvgScore = styled(AvgScore)`
   margin-right: 0.8rem;

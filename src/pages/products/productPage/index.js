@@ -312,7 +312,7 @@ const ProductPage = ({ itemsPerPage }) => {
       )}
       {ratingProductPage}
       <CommentContainer>
-        {currentUser && (
+        {currentUser ? (
           <CommentCreateForm
             productData={productData}
             comments={comments}
@@ -320,8 +320,10 @@ const ProductPage = ({ itemsPerPage }) => {
             setComments={setComments}
             // setPageCount={setPageCount}
           />
-        )}
-        {!!comments.results?.length &&
+        ) : !!comments.results?.length ? (
+          "Comments"
+        ) : null}
+        {!!comments.results?.length ? (
           comments.results?.map((comment) => (
             <Comment
               key={comment.id}
@@ -329,7 +331,12 @@ const ProductPage = ({ itemsPerPage }) => {
               setComments={setComments}
               {...comment}
             />
-          ))}
+          ))
+        ) : currentUser ? (
+          <span>No comments yet, be the first to comment!</span>
+        ) : (
+          <span>No comments... yet</span>
+        )}
         <ReactPaginateStyled
           nextLabel={<i className="fas fa-chevron-right"></i>}
           onPageChange={handlePageClick}

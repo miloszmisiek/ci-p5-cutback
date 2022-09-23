@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { axiosRes } from "../../../api/axiosDefaults";
+import { ActionButton, ActionButtonContainer } from "./styles";
 
 const CommentEditForm = ({ id, content, setShowEditForm, setComments }) => {
   const [formContent, setFormContent] = useState(content);
@@ -43,14 +44,14 @@ const CommentEditForm = ({ id, content, setShowEditForm, setComments }) => {
           rows={2}
         />
       </Form.Group>
-      <div className="text-right">
-        <button onClick={() => setShowEditForm(false)} type="button">
-          cancel
-        </button>
-        <button disabled={!content.trim()} type="submit">
-          save
-        </button>
-      </div>
+      <ActionButtonContainer>
+        <ActionButton save disabled={!content.trim()} type="submit">
+          <i className="fas fa-save"></i> Save
+        </ActionButton>
+        <ActionButton onClick={() => setShowEditForm(false)} type="button">
+          Cancel
+        </ActionButton>
+      </ActionButtonContainer>
     </Form>
   );
 };

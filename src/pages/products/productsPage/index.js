@@ -11,11 +11,14 @@ const ProductsPage = ({ filter = "", message }) => {
   const [results, setResults] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
+  const [inStock, setInStock] = useState("");
 
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const { data } = await axiosReq.get(`/products/?${filter}`);
+        const { data } = await axiosReq.get(
+          `/products/?in_stock=${inStock}&${filter}`
+        );
         setResults(data);
         setPageCount(
           !!data.next ? Math.ceil(data?.count / data?.results?.length) : 0
@@ -30,7 +33,9 @@ const ProductsPage = ({ filter = "", message }) => {
 
   const handlePageClick = async (e) => {
     try {
-      const { data } = await axiosReq.get(`/products/?page=${e.selected + 1}`);
+      const { data } = await axiosReq.get(
+        `/products/?page=${e.selected + 1}&in_stock=${inStock}&${filter}`
+      );
       setResults(data);
     } catch (err) {
       console.log(err);
