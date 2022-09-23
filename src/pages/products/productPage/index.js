@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { NavLink, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import { FullRow } from "../../auth/signUpForm/styles";
@@ -29,10 +29,8 @@ import Comment from "../../comments/comment";
 import Asset from "../../../components/asset/index";
 import { ReactPaginateStyled } from "../productsPage/styles";
 import Message from "../../../components/Alert";
-import {
-  useAlertContext,
-  useSetAlertContext,
-} from "../../../contexts/AlertContext";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
+import ModalCustom from "../../../components/modal";
 
 const ProductPage = ({ itemsPerPage }) => {
   const { id } = useParams();
@@ -72,12 +70,7 @@ const ProductPage = ({ itemsPerPage }) => {
   const [pageCount, setPageCount] = useState(0);
 
   const { handleShowAlert } = useSetAlertContext();
-  // const [showAlert, setShowAlert] = useState(false);
-  // const [alertData, setAlertData] = useState({
-  //   alertVariant: "",
-  //   alertMessage: "",
-  // });
-  // const { alertVariant, alertMessage } = alertData;
+
   const { rating_data, avg, currentUserRating, scores } = rating;
   const { profile_id, owner, email, first_name, last_name, phone_number } =
     profile;
@@ -178,10 +171,6 @@ const ProductPage = ({ itemsPerPage }) => {
       console.log(err);
     }
     setRating({ ...rating, currentUserRating: newRating });
-    // setAlertData({
-    //   alertVariant: "success",
-    //   alertMessage: "Your vote has been registered!",
-    // });
     handleShowAlert("success", "Your vote has been registered!");
   };
 
@@ -196,11 +185,6 @@ const ProductPage = ({ itemsPerPage }) => {
       console.log(err);
     }
     setRating({ ...rating, currentUserRating: newRating });
-    // setAlertData({
-    //   alertVariant: "secondary",
-    //   alertMessage: "Your vote has been updated.",
-    // });
-    // setShowAlert(true);
     handleShowAlert("secondary", "Your vote has been updated.");
   };
   const handlePageClick = async (e) => {
@@ -406,6 +390,7 @@ const ProductPage = ({ itemsPerPage }) => {
       {hasLoaded ? (
         <>
           <Message />
+          <ModalCustom />
           <FullRow>
             {productPageTest}
             {carouselProductPage}

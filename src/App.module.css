@@ -12,7 +12,7 @@ a:hover {
 }
 div {
   cursor: default;
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 
 ul {

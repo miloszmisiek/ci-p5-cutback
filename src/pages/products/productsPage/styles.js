@@ -1,6 +1,13 @@
 import ReactPaginate from "react-paginate";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Row } from "react-bootstrap";
 import styled from "styled-components";
+
+export const ProductsPageRow = styled(Row)`
+  min-height: ${(props) =>
+    props.heightCorrection
+      ? `calc(100vh - ${props.heightCorrection})`
+      : "calc(100vh - 309px)"};
+`;
 
 export const CarouselImg = styled.img`
   display: block;

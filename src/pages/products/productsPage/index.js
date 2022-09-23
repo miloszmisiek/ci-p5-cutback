@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import ProductCard from "../productCard";
-import { ReactPaginateStyled } from "./styles";
-import ReactPaginate from "react-paginate";
-import { fetchMoreData } from "../../../utils/utils";
+import { ProductsPageRow, ReactPaginateStyled } from "./styles";
 
-const ProductsPage = ({ filter = "", message }) => {
+const ProductsPage = ({ filter = "", message, heightCorrection }) => {
   const [results, setResults] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
@@ -46,11 +43,11 @@ const ProductsPage = ({ filter = "", message }) => {
     <>
       {hasLoaded ? (
         <>
-          <Row>
+          <ProductsPageRow heightCorrection={heightCorrection}>
             {results?.results.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
-          </Row>
+          </ProductsPageRow>
           <ReactPaginateStyled
             nextLabel={<i className="fas fa-chevron-right"></i>}
             onPageChange={handlePageClick}

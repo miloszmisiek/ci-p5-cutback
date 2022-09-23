@@ -95,5 +95,5 @@ export const VerticalDivider = styled.div`
 
 export const PopOver = styled(Popover)`
   z-index: 1040 !important;
-  margin-right: 0.5rem !important;
+  /* margin-right: 0.5rem !important; */
 `;

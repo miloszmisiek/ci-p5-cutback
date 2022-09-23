@@ -83,7 +83,6 @@ const Comment = (props) => {
             <p>{content}</p>
           )}
         </MediaBody>
-        <ModalCustom handleDelete={handleDelete} deleteItem="comment" />
         {is_owner && !showEditForm && (
           <OverlayTrigger
             trigger="click"

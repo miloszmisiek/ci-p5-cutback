@@ -388,7 +388,7 @@ const ProductEditForm = () => {
         <AddProductButton variant="primary" type="submit">
           <i className="fas fa-save"></i> Save
         </AddProductButton>
-        <ModalCustom handleDelete={handleProductDelete} deleteItem="product" />
+
         <ProductDeleteButton
           onClick={() => handleShow("product", handleProductDelete)}
         >
@@ -399,19 +399,22 @@ const ProductEditForm = () => {
   );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <ProductGallery
-          gallery={images}
-          setGallery={setImages}
-          errors={errors}
-          setErrors={setErrors}
-          deletedImages={deletedImages}
-          setDeletedImages={setDeletedImages}
-        />
-        {productFields}
-      </Row>
-    </Form>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <ModalCustom handleDelete={handleProductDelete} deleteItem="product" />
+        <Row>
+          <ProductGallery
+            gallery={images}
+            setGallery={setImages}
+            errors={errors}
+            setErrors={setErrors}
+            deletedImages={deletedImages}
+            setDeletedImages={setDeletedImages}
+          />
+          {productFields}
+        </Row>
+      </Form>
+    </>
   );
 };
 
