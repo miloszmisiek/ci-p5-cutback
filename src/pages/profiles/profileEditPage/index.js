@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Button, Col, Form, Row } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Alert,
+  Button,
+  Col,
+  Form,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
 import { Prev } from "react-bootstrap/esm/PageItem";
 import { useHistory, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import Avatar from "../../../components/avatar";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../../../contexts/CurrentUserContext";
 import { PostButton } from "../../comments/commentCreateForm/styles";
 import {
   ActionButton,
   ActionButtonContainer,
 } from "../../comments/commentEditForm/styles";
 import {
+  AvatarContainer,
+  AvatarFigure,
   CancelButton,
+  EditPicture,
+  EmailAddress,
+  EmailDescritpion,
   PersonalInfo,
   PhoneInputCustom,
   ProfileButton,
   SaveButton,
+  ToolTip,
 } from "./styles";
 // import "react-phone-number-input/style.css";
 // import PhoneInput from "react-phone-number-input";
@@ -24,38 +42,51 @@ const ProfileEditPage = () => {
   const { id } = useParams();
   const [phoneNo, setPhoneNo] = useState("");
   const [country, setCountry] = useState("");
+  const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
   const [profileData, setProfileData] = useState({
     owner: "",
+    username: "",
     first_name: "",
     last_name: "",
     email: "",
+    image: "",
   });
   const [errors, setErrors] = useState({});
-  const { owner, first_name, last_name, email, phone_number } = profileData;
+  const { owner, username, first_name, last_name, email, image } = profileData;
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const history = useHistory();
+  const imageFile = useRef();
 
   useEffect(() => {
     const handleMount = async () => {
-      try {
-        const { data } = await axiosReq.get(`/profiles/${id}`);
-        const { owner, first_name, last_name, email, phone_number } = data;
-
-        setProfileData((prev) => ({
-          ...prev,
-          owner: owner,
-          first_name: first_name,
-          last_name: last_name,
-          email: email,
-        }));
-        setPhoneNo(phone_number);
-        setHasLoaded(true);
-      } catch (err) {
-        console.log(err);
+      if (currentUser?.profile_id?.toString() === id) {
+        try {
+          const { data } = await axiosReq.get(`/profiles/${id}`);
+          const { owner, first_name, last_name, email, phone_number, image } =
+            data;
+          setProfileData((prev) => ({
+            ...prev,
+            owner: owner,
+            username: currentUser.username,
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            image: image,
+          }));
+          setPhoneNo(phone_number);
+          setHasLoaded(true);
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        console.log("go back useeffect");
+        history.goBack();
       }
     };
     handleMount();
-  }, [id]);
+  }, [currentUser, history, id]);
 
   const handleChange = (e) => {
     setProfileData({
@@ -66,15 +97,25 @@ const ProfileEditPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(profileData, phoneNo, country);
+    // console.log(profileData, phoneNo, country);
     const profileFormData = new FormData();
-    for (const property in profileData) {
-      profileFormData.append(`${property}`, profileData[property]);
-    }
+    profileFormData.append("first_name", first_name);
+    profileFormData.append("last_name", last_name);
     profileFormData.append("phone_number", phoneNo);
+
+    if (imageFile?.current?.files[0]) {
+      profileFormData.append("image", imageFile?.current?.files[0]);
+    }
     try {
-      await axiosRes.put(`/profiles/${id}/`, profileFormData);
-      history.push(`/profiles/${id}/products`);
+      const { data } = await axiosRes.put(`/profiles/${id}/`, profileFormData);
+      username !== currentUser.username &&
+        (await axiosRes.put("/dj-rest-auth/user/", { username }));
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        username,
+        profile_image: data.image,
+      }));
+      history.goBack();
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
@@ -82,14 +123,97 @@ const ProfileEditPage = () => {
       // console.log(err);
     }
   };
+
   return (
     <>
       {hasLoaded ? (
         <Row>
+          <Col xs={12} md={{ span: 6, order: "last" }}>
+            <AvatarContainer>
+              <Form.Group>
+                <div>
+                  <Form.Label htmlFor="image-upload">
+                    <OverlayTrigger
+                      placement="bottom"
+                      overlay={
+                        <ToolTip id={`tooltip-top`}>Change your avatar</ToolTip>
+                      }
+                    >
+                      <AvatarFigure>
+                        <Avatar shadow={true} src={image} height={200} />
+                      </AvatarFigure>
+                    </OverlayTrigger>
+                  </Form.Label>
+                </div>
+                <Form.File
+                  className="d-none"
+                  id="image-upload"
+                  ref={imageFile}
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files.length) {
+                      setProfileData({
+                        ...profileData,
+                        image: URL.createObjectURL(e.target.files[0]),
+                      });
+                    }
+                    setDisabled(false);
+                  }}
+                />
+              </Form.Group>
+              {errors?.image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+              {/* <Avatar shadow={true} src={image} height={200} /> */}
+              {/* <EditPicture edit="true"><i className="fas fa-pen pr-2"></i> Edit</EditPicture> */}
+            </AvatarContainer>
+          </Col>
           <Col xs={12} md={6}>
             <Form onSubmit={handleSubmit}>
               <PersonalInfo>Personal Information</PersonalInfo>
               <hr />
+              <EmailAddress>
+                <EmailDescritpion>Email address:</EmailDescritpion>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={
+                    <ToolTip id={`tooltip-top`}>
+                      You can't edit your email address for user verification
+                      reason.
+                    </ToolTip>
+                  }
+                >
+                  <span>{email}</span>
+                </OverlayTrigger>
+              </EmailAddress>
+              {/* <Form.Group controlId="formEmail">
+                <Form.Label className="d-none">Email</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                />
+              </Form.Group> */}
+              <Form.Group controlId="formUsername">
+                <Form.Label className="d-none">Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  value={username ? username : ""}
+                  onChange={handleChange}
+                  disabled={disabled}
+                />
+              </Form.Group>
+              {errors.username?.map((message, idx) => (
+                <Alert className="ml-auto" variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
               <Form.Group controlId="formFirstName">
                 <Form.Label className="d-none">First Name</Form.Label>
                 <Form.Control
@@ -98,8 +222,14 @@ const ProfileEditPage = () => {
                   name="first_name"
                   value={first_name}
                   onChange={handleChange}
+                  disabled={disabled}
                 />
               </Form.Group>
+              {errors.first_name?.map((message, idx) => (
+                <Alert className="ml-auto" variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
               <Form.Group controlId="formLasttName">
                 <Form.Label className="d-none">Last Name</Form.Label>
                 <Form.Control
@@ -108,18 +238,14 @@ const ProfileEditPage = () => {
                   name="last_name"
                   value={last_name}
                   onChange={handleChange}
+                  disabled={disabled}
                 />
               </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label className="d-none">Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Email address"
-                  name="email"
-                  value={email}
-                  onChange={handleChange}
-                />
-              </Form.Group>
+              {errors.last_name?.map((message, idx) => (
+                <Alert className="ml-auto" variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
               <Form.Group controlId="formPhoneNumber">
                 <PhoneInputCustom
                   placeholder="Phone No."
@@ -127,6 +253,7 @@ const ProfileEditPage = () => {
                   onChange={setPhoneNo}
                   onCountryChange={setCountry}
                   limitMaxLength={true}
+                  disabled={disabled}
                 />
               </Form.Group>
               {errors.phone_number?.map((message, idx) => (
@@ -135,13 +262,31 @@ const ProfileEditPage = () => {
                 </Alert>
               ))}
               <ActionButtonContainer>
-                <ProfileButton variant="primary" type="submit">
-                  Save
-                </ProfileButton>
-                <CancelButton onClick={() => history.goBack()}>
-                  Cancel
-                </CancelButton>
+                {disabled ? (
+                  <ProfileButton
+                    edit="true"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setDisabled(false);
+                    }}
+                  >
+                    Edit
+                  </ProfileButton>
+                ) : (
+                  <>
+                    <ProfileButton type="submit">Save</ProfileButton>
+                    <CancelButton
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setDisabled(true);
+                      }}
+                    >
+                      Cancel
+                    </CancelButton>
+                  </>
+                )}
               </ActionButtonContainer>
+
               <PersonalInfo delete="true">Delete Account</PersonalInfo>
               <hr />
               <Form.Text>
@@ -151,7 +296,6 @@ const ProfileEditPage = () => {
               <ProfileButton delete="true">Delete</ProfileButton>
             </Form>
           </Col>
-          <Col xs={12} md={6}></Col>
         </Row>
       ) : (
         <Asset spinner />
