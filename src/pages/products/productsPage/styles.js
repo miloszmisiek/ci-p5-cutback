@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const ProductsPageRow = styled(Row)`
   min-height: ${(props) =>
     props.heightCorrection
-      ? `calc(100vh - ${props.heightCorrection})`
+      ? `calc(100vh - ${props.heightcorrection})`
       : "calc(100vh - 309px)"};
 `;
 

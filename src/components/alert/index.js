@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
-import { useAlertContext, useSetAlertContext } from "../contexts/AlertContext";
+import { useAlertContext, useSetAlertContext } from "../../contexts/AlertContext";
+import { AlertCustom } from "./styles";
 
 const Message = () => {
   const showAlert = useAlertContext();
@@ -23,7 +24,11 @@ const Message = () => {
   }
 
   // If show is true this will be returned
-  return <Alert variant={variant}>{children}</Alert>;
+  return (
+    <AlertCustom variant={variant}>
+      {children}
+    </AlertCustom>
+  );
 };
 
 export default Message;

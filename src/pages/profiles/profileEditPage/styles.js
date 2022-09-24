@@ -3,7 +3,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { PostButton } from "../../comments/commentCreateForm/styles";
 import { ActionButton } from "../../comments/commentEditForm/styles";
-import { Tooltip } from "react-bootstrap";
+import { Form, Row, Tooltip } from "react-bootstrap";
 
 export const PersonalInfo = styled.div`
   padding: 1rem 1rem 0;
@@ -23,6 +23,12 @@ export const PhoneInputCustom = styled(PhoneInput)`
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
   }
+
+  /* @media (max-width: 767px) {
+    .PhoneInputInput {
+      text-align: center;
+    }
+  } */
 `;
 
 export const ProfileButton = styled(PostButton)`
@@ -34,7 +40,7 @@ export const ProfileButton = styled(PostButton)`
       : props.edit
       ? "rgba(0,0,0,0.2) !important"
       : "inherit"};
-  margin-top: ${(props) => (props.delete ? "1rem" : null)};
+  margin: ${(props) => (props.delete ? "1rem 0" : null)};
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 
   &:hover {
@@ -46,6 +52,10 @@ export const ProfileButton = styled(PostButton)`
         : "inherit"};
 
     color: ${(props) => (props.delete ? "white !important" : "inherit")};
+  }
+
+  @media (max-width: 767px) {
+    margin: ${(props) => (props.delete ? "1rem auto" : "inherit")};
   }
 `;
 
@@ -89,4 +99,16 @@ export const AvatarFigure = styled.figure`
 
 export const ToolTip = styled(Tooltip)`
   font-size: 0.7rem;
+`;
+
+export const RowCustom = styled(Row)`
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+`;
+
+export const FormControl = styled(Form.Control)`
+  /* @media (max-width: 767px) {
+    text-align: center;
+  } */
 `;

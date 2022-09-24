@@ -9,6 +9,7 @@ import { AvgScore, RatingComponent } from "../../products/productCard/styles";
 import ProductsPage from "../../products/productsPage";
 import StarRatings from "react-star-ratings";
 import {
+  AvatarContainer,
   ProfileData,
   ProfileInfoContainer,
   ProfileName,
@@ -43,9 +44,11 @@ const ProfilePage = () => {
         <>
           <Row>
             <ProfileInfoContainer>
-              <Link to={`/profiles/${id}/edit`}>
-                <Avatar shadow={true} src={profileData.image} height={120} />
-              </Link>
+              <AvatarContainer>
+                <Link to={`/profiles/${id}/edit`}>
+                  <Avatar shadow={true} src={profileData.image} height={120} />
+                </Link>
+              </AvatarContainer>
               <ProfileData>
                 <ProfileName>{profileData.owner}</ProfileName>
                 <StatsContainer>
@@ -82,7 +85,7 @@ const ProfilePage = () => {
           <hr />
           <ProductsPage
             filter={`owner__profile=${id}`}
-            heightCorrection={"370px"}
+            heightcorrection={"370px"}
           />{" "}
         </>
       ) : (

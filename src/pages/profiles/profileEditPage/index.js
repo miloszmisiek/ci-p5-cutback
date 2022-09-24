@@ -1,38 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Alert,
-  Button,
   Col,
   Form,
   OverlayTrigger,
-  Row,
-  Tooltip,
 } from "react-bootstrap";
-import { Prev } from "react-bootstrap/esm/PageItem";
 import { useHistory, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import Avatar from "../../../components/avatar";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../../../contexts/CurrentUserContext";
-import { PostButton } from "../../comments/commentCreateForm/styles";
+import { useSetModalContext } from "../../../contexts/ModalContext";
 import {
-  ActionButton,
   ActionButtonContainer,
 } from "../../comments/commentEditForm/styles";
 import {
   AvatarContainer,
   AvatarFigure,
   CancelButton,
-  EditPicture,
   EmailAddress,
   EmailDescritpion,
+  FormControl,
   PersonalInfo,
   PhoneInputCustom,
   ProfileButton,
-  SaveButton,
+  RowCustom,
   ToolTip,
 } from "./styles";
 // import "react-phone-number-input/style.css";
@@ -58,6 +54,8 @@ const ProfileEditPage = () => {
   const [disabled, setDisabled] = useState(true);
   const history = useHistory();
   const imageFile = useRef();
+  const { handleClose, handleShow } = useSetModalContext();
+  const { handleShowAlert } = useSetAlertContext();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -94,6 +92,15 @@ const ProfileEditPage = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/profiles/${id}/`);
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+    handleClose();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,6 +122,7 @@ const ProfileEditPage = () => {
         username,
         profile_image: data.image,
       }));
+      handleShowAlert("success", "Your profile has been updated!");
       history.goBack();
     } catch (err) {
       if (err.response?.status !== 401) {
@@ -127,7 +135,8 @@ const ProfileEditPage = () => {
   return (
     <>
       {hasLoaded ? (
-        <Row>
+        <RowCustom>
+          {/* <ModalCustom /> */}
           <Col xs={12} md={{ span: 6, order: "last" }}>
             <AvatarContainer>
               <Form.Group>
@@ -166,8 +175,6 @@ const ProfileEditPage = () => {
                   {message}
                 </Alert>
               ))}
-              {/* <Avatar shadow={true} src={image} height={200} /> */}
-              {/* <EditPicture edit="true"><i className="fas fa-pen pr-2"></i> Edit</EditPicture> */}
             </AvatarContainer>
           </Col>
           <Col xs={12} md={6}>
@@ -188,19 +195,9 @@ const ProfileEditPage = () => {
                   <span>{email}</span>
                 </OverlayTrigger>
               </EmailAddress>
-              {/* <Form.Group controlId="formEmail">
-                <Form.Label className="d-none">Email</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Email"
-                  name="email"
-                  value={email}
-                  onChange={handleChange}
-                />
-              </Form.Group> */}
               <Form.Group controlId="formUsername">
                 <Form.Label className="d-none">Username</Form.Label>
-                <Form.Control
+                <FormControl
                   type="text"
                   placeholder="Username"
                   name="username"
@@ -216,7 +213,7 @@ const ProfileEditPage = () => {
               ))}
               <Form.Group controlId="formFirstName">
                 <Form.Label className="d-none">First Name</Form.Label>
-                <Form.Control
+                <FormControl
                   type="text"
                   placeholder="First Name"
                   name="first_name"
@@ -232,7 +229,7 @@ const ProfileEditPage = () => {
               ))}
               <Form.Group controlId="formLasttName">
                 <Form.Label className="d-none">Last Name</Form.Label>
-                <Form.Control
+                <FormControl
                   type="text"
                   placeholder="Last Name"
                   name="last_name"
@@ -293,10 +290,15 @@ const ProfileEditPage = () => {
                 Once you delete your account, you will loose all your data.
                 Please be certain.
               </Form.Text>
-              <ProfileButton delete="true">Delete</ProfileButton>
+              <ProfileButton
+                delete="true"
+                onClick={() => handleShow("account", handleDelete)}
+              >
+                Delete
+              </ProfileButton>
             </Form>
           </Col>
-        </Row>
+        </RowCustom>
       ) : (
         <Asset spinner />
       )}

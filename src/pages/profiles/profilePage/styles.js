@@ -6,8 +6,12 @@ export const ProfileInfoContainer = styled.div`
   justify-content: space-evenly;
   /* border: 1px solid black; */
   padding: 1rem;
-
+  gap: 1rem;
   align-items: center;
+
+  @media (max-width: 767px) {
+   flex-direction: column;
+  }
 `;
 
 export const ProfileData = styled.div`
@@ -15,6 +19,7 @@ export const ProfileData = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  gap: 1rem;
 `;
 
 export const ProfileName = styled.div`
@@ -38,6 +43,11 @@ export const StatsContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+  /* @media (max-width: 767px) {
+    flex-direction: column;
+  } */
 `;
 
 export const StatsTitle = styled.div`
@@ -48,4 +58,13 @@ export const StatsTitle = styled.div`
 export const StatsValues = styled.div`
   font-size: 1.1rem;
   /* font-weight: 500; */
+`;
+
+export const AvatarContainer = styled.div`
+  display: flex;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;

@@ -401,7 +401,7 @@ const ProductEditForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <ModalCustom handleDelete={handleProductDelete} deleteItem="product" />
+        {/* <ModalCustom handleDelete={handleProductDelete} deleteItem="product" /> */}
         <Row>
           <ProductGallery
             gallery={images}

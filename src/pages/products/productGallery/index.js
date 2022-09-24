@@ -13,10 +13,10 @@ import {
   Thumbnail,
   Thumbnails,
 } from "./styles";
-import Message from "../../../components/Alert";
 import { Alert, Form } from "react-bootstrap";
 import Asset from "../../../components/asset";
 import { useSetModalContext } from "../../../contexts/ModalContext";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 
 const ProductGallery = ({
   gallery,
@@ -31,6 +31,7 @@ const ProductGallery = ({
 
   // const showModal = useModalContext();
   const { handleClose, handleShow } = useSetModalContext();
+  const { handleShowAlert } = useSetAlertContext();
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
@@ -48,11 +49,13 @@ const ProductGallery = ({
   };
 
   const handleImageUpload = (e) => {
-    setGallery([
-      ...gallery,
-      { product: "", image: URL.createObjectURL(e.target.files[0]) },
-    ]);
-    setActiveIndex(gallery.length);
+    if (e.target.files[0]) {
+      setGallery([
+        ...gallery,
+        { product: "", image: URL.createObjectURL(e.target.files[0]) },
+      ]);
+      setActiveIndex(gallery.length);
+    }
   };
 
   const handleImageDelete = () => {
@@ -72,7 +75,7 @@ const ProductGallery = ({
       ...errors,
       [e.target.dataset.name]: e.target.dataset.message,
     });
-    setIsShown(!isShown);
+    handleShowAlert("warning", "Max. allowed images per product are 5");
   };
 
   return (
@@ -129,12 +132,12 @@ const ProductGallery = ({
         <ActionBody>
           <FormLabel htmlFor="image-upload">
             <AddImageButton
-              disabled={errors.imagePreview}
+              disabled={gallery.length >= 5}
               data-name="imagePreview"
               data-message={"Max. allowed images per product are 5"}
-              onClick={gallery.length === 5 ? handleError : undefined}
+              onClick={gallery.length >= 5 ? handleError : null}
             >
-              {errors.imagePreview ? (
+              {gallery.length >= 5 ? (
                 <i className="fas fa-times"></i>
               ) : (
                 <i className="fas fa-plus"></i>
@@ -159,14 +162,6 @@ const ProductGallery = ({
             </DeleteImageButton>
           )}
         </ActionBody>
-        {isShown && (
-          <Message
-            variant={"warning"}
-            children={errors.imagePreview}
-            isShown={isShown}
-            setIsShown={setIsShown}
-          />
-        )}
       </>
       {/* ) : (
          <Asset spinner />

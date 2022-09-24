@@ -28,9 +28,8 @@ import CommentCreateForm from "../../comments/commentCreateForm";
 import Comment from "../../comments/comment";
 import Asset from "../../../components/asset/index";
 import { ReactPaginateStyled } from "../productsPage/styles";
-import Message from "../../../components/Alert";
 import { useSetAlertContext } from "../../../contexts/AlertContext";
-import ModalCustom from "../../../components/modal";
+// import ModalCustom from "../../../components/modal";
 
 const ProductPage = ({ itemsPerPage }) => {
   const { id } = useParams();
@@ -389,8 +388,6 @@ const ProductPage = ({ itemsPerPage }) => {
     <>
       {hasLoaded ? (
         <>
-          <Message />
-          <ModalCustom />
           <FullRow>
             {productPageTest}
             {carouselProductPage}

@@ -4,7 +4,7 @@ import Asset from "../../../components/asset";
 import ProductCard from "../productCard";
 import { ProductsPageRow, ReactPaginateStyled } from "./styles";
 
-const ProductsPage = ({ filter = "", message, heightCorrection }) => {
+const ProductsPage = ({ filter = "", message, heightcorrection }) => {
   const [results, setResults] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
@@ -43,7 +43,7 @@ const ProductsPage = ({ filter = "", message, heightCorrection }) => {
     <>
       {hasLoaded ? (
         <>
-          <ProductsPageRow heightCorrection={heightCorrection}>
+          <ProductsPageRow heightcorrection={heightcorrection}>
             {results?.results.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
