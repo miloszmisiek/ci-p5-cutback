@@ -14,6 +14,7 @@ import ProductEditForm from "./pages/products/productEditForm";
 import { useCategories } from "./contexts/CategoriesContext";
 import ProductPage from "./pages/products/productPage";
 import ProfilePage from "./pages/profiles/profilePage";
+import ProfileEditPage from "./pages/profiles/profileEditPage";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -62,6 +63,11 @@ function App() {
         ) : null}
         <Container className={styles.Main_Container}>
           <Switch>
+            <Route
+              exact
+              path="/profiles/:id/edit"
+              render={() => <ProfileEditPage />}
+            />
             <Route
               exact
               path="/profiles/:id/products"

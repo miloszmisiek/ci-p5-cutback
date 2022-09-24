@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import Avatar from "../../../components/avatar";
@@ -43,7 +43,9 @@ const ProfilePage = () => {
         <>
           <Row>
             <ProfileInfoContainer>
-              <Avatar src={profileData.image} height={120} />
+              <Link to={`/profiles/${id}/edit`}>
+                <Avatar shadow={true} src={profileData.image} height={120} />
+              </Link>
               <ProfileData>
                 <ProfileName>{profileData.owner}</ProfileName>
                 <StatsContainer>
