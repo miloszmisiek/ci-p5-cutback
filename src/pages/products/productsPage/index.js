@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   ButtonGroup,
+  Col,
   Dropdown,
   DropdownButton,
   Form,
@@ -80,9 +81,17 @@ const ProductsPage = ({
                   {/* <FiltersDivide /> */}
                 </FiltersTitle>
                 <FiltersExpanded expanded={expanded}>
+                  <FilterInStock
+                    // onChange={onSwitchAction}
+                    name="in_stock"
+                    id="custom-switch"
+                    label="In Stock"
+                    // checked={in_stock}
+                    // value={in_stock}
+                  />
                   <FiltersCountry
                     as="select"
-                    // defaultValue={""}
+                    defaultValue={""}
                     // name="country"
                     // onChange={handleChange}
                   >
@@ -97,7 +106,7 @@ const ProductsPage = ({
                   </FiltersCountry>
                   <FiltersCountry
                     as="select"
-                    // defaultValue={""}
+                    defaultValue={""}
                     // name="country"
                     // onChange={handleChange}
                   >
@@ -110,14 +119,27 @@ const ProductsPage = ({
                       </option>
                     ))}
                   </FiltersCountry>
-                  <FilterInStock
-                    // onChange={onSwitchAction}
-                    name="in_stock"
-                    id="custom-switch"
-                    label="In Stock"
-                    // checked={in_stock}
-                    // value={in_stock}
-                  />
+                  <FiltersCountry
+                    as="select"
+                    defaultValue={""}
+                    // name="country"
+                    // onChange={handleChange}
+                  >
+                    <option disabled value={""}>
+                      Sort by:
+                    </option>
+                    <optgroup label={`Ascending \u25b2`}>
+                      <option value={"1"}>Price</option>
+                      <option value={"2"}>Title</option>
+                      <option value={"2"}>Date created</option>
+                      <option value={"3"}>Rating</option>
+                    </optgroup>
+                    <optgroup label={`Descending \u25bc`}>
+                      <option value={"1"}>Price</option>
+                      <option value={"2"}>Title</option>
+                      <option value={"3"}>Rating</option>
+                    </optgroup>
+                  </FiltersCountry>
                 </FiltersExpanded>
               </FilterContainer>
             </FiltersForm>
