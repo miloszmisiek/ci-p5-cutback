@@ -40,13 +40,23 @@ export const CarouselStyled = styled(Carousel)`
 `;
 
 export const FilterContainer = styled.div`
-  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   gap: 2.5rem;
   flex-wrap: wrap;
+  position: relative;
+  min-height: 3rem;
+  margin: 1rem 0;
+  @media (max-width: 767px) {
+    gap: 1.5rem;
+    min-height: 5.5rem;
+  }
+  @media (max-width: 495px) {
+    gap: 1.5rem;
+    min-height: 8.5rem;
+  }
 `;
 
 export const ReactPaginateStyled = styled(ReactPaginate)`
@@ -87,31 +97,48 @@ export const ReactPaginateStyled = styled(ReactPaginate)`
 
 export const FiltersRow = styled(Row)`
   display: ${(props) => (props.visible ? "flex" : "none")};
+  /* min-height: 3rem; */
 `;
 
 export const FiltersForm = styled(Form)`
   width: 100%;
+  /* margin: 1rem; */
 `;
 
 export const FiltersCountry = styled(Form.Control)`
   background: transparent !important;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  width: 100%;
+  /* width: 100%; */
   max-width: 10rem;
   padding: 0 0.5rem;
 `;
 
 export const FilterInStock = styled(FormSwitch)`
   width: auto;
+  margin-bottom: 0;
 `;
 
 export const FiltersTitle = styled.div`
   font-weight: 500;
   letter-spacing: 0.1rem;
+  position: absolute;
+  left: 3rem;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  max-width: 7rem;
+  padding: 0.375rem;
+  cursor: pointer;
+  /* padding: 0 1rem; */
   @media (max-width: 767px) {
+    position: static;
+    display: flex;
+    left: auto;
     width: 100%;
     text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -142,5 +169,29 @@ export const AddProductBtn = styled.div`
   &:hover {
     background-color: rgba(180, 193, 185, 1);
     border-color: rgba(180, 193, 185, 1);
+  }
+`;
+
+export const FiltersExpanded = styled.div`
+  opacity: ${(props) => (props.expanded ? "1" : "0")};
+  position: ${(props) => (props.expanded ? "static" : "absolute")};
+  z-index: ${(props) => (props.expanded ? "1" : "-1")};
+  -webkit-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  /* width: 100%; */
+  /* max-width: 80%; */
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin-left: auto;
+  max-width: 70%;
+
+  @media (max-width: 767px) {
+    gap: 1.5rem;
+    justify-content: space-around;
+    margin: auto;
+    max-width: auto;
   }
 `;

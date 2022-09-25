@@ -125,7 +125,7 @@ const NavBar = () => {
               </span>
             </StyledCategoriesDropdown>
             <Dropdown.Menu className="end-0">
-              {choices.categories.map((cat) => (
+              {choices.categories?.map((cat) => (
                 <CategoriesLinks key={cat.value} to={`/${cat.display_name}`}>
                   {cat.display_name}
                 </CategoriesLinks>

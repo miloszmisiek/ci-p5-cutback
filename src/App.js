@@ -87,7 +87,7 @@ function App() {
               path="/signin"
               render={() => <SignInForm setBackground={setBackground} />}
             />
-            {choices?.categories.map((cat) => (
+            {choices.categories?.map((cat) => (
               <Route
                 key={cat.value}
                 exact

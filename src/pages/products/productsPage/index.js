@@ -18,6 +18,7 @@ import {
   FilterInStock,
   FiltersCountry,
   FiltersDivide,
+  FiltersExpanded,
   FiltersForm,
   FiltersRow,
   FiltersTitle,
@@ -35,6 +36,7 @@ const ProductsPage = ({
   const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [inStock, setInStock] = useState("");
+  const [expanded, setExpanded] = useState(false);
   const choices = useCategories();
 
   useEffect(() => {
@@ -73,51 +75,54 @@ const ProductsPage = ({
           <FiltersRow visible={visible}>
             <FiltersForm>
               <FilterContainer>
-                <FiltersTitle>
-                  Filters <i className="fas fa-tools"></i>
-                  <FiltersDivide />
+                <FiltersTitle onClick={() => setExpanded((prev) => !prev)}>
+                  Filters <i className="fas fa-tools pl-2"></i>
+                  {/* <FiltersDivide /> */}
                 </FiltersTitle>
-                <FiltersCountry
-                  as="select"
-                  // defaultValue={""}
-                  // name="country"
-                  // onChange={handleChange}
-                >
-                  <option disabled value={""}>
-                    Countires
-                  </option>
-                  {choices.countries?.map((country, idx) => (
-                    <option key={idx} value={country.value}>
-                      {country.display_name}
+                <FiltersExpanded expanded={expanded}>
+                  <FiltersCountry
+                    as="select"
+                    // defaultValue={""}
+                    // name="country"
+                    // onChange={handleChange}
+                  >
+                    <option disabled value={""}>
+                      Countires
                     </option>
-                  ))}
-                </FiltersCountry>
-                <FiltersCountry
-                  as="select"
-                  // defaultValue={""}
-                  // name="country"
-                  // onChange={handleChange}
-                >
-                  <option disabled value={""}>
-                    Ratings
-                  </option>
-                  {choices.ratings?.map((rating, idx) => (
-                    <option key={idx} value={rating.value}>
-                      {rating.display_name}
+                    {choices.countries?.map((country, idx) => (
+                      <option key={idx} value={country.value}>
+                        {country.display_name}
+                      </option>
+                    ))}
+                  </FiltersCountry>
+                  <FiltersCountry
+                    as="select"
+                    // defaultValue={""}
+                    // name="country"
+                    // onChange={handleChange}
+                  >
+                    <option disabled value={""}>
+                      Ratings
                     </option>
-                  ))}
-                </FiltersCountry>
-                <FilterInStock
-                  // onChange={onSwitchAction}
-                  name="in_stock"
-                  id="custom-switch"
-                  label="In Stock"
-                  // checked={in_stock}
-                  // value={in_stock}
-                />
+                    {choices.ratings?.map((rating, idx) => (
+                      <option key={idx} value={rating.value}>
+                        {rating.display_name}
+                      </option>
+                    ))}
+                  </FiltersCountry>
+                  <FilterInStock
+                    // onChange={onSwitchAction}
+                    name="in_stock"
+                    id="custom-switch"
+                    label="In Stock"
+                    // checked={in_stock}
+                    // value={in_stock}
+                  />
+                </FiltersExpanded>
               </FilterContainer>
             </FiltersForm>
           </FiltersRow>
+          <FiltersDivide />
           <ProductsPageRow heightcorrection={heightcorrection}>
             {!!results?.results.length ? (
               results.results?.map((product) => (
