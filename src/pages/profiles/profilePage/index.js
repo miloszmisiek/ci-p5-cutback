@@ -50,9 +50,7 @@ const ProfilePage = () => {
             <Link to="/products/create">
               <OverlayTrigger
                 placement="bottom"
-                overlay={
-                  <ToolTip id={`tooltip-top`}>Add product</ToolTip>
-                }
+                overlay={<ToolTip id={`tooltip-top`}>Add product</ToolTip>}
               >
                 <AddProductBtn>
                   <i className="fas fa-plus"></i>
@@ -118,21 +116,22 @@ const ProfilePage = () => {
             </ProfileInfoContainer>
           </RowProfilePage>
           <ProfilePageDivider />
-          {!!profileData.products_count ? (
+          {!!profileData.products_count && (
             <ProductsPage
               filter={`owner__profile=${id}`}
               heightcorrection={"370px"}
               visible={null}
             />
-          ) : (
-            <Asset
-              src={
-                "https://res.cloudinary.com/milo-milo/image/upload/v1664049160/travolta_uxurth.png"
-              }
-              message="You have no products. There is nothing to show here..."
-              height={200}
-            />
           )}
+          {/* // : (
+          //   <Asset
+          //     src={
+          //       "https://res.cloudinary.com/milo-milo/image/upload/v1664049160/travolta_uxurth.png"
+          //     }
+          //     message="You have no products. There is nothing to show here..."
+          //     height={200}
+          //   />
+          // )} */}
         </>
       ) : (
         <Asset spinner />

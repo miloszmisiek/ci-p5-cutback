@@ -1,13 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Dropdown, Form, NavDropdown } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useCategories } from "../../contexts/CategoriesContext";
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
+import {
+  useQueryContext,
+  useSetQueryContext,
+} from "../../contexts/QueryContext";
 import { removeTokenTimestamp } from "../../utils/utils";
 import Avatar from "../avatar/index.js";
 import {
@@ -33,12 +37,25 @@ const NavBar = () => {
   const choices = useCategories();
   const [displayName, setDisplayName] = useState("Categories");
   const location = useLocation();
+  const { query } = useQueryContext();
+  const { setQuery, setHasLoaded } = useSetQueryContext();
+  const history = useHistory();
 
   useEffect(() => {
     !choices.categories?.some((cat) =>
       location.pathname.includes(cat.display_name.toLowerCase())
-    ) && setDisplayName("Categories");
-  }, [location]);
+    )
+      ? setDisplayName("Categories")
+      : setDisplayName(
+          choices.categories?.filter((cat) =>
+            location.pathname.includes(cat.display_name.toLowerCase())
+          )[0].display_name
+        );
+  }, [location, choices, query, history]);
+
+  // const handleChange = (e) => {
+  //   setQuery(e.target.value);
+  // };
 
   const handleSignOut = async () => {
     try {
@@ -79,6 +96,7 @@ const NavBar = () => {
         <StyledNavLink
           dropdownitem="true"
           to={`/profiles/${currentUser?.profile_id}/products`}
+          onClick={() => setHasLoaded(false)}
         >
           Your Equipment
         </StyledNavLink>
@@ -106,7 +124,12 @@ const NavBar = () => {
       lg={3}
     >
       <StyledLogo>
-        <NavLink to="/">
+        <NavLink
+          to="/"
+          onClick={() => {
+            setHasLoaded(false);
+          }}
+        >
           <img src={logo} alt="Logo" height="45"></img>
           <StyledLogoName>Cutback</StyledLogoName>
         </NavLink>
@@ -116,12 +139,18 @@ const NavBar = () => {
 
   const searchBarCol = (
     <StyledCol xs={12} md={6}>
-      <Form inline>
+      <Form inline onSubmit={(e) => e.preventDefault()}>
         <StyledSearchBarContainer>
           <StyledFormControl
             type="text"
             placeholder="&#xF002; Search"
             className="mr-sm-2"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              history.push("/");
+              setHasLoaded(false);
+            }}
           />
           <SearchBarDropdown>
             <StyledCategoriesDropdown id="dropdown-basic">
@@ -135,7 +164,10 @@ const NavBar = () => {
             <Dropdown.Menu className="end-0">
               {choices.categories?.map((cat) => (
                 <CategoriesLinks
-                  onClick={() => setDisplayName(cat.display_name)}
+                  onClick={() => {
+                    setDisplayName(cat.display_name);
+                    setHasLoaded(false);
+                  }}
                   key={cat.value}
                   to={`/products/categories/${cat.display_name.toLowerCase()}`}
                 >

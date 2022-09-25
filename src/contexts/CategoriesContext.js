@@ -9,29 +9,26 @@ export const CategoriesProvider = ({ children }) => {
   const [choices, setChoices] = useState({
     categories: [],
     countries: [],
-    rating: [],
+    currencies: [],
   });
-  const handleMount = async () => {
-    try {
-      const [{ data: products }, { data: ratings }] = await Promise.all([
-        axiosRes.options("/products/"),
-        axiosRes.options("/ratings/"),
-      ]);
 
-      const categories = products.actions?.POST.category.choices;
-      const countries = products.actions?.POST.country.choices;
-      const rating = ratings.actions?.POST.score.choices;
-      setChoices({
-        ...choices,
-        categories: categories,
-        countries: countries,
-        ratings: rating,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
   useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosRes.options("/products/");
+        const categories = data.actions?.POST.category.choices;
+        const countries = data.actions?.POST.country.choices;
+        const currencies = data.actions?.POST.price_currency.choices;
+        setChoices((prev) => ({
+          ...prev,
+          categories: categories,
+          countries: countries,
+          currencies: currencies,
+        }));
+      } catch (err) {
+        console.error(err);
+      }
+    };
     handleMount();
   }, []);
   return (

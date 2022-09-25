@@ -113,19 +113,19 @@ export const FiltersCountry = styled(Form.Control)`
   padding: 0 0.5rem;
   text-overflow: ellipsis;
 
-  optgroup {
+  optgroup,
+  option {
     text-align: center;
   }
-  option {
+  /* option {
     text-align: left;
-  }
+  } */
 `;
 
 export const FilterInStock = styled(FormSwitch)`
   margin-bottom: 0;
   width: 100%;
   max-width: 8rem;
-  
 `;
 
 export const FiltersTitle = styled.div`
@@ -202,4 +202,21 @@ export const FiltersExpanded = styled.div`
     margin: auto;
     max-width: auto;
   }
+`;
+
+export const FormGroup = styled(Form.Group)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  max-width: 8rem;
+  width: 100%;
+`;
+
+export const FormLabel = styled(Form.Label)`
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
 `;

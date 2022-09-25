@@ -10,6 +10,10 @@ import {
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import { useCategories } from "../../../contexts/CategoriesContext";
+import {
+  useQueryContext,
+  useSetQueryContext,
+} from "../../../contexts/QueryContext";
 import ProductCard from "../productCard";
 import { FormSwitch } from "../productEditForm/styles";
 import {
@@ -23,6 +27,8 @@ import {
   FiltersForm,
   FiltersRow,
   FiltersTitle,
+  FormGroup,
+  FormLabel,
   ProductsPageRow,
   ReactPaginateStyled,
 } from "./styles";
@@ -34,29 +40,64 @@ const ProductsPage = ({
   visible = "true",
 }) => {
   const [results, setResults] = useState([]);
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [productCountries, setProductCountries] = useState([]);
+  // const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [inStock, setInStock] = useState(true);
   const [expanded, setExpanded] = useState(false);
+  const [ordering, setOrdering] = useState("");
+  const [filterSet, setFilterSet] = useState({
+    country: "",
+    currency: "",
+  });
   const choices = useCategories();
+  const { country, currency } = filterSet;
+  const { query, hasLoaded } = useQueryContext();
+  const { setHasLoaded } = useSetQueryContext();
 
   useEffect(() => {
+    console.log(hasLoaded);
     const handleMount = async () => {
       try {
-        const { data } = await axiosReq.get(
-          `/products/?in_stock=${inStock}&${filter}`
+        const [{ data: filtered }, { data: all }] = await Promise.all([
+          axiosReq.get(
+            `/products/?in_stock=${inStock}&${filter}&ordering=${ordering}&\
+            country=${country}&price_currency=${currency}&search=${query}`
+          ),
+          axiosReq.get("/products"),
+        ]);
+        setResults(filtered);
+
+        setProductCountries(
+          all.results
+            ?.map((product) => product.country)
+            .filter(
+              (country, index, array) =>
+                array.findIndex(
+                  (c) => c.code === country.code && c.name === country.name
+                ) === index
+            )
+            .sort((a, b) => a.name.localeCompare(b.name))
         );
-        setResults(data);
         setPageCount(
-          !!data.next ? Math.ceil(data?.count / data?.results?.length) : 0
+          !!filtered.next
+            ? Math.ceil(filtered?.count / filtered?.results?.length)
+            : 0
         );
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
-    handleMount();
-  }, [filter, inStock, hasLoaded]);
+
+    const timer = setTimeout(() => {
+      handleMount();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [filter, inStock, hasLoaded, ordering, country, currency, query]);
 
   const handlePageClick = async (e) => {
     try {
@@ -68,94 +109,118 @@ const ProductsPage = ({
       console.log(err);
     }
   };
-  // "owner__profile", "in_stock", "category", "brand", "country", "city";
+
+  const handleChange = (e) => {
+    setFilterSet({ ...filterSet, [e.target.name]: e.target.value });
+    setHasLoaded(false);
+  };
+
   return (
     <>
-      {!!results.results?.length && (
-        <>
-          {" "}
-          <FiltersRow visible={visible}>
-            <FiltersForm>
-              <FilterContainer>
-                <FiltersTitle onClick={() => setExpanded((prev) => !prev)}>
-                  Filters <i className="fas fa-tools pl-2"></i>
-                  {/* <FiltersDivide /> */}
-                </FiltersTitle>
-                <FiltersExpanded expanded={expanded}>
-                  <FilterInStock
-                    onChange={() => {
-                      setInStock((prev) => !prev);
-                      setHasLoaded(false);
-                    }}
-                    name="in_stock"
-                    id="custom-switch"
-                    label="In Stock"
-                    checked={inStock}
-                    value={inStock}
-                  />
-                  <FiltersCountry
-                    as="select"
-                    defaultValue={""}
-                    // name="country"
-                    // onChange={handleChange}
-                  >
-                    <option disabled value={""}>
-                      Countires
+      {/* {hasLoaded ? (
+        <> */}
+      <FiltersRow visible={visible}>
+        <FiltersForm>
+          <FilterContainer>
+            <FiltersTitle onClick={() => setExpanded((prev) => !prev)}>
+              Filters <i className="fas fa-tools pl-2"></i>
+            </FiltersTitle>
+            <FiltersExpanded expanded={expanded}>
+              <FilterInStock
+                onChange={() => {
+                  setInStock((prev) => !prev);
+                  setHasLoaded(false);
+                }}
+                name="in_stock"
+                id="custom-switch"
+                label="In Stock"
+                checked={inStock}
+                value={inStock}
+              />
+              <FormGroup>
+                <FormLabel>Country</FormLabel>
+                <FiltersCountry
+                  as="select"
+                  value={country}
+                  name="country"
+                  onChange={handleChange}
+                >
+                  {/* <option disabled value={""}>
+                  Countires
+                </option> */}
+                  <option value={""}>All</option>
+                  <option disabled>──────────</option>
+                  {productCountries?.map((country, idx) => (
+                    <option key={idx} value={country.code}>
+                      {country.name}
                     </option>
-                    {choices.countries?.map((country, idx) => (
-                      <option key={idx} value={country.value}>
-                        {country.display_name}
-                      </option>
-                    ))}
-                  </FiltersCountry>
-                  <FiltersCountry
-                    as="select"
-                    defaultValue={""}
-                    // name="country"
-                    // onChange={handleChange}
-                  >
-                    <option disabled value={""}>
-                      Ratings
+                  ))}
+                </FiltersCountry>
+              </FormGroup>
+              <FormGroup>
+                <FormLabel>Currency</FormLabel>
+                <FiltersCountry
+                  as="select"
+                  name="currency"
+                  value={currency}
+                  onChange={handleChange}
+                >
+                  {/* <option disabled value={""}>
+                  Currency
+                </option> */}
+                  <option value="">All</option>
+                  <option disabled>──────────</option>
+                  {choices.currencies?.map((currency) => (
+                    <option key={currency.value} value={currency.value}>
+                      ({currency.display_name}) {currency.value}
                     </option>
-                    {choices.ratings?.map((rating, idx) => (
-                      <option key={idx} value={rating.value}>
-                        {rating.display_name}
-                      </option>
-                    ))}
-                  </FiltersCountry>
-                  <FiltersCountry
-                    as="select"
-                    defaultValue={""}
-                    // name="country"
-                    // onChange={handleChange}
-                  >
-                    <option disabled value={""}>
-                      Sort by:
+                  ))}
+                </FiltersCountry>
+              </FormGroup>
+              <FormGroup>
+                <FormLabel>Sorting</FormLabel>
+                <FiltersCountry
+                  as="select"
+                  defaultValue={""}
+                  name="ordering"
+                  onChange={(e) => {
+                    setOrdering(e.target.value);
+                    setHasLoaded(false);
+                  }}
+                >
+                  <option value={""}>All</option>
+                  <option disabled>──────────</option>
+                  <optgroup label={`Ascending \u25b2`}>
+                    <option value="price" disabled={!!!currency}>
+                      Price &#9650;
                     </option>
-                    <optgroup label={`Ascending \u25b2`}>
-                      <option value={"1"}>Price</option>
-                      <option value={"2"}>Title</option>
-                      <option value={"2"}>Date created</option>
-                      <option value={"3"}>Rating</option>
-                    </optgroup>
-                    <optgroup label={`Descending \u25bc`}>
-                      <option value={"1"}>Price</option>
-                      <option value={"2"}>Title</option>
-                      <option value={"3"}>Rating</option>
-                    </optgroup>
-                  </FiltersCountry>
-                </FiltersExpanded>
-              </FilterContainer>
-            </FiltersForm>
-          </FiltersRow>
-          <FiltersDivide />{" "}
-        </>
-      )}
+                    <option value="title">Title &#9650;</option>
+                    <option value="created_at">Created &#9650;</option>
+                    <option value="avg_score">Avg score &#9650;</option>
+                    <option value="all_scores">All scores &#9650;</option>
+                  </optgroup>
+                  <option disabled>──────────</option>
+                  <optgroup label={`Descending \u25bc`}>
+                    <option value="-price" disabled={!!!currency}>
+                      Price &#9660;
+                    </option>
+                    <option value="-title">Title &#9660;</option>
+                    <option value="-created_at">Created &#9660;</option>
+                    <option value="-avg_score">Avg score &#9660;</option>
+                    <option value="-all_scores">All scores &#9660;</option>
+                  </optgroup>
+                </FiltersCountry>
+              </FormGroup>
+            </FiltersExpanded>
+          </FilterContainer>
+        </FiltersForm>
+      </FiltersRow>
+      <FiltersDivide />{" "}
       {hasLoaded ? (
         <>
           <ProductsPageRow heightcorrection={heightcorrection}>
-            {!!results?.results.length ? (
-              results.results?.map((product) => (
+            {!!results.results?.length ? (
+              results.results.map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))
             ) : (
@@ -192,6 +257,10 @@ const ProductsPage = ({
       ) : (
         <Asset spinner />
       )}
+      {/* </>
+      ) : (
+        <Asset spinner />
+      )} */}
     </>
   );
 };

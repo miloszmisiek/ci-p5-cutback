@@ -15,6 +15,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSetCurrentUser } from "../../../contexts/CurrentUserContext";
 import { setTokenTimestamp } from "../../../utils/utils";
+import { useSetQueryContext } from "../../../contexts/QueryContext";
 
 const SignInForm = (props) => {
   const setCurrentUser = useSetCurrentUser();
@@ -26,6 +27,7 @@ const SignInForm = (props) => {
   const { username, password } = signInData;
   const [errors, setErrors] = useState({});
   const history = useHistory();
+  const { setHasLoaded } = useSetQueryContext();
 
   useEffect(() => {
     setBackground({ signIn: true });
@@ -48,7 +50,8 @@ const SignInForm = (props) => {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      history.push("/signin");
+      history.push("/");
+      setHasLoaded(false);
     } catch (err) {
       setErrors(err.response?.data);
     }

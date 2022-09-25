@@ -8,19 +8,22 @@ import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 import { ModalProvider } from "./contexts/ModalContext";
 import { CategoriesProvider } from "./contexts/CategoriesContext";
 import { AlertProvider } from "./contexts/AlertContext";
+import { QueryProvider } from "./contexts/QueryContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <AlertProvider>
-          <CategoriesProvider>
-            <ModalProvider>
-              <App />
-            </ModalProvider>
-          </CategoriesProvider>
-        </AlertProvider>
+        <QueryProvider>
+          <AlertProvider>
+            <CategoriesProvider>
+              <ModalProvider>
+                <App />
+              </ModalProvider>
+            </CategoriesProvider>
+          </AlertProvider>
+        </QueryProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>
