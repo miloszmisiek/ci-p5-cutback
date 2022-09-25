@@ -1,14 +1,41 @@
 import React, { useEffect, useState } from "react";
+import {
+  ButtonGroup,
+  Dropdown,
+  DropdownButton,
+  Form,
+  Row,
+} from "react-bootstrap";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
+import { useCategories } from "../../../contexts/CategoriesContext";
 import ProductCard from "../productCard";
-import { ProductsPageRow, ReactPaginateStyled } from "./styles";
+import { FormSwitch } from "../productEditForm/styles";
+import {
+  CountryButton,
+  DropBtnCustom,
+  FilterContainer,
+  FilterInStock,
+  FiltersCountry,
+  FiltersDivide,
+  FiltersForm,
+  FiltersRow,
+  FiltersTitle,
+  ProductsPageRow,
+  ReactPaginateStyled,
+} from "./styles";
 
-const ProductsPage = ({ filter = "", message, heightcorrection }) => {
+const ProductsPage = ({
+  filter = "",
+  message,
+  heightcorrection,
+  visible = "true",
+}) => {
   const [results, setResults] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [inStock, setInStock] = useState("");
+  const choices = useCategories();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -38,15 +65,73 @@ const ProductsPage = ({ filter = "", message, heightcorrection }) => {
       console.log(err);
     }
   };
-
+  // "owner__profile", "in_stock", "category", "brand", "country", "city";
   return (
     <>
       {hasLoaded ? (
         <>
+          <FiltersRow visible={visible}>
+            <FiltersForm>
+              <FilterContainer>
+                <FiltersTitle>
+                  Filters <i className="fas fa-tools"></i>
+                  <FiltersDivide />
+                </FiltersTitle>
+                <FiltersCountry
+                  as="select"
+                  // defaultValue={""}
+                  // name="country"
+                  // onChange={handleChange}
+                >
+                  <option disabled value={""}>
+                    Countires
+                  </option>
+                  {choices?.countries.map((country, idx) => (
+                    <option key={idx} value={country.value}>
+                      {country.display_name}
+                    </option>
+                  ))}
+                </FiltersCountry>
+                <FiltersCountry
+                  as="select"
+                  // defaultValue={""}
+                  // name="country"
+                  // onChange={handleChange}
+                >
+                  <option disabled value={""}>
+                    Ratings
+                  </option>
+                  {choices?.ratings.map((rating, idx) => (
+                    <option key={idx} value={rating.value}>
+                      {rating.display_name}
+                    </option>
+                  ))}
+                </FiltersCountry>
+                <FilterInStock
+                  // onChange={onSwitchAction}
+                  name="in_stock"
+                  id="custom-switch"
+                  label="In Stock"
+                  // checked={in_stock}
+                  // value={in_stock}
+                />
+              </FilterContainer>
+            </FiltersForm>
+          </FiltersRow>
           <ProductsPageRow heightcorrection={heightcorrection}>
-            {results?.results.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+            {!!results?.results.length ? (
+              results?.results.map((product) => (
+                <ProductCard key={product.id} {...product} />
+              ))
+            ) : (
+              <Asset
+                src={
+                  "https://res.cloudinary.com/milo-milo/image/upload/v1664049160/travolta_uxurth.png"
+                }
+                message="There are no products. There is nothing to show here..."
+                height={200}
+              />
+            )}
           </ProductsPageRow>
           <ReactPaginateStyled
             nextLabel={<i className="fas fa-chevron-right"></i>}

@@ -11,3 +11,14 @@ export const AssetWrapper = styled.div`
   min-height: ${(props) => (props.signin ? null : "120px")};
   width: 100%;
 `;
+
+export const Img = styled.img`
+  border-radius: 20px;
+  margin-bottom: ${(props) => (props.productCard ? null : "1rem" )};
+`;
+
+export const Msg = styled.p`
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+`;

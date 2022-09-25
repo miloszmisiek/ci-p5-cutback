@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import { FullRow } from "../../auth/signUpForm/styles";
 import StarRatings from "react-star-ratings";
@@ -14,6 +14,7 @@ import {
   CountryFlag,
   Description,
   Divider,
+  PhoneInputDisplay,
   Price,
   ProductAvgScore,
   ProductPageColumn,
@@ -29,6 +30,11 @@ import Comment from "../../comments/comment";
 import Asset from "../../../components/asset/index";
 import { ReactPaginateStyled } from "../productsPage/styles";
 import { useSetAlertContext } from "../../../contexts/AlertContext";
+import {
+  formatPhoneNumberIntl,
+  parsePhoneNumber,
+} from "react-phone-number-input";
+import { PhoneInputCustom } from "../../profiles/profileEditPage/styles";
 // import ModalCustom from "../../../components/modal";
 
 const ProductPage = ({ itemsPerPage }) => {
@@ -88,6 +94,7 @@ const ProductPage = ({ itemsPerPage }) => {
     comments_count,
   } = productData;
   const is_owner = currentUser?.username === owner;
+  console.log(phone_number);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -278,8 +285,16 @@ const ProductPage = ({ itemsPerPage }) => {
           </ContactData>
           {phone_number ? (
             <ContactData>
-              <i className="fas fa-phone-alt"></i>
-              {phone_number}
+              <a href={`tel:${formatPhoneNumberIntl(phone_number)}`}>
+                <i className="fas fa-phone-alt"></i>
+              </a>
+              {formatPhoneNumberIntl(phone_number)}
+              {
+                <CountryFlag
+                  svg
+                  countryCode={parsePhoneNumber(phone_number).country}
+                />
+              }
             </ContactData>
           ) : null}
           <ContactData>
@@ -292,7 +307,15 @@ const ProductPage = ({ itemsPerPage }) => {
         <Divider />
         <Wrapper>
           <ContactInformation>
-            <i className="fas fa-map-pin"></i> Location
+            <a
+              href={`http://maps.google.com/?q=${
+                street + " " + city + " " + country.name
+              }`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fas fa-map-pin"></i> Location
+            </a>
           </ContactInformation>
           <ContactData>
             <strong>Address: </strong>

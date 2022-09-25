@@ -18,6 +18,7 @@ a:hover {
 div {
   cursor: default;
   /* word-break: break-all; */
+  overflow-wrap: anywhere;
 }
 
 ul {

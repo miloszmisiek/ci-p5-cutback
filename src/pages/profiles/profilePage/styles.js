@@ -1,3 +1,4 @@
+import { Row } from "react-bootstrap";
 import styled from "styled-components";
 
 export const ProfileInfoContainer = styled.div`
@@ -10,7 +11,7 @@ export const ProfileInfoContainer = styled.div`
   align-items: center;
 
   @media (max-width: 767px) {
-   flex-direction: column;
+    flex-direction: column;
   }
 `;
 
@@ -56,7 +57,7 @@ export const StatsTitle = styled.div`
 `;
 
 export const StatsValues = styled.div`
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   /* font-weight: 500; */
 `;
 
@@ -66,5 +67,46 @@ export const AvatarContainer = styled.div`
   @media (max-width: 767px) {
     width: 100%;
     justify-content: center;
+  }
+`;
+
+export const AddProductBtn = styled.div`
+  border: 1px solid rgba(180, 211, 178, 1);
+  border-radius: 50%;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  cursor: pointer;
+  position: absolute;
+  right: 2rem;
+  top: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(180, 211, 178, 1);
+  &:hover {
+    background-color: rgba(180, 193, 185, 1);
+    border-color: rgba(180, 193, 185, 1);
+  }
+
+  @media (max-width: 465px) {
+    right: auto;
+    left: 50%;
+    bottom: -5.5rem;
+    top: auto;
+    z-index: 500;
+    transform: translateX(-50%);
+  }
+`;
+
+export const RowProfilePage = styled(Row)`
+  position: relative;
+`;
+
+export const ProfilePageDivider = styled.hr`
+  @media (max-width: 465px) {
+    margin-bottom: 5rem;
   }
 `;

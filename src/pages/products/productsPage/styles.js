@@ -1,6 +1,14 @@
 import ReactPaginate from "react-paginate";
-import { Carousel, Row } from "react-bootstrap";
+import {
+  Button,
+  Carousel,
+  Dropdown,
+  DropdownButton,
+  Form,
+  Row,
+} from "react-bootstrap";
 import styled from "styled-components";
+import { FormSwitch } from "../productEditForm/styles";
 
 export const ProductsPageRow = styled(Row)`
   min-height: ${(props) =>
@@ -29,6 +37,16 @@ export const CarouselStyled = styled(Carousel)`
     border: 1px solid black !important;
     margin-bottom: 10px;
   }
+`;
+
+export const FilterContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 2.5rem;
+  flex-wrap: wrap;
 `;
 
 export const ReactPaginateStyled = styled(ReactPaginate)`
@@ -64,5 +82,65 @@ export const ReactPaginateStyled = styled(ReactPaginate)`
 
   @media (max-width: 575px) {
     justify-content: center;
+  }
+`;
+
+export const FiltersRow = styled(Row)`
+  display: ${(props) => (props.visible ? "flex" : "none")};
+`;
+
+export const FiltersForm = styled(Form)`
+  width: 100%;
+`;
+
+export const FiltersCountry = styled(Form.Control)`
+  background: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 10rem;
+  padding: 0 0.5rem;
+`;
+
+export const FilterInStock = styled(FormSwitch)`
+  width: auto;
+`;
+
+export const FiltersTitle = styled.div`
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
+`;
+
+export const FiltersDivide = styled.hr`
+  display: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+  @media (max-width: 767px) {
+    display: block;
+  }
+`;
+
+export const AddProductBtn = styled.div`
+  border: 1px solid rgba(180, 211, 178, 1);
+  border-radius: 50%;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(180, 211, 178, 1);
+  &:hover {
+    background-color: rgba(180, 193, 185, 1);
+    border-color: rgba(180, 193, 185, 1);
   }
 `;

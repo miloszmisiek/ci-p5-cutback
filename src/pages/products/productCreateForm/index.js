@@ -15,7 +15,11 @@ import {
   TransparentInput,
 } from "./styles";
 import ProductGallery from "../productGallery";
-import { Brand, FormSwitch, InStockBrandWrapper } from "../productEditForm/styles";
+import {
+  Brand,
+  FormSwitch,
+  InStockBrandWrapper,
+} from "../productEditForm/styles";
 import { useCategories } from "../../../contexts/CategoriesContext";
 const ProductCreateForm = () => {
   const [gallery, setGallery] = useState([]);
@@ -32,13 +36,14 @@ const ProductCreateForm = () => {
     city: "",
     country: "",
   });
-  const { title, description, brand, price, street, city, in_stock } = productData;
-  const [choices, setChoices] = useState({
+  const { title, description, brand, price, street, city, in_stock } =
+    productData;
+  const [options, setOptions] = useState({
     currencies: [],
     countires: [],
   });
-  const { currencies, countires } = choices;
-  const categories = useCategories()
+  const { currencies, countires } = options;
+  const choices = useCategories();
   const history = useHistory();
 
   useEffect(() => {
@@ -47,7 +52,7 @@ const ProductCreateForm = () => {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
         const currencies = data.actions?.POST.price_currency.choices;
-        setChoices({ categories, currencies, countires });
+        setOptions({ currencies, countires });
         setProductData((prev) => ({
           ...prev,
           price_currency: currencies[0].value,
@@ -57,7 +62,7 @@ const ProductCreateForm = () => {
       }
     };
     handleMount();
-  }, [categories]);
+  }, []);
 
   const handleImageSubmit = (history) => {
     const galleryFormData = new FormData();
@@ -88,7 +93,7 @@ const ProductCreateForm = () => {
     //   console.log(pair[0], pair[1]);
     // }
     try {
-      const{data} = await axiosRes.post("/products/", productFormData);
+      const { data } = await axiosRes.post("/products/", productFormData);
       history.push(`/products/${data.id}`);
       handleImageSubmit(history);
     } catch (err) {
@@ -175,7 +180,7 @@ const ProductCreateForm = () => {
       </TitleWrapper>
       <Form.Group controlId="categoriesSelect">
         <Form.Label className="d-none">Categories</Form.Label>
-        {categories?.length ? (
+        {choices?.categories.length ? (
           <Form.Control
             as="select"
             defaultValue={""}
@@ -185,7 +190,7 @@ const ProductCreateForm = () => {
             <option disabled value={""}>
               Categories
             </option>
-            {categories?.map((category, idx) => (
+            {choices?.categories.map((category, idx) => (
               <option key={idx} value={category.value}>
                 {category.display_name}
               </option>

@@ -30,7 +30,7 @@ import {
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  const categories = useCategories();
+  const choices = useCategories();
 
   const handleSignOut = async () => {
     try {
@@ -68,7 +68,10 @@ const NavBar = () => {
         </StyledSignedInMsg>
         <NavDropdown.Divider />
         {/* TODO: add routes for dropdown section */}
-        <StyledNavLink dropdownitem="true" to={`/profiles/${currentUser?.profile_id}/products`}>
+        <StyledNavLink
+          dropdownitem="true"
+          to={`/profiles/${currentUser?.profile_id}/products`}
+        >
           Your Equipment
         </StyledNavLink>
         <StyledNavLink dropdownitem="true" to="/">
@@ -122,7 +125,7 @@ const NavBar = () => {
               </span>
             </StyledCategoriesDropdown>
             <Dropdown.Menu className="end-0">
-              {categories?.map((cat) => (
+              {choices.categories.map((cat) => (
                 <CategoriesLinks key={cat.value} to={`/${cat.display_name}`}>
                   {cat.display_name}
                 </CategoriesLinks>

@@ -3,6 +3,7 @@ import { AvgScore, RatingComponent } from "../productCard/styles";
 import { CreateColumn } from "../productCreateForm/styles";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import ReactCountryFlag from "react-country-flag";
+import { PhoneInputCustom } from "../../profiles/profileEditPage/styles";
 
 export const ProductPageColumn = styled(CreateColumn)`
   background-color: transparent;
@@ -110,8 +111,9 @@ export const ProductAvgScore = styled(AvgScore)`
 `;
 
 export const CountryFlag = styled(ReactCountryFlag)`
-  margin-left: 0.3rem;
+  margin-left: 0.4rem;
   font-size: 1.5rem;
+  margin-bottom: 0.2rem;
 `;
 
 export const Rating = styled(RatingComponent)`

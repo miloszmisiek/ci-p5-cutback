@@ -53,12 +53,12 @@ const ProductEditForm = () => {
     city,
     in_stock,
   } = productData;
-  const [choices, setChoices] = useState({
+  const [options, setOptions] = useState({
     currencies: [],
     countires: [],
   });
-  const { currencies, countires } = choices;
-  const categories = useCategories();
+  const { currencies, countires } = options;
+  const choices = useCategories();
   const history = useHistory();
   const { id } = useParams();
   const { handleClose, handleShow } = useSetModalContext();
@@ -69,7 +69,7 @@ const ProductEditForm = () => {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
         const currencies = data.actions?.POST.price_currency.choices;
-        setChoices({ currencies, countires });
+        setOptions({ currencies, countires });
       } catch (err) {
         console.log(err);
       }
@@ -267,7 +267,7 @@ const ProductEditForm = () => {
       </TitleWrapper>
       <Form.Group controlId="categoriesSelect">
         <Form.Label className="d-none">Categories</Form.Label>
-        {categories?.length ? (
+        {choices?.categories.length ? (
           <Form.Control
             as="select"
             value={category || ""}
@@ -277,7 +277,7 @@ const ProductEditForm = () => {
             <option disabled value={""}>
               Categories
             </option>
-            {categories?.map((category, idx) => (
+            {choices?.categories.map((category, idx) => (
               <option key={idx} value={category.value}>
                 {category.display_name}
               </option>

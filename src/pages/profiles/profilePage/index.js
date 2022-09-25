@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
+import { OverlayTrigger, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
@@ -9,15 +9,19 @@ import { AvgScore, RatingComponent } from "../../products/productCard/styles";
 import ProductsPage from "../../products/productsPage";
 import StarRatings from "react-star-ratings";
 import {
+  AddProductBtn,
   AvatarContainer,
   ProfileData,
   ProfileInfoContainer,
   ProfileName,
+  ProfilePageDivider,
+  RowProfilePage,
   Stats,
   StatsContainer,
   StatsTitle,
   StatsValues,
 } from "./styles";
+import { ToolTip } from "../profileEditPage/styles";
 
 const ProfilePage = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -42,7 +46,20 @@ const ProfilePage = () => {
     <>
       {hasLoaded ? (
         <>
-          <Row>
+          <RowProfilePage>
+            <Link to="/products/create">
+              <OverlayTrigger
+                placement="bottom"
+                overlay={
+                  <ToolTip id={`tooltip-top`}>Add product</ToolTip>
+                }
+              >
+                <AddProductBtn>
+                  <i className="fas fa-plus"></i>
+                </AddProductBtn>
+              </OverlayTrigger>
+            </Link>
+
             <ProfileInfoContainer>
               <AvatarContainer>
                 <Link to={`/profiles/${id}/edit`}>
@@ -54,39 +71,68 @@ const ProfilePage = () => {
                 <StatsContainer>
                   <Stats>
                     <StatsTitle>Products</StatsTitle>
-                    <StatsValues>{profileData.products_count}</StatsValues>
+                    <StatsValues>
+                      {!!profileData.products_count ? (
+                        profileData.products_count
+                      ) : (
+                        <i className="far fa-sad-cry"></i>
+                      )}
+                    </StatsValues>
                   </Stats>
                   <Stats>
                     <StatsTitle>Avg Rating</StatsTitle>
-                    <RatingComponent>
-                      <AvgScore>
-                        {parseFloat(profileData.avg_score).toFixed(1)}
-                      </AvgScore>
-                      <StarRatings
-                        rating={profileData.avg_score}
-                        numberOfStars={Math.ceil(
-                          parseFloat(profileData.avg_score)
-                        )}
-                        starDimension="20px"
-                        starSpacing="2px"
-                        starEmptyColor="rgb(180,211,178)"
-                        starRatedColor="green"
-                      />
-                    </RatingComponent>
+                    {!!profileData.avg_score ? (
+                      <RatingComponent>
+                        <AvgScore>
+                          {parseFloat(profileData.avg_score).toFixed(1)}
+                        </AvgScore>
+                        <StarRatings
+                          rating={profileData.avg_score}
+                          numberOfStars={Math.ceil(
+                            parseFloat(profileData.avg_score)
+                          )}
+                          starDimension="20px"
+                          starSpacing="2px"
+                          starEmptyColor="rgb(180,211,178)"
+                          starRatedColor="green"
+                        />
+                      </RatingComponent>
+                    ) : (
+                      <StatsValues>
+                        <i className="far fa-sad-cry"></i>
+                      </StatsValues>
+                    )}
                   </Stats>
                   <Stats>
                     <StatsTitle>All Ratings</StatsTitle>
-                    <StatsValues>{profileData.all_scores}</StatsValues>
+                    <StatsValues>
+                      {!!profileData.all_scores ? (
+                        profileData.all_scores
+                      ) : (
+                        <i className="far fa-sad-cry"></i>
+                      )}
+                    </StatsValues>
                   </Stats>
                 </StatsContainer>
               </ProfileData>
             </ProfileInfoContainer>
-          </Row>
-          <hr />
-          <ProductsPage
-            filter={`owner__profile=${id}`}
-            heightcorrection={"370px"}
-          />{" "}
+          </RowProfilePage>
+          <ProfilePageDivider />
+          {!!profileData.products_count ? (
+            <ProductsPage
+              filter={`owner__profile=${id}`}
+              heightcorrection={"370px"}
+              visible={null}
+            />
+          ) : (
+            <Asset
+              src={
+                "https://res.cloudinary.com/milo-milo/image/upload/v1664049160/travolta_uxurth.png"
+              }
+              message="You have no products. There is nothing to show here..."
+              height={200}
+            />
+          )}
         </>
       ) : (
         <Asset spinner />

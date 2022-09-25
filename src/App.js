@@ -48,7 +48,7 @@ export const BackgroundImage = styled(Image)`
 
 function App() {
   const [background, setBackground] = useState();
-  const categories = useCategories();
+  const choices = useCategories();
   return (
     <AppWrapper>
       <NavBar />
@@ -64,7 +64,7 @@ function App() {
           />
         ) : null}
         <Container className={styles.Main_Container}>
-          <Message/>
+          <Message />
           <ModalCustom />
           <Switch>
             <Route
@@ -87,7 +87,7 @@ function App() {
               path="/signin"
               render={() => <SignInForm setBackground={setBackground} />}
             />
-            {categories?.map((cat) => (
+            {choices?.categories.map((cat) => (
               <Route
                 key={cat.value}
                 exact
