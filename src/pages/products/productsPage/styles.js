@@ -104,6 +104,7 @@ export const FiltersForm = styled(Form)`
 `;
 
 export const FiltersCountry = styled(Form.Control)`
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   background: transparent !important;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -124,9 +125,11 @@ export const FilterInStock = styled(FormSwitch)`
   margin-bottom: 0;
   width: 100%;
   max-width: 8rem;
+  
 `;
 
 export const FiltersTitle = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   font-weight: 500;
   letter-spacing: 0.1rem;
   position: absolute;

@@ -36,7 +36,7 @@ const ProductsPage = ({
   const [results, setResults] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
-  const [inStock, setInStock] = useState("");
+  const [inStock, setInStock] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const choices = useCategories();
 
@@ -73,78 +73,83 @@ const ProductsPage = ({
     <>
       {hasLoaded ? (
         <>
-          <FiltersRow visible={visible}>
-            <FiltersForm>
-              <FilterContainer>
-                <FiltersTitle onClick={() => setExpanded((prev) => !prev)}>
-                  Filters <i className="fas fa-tools pl-2"></i>
-                  {/* <FiltersDivide /> */}
-                </FiltersTitle>
-                <FiltersExpanded expanded={expanded}>
-                  <FilterInStock
-                    // onChange={onSwitchAction}
-                    name="in_stock"
-                    id="custom-switch"
-                    label="In Stock"
-                    // checked={in_stock}
-                    // value={in_stock}
-                  />
-                  <FiltersCountry
-                    as="select"
-                    defaultValue={""}
-                    // name="country"
-                    // onChange={handleChange}
-                  >
-                    <option disabled value={""}>
-                      Countires
-                    </option>
-                    {choices.countries?.map((country, idx) => (
-                      <option key={idx} value={country.value}>
-                        {country.display_name}
-                      </option>
-                    ))}
-                  </FiltersCountry>
-                  <FiltersCountry
-                    as="select"
-                    defaultValue={""}
-                    // name="country"
-                    // onChange={handleChange}
-                  >
-                    <option disabled value={""}>
-                      Ratings
-                    </option>
-                    {choices.ratings?.map((rating, idx) => (
-                      <option key={idx} value={rating.value}>
-                        {rating.display_name}
-                      </option>
-                    ))}
-                  </FiltersCountry>
-                  <FiltersCountry
-                    as="select"
-                    defaultValue={""}
-                    // name="country"
-                    // onChange={handleChange}
-                  >
-                    <option disabled value={""}>
-                      Sort by:
-                    </option>
-                    <optgroup label={`Ascending \u25b2`}>
-                      <option value={"1"}>Price</option>
-                      <option value={"2"}>Title</option>
-                      <option value={"2"}>Date created</option>
-                      <option value={"3"}>Rating</option>
-                    </optgroup>
-                    <optgroup label={`Descending \u25bc`}>
-                      <option value={"1"}>Price</option>
-                      <option value={"2"}>Title</option>
-                      <option value={"3"}>Rating</option>
-                    </optgroup>
-                  </FiltersCountry>
-                </FiltersExpanded>
-              </FilterContainer>
-            </FiltersForm>
-          </FiltersRow>
-          <FiltersDivide />
+          {!!results?.results.length && (
+            <>
+              {" "}
+              <FiltersRow visible={visible}>
+                <FiltersForm>
+                  <FilterContainer>
+                    <FiltersTitle onClick={() => setExpanded((prev) => !prev)}>
+                      Filters <i className="fas fa-tools pl-2"></i>
+                      {/* <FiltersDivide /> */}
+                    </FiltersTitle>
+                    <FiltersExpanded expanded={expanded}>
+                      <FilterInStock
+                        onChange={() => setInStock((prev) => !prev)}
+                        name="in_stock"
+                        id="custom-switch"
+                        label="In Stock"
+                        checked={inStock}
+                        value={inStock}
+                      />
+                      <FiltersCountry
+                        as="select"
+                        defaultValue={""}
+                        // name="country"
+                        // onChange={handleChange}
+                      >
+                        <option disabled value={""}>
+                          Countires
+                        </option>
+                        {choices.countries?.map((country, idx) => (
+                          <option key={idx} value={country.value}>
+                            {country.display_name}
+                          </option>
+                        ))}
+                      </FiltersCountry>
+                      <FiltersCountry
+                        as="select"
+                        defaultValue={""}
+                        // name="country"
+                        // onChange={handleChange}
+                      >
+                        <option disabled value={""}>
+                          Ratings
+                        </option>
+                        {choices.ratings?.map((rating, idx) => (
+                          <option key={idx} value={rating.value}>
+                            {rating.display_name}
+                          </option>
+                        ))}
+                      </FiltersCountry>
+                      <FiltersCountry
+                        as="select"
+                        defaultValue={""}
+                        // name="country"
+                        // onChange={handleChange}
+                      >
+                        <option disabled value={""}>
+                          Sort by:
+                        </option>
+                        <optgroup label={`Ascending \u25b2`}>
+                          <option value={"1"}>Price</option>
+                          <option value={"2"}>Title</option>
+                          <option value={"2"}>Date created</option>
+                          <option value={"3"}>Rating</option>
+                        </optgroup>
+                        <optgroup label={`Descending \u25bc`}>
+                          <option value={"1"}>Price</option>
+                          <option value={"2"}>Title</option>
+                          <option value={"3"}>Rating</option>
+                        </optgroup>
+                      </FiltersCountry>
+                    </FiltersExpanded>
+                  </FilterContainer>
+                </FiltersForm>
+              </FiltersRow>
+              <FiltersDivide />{" "}
+            </>
+          )}
           <ProductsPageRow heightcorrection={heightcorrection}>
             {!!results?.results.length ? (
               results.results?.map((product) => (
