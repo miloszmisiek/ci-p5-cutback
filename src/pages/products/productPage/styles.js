@@ -3,7 +3,6 @@ import { AvgScore, RatingComponent } from "../productCard/styles";
 import { CreateColumn } from "../productCreateForm/styles";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import ReactCountryFlag from "react-country-flag";
-import { PhoneInputCustom } from "../../profiles/profileEditPage/styles";
 
 export const ProductPageColumn = styled(CreateColumn)`
   background-color: transparent;
@@ -36,6 +35,33 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
+export const TopWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media (max-width: 340px) {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+`;
+export const Category = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 50%;
+  align-items: center;
+  letter-spacing: 0.1rem;
+  color: darkblue;
+  font-weight: 500;
+
+  @media (max-width: 340px) {
+    margin-left: auto;
+    justify-content: flex-end;
+    max-width: fit-content;
+  }
+`;
+
 export const Title = styled.div`
   display: flex;
   justify-content: center;
@@ -49,8 +75,14 @@ export const Price = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  max-width: 50%;
   font-size: 1.5rem;
   font-weight: 500;
+
+  @media (max-width: 340px) {
+    margin-left: auto;
+    max-width: fit-content;
+  }
 `;
 
 export const Divider = styled.hr`

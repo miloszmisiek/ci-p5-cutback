@@ -1,7 +1,7 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown, Form, NavDropdown } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useCategories } from "../../contexts/CategoriesContext";
 import {
@@ -31,6 +31,14 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const choices = useCategories();
+  const [displayName, setDisplayName] = useState("Categories");
+  const location = useLocation();
+
+  useEffect(() => {
+    !choices.categories?.some((cat) =>
+      location.pathname.includes(cat.display_name.toLowerCase())
+    ) && setDisplayName("Categories");
+  }, [location]);
 
   const handleSignOut = async () => {
     try {
@@ -118,7 +126,7 @@ const NavBar = () => {
           <SearchBarDropdown>
             <StyledCategoriesDropdown id="dropdown-basic">
               <span className="d-none" id="categories">
-                Categories
+                {displayName}
               </span>
               <span className="d-inline" id="categories-icon">
                 <i className="fas fa-th-list"></i>
@@ -126,7 +134,11 @@ const NavBar = () => {
             </StyledCategoriesDropdown>
             <Dropdown.Menu className="end-0">
               {choices.categories?.map((cat) => (
-                <CategoriesLinks key={cat.value} to={`/${cat.display_name}`}>
+                <CategoriesLinks
+                  onClick={() => setDisplayName(cat.display_name)}
+                  key={cat.value}
+                  to={`/products/categories/${cat.display_name.toLowerCase()}`}
+                >
                   {cat.display_name}
                 </CategoriesLinks>
               ))}

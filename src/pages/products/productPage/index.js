@@ -8,6 +8,7 @@ import {
   BrandStock,
   CarouselImgProductPage,
   CarouselProductPage,
+  Category,
   CommentContainer,
   ContactData,
   ContactInformation,
@@ -22,6 +23,7 @@ import {
   RatingsWrapper,
   TextContainer,
   Title,
+  TopWrapper,
   Wrapper,
 } from "./styles";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
@@ -59,7 +61,7 @@ const ProductPage = ({ itemsPerPage }) => {
     phone_number: "",
   });
   const [productData, setProductData] = useState({
-    category: "",
+    category_name: "",
     title: "",
     description: "",
     brand: "",
@@ -80,7 +82,7 @@ const ProductPage = ({ itemsPerPage }) => {
   const { profile_id, owner, email, first_name, last_name, phone_number } =
     profile;
   const {
-    category,
+    category_name,
     country,
     title,
     description,
@@ -104,7 +106,7 @@ const ProductPage = ({ itemsPerPage }) => {
           axiosReq.get(`comments/?product=${id}`),
         ]);
         const {
-          category,
+          category_name,
           country,
           price_currency_symbol,
           title,
@@ -129,7 +131,7 @@ const ProductPage = ({ itemsPerPage }) => {
         } = owner_profile;
 
         setProductData({
-          category,
+          category_name,
           country: country,
           price_currency_symbol,
           title,
@@ -257,9 +259,12 @@ const ProductPage = ({ itemsPerPage }) => {
     <ProductPageColumn text="true" xs={12} md={{ span: 5, order: "last" }}>
       <TextContainer>
         <Wrapper>
-          <Price>
-            {price_currency_symbol} {price}
-          </Price>
+          <TopWrapper>
+            <Category>{category_name}</Category>
+            <Price>
+              {price_currency_symbol} {price}
+            </Price>
+          </TopWrapper>
           <Title>{title}</Title>
         </Wrapper>
         <Divider />
@@ -275,7 +280,7 @@ const ProductPage = ({ itemsPerPage }) => {
         <Divider />
         <Wrapper>
           <ContactInformation>
-            <i className="far fa-id-card"></i> Contact Information
+            <i className="far fa-id-card pr-1"></i> Contact Information
           </ContactInformation>
           <ContactData>
             <NavLink to={`/profile/${profile_id}`}>
@@ -314,7 +319,7 @@ const ProductPage = ({ itemsPerPage }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-map-pin"></i> Location
+              <i className="fas fa-map-pin pr-1"></i> Location
             </a>
           </ContactInformation>
           <ContactData>
