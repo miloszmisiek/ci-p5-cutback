@@ -180,7 +180,7 @@ const ProductCreateForm = () => {
       </TitleWrapper>
       <Form.Group controlId="categoriesSelect">
         <Form.Label className="d-none">Categories</Form.Label>
-        {choices?.categories.length ? (
+        {!!choices && choices.categories.length ? (
           <Form.Control
             as="select"
             defaultValue={""}
@@ -190,7 +190,7 @@ const ProductCreateForm = () => {
             <option disabled value={""}>
               Categories
             </option>
-            {choices?.categories.map((category, idx) => (
+            {!!choices && choices.categories.map((category, idx) => (
               <option key={idx} value={category.value}>
                 {category.display_name}
               </option>

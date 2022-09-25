@@ -86,7 +86,7 @@ const ProductsPage = ({
                   <option disabled value={""}>
                     Countires
                   </option>
-                  {choices?.countries.map((country, idx) => (
+                  {choices.countries?.map((country, idx) => (
                     <option key={idx} value={country.value}>
                       {country.display_name}
                     </option>
@@ -101,7 +101,7 @@ const ProductsPage = ({
                   <option disabled value={""}>
                     Ratings
                   </option>
-                  {choices?.ratings.map((rating, idx) => (
+                  {choices.ratings?.map((rating, idx) => (
                     <option key={idx} value={rating.value}>
                       {rating.display_name}
                     </option>
@@ -120,7 +120,7 @@ const ProductsPage = ({
           </FiltersRow>
           <ProductsPageRow heightcorrection={heightcorrection}>
             {!!results?.results.length ? (
-              results?.results.map((product) => (
+              results.results?.map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))
             ) : (
