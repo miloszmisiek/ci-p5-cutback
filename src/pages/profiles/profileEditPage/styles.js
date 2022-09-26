@@ -23,12 +23,6 @@ export const PhoneInputCustom = styled(PhoneInput)`
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
   }
-
-  /* @media (max-width: 767px) {
-    .PhoneInputInput {
-      text-align: center;
-    }
-  } */
 `;
 
 export const ProfileButton = styled(PostButton)`

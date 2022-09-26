@@ -93,18 +93,21 @@ const NavBar = () => {
         </StyledSignedInMsg>
         <NavDropdown.Divider />
         {/* TODO: add routes for dropdown section */}
+        <StyledNavLink dropdownitem="true" to={`/`}>
+          Home
+        </StyledNavLink>
         <StyledNavLink
           dropdownitem="true"
-          to={`/profiles/${currentUser?.profile_id}/products`}
+          to={`/profiles/${currentUser?.profile_id}/`}
           onClick={() => setHasLoaded(false)}
         >
-          Your Equipment
+          Profile
         </StyledNavLink>
-        <StyledNavLink dropdownitem="true" to="/">
-          Your Ratings
-        </StyledNavLink>
-        <StyledNavLink dropdownitem="true" to="/">
-          Your Profile
+        <StyledNavLink
+          dropdownitem="true"
+          to={`/profiles/${currentUser?.profile_id}/edit`}
+        >
+          Settings
         </StyledNavLink>
         <NavDropdown.Divider />
         <StyledNavLink dropdownitem="true" to="/" onClick={handleSignOut}>

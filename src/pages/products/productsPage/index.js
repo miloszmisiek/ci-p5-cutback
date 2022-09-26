@@ -7,6 +7,7 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
 import { useCategories } from "../../../contexts/CategoriesContext";
@@ -17,6 +18,8 @@ import {
 import ProductCard from "../productCard";
 import { FormSwitch } from "../productEditForm/styles";
 import {
+  AllProductsButton,
+  AllProductsContainer,
   CountryButton,
   DropBtnCustom,
   FilterContainer,
@@ -49,20 +52,21 @@ const ProductsPage = ({
   const [filterSet, setFilterSet] = useState({
     country: "",
     currency: "",
+    page: "1",
   });
   const choices = useCategories();
-  const { country, currency } = filterSet;
-  const { query, hasLoaded } = useQueryContext();
-  const { setHasLoaded } = useSetQueryContext();
+  const { country, currency, page } = filterSet;
+  const { query } = useQueryContext();
+  // const { setHasLoaded } = useSetQueryContext();
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
-    console.log(hasLoaded);
     const handleMount = async () => {
       try {
         const [{ data: filtered }, { data: all }] = await Promise.all([
           axiosReq.get(
-            `/products/?in_stock=${inStock}&${filter}&ordering=${ordering}&\
-            country=${country}&price_currency=${currency}&search=${query}`
+            `/products/?in_stock=${inStock}&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
           ),
           axiosReq.get("/products"),
         ]);
@@ -97,12 +101,14 @@ const ProductsPage = ({
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, inStock, hasLoaded, ordering, country, currency, query]);
+  }, [filter, inStock, hasLoaded, ordering, country, currency, query, history]);
 
   const handlePageClick = async (e) => {
     try {
       const { data } = await axiosReq.get(
-        `/products/?page=${e.selected + 1}&in_stock=${inStock}&${filter}`
+        `/products/?page=${
+          e.selected + 1
+        }&in_stock=${inStock}&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
       );
       setResults(data);
     } catch (err) {
@@ -126,96 +132,104 @@ const ProductsPage = ({
               Filters <i className="fas fa-tools pl-2"></i>
             </FiltersTitle>
             <FiltersExpanded expanded={expanded}>
-              <FilterInStock
-                onChange={() => {
-                  setInStock((prev) => !prev);
-                  setHasLoaded(false);
-                }}
-                name="in_stock"
-                id="custom-switch"
-                label="In Stock"
-                checked={inStock}
-                value={inStock}
-              />
-              <FormGroup>
-                <FormLabel>Country</FormLabel>
-                <FiltersCountry
-                  as="select"
-                  value={country}
-                  name="country"
-                  onChange={handleChange}
-                >
-                  {/* <option disabled value={""}>
-                  Countires
-                </option> */}
-                  <option value={""}>All</option>
-                  <option disabled>──────────</option>
-                  {productCountries?.map((country, idx) => (
-                    <option key={idx} value={country.code}>
-                      {country.name}
-                    </option>
-                  ))}
-                </FiltersCountry>
-              </FormGroup>
-              <FormGroup>
-                <FormLabel>Currency</FormLabel>
-                <FiltersCountry
-                  as="select"
-                  name="currency"
-                  value={currency}
-                  onChange={handleChange}
-                >
-                  {/* <option disabled value={""}>
-                  Currency
-                </option> */}
-                  <option value="">All</option>
-                  <option disabled>──────────</option>
-                  {choices.currencies?.map((currency) => (
-                    <option key={currency.value} value={currency.value}>
-                      ({currency.display_name}) {currency.value}
-                    </option>
-                  ))}
-                </FiltersCountry>
-              </FormGroup>
-              <FormGroup>
-                <FormLabel>Sorting</FormLabel>
-                <FiltersCountry
-                  as="select"
-                  defaultValue={""}
-                  name="ordering"
-                  onChange={(e) => {
-                    setOrdering(e.target.value);
+              <AllProductsContainer>
+                <FilterInStock
+                  onChange={() => {
+                    setInStock((prev) => !prev);
+                    setHasLoaded(false);
+                  }}
+                  name="in_stock"
+                  id="custom-switch"
+                  label="In Stock"
+                  checked={inStock}
+                  value={inStock}
+                />
+                <AllProductsButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setInStock("");
+                    setFilterSet({ country: "", currency: "", page: "1" });
                     setHasLoaded(false);
                   }}
                 >
-                  <option value={""}>All</option>
-                  <option disabled>──────────</option>
-                  <optgroup label={`Ascending \u25b2`}>
-                    <option value="price" disabled={!!!currency}>
-                      Price &#9650;
-                    </option>
-                    <option value="title">Title &#9650;</option>
-                    <option value="created_at">Created &#9650;</option>
-                    <option value="avg_score">Avg score &#9650;</option>
-                    <option value="all_scores">All scores &#9650;</option>
-                  </optgroup>
-                  <option disabled>──────────</option>
-                  <optgroup label={`Descending \u25bc`}>
-                    <option value="-price" disabled={!!!currency}>
-                      Price &#9660;
-                    </option>
-                    <option value="-title">Title &#9660;</option>
-                    <option value="-created_at">Created &#9660;</option>
-                    <option value="-avg_score">Avg score &#9660;</option>
-                    <option value="-all_scores">All scores &#9660;</option>
-                  </optgroup>
-                </FiltersCountry>
-              </FormGroup>
+                  Show All
+                </AllProductsButton>
+              </AllProductsContainer>
+              <AllProductsContainer select="true">
+                <FormGroup>
+                  <FormLabel>Country</FormLabel>
+                  <FiltersCountry
+                    as="select"
+                    value={country}
+                    name="country"
+                    onChange={handleChange}
+                  >
+                    <option value={""}>All</option>
+                    <option disabled>──────────</option>
+                    {productCountries?.map((country, idx) => (
+                      <option key={idx} value={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </FiltersCountry>
+                </FormGroup>
+                <FormGroup>
+                  <FormLabel>Currency</FormLabel>
+                  <FiltersCountry
+                    as="select"
+                    name="currency"
+                    value={currency}
+                    onChange={handleChange}
+                  >
+                    <option value="">All</option>
+                    <option disabled>──────────</option>
+                    {choices.currencies?.map((currency) => (
+                      <option key={currency.value} value={currency.value}>
+                        ({currency.display_name}) {currency.value}
+                      </option>
+                    ))}
+                  </FiltersCountry>
+                </FormGroup>
+                <FormGroup>
+                  <FormLabel>Sorting</FormLabel>
+                  <FiltersCountry
+                    as="select"
+                    defaultValue={""}
+                    name="ordering"
+                    onChange={(e) => {
+                      setOrdering(e.target.value);
+                      setHasLoaded(false);
+                    }}
+                  >
+                    <option value={""}>All</option>
+                    <option disabled>──────────</option>
+                    <optgroup label={`Ascending \u25b2`}>
+                      <option value="price" disabled={!!!currency}>
+                        Price &#9650;
+                      </option>
+                      <option value="title">Title &#9650;</option>
+                      <option value="created_at">Created &#9650;</option>
+                      <option value="avg_score">Avg score &#9650;</option>
+                      <option value="all_scores">All scores &#9650;</option>
+                    </optgroup>
+                    <option disabled>──────────</option>
+                    <optgroup label={`Descending \u25bc`}>
+                      <option value="-price" disabled={!!!currency}>
+                        Price &#9660;
+                      </option>
+                      <option value="-title">Title &#9660;</option>
+                      <option value="-created_at">Created &#9660;</option>
+                      <option value="-avg_score">Avg score &#9660;</option>
+                      <option value="-all_scores">All scores &#9660;</option>
+                    </optgroup>
+                  </FiltersCountry>
+                </FormGroup>
+              </AllProductsContainer>
             </FiltersExpanded>
           </FilterContainer>
         </FiltersForm>
       </FiltersRow>
-      <FiltersDivide />{" "}
+      <FiltersDivide visible={visible} />
       {hasLoaded ? (
         <>
           <ProductsPageRow heightcorrection={heightcorrection}>

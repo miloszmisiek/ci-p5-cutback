@@ -13,6 +13,7 @@ import {
   ContactData,
   ContactInformation,
   CountryFlag,
+  CreatedDate,
   Description,
   Divider,
   PhoneInputDisplay,
@@ -73,6 +74,7 @@ const ProductPage = ({ itemsPerPage }) => {
     country: {},
     gallery: [],
     comments_count: "",
+    created_at: "",
   });
   const [pageCount, setPageCount] = useState(0);
 
@@ -94,6 +96,7 @@ const ProductPage = ({ itemsPerPage }) => {
     in_stock,
     gallery,
     comments_count,
+    created_at,
   } = productData;
   const is_owner = currentUser?.username === owner;
   console.log(phone_number);
@@ -120,6 +123,7 @@ const ProductPage = ({ itemsPerPage }) => {
           owner_profile,
           scores,
           comments_count,
+          created_at,
         } = products;
         const {
           id: profile_id,
@@ -143,6 +147,7 @@ const ProductPage = ({ itemsPerPage }) => {
           in_stock,
           gallery,
           comments_count,
+          created_at,
         });
         setProfile({
           profile_id,
@@ -283,7 +288,7 @@ const ProductPage = ({ itemsPerPage }) => {
             <i className="far fa-id-card pr-1"></i> Contact Information
           </ContactInformation>
           <ContactData>
-            <NavLink to={`/profile/${profile_id}`}>
+            <NavLink to={`/profiles/${profile_id}`}>
               <i className="fas fa-user"></i>{" "}
             </NavLink>
             {first_name ? first_name : owner} {last_name ? last_name : null}
@@ -334,6 +339,8 @@ const ProductPage = ({ itemsPerPage }) => {
             {<CountryFlag svg countryCode={country?.code} />}
           </ContactData>
         </Wrapper>
+        <Divider />
+        <CreatedDate><i className="far fa-calendar-plus mr-2"></i>{created_at}</CreatedDate>
       </TextContainer>
     </ProductPageColumn>
   );

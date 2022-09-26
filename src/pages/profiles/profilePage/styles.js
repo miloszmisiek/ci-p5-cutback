@@ -24,7 +24,7 @@ export const ProfileData = styled.div`
 `;
 
 export const ProfileName = styled.div`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 500;
   letter-spacing: 0.1rem;
   display: flex;
@@ -35,9 +35,11 @@ export const ProfileName = styled.div`
 
 export const Stats = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  max-width: 8rem;
 `;
 
 export const StatsContainer = styled.div`
@@ -52,13 +54,12 @@ export const StatsContainer = styled.div`
 `;
 
 export const StatsTitle = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
 `;
 
 export const StatsValues = styled.div`
-  font-size: 1.5rem;
-  /* font-weight: 500; */
+  font-size: 1.1rem;
 `;
 
 export const AvatarContainer = styled.div`

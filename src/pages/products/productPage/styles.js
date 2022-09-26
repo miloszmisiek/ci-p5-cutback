@@ -151,3 +151,8 @@ export const CountryFlag = styled(ReactCountryFlag)`
 export const Rating = styled(RatingComponent)`
   justify-content: ${(props) => (props.scores ? "space-around" : "center")};
 `;
+
+export const CreatedDate = styled(ContactInformation)`
+  color: rgba(0, 0, 0, 0.4);
+  /* margin-left: auto; */
+`;

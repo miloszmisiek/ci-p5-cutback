@@ -11,10 +11,10 @@ import styled from "styled-components";
 import { FormSwitch } from "../productEditForm/styles";
 
 export const ProductsPageRow = styled(Row)`
-  min-height: ${(props) =>
-    props.heightCorrection
+  /* min-height: ${(props) =>
+    props.heightcorrection
       ? `calc(100vh - ${props.heightcorrection})`
-      : "calc(100vh - 309px)"};
+      : "calc(100vh - 309px)"}; */
 `;
 
 export const CarouselImg = styled.img`
@@ -126,6 +126,7 @@ export const FilterInStock = styled(FormSwitch)`
   margin-bottom: 0;
   width: 100%;
   max-width: 8rem;
+  margin-top: auto;
 `;
 
 export const FiltersTitle = styled.div`
@@ -153,7 +154,7 @@ export const FiltersTitle = styled.div`
 `;
 
 export const FiltersDivide = styled.hr`
-  display: none;
+  display: ${(props) => (props.visible ? "block" : "none")};
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   @media (max-width: 767px) {
@@ -189,7 +190,7 @@ export const FiltersExpanded = styled.div`
   -webkit-transition: opacity 1s ease-in-out;
   transition: opacity 1s ease-in-out;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
   align-items: center;
@@ -200,7 +201,7 @@ export const FiltersExpanded = styled.div`
   @media (max-width: 767px) {
     justify-content: space-around;
     margin: auto;
-    max-width: auto;
+    max-width: 100%;
   }
 `;
 
@@ -219,4 +220,40 @@ export const FormLabel = styled(Form.Label)`
   font-weight: 500;
   font-size: 0.9rem;
   letter-spacing: 0.1rem;
+`;
+
+export const AllProductsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: ${(props) => (props.select ? "30rem" : "15rem")};
+  width: 100%;
+  gap: 1rem;
+  margin-top: auto;
+
+  @media (min-width: 1200px) {
+    max-width: ${(props) => (props.select ? "30rem" : "20rem")};
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 460px) {
+    flex-direction: column;
+  }
+`;
+
+export const AllProductsButton = styled.button`
+  box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 8rem;
+  padding: 0 0.5rem;
+  /* margin-bottom: 0.5rem; */
+  margin-top: auto;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+  }
 `;
