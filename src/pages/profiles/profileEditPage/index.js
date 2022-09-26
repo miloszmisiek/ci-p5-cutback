@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Alert,
-  Col,
-  Form,
-  OverlayTrigger,
-} from "react-bootstrap";
+import { Alert, Col, Form, OverlayTrigger } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
@@ -15,9 +10,7 @@ import {
   useSetCurrentUser,
 } from "../../../contexts/CurrentUserContext";
 import { useSetModalContext } from "../../../contexts/ModalContext";
-import {
-  ActionButtonContainer,
-} from "../../comments/commentEditForm/styles";
+import { ActionButtonContainer } from "../../comments/commentEditForm/styles";
 import {
   AvatarContainer,
   AvatarFigure,
@@ -84,7 +77,7 @@ const ProfileEditPage = () => {
       }
     };
     handleMount();
-  }, [currentUser, history, id]);
+  }, [currentUser, history, id, hasLoaded]);
 
   const handleChange = (e) => {
     setProfileData({

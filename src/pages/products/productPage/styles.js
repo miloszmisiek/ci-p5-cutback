@@ -3,6 +3,7 @@ import { AvgScore, RatingComponent } from "../productCard/styles";
 import { CreateColumn } from "../productCreateForm/styles";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import ReactCountryFlag from "react-country-flag";
+import { Link } from "react-router-dom";
 
 export const ProductPageColumn = styled(CreateColumn)`
   background-color: transparent;
@@ -155,4 +156,11 @@ export const Rating = styled(RatingComponent)`
 export const CreatedDate = styled(ContactInformation)`
   color: rgba(0, 0, 0, 0.4);
   /* margin-left: auto; */
+`;
+
+export const TitleLink = styled(Link)`
+  cursor: pointer;
+  &:hover {
+    font-weight: 600;
+  }
 `;

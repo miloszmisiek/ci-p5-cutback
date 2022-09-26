@@ -35,6 +35,8 @@ import {
   ProductsPageRow,
   ReactPaginateStyled,
 } from "./styles";
+import rates from "../../../utils/rates.json";
+import { ConvertCurrency } from "../../../utils/utils";
 
 const ProductsPage = ({
   filter = "",
@@ -61,6 +63,8 @@ const ProductsPage = ({
   const [hasLoaded, setHasLoaded] = useState(false);
   const history = useHistory();
 
+  console.log(results);
+
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -70,19 +74,43 @@ const ProductsPage = ({
           ),
           axiosReq.get("/products"),
         ]);
-        setResults(filtered);
 
-        setProductCountries(
-          all.results
-            ?.map((product) => product.country)
-            .filter(
-              (country, index, array) =>
-                array.findIndex(
-                  (c) => c.code === country.code && c.name === country.name
-                ) === index
-            )
-            .sort((a, b) => a.name.localeCompare(b.name))
-        );
+        // if (ordering === "-price") {
+        //   const newFiltered = {
+        //     ...filtered,
+        //     results: filtered.results
+        //       ?.map((obj) => ({
+        //         ...obj,
+        //         price_euro: ConvertCurrency(
+        //           obj.price_currency,
+        //           parseFloat(obj.price)
+        //         ),
+        //       }))
+        //       .sort(
+        //         (a, b) => parseFloat(b.price_euro) - parseFloat(a.price_euro)
+        //       ),
+        //   };
+        //   setResults(newFiltered);
+        // } else if (ordering === "price") {
+        //   const newFiltered = {
+        //     ...filtered,
+        //     results: filtered.results
+        //       ?.map((obj) => ({
+        //         ...obj,
+        //         price_euro: ConvertCurrency(
+        //           obj.price_currency,
+        //           parseFloat(obj.price)
+        //         ),
+        //       }))
+        //       .sort((a, b) =>
+        //         parseFloat(a.price_euro - parseFloat(b.price_euro))
+        //       ),
+        //   };
+        //   setResults(newFiltered);
+        // } else {
+        //   setResults(filtered);
+        // }
+        setResults(filtered);
         setPageCount(
           !!filtered.next
             ? Math.ceil(filtered?.count / filtered?.results?.length)
@@ -110,6 +138,42 @@ const ProductsPage = ({
           e.selected + 1
         }&in_stock=${inStock}&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
       );
+      // if (ordering === "-price") {
+      //   const newFiltered = {
+      //     ...data,
+      //     results: data.results
+      //       ?.map((obj) => ({
+      //         ...obj,
+      //         price_euro: ConvertCurrency(
+      //           obj.price_currency,
+      //           parseFloat(obj.price)
+      //         ),
+      //       }))
+      //       .sort(
+      //         (a, b) => parseFloat(b.price_euro) - parseFloat(a.price_euro)
+      //       ),
+      //   };
+      //   setResults(newFiltered);
+      // } else if (ordering === "price") {
+      //   const newFiltered = {
+      //     ...data,
+      //     results: data.results
+      //       ?.map((obj) => ({
+      //         ...obj,
+      //         price_euro: ConvertCurrency(
+      //           obj.price_currency,
+      //           parseFloat(obj.price)
+      //         ),
+      //       }))
+      //       .sort((a, b) =>
+      //         parseFloat(a.price_euro - parseFloat(b.price_euro))
+      //       ),
+      //   };
+      //   setResults(newFiltered);
+      // } else {
+      //   setResults(data);
+      // }
+      
       setResults(data);
     } catch (err) {
       console.log(err);
@@ -204,9 +268,7 @@ const ProductsPage = ({
                     <option value={""}>All</option>
                     <option disabled>──────────</option>
                     <optgroup label={`Ascending \u25b2`}>
-                      <option value="price" disabled={!!!currency}>
-                        Price &#9650;
-                      </option>
+                      <option value="price">Price &#9650;</option>
                       <option value="title">Title &#9650;</option>
                       <option value="created_at">Created &#9650;</option>
                       <option value="avg_score">Avg score &#9650;</option>
@@ -214,9 +276,7 @@ const ProductsPage = ({
                     </optgroup>
                     <option disabled>──────────</option>
                     <optgroup label={`Descending \u25bc`}>
-                      <option value="-price" disabled={!!!currency}>
-                        Price &#9660;
-                      </option>
+                      <option value="-price">Price &#9660;</option>
                       <option value="-title">Title &#9660;</option>
                       <option value="-created_at">Created &#9660;</option>
                       <option value="-avg_score">Avg score &#9660;</option>

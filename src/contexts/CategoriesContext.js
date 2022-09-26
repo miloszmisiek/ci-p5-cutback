@@ -9,7 +9,7 @@ export const CategoriesProvider = ({ children }) => {
   const [choices, setChoices] = useState({
     categories: [],
     countries: [],
-    currencies: [],
+    // currencies: [],
   });
 
   useEffect(() => {
@@ -18,12 +18,12 @@ export const CategoriesProvider = ({ children }) => {
         const { data } = await axiosRes.options("/products/");
         const categories = data.actions?.POST.category.choices;
         const countries = data.actions?.POST.country.choices;
-        const currencies = data.actions?.POST.price_currency.choices;
+        // const currencies = data.actions?.POST.price_currency.choices;
         setChoices((prev) => ({
           ...prev,
           categories: categories,
           countries: countries,
-          currencies: currencies,
+          // currencies: currencies,
         }));
       } catch (err) {
         console.error(err);

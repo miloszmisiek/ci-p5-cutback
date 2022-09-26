@@ -11,6 +11,7 @@ import {
   CreateColumn,
   CurrencySelect,
   FormControlMb,
+  PriceCurrency,
   TitleWrapper,
   TransparentInput,
 } from "./styles";
@@ -31,7 +32,6 @@ const ProductCreateForm = () => {
     brand: "",
     in_stock: false,
     price: "",
-    price_currency: "",
     street: "",
     city: "",
     country: "",
@@ -42,6 +42,7 @@ const ProductCreateForm = () => {
     currencies: [],
     countires: [],
   });
+  const [hasLoaded, setHasLoaded] = useState(false);
   const { currencies, countires } = options;
   const choices = useCategories();
   const history = useHistory();
@@ -51,18 +52,14 @@ const ProductCreateForm = () => {
       try {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
-        const currencies = data.actions?.POST.price_currency.choices;
         setOptions({ currencies, countires });
-        setProductData((prev) => ({
-          ...prev,
-          price_currency: currencies[0].value,
-        }));
+        setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
     handleMount();
-  }, []);
+  }, [hasLoaded]);
 
   const handleImageSubmit = (history) => {
     const galleryFormData = new FormData();
@@ -126,6 +123,19 @@ const ProductCreateForm = () => {
     <CreateColumn xs={12} md={6}>
       <Form.Group controlId="titlePriceSelect">
         <TitleWrapper title="true">
+          <TitleWrapper>
+            <PriceCurrency>
+              &#8364;
+              <TransparentInput
+                type="text"
+                name="price"
+                value={price}
+                onChange={onAmountChange}
+                placeholder="0.00"
+                price="true"
+              />
+            </PriceCurrency>
+          </TitleWrapper>
           <TransparentInput
             type="text"
             maxLength="30"
@@ -134,41 +144,11 @@ const ProductCreateForm = () => {
             value={title}
             onChange={handleChange}
           />
-          <TitleWrapper>
-            {currencies?.length ? (
-              <CurrencySelect
-                as="select"
-                name="price_currency"
-                onChange={handleChange}
-              >
-                {currencies?.map((currency, idx) => (
-                  <option key={idx} value={currency.value}>
-                    {currency.display_name}
-                  </option>
-                ))}
-              </CurrencySelect>
-            ) : (
-              <Asset spinner signin />
-            )}
-            <TransparentInput
-              type="text"
-              name="price"
-              value={price}
-              onChange={onAmountChange}
-              placeholder="0.00"
-              price="true"
-            />
-          </TitleWrapper>
         </TitleWrapper>
       </Form.Group>
       <TitleWrapper>
         {errors.productErrors?.title?.map((message, idx) => (
           <Alert className="mr-auto" variant="warning" key={idx}>
-            {message}
-          </Alert>
-        ))}
-        {errors.productErrors?.price_currency?.map((message, idx) => (
-          <Alert variant="warning" key={idx}>
             {message}
           </Alert>
         ))}
@@ -190,11 +170,12 @@ const ProductCreateForm = () => {
             <option disabled value={""}>
               Categories
             </option>
-            {!!choices && choices.categories.map((category, idx) => (
-              <option key={idx} value={category.value}>
-                {category.display_name}
-              </option>
-            ))}
+            {!!choices &&
+              choices.categories.map((category, idx) => (
+                <option key={idx} value={category.value}>
+                  {category.display_name}
+                </option>
+              ))}
           </Form.Control>
         ) : (
           <Asset spinner signin />
@@ -315,6 +296,7 @@ const ProductCreateForm = () => {
           setGallery={setGallery}
           errors={errors}
           setErrors={setErrors}
+          hasLoaded={hasLoaded}
         />
         {productFields}
       </Row>

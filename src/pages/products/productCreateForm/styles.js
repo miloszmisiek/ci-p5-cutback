@@ -15,6 +15,8 @@ export const TitleWrapper = styled.div`
   justify-content: ${(props) => (props.title ? "space-between" : "flex-end")};
   align-items: center;
   width: ${(props) => (props.title ? "100%" : null)};
+  flex-direction: ${(props) => (props.title ? "column" : null)};
+  margin-left: ${(props) => (props.title ? null : "auto")};
 `;
 
 export const TitleText = styled.div`
@@ -56,10 +58,14 @@ export const TransparentInput = styled(Form.Control)`
   border: none;
   background-color: transparent;
   color: black;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: ${(props) => (props.price ? "1.5rem" : "2rem")};
+  letter-spacing: ${(props) => (props.price ? null : "0.1rem")};
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: ${(props) => (props.price ? null : "1rem")};
   text-align: ${(props) => (props.price ? "end" : null)};
-  max-width: 63%;
+  max-width: ${(props) => (props.price ? "40%" : null)};
+  cursor: pointer;
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: black;
@@ -83,4 +89,18 @@ export const TransparentInput = styled(Form.Control)`
 
 export const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
+`;
+
+export const PriceCurrency = styled.div`
+  border: none;
+  background-color: transparent;
+  color: black;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: end;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
 `;

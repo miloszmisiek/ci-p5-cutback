@@ -24,6 +24,7 @@ import {
   RatingsWrapper,
   TextContainer,
   Title,
+  TitleLink,
   TopWrapper,
   Wrapper,
 } from "./styles";
@@ -68,7 +69,6 @@ const ProductPage = ({ itemsPerPage }) => {
     brand: "",
     in_stock: false,
     price: "",
-    price_currency_symbol: "",
     street: "",
     city: "",
     country: {},
@@ -88,7 +88,6 @@ const ProductPage = ({ itemsPerPage }) => {
     country,
     title,
     description,
-    price_currency_symbol,
     brand,
     price,
     street,
@@ -99,7 +98,6 @@ const ProductPage = ({ itemsPerPage }) => {
     created_at,
   } = productData;
   const is_owner = currentUser?.username === owner;
-  console.log(phone_number);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -111,7 +109,6 @@ const ProductPage = ({ itemsPerPage }) => {
         const {
           category_name,
           country,
-          price_currency_symbol,
           title,
           description,
           brand,
@@ -137,7 +134,6 @@ const ProductPage = ({ itemsPerPage }) => {
         setProductData({
           category_name,
           country: country,
-          price_currency_symbol,
           title,
           description,
           brand,
@@ -266,11 +262,15 @@ const ProductPage = ({ itemsPerPage }) => {
         <Wrapper>
           <TopWrapper>
             <Category>{category_name}</Category>
-            <Price>
-              {price_currency_symbol} {price}
-            </Price>
+            <Price> &#8364; {price}</Price>
           </TopWrapper>
-          <Title>{title}</Title>
+          {is_owner ? (
+            <Title>
+              <TitleLink to={`/products/${id}/edit`}>{title}</TitleLink>
+            </Title>
+          ) : (
+            <Title>{title}</Title>
+          )}
         </Wrapper>
         <Divider />
         <Wrapper>
@@ -340,7 +340,10 @@ const ProductPage = ({ itemsPerPage }) => {
           </ContactData>
         </Wrapper>
         <Divider />
-        <CreatedDate><i className="far fa-calendar-plus mr-2"></i>{created_at}</CreatedDate>
+        <CreatedDate>
+          <i className="far fa-calendar-plus mr-2"></i>
+          {created_at}
+        </CreatedDate>
       </TextContainer>
     </ProductPageColumn>
   );

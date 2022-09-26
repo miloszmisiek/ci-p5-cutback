@@ -62,13 +62,14 @@ const ProductEditForm = () => {
   const history = useHistory();
   const { id } = useParams();
   const { handleClose, handleShow } = useSetModalContext();
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
-        const currencies = data.actions?.POST.price_currency.choices;
+
         setOptions({ currencies, countires });
       } catch (err) {
         console.log(err);
@@ -107,6 +108,7 @@ const ProductEditForm = () => {
             gallery,
           });
           setImages(gallery);
+          setHasLoaded(true);
         } else {
           history.push("/");
         }
@@ -115,7 +117,7 @@ const ProductEditForm = () => {
       }
     };
     handleMount();
-  }, [history, id]);
+  }, [history, id, hasLoaded]);
 
   const handleImageSubmit = () => {
     const galleryFormData = new FormData();
@@ -221,7 +223,7 @@ const ProductEditForm = () => {
             onChange={handleChange}
           />
           <TitleWrapper>
-            {currencies?.length ? (
+            {/* {currencies?.length ? (
               <CurrencySelect
                 as="select"
                 name="price_currency"
@@ -236,7 +238,8 @@ const ProductEditForm = () => {
               </CurrencySelect>
             ) : (
               <Asset spinner signin />
-            )}
+            )} */}
+            <span>&#8364;</span>
             <TransparentInput
               type="text"
               name="price"
@@ -410,6 +413,7 @@ const ProductEditForm = () => {
             setErrors={setErrors}
             deletedImages={deletedImages}
             setDeletedImages={setDeletedImages}
+            hasLoaded={hasLoaded}
           />
           {productFields}
         </Row>

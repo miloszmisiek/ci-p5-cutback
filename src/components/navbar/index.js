@@ -130,6 +130,7 @@ const NavBar = () => {
         <NavLink
           to="/"
           onClick={() => {
+            history.push("/");
             setHasLoaded(false);
           }}
         >
