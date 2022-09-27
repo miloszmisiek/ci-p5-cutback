@@ -178,18 +178,17 @@ const NavBar = () => {
               setHasLoaded(false);
             }}
           />
-          <SearchBarDropdown show={menuIsOpen.category}>
+          <SearchBarDropdown
+            show={menuIsOpen.category}
+            onToggle={() =>
+              setMenuIsOpen((prev) => ({
+                ...prev,
+                category: !prev.category,
+              }))
+            }
+          >
             <StyledCategoriesDropdown id="dropdown-basic">
-              <span
-                onClick={() =>
-                  setMenuIsOpen((prev) => ({
-                    ...prev,
-                    category: !prev.category,
-                  }))
-                }
-                className="d-none"
-                id="categories"
-              >
+              <span className="d-none" id="categories">
                 {displayName}
               </span>
               <span
