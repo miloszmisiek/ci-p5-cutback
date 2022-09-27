@@ -169,9 +169,9 @@ const ProductCreateForm = () => {
               Categories
             </option>
             {!!choices &&
-              choices.categories.map((category, idx) => (
-                <option key={idx} value={category.value}>
-                  {category.display_name}
+              choices.categories.map((category) => (
+                <option key={category.key} value={category.key}>
+                  {category.value}
                 </option>
               ))}
           </Form.Control>
