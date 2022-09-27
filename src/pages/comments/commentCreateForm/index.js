@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { axiosRes } from "../../../api/axiosDefaults";
 
 import {
   CommentInput,
