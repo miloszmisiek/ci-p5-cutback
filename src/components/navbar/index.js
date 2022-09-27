@@ -101,6 +101,9 @@ const NavBar = () => {
           to={`/`}
           onClick={() => {
             setMenuIsOpen((prev) => ({ ...prev, navbar: !prev.navbar }));
+            if (location.pathname === "/") {
+              history.go(0);
+            }
           }}
         >
           Home
@@ -153,7 +156,9 @@ const NavBar = () => {
           to="/"
           onClick={() => {
             history.push("/");
-            setHasLoaded(false);
+            if (location.pathname === "/") {
+              history.go(0);
+            }
           }}
         >
           <img src={logo} alt="Logo" height="45"></img>

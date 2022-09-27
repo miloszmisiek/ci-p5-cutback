@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import {
   StyledFooter,
   StyledFooterLogo,
@@ -9,11 +9,20 @@ import {
 import footer from "../../assets/logo-footer.png";
 
 const Footer = () => {
+  const location = useLocation();
+  const history = useHistory();
   return (
     <footer className="mt-auto">
       <StyledFooter>
         <StyledFooterLogo>
-          <NavLink to="/">
+          <NavLink
+            to="/"
+            onClick={() => {
+              if (location.pathname === "/") {
+                history.go(0);
+              }
+            }}
+          >
             <img src={footer} alt="Logo" height="35"></img>
             <span>Cutback</span>
           </NavLink>
