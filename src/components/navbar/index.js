@@ -205,6 +205,19 @@ const NavBar = () => {
               </span>
             </StyledCategoriesDropdown>
             <Dropdown.Menu className="end-0">
+              <CategoriesLinks
+                onClick={() => {
+                  setDisplayName("Categories");
+                  setMenuIsOpen((prev) => ({
+                    ...prev,
+                    category: !prev.category,
+                  }));
+                }}
+                to={"/"}
+              >
+                All
+              </CategoriesLinks>
+              <Dropdown.Divider />
               {choices.categories?.map((cat) => (
                 <CategoriesLinks
                   onClick={() => {
