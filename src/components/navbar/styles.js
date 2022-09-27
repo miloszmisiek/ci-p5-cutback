@@ -19,14 +19,19 @@ export const StyledFormControl = styled(FormControl)`
   font-family: "Font Awesome\ 5 Free", "Montserrat", sans-serif;
   font-weight: 600;
   display: inline-block;
-  width: 100%;
+  width: 100% !important;
   background-color: transparent;
   border: none;
+  padding-right: 4rem;
   &:focus {
     outline: none !important;
     outline-width: 0 !important;
     box-shadow: none;
     z-index: -1;
+  }
+
+  @media (min-width: 576px) {
+    padding-right: 8rem;
   }
 `;
 export const StyledRow = styled(Row)`
@@ -237,6 +242,7 @@ export const StyledCategoriesDropdown = styled(Dropdown.Toggle)`
   }
 
   @media (min-width: 500px) {
+    min-width: 8rem;
     & #categories {
       display: inline !important;
     }
