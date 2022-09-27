@@ -80,6 +80,11 @@ function App() {
           <Switch>
             <Route
               exact
+              path="/"
+              render={() => <ProductsPage itemsPerPage={12} />}
+            />
+            <Route
+              exact
               path="/profiles/:id/edit"
               render={() => <ProfileEditPage />}
             />
@@ -98,7 +103,7 @@ function App() {
               <Route
                 key={cat.value}
                 exact
-                path={`/products/categories/${cat.display_name.toLowerCase()}`}
+                path={`/${cat.display_name.toLowerCase()}`}
                 render={() => (
                   <ProductsPage
                     filter={`category=${cat.value}`}
@@ -122,12 +127,9 @@ function App() {
               path="/products/:id/edit"
               render={() => <ProductEditForm />}
             />
+            
             <Route
-              exact
-              path="/"
-              render={() => <ProductsPage itemsPerPage={12} />}
-            />
-            <Route
+              path={"*"}
               render={() => <PageNotFound setBackground={setBackground} />}
             />
           </Switch>

@@ -11,7 +11,9 @@ export const PersonalInfo = styled.div`
   font-size: 1.2rem;
   letter-spacing: 0.1rem;
   color: ${(props) => (props.delete ? "#df2c14" : "black")};
-  margin-top: ${(props) => (props.delete ? "1.5rem" : null)}; ;
+  @media (max-width: 767px) {
+    margin-top: ${(props) => (props.delete ? "1.5rem" : null)};
+  }
 `;
 
 export const PhoneInputCustom = styled(PhoneInput)`
@@ -34,16 +36,27 @@ export const ProfileButton = styled(PostButton)`
       : props.edit
       ? "rgba(0,0,0,0.2) !important"
       : "inherit"};
-  margin: ${(props) => (props.delete ? "1rem 0" : null)};
+  margin: ${(props) => (props.delete ? "1rem auto" : null)};
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 
+  &:active,
+  :focus {
+    background-color: ${(props) =>
+      props.delete
+        ? "#df2c14 !important;"
+        : props.edit
+        ? "rgba(0,0,0,0.2) !important"
+        : "rgb(180, 211, 178) !important;"};
+    color: ${(props) =>
+      props.delete ? "rgba(255, 255, 255) !important" : "inherit !important"};
+  }
   &:hover {
     background-color: ${(props) =>
       props.delete
         ? "#B1220F !important;"
         : props.edit
         ? "rgba(0,0,0,0.3) !important"
-        : "inherit"};
+        : "rgba(180, 193, 185, 1) !important"};
 
     color: ${(props) => (props.delete ? "white !important" : "inherit")};
   }
