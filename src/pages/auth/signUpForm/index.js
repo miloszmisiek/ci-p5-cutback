@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 
 const SignUpForm = (props) => {
   const { setBackground } = props;
@@ -25,6 +26,7 @@ const SignUpForm = (props) => {
   const { email, username, password1, password2 } = signUpData;
   const [errors, setErrors] = useState({});
   const history = useHistory();
+  const { handleShowAlert } = useSetAlertContext();
 
   useEffect(() => {
     setBackground({ signUp: true });
@@ -46,9 +48,12 @@ const SignUpForm = (props) => {
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
       history.push("/signin");
+      handleShowAlert("secondary", "Email verification message has been sent.");
     } catch (err) {
       setErrors(err.response?.data);
     }
+    
+
   };
 
   return (

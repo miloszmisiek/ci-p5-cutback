@@ -16,6 +16,7 @@ import { useHistory } from "react-router-dom";
 import { useSetCurrentUser } from "../../../contexts/CurrentUserContext";
 import { setTokenTimestamp } from "../../../utils/utils";
 import { useSetQueryContext } from "../../../contexts/QueryContext";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 
 const SignInForm = (props) => {
   const setCurrentUser = useSetCurrentUser();
@@ -28,6 +29,8 @@ const SignInForm = (props) => {
   const [errors, setErrors] = useState({});
   const history = useHistory();
   const { setHasLoaded } = useSetQueryContext();
+  const { handleShowAlert } = useSetAlertContext();
+
 
   useEffect(() => {
     setBackground({ signIn: true });
@@ -51,6 +54,7 @@ const SignInForm = (props) => {
       setCurrentUser(data.user);
       setTokenTimestamp(data);
       history.push("/");
+      handleShowAlert("success", "Successfully logged in");
       setHasLoaded(false);
     } catch (err) {
       setErrors(err.response?.data);
