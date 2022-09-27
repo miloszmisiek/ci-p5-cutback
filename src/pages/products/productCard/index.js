@@ -11,13 +11,17 @@ import {
   CardTitle,
   CardWrapper,
   Column,
+  Counters,
   NavLinkProduct,
+  OverlayShadow,
   PriceComponent,
+  ProductCardDivider,
   RatingComponent,
   UserContainer,
   Username,
 } from "./styles";
 import Asset from "../../../components/asset";
+import { CreatedDate } from "../productPage/styles";
 
 const ProductCard = (props) => {
   const [errors, setErrors] = useState({});
@@ -26,22 +30,22 @@ const ProductCard = (props) => {
     owner_profile,
     gallery,
     title,
-    price_currency_symbol,
     price,
     scores,
+    comments_count,
+    in_stock,
   } = props;
   return (
     <Column xs={12} sm={6} md={4}>
       <CardWrapper>
-        <CardHeader>
-          <NavLink to={`/profiles/${owner_profile.id}/`}>
-            <UserContainer>
-              <Avatar src={owner_profile.image} height={40} />
-              <Username>{owner_profile.owner}</Username>
-            </UserContainer>
-          </NavLink>
-        </CardHeader>
-        {!!gallery.length ? (
+        {!in_stock && (
+          <Asset
+            outofstock={true}
+            src="https://res.cloudinary.com/milo-milo/image/upload/v1664225168/dlf.pt-in-stock-png-3279008_ownkpl.png"
+            height={100}
+          />
+        )}
+        {gallery.length > 1 ? (
           <CarouselStyled interval={null}>
             {gallery.map((image) => (
               <Carousel.Item key={image.id}>
@@ -54,11 +58,11 @@ const ProductCard = (props) => {
               </Carousel.Item>
             ))}
           </CarouselStyled>
+        ) : !!gallery.length ? (
+          <Asset src={gallery[0]?.image} height={200} productCard />
         ) : (
           <Asset
-            src={
-              "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
-            }
+            src="https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
             height={200}
             productCard
           />
@@ -67,9 +71,8 @@ const ProductCard = (props) => {
           <CardTitle>
             <NavLinkProduct to={`/products/${id}/`}>{title}</NavLinkProduct>
           </CardTitle>
-          <PriceComponent>
-            {price_currency_symbol} {price}
-          </PriceComponent>
+          <ProductCardDivider />
+          <PriceComponent>&#8364; {price}</PriceComponent>
           <RatingComponent>
             <AvgScore>{parseFloat(scores?.statistics.avg).toFixed(1)}</AvgScore>
             <StarRatings
@@ -80,6 +83,13 @@ const ProductCard = (props) => {
               starRatedColor="green"
             />
           </RatingComponent>
+          <Counters>
+            {scores.statistics?.all_scores}
+            {scores.statistics?.all_scores !== 1
+              ? " ratings"
+              : " rating"} and {comments_count}
+            {comments_count !== 1 ? " reviews" : " review"}
+          </Counters>
         </CardBody>
       </CardWrapper>
     </Column>

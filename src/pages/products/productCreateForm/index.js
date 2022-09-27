@@ -125,7 +125,6 @@ const ProductCreateForm = () => {
         <TitleWrapper title="true">
           <TitleWrapper>
             <PriceCurrency>
-              &#8364;
               <TransparentInput
                 type="text"
                 name="price"
@@ -134,6 +133,7 @@ const ProductCreateForm = () => {
                 placeholder="0.00"
                 price="true"
               />
+              &#8364;
             </PriceCurrency>
           </TitleWrapper>
           <TransparentInput

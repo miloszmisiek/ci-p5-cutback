@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AvgScore, RatingComponent } from "../productCard/styles";
+import { AvgScore, Counters, RatingComponent } from "../productCard/styles";
 import { CreateColumn } from "../productCreateForm/styles";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import ReactCountryFlag from "react-country-flag";
@@ -118,6 +118,12 @@ export const ContactInformation = styled.div`
   margin-bottom: 0.5rem;
 `;
 
+export const LocationLink = styled.a`
+  &:hover {
+    text-decoration: underline !important;
+  }
+`;
+
 export const ContactData = styled.div`
   margin-bottom: 0.5rem;
 
@@ -155,12 +161,23 @@ export const Rating = styled(RatingComponent)`
 
 export const CreatedDate = styled(ContactInformation)`
   color: rgba(0, 0, 0, 0.4);
-  /* margin-left: auto; */
+  margin: auto;
 `;
 
 export const TitleLink = styled(Link)`
   cursor: pointer;
   &:hover {
     font-weight: 600;
+  }
+`;
+
+export const ProductPageConters = styled(Counters)`
+  text-align: center;
+  margin: 0.5rem auto 0;
+`;
+
+export const ContactLink = styled.a`
+  &:hover {
+    text-decoration: underline !important;
   }
 `;

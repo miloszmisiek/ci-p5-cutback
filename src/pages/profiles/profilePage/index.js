@@ -27,6 +27,8 @@ const ProfilePage = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const { id } = useParams();
+  const is_owner = currentUser?.profile_id === parseInt(id);
+
   const [profileData, setProfileData] = useState({});
 
   useEffect(() => {
@@ -60,9 +62,17 @@ const ProfilePage = () => {
 
             <ProfileInfoContainer>
               <AvatarContainer>
-                <Link to={`/profiles/${id}/edit`}>
+                {is_owner ? (
+                  <Link to={`/profiles/${id}/edit`}>
+                    <Avatar
+                      shadow={true}
+                      src={profileData.image}
+                      height={120}
+                    />
+                  </Link>
+                ) : (
                   <Avatar shadow={true} src={profileData.image} height={120} />
-                </Link>
+                )}
               </AvatarContainer>
               <ProfileData>
                 <ProfileName>{profileData.owner}</ProfileName>
@@ -125,9 +135,9 @@ const ProfilePage = () => {
           ) : (
             <Asset
               src={
-                "https://res.cloudinary.com/milo-milo/image/upload/v1664049160/travolta_uxurth.png"
+                "https://res.cloudinary.com/milo-milo/image/upload/v1664234685/000_1705.S.05.V01.surfingskeleton_pf4n2t.svg"
               }
-              message="You have no products. There is nothing to show here..."
+              message="No products, no waves, no fun..."
               height={200}
             />
           )}

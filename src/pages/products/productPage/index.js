@@ -12,14 +12,17 @@ import {
   CommentContainer,
   ContactData,
   ContactInformation,
+  ContactLink,
   CountryFlag,
   CreatedDate,
   Description,
   Divider,
+  LocationLink,
   PhoneInputDisplay,
   Price,
   ProductAvgScore,
   ProductPageColumn,
+  ProductPageConters,
   Rating,
   RatingsWrapper,
   TextContainer,
@@ -38,8 +41,6 @@ import {
   formatPhoneNumberIntl,
   parsePhoneNumber,
 } from "react-phone-number-input";
-import { PhoneInputCustom } from "../../profiles/profileEditPage/styles";
-// import ModalCustom from "../../../components/modal";
 
 const ProductPage = ({ itemsPerPage }) => {
   const { id } = useParams();
@@ -52,6 +53,7 @@ const ProductPage = ({ itemsPerPage }) => {
     avg: 0,
     currentUserRating: null,
     scores: {},
+    all_scores: 0,
   });
   const [comments, setComments] = useState({});
   const [profile, setProfile] = useState({
@@ -80,7 +82,7 @@ const ProductPage = ({ itemsPerPage }) => {
 
   const { handleShowAlert } = useSetAlertContext();
 
-  const { rating_data, avg, currentUserRating, scores } = rating;
+  const { rating_data, avg, currentUserRating, scores, all_scores } = rating;
   const { profile_id, owner, email, first_name, last_name, phone_number } =
     profile;
   const {
@@ -155,14 +157,15 @@ const ProductPage = ({ itemsPerPage }) => {
         });
         setRating((prev) => ({
           ...prev,
-          rating_data: scores?.data,
-          avg: scores?.statistics?.avg,
-          scores: scores?.statistics?.scores,
+          rating_data: scores.data,
+          avg: scores.statistics.avg,
+          scores: scores.statistics.scores,
+          all_scores: scores.statistics.all_scores,
         }));
         setComments(commentsData);
         setPageCount(
           !!commentsData.next
-            ? Math.ceil(commentsData?.count / commentsData?.results?.length)
+            ? Math.ceil(commentsData?.count / commentsData.results?.length)
             : 0
         );
         setHasLoaded(true);
@@ -241,6 +244,12 @@ const ProductPage = ({ itemsPerPage }) => {
           />
         )}
       </Rating>
+      <ProductPageConters>
+        {" "}
+        {all_scores}
+        {all_scores !== 1 ? " ratings" : " rating"} and {comments_count}
+        {comments_count !== 1 ? " reviews" : " review"}
+      </ProductPageConters>
       <Divider />
       {Object.entries(scores).map((score) => (
         <Rating key={parseInt(score[0].split("star_")[1])} scores>
@@ -288,17 +297,17 @@ const ProductPage = ({ itemsPerPage }) => {
             <i className="far fa-id-card pr-1"></i> Contact Information
           </ContactInformation>
           <ContactData>
-            <NavLink to={`/profiles/${profile_id}`}>
-              <i className="fas fa-user"></i>{" "}
-            </NavLink>
-            {first_name ? first_name : owner} {last_name ? last_name : null}
+            <ContactLink as={Link} to={`/profiles/${profile_id}`}>
+              <i className="fas fa-user mr-2"></i>{" "}
+              {first_name ? first_name : owner} {last_name ? last_name : null}
+            </ContactLink>
           </ContactData>
           {phone_number ? (
             <ContactData>
-              <a href={`tel:${formatPhoneNumberIntl(phone_number)}`}>
-                <i className="fas fa-phone-alt"></i>
-              </a>
-              {formatPhoneNumberIntl(phone_number)}
+              <ContactLink href={`tel:${formatPhoneNumberIntl(phone_number)}`}>
+                <i className="fas fa-phone-alt mr-2"></i>
+                {formatPhoneNumberIntl(phone_number)}
+              </ContactLink>
               {
                 <CountryFlag
                   svg
@@ -308,16 +317,16 @@ const ProductPage = ({ itemsPerPage }) => {
             </ContactData>
           ) : null}
           <ContactData>
-            <a href={`mailto:${email}`} aria-label="Go to email page">
-              <i className="fas fa-envelope"></i>
-            </a>
-            {email}
+            <ContactLink href={`mailto:${email}`} aria-label="Go to email page">
+              <i className="fas fa-envelope mr-2"></i>
+              {email}
+            </ContactLink>
           </ContactData>
         </Wrapper>
         <Divider />
         <Wrapper>
           <ContactInformation>
-            <a
+            <LocationLink
               href={`http://maps.google.com/?q=${
                 street + " " + city + " " + country.name
               }`}
@@ -325,7 +334,7 @@ const ProductPage = ({ itemsPerPage }) => {
               rel="noopener noreferrer"
             >
               <i className="fas fa-map-pin pr-1"></i> Location
-            </a>
+            </LocationLink>
           </ContactInformation>
           <ContactData>
             <strong>Address: </strong>
@@ -341,7 +350,9 @@ const ProductPage = ({ itemsPerPage }) => {
         </Wrapper>
         <Divider />
         <CreatedDate>
-          <i className="far fa-calendar-plus mr-2"></i>
+          <span className="mr-1">
+            <i className="far fa-calendar-plus mr-2"></i>Created at:{" "}
+          </span>
           {created_at}
         </CreatedDate>
       </TextContainer>
@@ -349,7 +360,7 @@ const ProductPage = ({ itemsPerPage }) => {
   );
   const carouselProductPage = (
     <ProductPageColumn xs={12} md={7}>
-      {!!gallery.length ? (
+      {gallery.length > 1 ? (
         <CarouselProductPage>
           {gallery?.map((image) => (
             <Carousel.Item key={image.id}>
@@ -362,11 +373,11 @@ const ProductPage = ({ itemsPerPage }) => {
             </Carousel.Item>
           ))}
         </CarouselProductPage>
+      ) : !!gallery.length ? (
+        <Asset src={gallery[0]?.image} height={300} productCard />
       ) : (
         <Asset
-          src={
-            "https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
-          }
+          src="https://res.cloudinary.com/milo-milo/image/upload/v1663236405/default_gkffon.png"
           height={200}
           productCard
         />

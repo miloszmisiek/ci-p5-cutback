@@ -10,11 +10,18 @@ export const AssetWrapper = styled.div`
   align-items: center;
   min-height: ${(props) => (props.signin ? null : "120px")};
   width: 100%;
+  ${(props) =>
+    props.outofstock
+      ? `position: absolute;
+    top: 18px;
+    left: 0;
+    z-index: 1;`
+      : null}
 `;
 
 export const Img = styled.img`
   border-radius: 20px;
-  margin-bottom: ${(props) => (props.productCard ? null : "1rem" )};
+  margin-bottom: ${(props) => (props.productCard ? null : "1rem")};
 `;
 
 export const Msg = styled.p`

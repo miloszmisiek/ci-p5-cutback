@@ -39,6 +39,10 @@ const NavBar = () => {
   const location = useLocation();
   const { query } = useQueryContext();
   const { setQuery, setHasLoaded } = useSetQueryContext();
+  const [menuIsOpen, setMenuIsOpen] = useState({
+    navbar: false,
+    category: false,
+  });
   const history = useHistory();
 
   useEffect(() => {
@@ -52,10 +56,6 @@ const NavBar = () => {
           )[0].display_name
         );
   }, [location, choices, query, history]);
-
-  // const handleChange = (e) => {
-  //   setQuery(e.target.value);
-  // };
 
   const handleSignOut = async () => {
     try {
@@ -86,6 +86,10 @@ const NavBar = () => {
       <StyledDropdown
         title={<Avatar src={currentUser?.profile_image} height={40} />}
         id="basic-nav-dropdown"
+        show={menuIsOpen.navbar}
+        onToggle={() =>
+          setMenuIsOpen((prev) => ({ ...prev, navbar: !prev.navbar }))
+        }
       >
         <StyledSignedInMsg>
           {" "}
@@ -93,24 +97,43 @@ const NavBar = () => {
         </StyledSignedInMsg>
         <NavDropdown.Divider />
         {/* TODO: add routes for dropdown section */}
-        <StyledNavLink dropdownitem="true" to={`/`}>
+        <StyledNavLink
+          dropdownitem="true"
+          to={`/`}
+          onClick={() => {
+            setMenuIsOpen((prev) => ({ ...prev, navbar: !prev.navbar }));
+          }}
+        >
           Home
         </StyledNavLink>
         <StyledNavLink
           dropdownitem="true"
           to={`/profiles/${currentUser?.profile_id}/`}
-          onClick={() => setHasLoaded(false)}
+          onClick={() => {
+            setMenuIsOpen((prev) => ({ ...prev, navbar: !prev }));
+            setHasLoaded(false);
+          }}
         >
           Profile
         </StyledNavLink>
         <StyledNavLink
           dropdownitem="true"
           to={`/profiles/${currentUser?.profile_id}/edit`}
+          onClick={() => {
+            setMenuIsOpen((prev) => ({ ...prev, navbar: !prev }));
+          }}
         >
           Settings
         </StyledNavLink>
         <NavDropdown.Divider />
-        <StyledNavLink dropdownitem="true" to="/" onClick={handleSignOut}>
+        <StyledNavLink
+          dropdownitem="true"
+          to="/"
+          onClick={() => {
+            handleSignOut();
+            setMenuIsOpen((prev) => ({ ...prev, navbar: !prev }));
+          }}
+        >
           <i className="fas fa-sign-out-alt"></i> Logout
         </StyledNavLink>
       </StyledDropdown>
@@ -156,12 +179,30 @@ const NavBar = () => {
               setHasLoaded(false);
             }}
           />
-          <SearchBarDropdown>
+          <SearchBarDropdown show={menuIsOpen.category}>
             <StyledCategoriesDropdown id="dropdown-basic">
-              <span className="d-none" id="categories">
+              <span
+                onClick={() =>
+                  setMenuIsOpen((prev) => ({
+                    ...prev,
+                    category: !prev.category,
+                  }))
+                }
+                className="d-none"
+                id="categories"
+              >
                 {displayName}
               </span>
-              <span className="d-inline" id="categories-icon">
+              <span
+                onClick={() =>
+                  setMenuIsOpen((prev) => ({
+                    ...prev,
+                    category: !prev.category,
+                  }))
+                }
+                className="d-inline"
+                id="categories-icon"
+              >
                 <i className="fas fa-th-list"></i>
               </span>
             </StyledCategoriesDropdown>
@@ -170,6 +211,10 @@ const NavBar = () => {
                 <CategoriesLinks
                   onClick={() => {
                     setDisplayName(cat.display_name);
+                    setMenuIsOpen((prev) => ({
+                      ...prev,
+                      category: !prev.category,
+                    }));
                     setHasLoaded(false);
                   }}
                   key={cat.value}

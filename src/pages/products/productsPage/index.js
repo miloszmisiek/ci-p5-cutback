@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  ButtonGroup,
-  Col,
-  Dropdown,
-  DropdownButton,
-  Form,
-  Row,
-} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
@@ -16,12 +8,9 @@ import {
   useSetQueryContext,
 } from "../../../contexts/QueryContext";
 import ProductCard from "../productCard";
-import { FormSwitch } from "../productEditForm/styles";
 import {
   AllProductsButton,
   AllProductsContainer,
-  CountryButton,
-  DropBtnCustom,
   FilterContainer,
   FilterInStock,
   FiltersCountry,
@@ -35,8 +24,6 @@ import {
   ProductsPageRow,
   ReactPaginateStyled,
 } from "./styles";
-import rates from "../../../utils/rates.json";
-import { ConvertCurrency } from "../../../utils/utils";
 
 const ProductsPage = ({
   filter = "",
@@ -46,7 +33,6 @@ const ProductsPage = ({
 }) => {
   const [results, setResults] = useState([]);
   const [productCountries, setProductCountries] = useState([]);
-  // const [hasLoaded, setHasLoaded] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [inStock, setInStock] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -70,10 +56,23 @@ const ProductsPage = ({
       try {
         const [{ data: filtered }, { data: all }] = await Promise.all([
           axiosReq.get(
-            `/products/?in_stock=${inStock}&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
+            `/products/?in_stock=${
+              inStock ? inStock : ""
+            }&${filter}&ordering=${ordering}&country=${country}&search=${query}`
           ),
           axiosReq.get("/products"),
         ]);
+        setProductCountries(
+          all.results
+            ?.map((product) => product.country)
+            .filter(
+              (country, index, array) =>
+                array.findIndex(
+                  (c) => c.code === country.code && c.name === country.name
+                ) === index
+            )
+            .sort((a, b) => a.name.localeCompare(b.name))
+        );
 
         // if (ordering === "-price") {
         //   const newFiltered = {
@@ -134,9 +133,9 @@ const ProductsPage = ({
   const handlePageClick = async (e) => {
     try {
       const { data } = await axiosReq.get(
-        `/products/?page=${
-          e.selected + 1
-        }&in_stock=${inStock}&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
+        `/products/?page=${e.selected + 1}&in_stock=${
+          inStock ? inStock : ""
+        }&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
       );
       // if (ordering === "-price") {
       //   const newFiltered = {
@@ -173,7 +172,7 @@ const ProductsPage = ({
       // } else {
       //   setResults(data);
       // }
-      
+
       setResults(data);
     } catch (err) {
       console.log(err);
@@ -196,30 +195,28 @@ const ProductsPage = ({
               Filters <i className="fas fa-tools pl-2"></i>
             </FiltersTitle>
             <FiltersExpanded expanded={expanded}>
-              <AllProductsContainer>
-                <FilterInStock
-                  onChange={() => {
-                    setInStock((prev) => !prev);
-                    setHasLoaded(false);
-                  }}
-                  name="in_stock"
-                  id="custom-switch"
-                  label="In Stock"
-                  checked={inStock}
-                  value={inStock}
-                />
+              <FilterInStock
+                onChange={() => {
+                  setInStock((prev) => !prev);
+                  setHasLoaded(false);
+                }}
+                name="in_stock"
+                id="custom-switch"
+                label="In Stock"
+                checked={inStock}
+                value={inStock}
+              />
+              <AllProductsContainer select="true">
                 <AllProductsButton
                   onClick={(e) => {
                     e.preventDefault();
                     setInStock("");
-                    setFilterSet({ country: "", currency: "", page: "1" });
+                    setFilterSet({ country: "", page: "1" });
                     setHasLoaded(false);
                   }}
                 >
                   Show All
                 </AllProductsButton>
-              </AllProductsContainer>
-              <AllProductsContainer select="true">
                 <FormGroup>
                   <FormLabel>Country</FormLabel>
                   <FiltersCountry
@@ -233,23 +230,6 @@ const ProductsPage = ({
                     {productCountries?.map((country, idx) => (
                       <option key={idx} value={country.code}>
                         {country.name}
-                      </option>
-                    ))}
-                  </FiltersCountry>
-                </FormGroup>
-                <FormGroup>
-                  <FormLabel>Currency</FormLabel>
-                  <FiltersCountry
-                    as="select"
-                    name="currency"
-                    value={currency}
-                    onChange={handleChange}
-                  >
-                    <option value="">All</option>
-                    <option disabled>──────────</option>
-                    {choices.currencies?.map((currency) => (
-                      <option key={currency.value} value={currency.value}>
-                        ({currency.display_name}) {currency.value}
                       </option>
                     ))}
                   </FiltersCountry>
@@ -271,16 +251,16 @@ const ProductsPage = ({
                       <option value="price">Price &#9650;</option>
                       <option value="title">Title &#9650;</option>
                       <option value="created_at">Created &#9650;</option>
-                      <option value="avg_score">Avg score &#9650;</option>
-                      <option value="all_scores">All scores &#9650;</option>
+                      <option value="avg_score">Avg rating &#9650;</option>
+                      <option value="all_scores">All ratings &#9650;</option>
                     </optgroup>
                     <option disabled>──────────</option>
                     <optgroup label={`Descending \u25bc`}>
                       <option value="-price">Price &#9660;</option>
                       <option value="-title">Title &#9660;</option>
                       <option value="-created_at">Created &#9660;</option>
-                      <option value="-avg_score">Avg score &#9660;</option>
-                      <option value="-all_scores">All scores &#9660;</option>
+                      <option value="-avg_score">Avg rating &#9660;</option>
+                      <option value="-all_scores">All ratings &#9660;</option>
                     </optgroup>
                   </FiltersCountry>
                 </FormGroup>
@@ -300,10 +280,10 @@ const ProductsPage = ({
             ) : (
               <Asset
                 src={
-                  "https://res.cloudinary.com/milo-milo/image/upload/v1664049160/travolta_uxurth.png"
+                  "https://res.cloudinary.com/milo-milo/image/upload/v1664234685/000_1705.S.05.V01.surfingskeleton_pf4n2t.svg"
                 }
-                message="There are no products. There is nothing to show here..."
-                height={200}
+                message="No products, no waves, no fun..."
+                height={300}
               />
             )}
           </ProductsPageRow>

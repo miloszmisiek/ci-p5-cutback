@@ -11,6 +11,7 @@ export const CardWrapper = styled(Card)`
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 `;
 
+
 export const CardHeader = styled(Card.Header)`
   /* display: flex; */
   display: none;
@@ -70,8 +71,7 @@ export const NavLinkProduct = styled(NavLink)`
   }
 `;
 
-export const CardBody = styled(Card.Body)`
-`;
+export const CardBody = styled(Card.Body)``;
 
 export const AvgScore = styled.div`
   margin-top: 8px;
@@ -82,4 +82,16 @@ export const AvgScore = styled.div`
 
 export const Username = styled.div`
   margin-left: 0.3rem;
+`;
+
+export const ProductCardDivider = styled.hr`
+  margin-top: 0;
+`;
+
+export const Counters = styled.div`
+  margin-left: auto;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
 `;

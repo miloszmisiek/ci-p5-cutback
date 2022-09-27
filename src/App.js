@@ -17,6 +17,7 @@ import ProfilePage from "./pages/profiles/profilePage";
 import ProfileEditPage from "./pages/profiles/profileEditPage";
 import Message from "./components/alert/index";
 import ModalCustom from "./components/modal";
+import PageNotFound from "./pages/404notFound";
 
 export const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -31,6 +32,7 @@ export const AppWrapper = styled.div`
 export const Main = styled.main`
   background-color: #f8f8f8;
   height: ${(props) => (props.home ? null : "100%")};
+  /* min-height: calc(); */
 `;
 
 export const BackgroundImage = styled(Image)`
@@ -39,10 +41,17 @@ export const BackgroundImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: ${(props) => (props.signin ? "bottom 0px right 62%" : null)};
+  object-position: ${(props) =>
+    props.signIn
+      ? "bottom 0px right 62%"
+      : props.signUp
+      ? null
+      : "bottom 0 right 31%"};
 
   @media (max-width: 767px) {
-    display: none;
+    display: ${(props) => (props.signIn || props.signUp ? "none" : null)};
+    object-position: ${(props) =>
+      props.signIn || props.signUp ? null : "left 0"};
   }
 `;
 
@@ -58,9 +67,11 @@ function App() {
             src={
               background.signIn
                 ? "https://res.cloudinary.com/milo-milo/image/upload/v1662642961/signin-section_spvixz.jpg"
-                : "https://res.cloudinary.com/milo-milo/image/upload/v1662646113/signup-section_japbut.jpg"
+                : background.signUp
+                ? "https://res.cloudinary.com/milo-milo/image/upload/v1662646113/signup-section_japbut.jpg"
+                : "https://res.cloudinary.com/milo-milo/image/upload/v1664235152/telescope-498331_1920_mkik1t.jpg"
             }
-            signin={background.signIn ? "true" : null}
+            signin={`${!!background.signIn}`}
           />
         ) : null}
         <Container className={styles.Main_Container}>
@@ -72,11 +83,7 @@ function App() {
               path="/profiles/:id/edit"
               render={() => <ProfileEditPage />}
             />
-            <Route
-              exact
-              path="/profiles/:id/"
-              render={() => <ProfilePage />}
-            />
+            <Route exact path="/profiles/:id/" render={() => <ProfilePage />} />
             <Route
               exact
               path="/products/create"
@@ -120,7 +127,9 @@ function App() {
               path="/"
               render={() => <ProductsPage itemsPerPage={12} />}
             />
-            <Route render={() => <h1>Page not found!</h1>} />
+            <Route
+              render={() => <PageNotFound setBackground={setBackground} />}
+            />
           </Switch>
         </Container>
       </Main>
