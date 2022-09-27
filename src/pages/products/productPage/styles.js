@@ -4,6 +4,7 @@ import { CreateColumn } from "../productCreateForm/styles";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import ReactCountryFlag from "react-country-flag";
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 export const ProductPageColumn = styled(CreateColumn)`
   background-color: transparent;
@@ -181,3 +182,41 @@ export const ContactLink = styled.a`
     text-decoration: underline !important;
   }
 `;
+
+export const CommentPagination = styled(ReactPaginate)`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 2rem;
+  .page-item:first-child {
+    margin-right: 1rem;
+  }
+  .page-item:last-child {
+    margin-left: 1rem;
+  }
+  .page-item:first-child .page-link,
+  .page-item:last-child .page-link {
+    border-radius: 50% !important;
+    background-color: white;
+    border: 1px solid #dee2e6;
+  }
+
+  .page-link {
+    background: transparent;
+    border: none;
+    color: black;
+  }
+
+  .page-item.active .page-link {
+    background: transparent;
+    border: 0;
+    color: green;
+    font-weight: 700;
+  }
+
+  @media (max-width: 575px) {
+    justify-content: center;
+  }
+`;
+
+

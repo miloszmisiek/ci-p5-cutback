@@ -20,10 +20,11 @@ import ModalCustom from "./components/modal";
 import PageNotFound from "./pages/404notFound";
 
 export const AppWrapper = styled.div`
+  position: relative;
   font-family: "Montserrat", sans-serif;
   background-color: #f8f8f8;
   min-height: 100vh;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -31,8 +32,8 @@ export const AppWrapper = styled.div`
 
 export const Main = styled.main`
   background-color: #f8f8f8;
-  height: ${(props) => (props.home ? null : "100%")};
-  /* min-height: calc(); */
+  /* height: ${(props) => (props.home ? null : "100%")}; */
+  min-height: calc(100vh - 101px);
 `;
 
 export const BackgroundImage = styled(Image)`
@@ -127,7 +128,7 @@ function App() {
               path="/products/:id/edit"
               render={() => <ProductEditForm />}
             />
-            
+
             <Route
               path={"*"}
               render={() => <PageNotFound setBackground={setBackground} />}

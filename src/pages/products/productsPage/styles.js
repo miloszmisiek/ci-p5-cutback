@@ -58,9 +58,12 @@ export const FilterContainer = styled.div`
 `;
 
 export const ReactPaginateStyled = styled(ReactPaginate)`
+  position: absolute;
+  bottom: 6rem;
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 5rem;
   .page-item:first-child {
     margin-right: 1rem;
@@ -88,8 +91,8 @@ export const ReactPaginateStyled = styled(ReactPaginate)`
     font-weight: 700;
   }
 
-  @media (max-width: 575px) {
-    justify-content: center;
+  @media (max-width: 600px) {
+    bottom: 11rem;
   }
 `;
 

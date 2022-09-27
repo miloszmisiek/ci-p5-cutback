@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NotFound = styled.div`
   /* border: 1px solid red; */
   position: absolute;
-  top: 10%;
+  top: 6rem;
   left: 5%;
 
   padding: 4rem 1rem;
@@ -25,7 +25,7 @@ export const NotFound = styled.div`
   color: white;
 
   @media (max-width: 767px) {
-    top: 47%;
+    bottom: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }

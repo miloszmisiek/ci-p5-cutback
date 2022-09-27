@@ -10,6 +10,7 @@ import {
   CarouselProductPage,
   Category,
   CommentContainer,
+  CommentPagination,
   ContactData,
   ContactInformation,
   ContactLink,
@@ -409,7 +410,7 @@ const ProductPage = ({ itemsPerPage }) => {
         ) : (
           <span>No comments... yet</span>
         )}
-        <ReactPaginateStyled
+        <CommentPagination
           nextLabel={<i className="fas fa-chevron-right"></i>}
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
