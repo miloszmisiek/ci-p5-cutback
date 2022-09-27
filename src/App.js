@@ -43,16 +43,16 @@ export const BackgroundImage = styled(Image)`
   height: 100%;
   object-fit: cover;
   object-position: ${(props) =>
-    props.signIn
-      ? "bottom 0px right 62%"
-      : props.signUp
-      ? null
+    props.signin
+      ? "bottom 0 right 55%"
+      : props.signup
+      ? "bottom 0 right 55%"
       : "bottom 0 right 31%"};
 
   @media (max-width: 767px) {
-    display: ${(props) => (props.signIn || props.signUp ? "none" : null)};
+    display: ${(props) => (props.signin || props.signup ? "none" : null)};
     object-position: ${(props) =>
-      props.signIn || props.signUp ? null : "left 0"};
+      props.signin || props.signup ? null : "left 0"};
   }
 `;
 
@@ -66,13 +66,14 @@ function App() {
         {background ? (
           <BackgroundImage
             src={
-              background.signIn
+              background.signin
                 ? "https://res.cloudinary.com/milo-milo/image/upload/v1662642961/signin-section_spvixz.jpg"
-                : background.signUp
+                : background.signup
                 ? "https://res.cloudinary.com/milo-milo/image/upload/v1662646113/signup-section_japbut.jpg"
                 : "https://res.cloudinary.com/milo-milo/image/upload/v1664235152/telescope-498331_1920_mkik1t.jpg"
             }
-            signin={`${!!background.signIn}`}
+            signin={background.signin}
+            signup={background.signup}
           />
         ) : null}
         <Container className={styles.Main_Container}>
@@ -100,14 +101,14 @@ function App() {
               path="/signin"
               render={() => <SignInForm setBackground={setBackground} />}
             />
-            {choices.categories?.map((cat) => (
+            {choices?.categories?.map((cat) => (
               <Route
-                key={cat.value}
+                key={cat.key}
                 exact
-                path={`/products/categories/${cat.display_name.toLowerCase()}`}
+                path={`/products/categories/${cat.value.toLowerCase()}`}
                 render={() => (
                   <ProductsPage
-                    filter={`category=${cat.value}`}
+                    filter={`category=${cat.key}`}
                     itemsPerPage={12}
                   />
                 )}

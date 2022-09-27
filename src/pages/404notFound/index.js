@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
-import { FullRow } from "../auth/signUpForm/styles";
-import { NotFound } from "./styles";
+import { NotFound, NotFoundRow } from "./styles";
 
 const PageNotFound = ({ setBackground }) => {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -18,11 +17,11 @@ const PageNotFound = ({ setBackground }) => {
   return (
     <>
       {hasLoaded && (
-        <FullRow>
+        <NotFoundRow>
           <Col xs={12} md={6}>
-            <NotFound>404 not found</NotFound>
+            <NotFound>Page not found</NotFound>
           </Col>
-        </FullRow>
+        </NotFoundRow>
       )}
     </>
   );

@@ -29,7 +29,7 @@ const SignUpForm = (props) => {
   const { handleShowAlert } = useSetAlertContext();
 
   useEffect(() => {
-    setBackground({ signUp: true });
+    setBackground({ signup: true });
     return () => {
       setBackground(null);
     };

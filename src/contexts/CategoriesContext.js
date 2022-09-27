@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { axiosRes } from "../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../api/axiosDefaults";
 
 export const CategoriesContext = createContext();
 
@@ -9,21 +9,19 @@ export const CategoriesProvider = ({ children }) => {
   const [choices, setChoices] = useState({
     categories: [],
     countries: [],
-    // currencies: [],
   });
-
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const { data } = await axiosRes.options("/products/");
-        const categories = data.actions?.POST.category.choices;
-        const countries = data.actions?.POST.country.choices;
-        // const currencies = data.actions?.POST.price_currency.choices;
+        const [{ data: countries }, { data: categories }] = await Promise.all([
+          axiosRes.options("/products/"),
+          axiosReq.get("/products/choices/"),
+        ]);
+        const countriesChoices = countries.actions?.POST.country.choices;
         setChoices((prev) => ({
           ...prev,
-          categories: categories,
-          countries: countries,
-          // currencies: currencies,
+          categories: categories.CATEGORIES,
+          countries: countriesChoices,
         }));
       } catch (err) {
         console.error(err);

@@ -35,7 +35,6 @@ import {
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  const choices = useCategories();
   const [displayName, setDisplayName] = useState("Categories");
   const location = useLocation();
   const { query } = useQueryContext();
@@ -46,25 +45,25 @@ const NavBar = () => {
   });
   const history = useHistory();
   const { handleShowAlert } = useSetAlertContext();
-
+  const choices = useCategories();
   useEffect(() => {
-    !choices.categories?.some((cat) =>
-      location.pathname.includes(cat.display_name.toLowerCase())
+    !choices?.categories.some((cat) =>
+      location.pathname.includes(cat.value.toLowerCase())
     )
       ? setDisplayName("Categories")
       : setDisplayName(
           choices.categories?.filter((cat) =>
-            location.pathname.includes(cat.display_name.toLowerCase())
-          )[0].display_name
+            location.pathname.includes(cat.value.toLowerCase())
+          )[0].value
         );
-  }, [location, choices, query, history]);
+  }, [location, query, history, choices]);
 
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
-      handleShowAlert("secondary", "You have been logged out.")
+      handleShowAlert("secondary", "You have been logged out.");
     } catch (err) {
       console.error(err);
     }
@@ -225,19 +224,19 @@ const NavBar = () => {
                 All
               </CategoriesLinks>
               <Dropdown.Divider />
-              {choices.categories?.map((cat) => (
+              {choices?.categories.map((cat) => (
                 <CategoriesLinks
                   onClick={() => {
-                    setDisplayName(cat.display_name);
+                    setDisplayName(cat.value);
                     setMenuIsOpen((prev) => ({
                       ...prev,
                       category: !prev.category,
                     }));
                   }}
-                  key={cat.value}
-                  to={`/products/categories/${cat.display_name.toLowerCase()}`}
+                  key={cat.key}
+                  to={`/products/categories/${cat.value.toLowerCase()}`}
                 >
-                  {cat.display_name}
+                  {cat.value}
                 </CategoriesLinks>
               ))}
             </Dropdown.Menu>
