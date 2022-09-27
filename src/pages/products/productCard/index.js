@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Carousel } from "react-bootstrap";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import StarRatings from "react-star-ratings";
