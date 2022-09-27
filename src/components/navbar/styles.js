@@ -13,6 +13,11 @@ import styled from "styled-components";
 
 export const StyledNavbar = styled(Navbar)`
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  min-height: 5.6rem;
+
+  @media (max-width: 767px) {
+    min-height: 9.6rem;
+  }
 `;
 
 export const StyledFormControl = styled(FormControl)`

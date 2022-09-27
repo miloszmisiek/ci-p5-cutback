@@ -8,11 +8,11 @@ export const useSetQueryContext = () => useContext(SetQueryContext);
 
 export const QueryProvider = ({ children }) => {
   const [query, setQuery] = useState("");
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [queryLoaded, setQueryLoaded] = useState(false);
 
   return (
-    <QueryContext.Provider value={{ query, hasLoaded }}>
-      <SetQueryContext.Provider value={{ setQuery, setHasLoaded }}>
+    <QueryContext.Provider value={{ query, queryLoaded }}>
+      <SetQueryContext.Provider value={{ setQuery, setQueryLoaded }}>
         {children}
       </SetQueryContext.Provider>
     </QueryContext.Provider>

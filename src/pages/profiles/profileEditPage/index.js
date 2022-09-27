@@ -99,32 +99,54 @@ const ProfileEditPage = () => {
     handleClose();
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const profileFormData = new FormData();
-    profileFormData.append("first_name", first_name);
-    profileFormData.append("last_name", last_name);
-    profileFormData.append("phone_number", phoneNo);
-
-    if (imageFile?.current?.files[0]) {
-      profileFormData.append("image", imageFile?.current?.files[0]);
-    }
+  const handlePasswordChange = async () => {
     try {
-      const { data } = await axiosRes.put(`/profiles/${id}/`, profileFormData);
-      username !== currentUser.username &&
-        (await axiosRes.put("/dj-rest-auth/user/", { username }));
-      setCurrentUser((prevUser) => ({
-        ...prevUser,
-        username,
-        profile_image: data.image,
-      }));
-      handleShowAlert("success", "Your profile has been updated!");
+      await axiosRes.post("/dj-rest-auth/password/change/", {
+        new_password1: profileData.new_password1,
+        new_password2: profileData.new_password2,
+      });
+      handleShowAlert("success", "Your password has been updated!");
       history.goBack();
     } catch (err) {
-      if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+      //   console.log(err);
+      setErrors(err.response?.data);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (new_password1 || new_password2) {
+      handlePasswordChange();
+    } else {
+      const profileFormData = new FormData();
+      profileFormData.append("first_name", first_name);
+      profileFormData.append("last_name", last_name);
+      profileFormData.append("phone_number", phoneNo);
+
+      if (imageFile?.current?.files[0]) {
+        profileFormData.append("image", imageFile?.current?.files[0]);
       }
-      // console.log(err);
+
+      try {
+        const { data } = await axiosRes.put(
+          `/profiles/${id}/`,
+          profileFormData
+        );
+        username !== currentUser.username &&
+          (await axiosRes.put("/dj-rest-auth/user/", { username }));
+        setCurrentUser((prevUser) => ({
+          ...prevUser,
+          username,
+          profile_image: data.image,
+        }));
+        handleShowAlert("success", "Your profile has been updated!");
+        history.goBack();
+      } catch (err) {
+        if (err.response?.status !== 401) {
+          setErrors(err.response?.data);
+        }
+        // console.log(err);
+      }
     }
   };
 

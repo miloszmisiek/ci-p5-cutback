@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Dropdown, Form, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { useSetAlertContext } from "../../contexts/AlertContext";
 import { useCategories } from "../../contexts/CategoriesContext";
 import {
   useCurrentUser,
@@ -38,12 +39,13 @@ const NavBar = () => {
   const [displayName, setDisplayName] = useState("Categories");
   const location = useLocation();
   const { query } = useQueryContext();
-  const { setQuery, setHasLoaded } = useSetQueryContext();
+  const { setQuery, setQueryLoaded } = useSetQueryContext();
   const [menuIsOpen, setMenuIsOpen] = useState({
     navbar: false,
     category: false,
   });
   const history = useHistory();
+  const { handleShowAlert } = useSetAlertContext();
 
   useEffect(() => {
     !choices.categories?.some((cat) =>
@@ -62,6 +64,7 @@ const NavBar = () => {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
+      handleShowAlert("secondary", "You have been logged out.")
     } catch (err) {
       console.error(err);
     }
@@ -113,7 +116,6 @@ const NavBar = () => {
           to={`/profiles/${currentUser?.profile_id}/`}
           onClick={() => {
             setMenuIsOpen((prev) => ({ ...prev, navbar: !prev }));
-            setHasLoaded(false);
           }}
         >
           Profile
@@ -180,7 +182,7 @@ const NavBar = () => {
             onChange={(e) => {
               setQuery(e.target.value);
               history.push("/");
-              setHasLoaded(false);
+              setQueryLoaded(false);
             }}
           />
           <SearchBarDropdown
@@ -231,7 +233,6 @@ const NavBar = () => {
                       ...prev,
                       category: !prev.category,
                     }));
-                    setHasLoaded(false);
                   }}
                   key={cat.value}
                   to={`/products/categories/${cat.display_name.toLowerCase()}`}

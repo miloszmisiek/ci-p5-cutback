@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
-import { useCategories } from "../../../contexts/CategoriesContext";
 import {
   useQueryContext,
   useSetQueryContext,
@@ -37,19 +36,12 @@ const ProductsPage = ({
   const [inStock, setInStock] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [ordering, setOrdering] = useState("");
-  const [filterSet, setFilterSet] = useState({
-    country: "",
-    currency: "",
-    page: "1",
-  });
-  const choices = useCategories();
-  const { country, currency, page } = filterSet;
+  const [filterSet, setFilterSet] = useState("");
   const { query } = useQueryContext();
-  // const { setHasLoaded } = useSetQueryContext();
+  const { queryLoaded } = useQueryContext();
+  const { setQueryLoaded } = useSetQueryContext();
   const [hasLoaded, setHasLoaded] = useState(false);
   const history = useHistory();
-
-  console.log(results);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -58,7 +50,7 @@ const ProductsPage = ({
           axiosReq.get(
             `/products/?in_stock=${
               inStock ? inStock : ""
-            }&${filter}&ordering=${ordering}&country=${country}&search=${query}`
+            }&${filter}&ordering=${ordering}&country=${filterSet}&search=${query}`
           ),
           axiosReq.get("/products"),
         ]);
@@ -116,6 +108,7 @@ const ProductsPage = ({
             : 0
         );
         setHasLoaded(true);
+        setQueryLoaded(true);
       } catch (err) {
         console.log(err);
       }
@@ -128,14 +121,24 @@ const ProductsPage = ({
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, inStock, hasLoaded, ordering, country, currency, query, history]);
+  }, [
+    filter,
+    inStock,
+    hasLoaded,
+    ordering,
+    filterSet,
+    query,
+    history,
+    setQueryLoaded,
+  ]);
 
   const handlePageClick = async (e) => {
+    window.scrollTo(0, 0);
     try {
       const { data } = await axiosReq.get(
         `/products/?page=${e.selected + 1}&in_stock=${
           inStock ? inStock : ""
-        }&${filter}&ordering=${ordering}&country=${country}&price_currency=${currency}&search=${query}`
+        }&${filter}&ordering=${ordering}&country=${filterSet}&search=${query}`
       );
       // if (ordering === "-price") {
       //   const newFiltered = {
@@ -172,7 +175,9 @@ const ProductsPage = ({
       // } else {
       //   setResults(data);
       // }
-
+      // setPageCount(
+      //   !!data.next ? Math.ceil(data?.count / data?.results?.length) : 0
+      // );
       setResults(data);
     } catch (err) {
       console.log(err);
@@ -180,7 +185,7 @@ const ProductsPage = ({
   };
 
   const handleChange = (e) => {
-    setFilterSet({ ...filterSet, [e.target.name]: e.target.value });
+    setFilterSet(e.target.value);
     setHasLoaded(false);
   };
 
@@ -211,7 +216,7 @@ const ProductsPage = ({
                   onClick={(e) => {
                     e.preventDefault();
                     setInStock("");
-                    setFilterSet({ country: "", page: "1" });
+                    setFilterSet("");
                     setHasLoaded(false);
                   }}
                 >
@@ -221,7 +226,7 @@ const ProductsPage = ({
                   <FormLabel>Country</FormLabel>
                   <FiltersCountry
                     as="select"
-                    value={country}
+                    value={filterSet}
                     name="country"
                     onChange={handleChange}
                   >
@@ -238,27 +243,25 @@ const ProductsPage = ({
                   <FormLabel>Sorting</FormLabel>
                   <FiltersCountry
                     as="select"
-                    defaultValue={""}
+                    defaultValue={"-created_at"}
                     name="ordering"
                     onChange={(e) => {
                       setOrdering(e.target.value);
                       setHasLoaded(false);
                     }}
                   >
-                    <option value={""}>All</option>
-                    <option disabled>──────────</option>
                     <optgroup label={`Ascending \u25b2`}>
+                      <option value="created_at">Created &#9650;</option>
                       <option value="price">Price &#9650;</option>
                       <option value="title">Title &#9650;</option>
-                      <option value="created_at">Created &#9650;</option>
                       <option value="avg_score">Avg rating &#9650;</option>
                       <option value="all_scores">All ratings &#9650;</option>
                     </optgroup>
                     <option disabled>──────────</option>
                     <optgroup label={`Descending \u25bc`}>
+                      <option value="-created_at">Created &#9660;</option>
                       <option value="-price">Price &#9660;</option>
                       <option value="-title">Title &#9660;</option>
-                      <option value="-created_at">Created &#9660;</option>
                       <option value="-avg_score">Avg rating &#9660;</option>
                       <option value="-all_scores">All ratings &#9660;</option>
                     </optgroup>
@@ -270,7 +273,7 @@ const ProductsPage = ({
         </FiltersForm>
       </FiltersRow>
       <FiltersDivide visible={visible} />
-      {hasLoaded ? (
+      {hasLoaded && queryLoaded ? (
         <>
           <ProductsPageRow heightcorrection={heightcorrection}>
             {!!results.results?.length ? (

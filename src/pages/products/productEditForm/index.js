@@ -8,8 +8,8 @@ import { useHistory, useParams } from "react-router";
 import {
   AddProductButton,
   CreateColumn,
-  CurrencySelect,
   FormControlMb,
+  PriceCurrency,
   TitleWrapper,
   TransparentInput,
 } from "../productCreateForm/styles";
@@ -21,9 +21,9 @@ import {
   InStockBrandWrapper,
   ProductDeleteButton,
 } from "./styles";
-import ModalCustom from "../../../components/modal";
 import { useSetModalContext } from "../../../contexts/ModalContext";
 import { useCategories } from "../../../contexts/CategoriesContext";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 const ProductEditForm = () => {
   const [images, setImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
@@ -52,15 +52,15 @@ const ProductEditForm = () => {
     in_stock,
   } = productData;
   const [options, setOptions] = useState({
-    currencies: [],
     countires: [],
   });
-  const { currencies, countires } = options;
+  const { countires } = options;
   const choices = useCategories();
   const history = useHistory();
   const { id } = useParams();
   const { handleClose, handleShow } = useSetModalContext();
   const [hasLoaded, setHasLoaded] = useState(false);
+  const handleShowAlert = useSetAlertContext();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -68,7 +68,7 @@ const ProductEditForm = () => {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
 
-        setOptions({ currencies, countires });
+        setOptions({ countires });
       } catch (err) {
         console.log(err);
       }
@@ -122,7 +122,6 @@ const ProductEditForm = () => {
 
     deletedImages.forEach(async (image) => {
       if (image.id) {
-        console.log("deleted image >>> ", image);
         try {
           await axiosReq.delete(`/products/images/${image.id}/`);
         } catch (err) {
@@ -135,10 +134,6 @@ const ProductEditForm = () => {
       let blob = await fetch(image.image).then((r) => r.blob());
       galleryFormData.append("product", id);
       galleryFormData.append("image", blob, "image.jpg");
-
-      //   for (var pair of galleryFormData.entries()) {
-      //     console.log(pair[0], pair[1]);
-      //   }
       try {
         if (image.id) {
           console.log("image to put >>> ", image);
@@ -147,11 +142,6 @@ const ProductEditForm = () => {
           console.log("image to post >>> ", image);
           await axiosRes.post("/products/images/", galleryFormData);
         }
-        // image.id
-        //   ? await axiosRes.put(`/products/images/${image.id}/`, galleryFormData)
-        //   : await axiosRes.post("/products/images/", galleryFormData);
-        // ? console.log("image to put >>> ", image)
-        // : console.log("image to post >>> ", image);
       } catch (err) {
         if (err.response?.status !== 401) {
           setErrors({ ...errors, galleryErrors: err.response?.data });
@@ -169,6 +159,7 @@ const ProductEditForm = () => {
     for (const property in productData) {
       productFormData.append(`${property}`, productData[property]);
     }
+
     try {
       await axiosRes.put(`/products/${id}/`, productFormData);
       history.push(`/products/${id}`);
@@ -177,6 +168,7 @@ const ProductEditForm = () => {
         setErrors({ ...errors, productErrors: err.response?.data });
       }
     }
+
     handleImageSubmit();
   };
 
@@ -201,7 +193,8 @@ const ProductEditForm = () => {
   const handleProductDelete = async () => {
     try {
       await axiosRes.delete(`/products/${id}`);
-      history.goBack();
+      history.push("/");
+      handleShowAlert("secondary", "Your product has been deleted.");
     } catch (err) {
       console.log(err);
     }
@@ -212,6 +205,19 @@ const ProductEditForm = () => {
     <CreateColumn xs={12} md={6}>
       <Form.Group controlId="titlePriceSelect">
         <TitleWrapper title="true">
+          <TitleWrapper>
+            <PriceCurrency>
+              <TransparentInput
+                type="text"
+                name="price"
+                value={price}
+                onChange={onAmountChange}
+                placeholder="0.00"
+                price="true"
+              />
+              &#8364;
+            </PriceCurrency>
+          </TitleWrapper>
           <TransparentInput
             type="text"
             maxLength="30"
@@ -220,33 +226,6 @@ const ProductEditForm = () => {
             value={title}
             onChange={handleChange}
           />
-          <TitleWrapper>
-            {/* {currencies?.length ? (
-              <CurrencySelect
-                as="select"
-                name="price_currency"
-                value={price_currency || ""}
-                onChange={handleChange}
-              >
-                {currencies?.map((currency, idx) => (
-                  <option key={idx} value={currency.value}>
-                    {currency.display_name}
-                  </option>
-                ))}
-              </CurrencySelect>
-            ) : (
-              <Asset spinner signin />
-            )} */}
-            <span>&#8364;</span>
-            <TransparentInput
-              type="text"
-              name="price"
-              value={price}
-              onChange={onAmountChange}
-              placeholder="0.00"
-              price="true"
-            />
-          </TitleWrapper>
         </TitleWrapper>
       </Form.Group>
       <TitleWrapper>
@@ -402,7 +381,6 @@ const ProductEditForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {/* <ModalCustom handleDelete={handleProductDelete} deleteItem="product" /> */}
         <Row>
           <ProductGallery
             gallery={images}

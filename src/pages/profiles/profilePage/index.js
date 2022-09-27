@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { OverlayTrigger, Row } from "react-bootstrap";
+import { OverlayTrigger } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
@@ -49,16 +49,18 @@ const ProfilePage = () => {
       {hasLoaded ? (
         <>
           <RowProfilePage>
-            <Link to="/products/create">
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<ToolTip id={`tooltip-top`}>Add product</ToolTip>}
-              >
-                <AddProductBtn>
-                  <i className="fas fa-plus"></i>
-                </AddProductBtn>
-              </OverlayTrigger>
-            </Link>
+            {currentUser && (
+              <Link to="/products/create">
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={<ToolTip id={`tooltip-top`}>Add product</ToolTip>}
+                >
+                  <AddProductBtn>
+                    <i className="fas fa-plus"></i>
+                  </AddProductBtn>
+                </OverlayTrigger>
+              </Link>
+            )}
 
             <ProfileInfoContainer>
               <AvatarContainer>

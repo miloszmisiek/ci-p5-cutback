@@ -103,7 +103,7 @@ function App() {
               <Route
                 key={cat.value}
                 exact
-                path={`/${cat.display_name.toLowerCase()}`}
+                path={`/products/categories/${cat.display_name.toLowerCase()}`}
                 render={() => (
                   <ProductsPage
                     filter={`category=${cat.value}`}
