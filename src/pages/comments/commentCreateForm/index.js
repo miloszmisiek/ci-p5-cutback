@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
-import { Divider } from "../../products/productPage/styles";
+
 import {
-  CommentContainer,
   CommentInput,
   CommentText,
   PostBox,
@@ -13,11 +11,8 @@ import {
 } from "./styles";
 
 const CommentCreateForm = ({
-  productData,
   setProductData,
-  comments,
   setComments,
-  // setPageCount,
 }) => {
   const { id } = useParams();
   const [comment, setComment] = useState("");
@@ -37,9 +32,6 @@ const CommentCreateForm = ({
         comments_count: prev.comments_count + 1,
       }));
       setComment("");
-      // setPageCount(
-      //   Math.ceil(comments.count + 1 / comments.results?.length)
-      // );
     } catch (err) {
       console.log(err);
     }

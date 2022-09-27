@@ -9,7 +9,6 @@ import {
   AddProductButton,
   ButtonsWrapper,
   CreateColumn,
-  CurrencySelect,
   FormControlMb,
   PriceCurrency,
   TitleWrapper,
@@ -39,11 +38,10 @@ const ProductCreateForm = () => {
   const { title, description, brand, price, street, city, in_stock } =
     productData;
   const [options, setOptions] = useState({
-    currencies: [],
     countires: [],
   });
   const [hasLoaded, setHasLoaded] = useState(false);
-  const { currencies, countires } = options;
+  const { countires } = options;
   const choices = useCategories();
   const history = useHistory();
 
@@ -52,7 +50,7 @@ const ProductCreateForm = () => {
       try {
         const { data } = await axiosReq.options("/products/");
         const countires = data.actions?.POST.country.choices;
-        setOptions({ currencies, countires });
+        setOptions({ countires });
         setHasLoaded(true);
       } catch (err) {
         console.log(err);

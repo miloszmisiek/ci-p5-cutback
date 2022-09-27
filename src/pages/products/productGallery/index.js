@@ -28,9 +28,6 @@ const ProductGallery = ({
   hasLoaded,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isShown, setIsShown] = useState(false);
-
-  // const showModal = useModalContext();
   const { handleClose, handleShow } = useSetModalContext();
   const { handleShowAlert } = useSetAlertContext();
 
@@ -83,7 +80,6 @@ const ProductGallery = ({
     <CreateColumn xs={12} md={6}>
       {hasLoaded ? (
         <>
-          {/* <ModalCustom /> */}
           <CreateCard>
             <FormLabel htmlFor="image-change">
               <Figure disabled={gallery[activeIndex] ? false : true}>

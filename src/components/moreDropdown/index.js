@@ -1,7 +1,5 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
-import { useHistory } from "react-router";
 import { ActionButton, DropdownCustom, VerticalDivider } from "./styles";
 
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (

@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
-import { Alert } from "react-bootstrap";
-import { useAlertContext, useSetAlertContext } from "../../contexts/AlertContext";
+import { useEffect } from "react";
+import {
+  useAlertContext,
+  useSetAlertContext,
+} from "../../contexts/AlertContext";
 import { AlertCustom } from "./styles";
 
 const Message = () => {
@@ -11,7 +13,7 @@ const Message = () => {
   useEffect(() => {
     const timeId = setTimeout(() => {
       // After 3 seconds set the show value to false
-      setShowAlert({ ...showAlert, alertIsVisible: false });
+      setShowAlert((prev) => ({ ...prev, alertIsVisible: false }));
     }, 5000);
     return () => {
       clearTimeout(timeId);
@@ -24,11 +26,7 @@ const Message = () => {
   }
 
   // If show is true this will be returned
-  return (
-    <AlertCustom variant={variant}>
-      {children}
-    </AlertCustom>
-  );
+  return <AlertCustom variant={variant}>{children}</AlertCustom>;
 };
 
 export default Message;

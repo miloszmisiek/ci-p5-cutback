@@ -1,33 +1,24 @@
 import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import Avatar from "../../../components/avatar";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import StarRatings from "react-star-ratings";
 import {
   AvgScore,
   CardBody,
-  CardHeader,
   CardTitle,
   CardWrapper,
   Column,
   Counters,
   NavLinkProduct,
-  OverlayShadow,
   PriceComponent,
   ProductCardDivider,
   RatingComponent,
-  UserContainer,
-  Username,
 } from "./styles";
 import Asset from "../../../components/asset";
-import { CreatedDate } from "../productPage/styles";
 
 const ProductCard = (props) => {
-  const [errors, setErrors] = useState({});
   const {
     id,
-    owner_profile,
     gallery,
     title,
     price,

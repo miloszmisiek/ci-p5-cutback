@@ -1,9 +1,6 @@
 import ReactPaginate from "react-paginate";
 import {
-  Button,
   Carousel,
-  Dropdown,
-  DropdownButton,
   Form,
   Row,
 } from "react-bootstrap";

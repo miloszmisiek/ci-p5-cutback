@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import { FullRow } from "../../auth/signUpForm/styles";
 import StarRatings from "react-star-ratings";
@@ -19,7 +19,6 @@ import {
   Description,
   Divider,
   LocationLink,
-  PhoneInputDisplay,
   Price,
   ProductAvgScore,
   ProductPageColumn,
@@ -36,7 +35,6 @@ import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 import CommentCreateForm from "../../comments/commentCreateForm";
 import Comment from "../../comments/comment";
 import Asset from "../../../components/asset/index";
-import { ReactPaginateStyled } from "../productsPage/styles";
 import { useSetAlertContext } from "../../../contexts/AlertContext";
 import {
   formatPhoneNumberIntl,
@@ -46,7 +44,6 @@ import {
 const ProductPage = ({ itemsPerPage }) => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
-  const [errors, setErrors] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const [rating, setRating] = useState({

@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 import styled from "styled-components";
-import { AddProductButton, ButtonsWrapper, FormControlMt } from "../productCreateForm/styles";
+import { AddProductButton, ButtonsWrapper } from "../productCreateForm/styles";
 
 export const EditButtonsWrapper = styled(ButtonsWrapper)`
     justify-content: space-between;
