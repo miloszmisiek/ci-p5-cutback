@@ -96,7 +96,6 @@ const NavBar = () => {
           Signed in as <br /> <strong>{currentUser?.username}</strong>
         </StyledSignedInMsg>
         <NavDropdown.Divider />
-        {/* TODO: add routes for dropdown section */}
         <StyledNavLink
           dropdownitem="true"
           to={`/`}

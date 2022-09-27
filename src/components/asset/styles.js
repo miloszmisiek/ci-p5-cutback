@@ -20,8 +20,11 @@ export const AssetWrapper = styled.div`
 `;
 
 export const Img = styled.img`
-  border-radius: 20px;
+  object-fit: ${(props) => (props.productCard ? null : "20px")};
   margin-bottom: ${(props) => (props.productCard ? null : "1rem")};
+  object-fit: ${(props) => (props.productCard ? "contain" : null)};
+  width: ${(props) => (props.productCard ? "100%" : null)};
+
 `;
 
 export const Msg = styled.p`
