@@ -13,12 +13,12 @@ const Message = () => {
   useEffect(() => {
     const timeId = setTimeout(() => {
       // After 3 seconds set the show value to false
-      setShowAlert({ ...showAlert, alertIsVisible: false });
+      setShowAlert((prev) => ({ ...prev, alertIsVisible: false }));
     }, 5000);
     return () => {
       clearTimeout(timeId);
     };
-  }, [alertIsVisible, showAlert, setShowAlert]);
+  }, [alertIsVisible, setShowAlert]);
 
   // If show is false the component will return null and stop here
   if (!alertIsVisible) {

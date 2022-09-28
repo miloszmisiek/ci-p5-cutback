@@ -33,7 +33,7 @@ const SignInForm = (props) => {
 
 
   useEffect(() => {
-    setBackground({ signin: true });
+    setBackground({ signin: "true" });
     return () => {
       setBackground(null);
     };
