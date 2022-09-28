@@ -70,7 +70,7 @@ const ProductEditForm = () => {
 
         setOptions({ countires });
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
       try {
         const { data } = await axiosReq.get(`/products/${id}/`);
@@ -111,7 +111,7 @@ const ProductEditForm = () => {
           history.push("/");
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     handleMount();
@@ -125,7 +125,7 @@ const ProductEditForm = () => {
         try {
           await axiosReq.delete(`/products/images/${image.id}/`);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
     });
@@ -136,17 +136,15 @@ const ProductEditForm = () => {
       galleryFormData.append("image", blob, "image.jpg");
       try {
         if (image.id) {
-          console.log("image to put >>> ", image);
           await axiosRes.put(`/products/images/${image.id}/`, galleryFormData);
         } else {
-          console.log("image to post >>> ", image);
           await axiosRes.post("/products/images/", galleryFormData);
         }
       } catch (err) {
         if (err.response?.status !== 401) {
           setErrors({ ...errors, galleryErrors: err.response?.data });
         }
-        console.log(err.response.data);
+        // console.log(err.response.data);
       }
     });
   };
@@ -196,7 +194,7 @@ const ProductEditForm = () => {
       history.push("/");
       handleShowAlert("secondary", "Your product has been deleted.");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     handleClose();
   };

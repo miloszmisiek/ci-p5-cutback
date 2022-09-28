@@ -36,7 +36,7 @@ const Comment = (props) => {
         comments_count: prev.comments_count - 1,
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     handleClose();
   };

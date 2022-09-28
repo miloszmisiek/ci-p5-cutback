@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Col, Form, OverlayTrigger } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,6 +11,7 @@ import {
   useSetCurrentUser,
 } from "../../../contexts/CurrentUserContext";
 import { useSetModalContext } from "../../../contexts/ModalContext";
+import { removeTokenTimestamp } from "../../../utils/utils";
 import { ActionButtonContainer } from "../../comments/commentEditForm/styles";
 import {
   AvatarContainer,
@@ -91,7 +93,13 @@ const ProfileEditPage = () => {
   };
   const handleDelete = async () => {
     try {
-      await axiosRes.delete(`/profiles/${id}/`);
+      await Promise.all([
+        axios.post("dj-rest-auth/logout/"),
+        axiosRes.delete(`/profiles/${id}/`),
+      ]);
+      setCurrentUser(null);
+      removeTokenTimestamp();
+      handleShowAlert("secondary", "Your profile has been deleted.");
       history.push("/");
     } catch (err) {
       console.log(err);

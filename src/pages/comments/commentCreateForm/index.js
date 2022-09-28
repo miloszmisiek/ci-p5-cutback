@@ -34,7 +34,7 @@ const CommentCreateForm = ({
       }));
       setComment("");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   const handleCommentChange = (e) => {
