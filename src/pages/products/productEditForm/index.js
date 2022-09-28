@@ -256,8 +256,8 @@ const ProductEditForm = () => {
               Categories
             </option>
             {choices?.categories.map((category, idx) => (
-              <option key={idx} value={category.value}>
-                {category.display_name}
+              <option key={category.key} value={category.key}>
+                {category.value}
               </option>
             ))}
           </Form.Control>

@@ -99,6 +99,8 @@ const ProductPage = ({ itemsPerPage }) => {
   } = productData;
   const is_owner = currentUser?.username === owner;
 
+  console.log(productData);
+
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -171,7 +173,12 @@ const ProductPage = ({ itemsPerPage }) => {
         console.log(err);
       }
     };
-    handleMount();
+    const timer = setTimeout(() => {
+      handleMount();
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [id, currentUserRating, comments_count, pageCount]);
 
   const handleRating = async (newRating) => {

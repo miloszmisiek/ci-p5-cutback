@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Col, Form, OverlayTrigger } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,8 +9,6 @@ import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../../../contexts/CurrentUserContext";
-import { useSetModalContext } from "../../../contexts/ModalContext";
-import { removeTokenTimestamp } from "../../../utils/utils";
 import { ActionButtonContainer } from "../../comments/commentEditForm/styles";
 import {
   AvatarContainer,
@@ -55,7 +52,6 @@ const ProfileEditPage = () => {
   const [disabled, setDisabled] = useState(true);
   const history = useHistory();
   const imageFile = useRef();
-  const { handleClose, handleShow } = useSetModalContext();
   const { handleShowAlert } = useSetAlertContext();
   const is_owner = currentUser?.profile_id === parseInt(id);
 
@@ -91,21 +87,7 @@ const ProfileEditPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleDelete = async () => {
-    try {
-      await Promise.all([
-        axios.post("dj-rest-auth/logout/"),
-        axiosRes.delete(`/profiles/${id}/`),
-      ]);
-      setCurrentUser(null);
-      removeTokenTimestamp();
-      handleShowAlert("secondary", "Your profile has been deleted.");
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-    }
-    handleClose();
-  };
+
 
   const handlePasswordChange = async () => {
     try {
@@ -361,22 +343,6 @@ const ProfileEditPage = () => {
                 )}
               </Form>
             </Col>
-            {is_owner && (
-              <Col xs={12} md={6} className="text-center">
-                <PersonalInfo delete="true">Delete Account</PersonalInfo>
-                <hr />
-                <Form.Text>
-                  Once you delete your account, you will loose all your data.
-                  Please be certain.
-                </Form.Text>
-                <ProfileButton
-                  delete="true"
-                  onClick={() => handleShow("account", handleDelete)}
-                >
-                  Delete
-                </ProfileButton>
-              </Col>
-            )}
           </RowCustom>
         </>
       ) : (

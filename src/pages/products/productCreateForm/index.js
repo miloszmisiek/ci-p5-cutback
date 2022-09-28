@@ -61,9 +61,11 @@ const ProductCreateForm = () => {
 
   const handleImageSubmit = (history) => {
     const galleryFormData = new FormData();
+    console.log("submitting image");
     gallery.forEach(async (image) => {
       let blob = await fetch(image.image).then((r) => r.blob());
-      const productId = history.location.pathname.slice(-2);
+      const productId = history.location.pathname.split("/")[2];
+      console.log(productId);
       galleryFormData.append("product", productId);
       galleryFormData.append("image", blob, "image.jpg");
       try {
@@ -72,7 +74,7 @@ const ProductCreateForm = () => {
         if (err.response?.status !== 401) {
           setErrors({ ...errors, galleryErrors: err.response?.data });
         }
-        // console.log(err.response.data);
+        console.log(err.response.data);
       }
     });
   };
