@@ -22,8 +22,8 @@ import {
   ProductDeleteButton,
 } from "./styles";
 import { useSetModalContext } from "../../../contexts/ModalContext";
-import { useCategories } from "../../../contexts/CategoriesContext";
 import { useSetAlertContext } from "../../../contexts/AlertContext";
+import useFetch from "../../../components/hooks/useFetch";
 const ProductEditForm = () => {
   const [images, setImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
@@ -55,7 +55,7 @@ const ProductEditForm = () => {
     countires: [],
   });
   const { countires } = options;
-  const choices = useCategories();
+  const choices = useFetch();
   const history = useHistory();
   const { id } = useParams();
   const { handleClose, handleShow } = useSetModalContext();

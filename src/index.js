@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 import { ModalProvider } from "./contexts/ModalContext";
-import { CategoriesProvider } from "./contexts/CategoriesContext";
 import { AlertProvider } from "./contexts/AlertContext";
 import { QueryProvider } from "./contexts/QueryContext";
 
@@ -16,11 +15,9 @@ root.render(
       <CurrentUserProvider>
         <QueryProvider>
           <AlertProvider>
-            <CategoriesProvider>
               <ModalProvider>
                 <App />
               </ModalProvider>
-            </CategoriesProvider>
           </AlertProvider>
         </QueryProvider>
       </CurrentUserProvider>

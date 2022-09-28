@@ -11,13 +11,13 @@ import SignInForm from "./pages/auth/signInForm/index";
 import ProductsPage from "./pages/products/productsPage";
 import ProductCreateForm from "./pages/products/productCreateForm";
 import ProductEditForm from "./pages/products/productEditForm";
-import { useCategories } from "./contexts/CategoriesContext";
 import ProductPage from "./pages/products/productPage";
 import ProfilePage from "./pages/profiles/profilePage";
 import ProfileEditPage from "./pages/profiles/profileEditPage";
 import Message from "./components/alert/index";
 import ModalCustom from "./components/modal";
 import PageNotFound from "./pages/404notFound";
+import useFetch from "./components/hooks/useFetch";
 
 export const AppWrapper = styled.div`
   position: relative;
@@ -58,7 +58,7 @@ export const BackgroundImage = styled(Image)`
 
 function App() {
   const [background, setBackground] = useState();
-  const choices = useCategories();
+  const choices = useFetch();
   return (
     <AppWrapper>
       <NavBar />

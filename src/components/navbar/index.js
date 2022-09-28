@@ -4,7 +4,6 @@ import { Dropdown, Form, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useSetAlertContext } from "../../contexts/AlertContext";
-import { useCategories } from "../../contexts/CategoriesContext";
 import {
   useCurrentUser,
   useSetCurrentUser,
@@ -15,6 +14,7 @@ import {
 } from "../../contexts/QueryContext";
 import { removeTokenTimestamp } from "../../utils/utils";
 import Avatar from "../avatar/index.js";
+import useFetch from "../hooks/useFetch";
 import {
   StyledContainer,
   StyledDropdown,
@@ -45,7 +45,7 @@ const NavBar = () => {
   });
   const history = useHistory();
   const { handleShowAlert } = useSetAlertContext();
-  const choices = useCategories();
+  const choices = useFetch();
   useEffect(() => {
     !choices?.categories.some((cat) =>
       location.pathname.includes(cat.value.toLowerCase())

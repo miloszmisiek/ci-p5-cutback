@@ -20,7 +20,7 @@ import {
   FormSwitch,
   InStockBrandWrapper,
 } from "../productEditForm/styles";
-import { useCategories } from "../../../contexts/CategoriesContext";
+import useFetch from "../../../components/hooks/useFetch";
 const ProductCreateForm = () => {
   const [gallery, setGallery] = useState([]);
   const [errors, setErrors] = useState({});
@@ -42,7 +42,7 @@ const ProductCreateForm = () => {
   });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { countires } = options;
-  const choices = useCategories();
+  const choices = useFetch();
   const history = useHistory();
 
   useEffect(() => {
