@@ -24,7 +24,9 @@ import {
 import { useSetModalContext } from "../../../contexts/ModalContext";
 import { useSetAlertContext } from "../../../contexts/AlertContext";
 import useFetch from "../../../components/hooks/useFetch";
+import { useRedirect } from "../../../components/hooks/useRedirect";
 const ProductEditForm = () => {
+  useRedirect("loggedOut");
   const [images, setImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
   const [errors, setErrors] = useState({});

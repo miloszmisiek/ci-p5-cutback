@@ -21,7 +21,10 @@ import {
   InStockBrandWrapper,
 } from "../productEditForm/styles";
 import useFetch from "../../../components/hooks/useFetch";
+import { useCurrentUser } from "../../../contexts/CurrentUserContext";
+import { useRedirect } from "../../../components/hooks/useRedirect";
 const ProductCreateForm = () => {
+  useRedirect("loggedOut");
   const [gallery, setGallery] = useState([]);
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
@@ -44,6 +47,7 @@ const ProductCreateForm = () => {
   const { countires } = options;
   const choices = useFetch();
   const history = useHistory();
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -57,7 +61,7 @@ const ProductCreateForm = () => {
       }
     };
     handleMount();
-  }, [hasLoaded]);
+  }, [hasLoaded, currentUser, history]);
 
   const handleImageSubmit = (history) => {
     const galleryFormData = new FormData();
