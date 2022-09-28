@@ -72,7 +72,7 @@ const ProfileEditPage = () => {
           setPhoneNo(phone_number);
           setHasLoaded(true);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       } else {
         history.goBack();

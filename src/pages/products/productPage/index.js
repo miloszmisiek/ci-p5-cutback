@@ -99,8 +99,6 @@ const ProductPage = ({ itemsPerPage }) => {
   } = productData;
   const is_owner = currentUser?.username === owner;
 
-  console.log(productData);
-
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -170,7 +168,7 @@ const ProductPage = ({ itemsPerPage }) => {
         );
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     const timer = setTimeout(() => {
@@ -185,7 +183,7 @@ const ProductPage = ({ itemsPerPage }) => {
     try {
       await axiosRes.post(`/ratings/`, { product: id, score: newRating });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     setRating({ ...rating, currentUserRating: newRating });
     handleShowAlert("success", "Your vote has been registered!");
@@ -199,7 +197,7 @@ const ProductPage = ({ itemsPerPage }) => {
         score: newRating,
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     setRating({ ...rating, currentUserRating: newRating });
     handleShowAlert("secondary", "Your vote has been updated.");
@@ -211,7 +209,7 @@ const ProductPage = ({ itemsPerPage }) => {
       );
       setComments(data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

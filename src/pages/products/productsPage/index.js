@@ -110,7 +110,7 @@ const ProductsPage = ({
         setHasLoaded(true);
         setQueryLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -180,7 +180,7 @@ const ProductsPage = ({
       // );
       setResults(data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
