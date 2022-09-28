@@ -1,4 +1,18 @@
-## Manual Testing
+# **Testing**
+
+## **Contents**
+
+- [**Testing**](#testing)
+  - [**Contents**](#contents)
+  - [**Manual Testing**](#manual-testing)
+  - [**Validators**](#validators)
+  - [**Testing User Stories**](#testing-user-stories)
+  - [**Responsiveness**](#responsiveness)
+  - [**Bugs**](#bugs)
+    - [Solved Bugs](#solved-bugs)
+    - [Unsolved Bugs](#unsolved-bugs)
+
+## **Manual Testing**
 
 Below are manual tests completed during the product development.
 
@@ -147,13 +161,13 @@ Below are manual tests completed during the product development.
 
 [Back to contents](#contents)
 
-## ESLint Code Validation
+## **Validators**
 
 The product's code was checked with the ESLint plugin for VSCode during the product development process. No warnings are present for the production version.
 
 [styled-components](https://styled-components.com/) are the CSS-in-JS library which was used for the app development and the html used for the React app is the index.html file which is supplied with technology package. For this product HTML and CSS validation does not suit.
 
-## Testing User Stories
+## **Testing User Stories**
 
 | Issue ID    | User Story | Requirement met |
 | :------------:| --------------- | ---------- |
@@ -190,7 +204,8 @@ The product's code was checked with the ESLint plugin for VSCode during the prod
 
 [Back to contents](#contents)
 
-## Responsiveness
+## **Responsiveness**
+
 Responsiveness design was checked with [Google Chrome Dev Tools](https://developer.chrome.com/), [Firefox Developers Tools](https://www.mozilla.org/pl/firefox/new/). The website responds well to different screen sizes.
 
 |        | Moto G4 | Galaxy S5 | iPhone 5/SE | iPhone X | iPad | iPad Pro | 1366 x 768 | 1920 x 1080 |
@@ -199,7 +214,7 @@ Responsiveness design was checked with [Google Chrome Dev Tools](https://develop
 | Images |   pass  |    pass   |     pass    |   pass   | pass |   pass   |    pass    |     pass    |
 
 
-## Bugs
+## **Bugs**
 
 ### Solved Bugs
 
