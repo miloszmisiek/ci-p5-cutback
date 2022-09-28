@@ -1,6 +1,6 @@
 ## Manual Testing
 
-Where automated unit testing was not completed or where extra testing was required to ensure proper functionality, the use of manual testing was implemented. The actions and results are listed below.
+Below are manual tests completed during the product development.
 
 |     | User Actions           | Expected Results | Y/N | Comments    |
 |:-----------:|------------------------|------------------|------|-------------|
@@ -8,162 +8,169 @@ Where automated unit testing was not completed or where extra testing was requir
 | 1           | Click on the Sing Up button | Redirection to signup page | Y |          |
 | 2           | Type Sign Up URL | Redirection to signup page | Y |          |
 | 3           | Form fields format validation | Correct input format required from user | Y |          |
-| 4           | Submit signup with blank fields | Form validation triggered, highlight the field, submission aborted | Y |          |
-| 5           | Submit signup with correct values | Redirection to sign in page, alert displayed with message that email confirmation has been send | Y |      Email send/receive tested with real email account    |
-| 6           | Click email confirmation link in the send message | Redirects to login page | Y |          |
-| 7           | Change screen size below 767 pixels width  | Backgorund image removed  | Y |          |
+| 4           | Submit form with blank fields | Form validation triggered, highlight the field, submission aborted | Y |          |
+| 5           | Submit form with correct values | Redirection to sign in page, alert displayed with message that email confirmation has been send | Y |      Email send/receive tested with real email account    |
+| 6           | A user clicks the email confirmation link in message sent | Redirects to login page | Y |          |
+| 7           | Change screen size below 767 pixels width  | Background image removed  | Y |          |
 
 | **Sign In**     |                        |                  |      |             |
 | 1           | Click on the Sing In button | Redirection to login page | Y |          |
-| 2           | Sign in without confirmed email | Alert displayed with message that email is not verifed | Y |          |
-| 3           | Sign in with confirmed email | Redirection to home page with Alert displayed on successfull sign in | Y |          |
+| 2           | Sign in without confirmed email | Alert displayed with message that email is not verified | Y |          |
+| 3           | Sign in with confirmed email | Redirection to home page with Alert displayed on sucessfull sign in | Y |          |
 | 4           | Type in a valid username or email with the password for the login and submit button| Redirection to home page with alert displayed on successful login  | Y |          |
 | 5           | Type in the invalid username or email with the password for the login and submit button | Alert displayed under username/email field | Y |          |
-| 6           | Click in the Sign up link in the 'Don't have accout' section  | Redirection to sing up page  | Y |          |
-| 7           | Sign in page rendered  | Backgorund image displayed for sign in page  | Y |          |
-| 8           | Change screen size below 767 pixels width  | Backgorund image removed  | Y |          |
+| 6           | Click in the sign-up link in the 'Don't have account section  | Redirection to sing up page  | Y |          |
+| 7           | Sign in page rendered  | Background image displayed for sign in page  | Y |          |
+| 8           | Change screen size below 767 pixels width  | Background image removed  | Y |          |
 
 | **Navbar**     |                        |                  |      |             |
 | 1           | User click on the logo | Redirection to home page | Y | Page is not refreshed if user is already on the home page       |
-| 2           | Logged in user visit app | Profile dropdown displayed in the navbar | Y |       |
-| 3           | Annonymous user visit app | Sign in and sign up buttons dispayed in the navbar | Y |       |
+| 2           | Logged-in user visit app | Profile dropdown displayed in the navbar | Y |       |
+| 3           | Anonymous user visit app | Sign in and sign up buttons displayed in the navbar | Y |       |
 | 4           | Navbar rendered | Logo, search bar and logged-in/logged-out icons displayed | Y |       |
 
 | **Searching**     |                        |                  |      |             |
-| 1           | User clicks in the serach bar field | Searching input triggered | Y |        |
-| 2           | User types in the serach bar field | Loading spinner displayed and products render including typed keyword | Y |   Tested for title, description, username, street, city and country     |
+| 1           | User clicks in the search bar field | Searching input triggered | Y |        |
+| 2           | User types in the search bar field | Loading spinner displayed and products render including typed keyword | Y |   Tested for title, description, username, street, city and country     |
 | 3           | User clicks on the 'Categories' dropdown button  | Dropdown displayed with available categories and all products as choices  | Y |          |
 | 4           | User clicks on Category link  | Products rendered for chosen category  | Y |   Category name displayed in the button, URL updated for category selected       |
 | 5           | User clicks on All link  | All products rendered  | Y |   User back at the home page       |
+
+| **Home Page**     |                        |                  |      |             |
+| 1           | Home page displayed | The Products Page component is displayed with the Navbar and the footer | Y |  Only available (in stock) products are displayed      |
 
 | **Filtering**     |                        |                  |      |             |
 | 1           | Home page rendered |  Filters button displayed, filters function hided | Y |     |
 | 2           | User clicks on filters button |  Filters function displayed: in stock, show all, country, sorting | Y |  In stock selected - default rendering for products is set for only available products   |
 | 3           | User clicks on filters button with filters displayed |  Filters function hided | Y |   |
 | 4           | User clicks in stock switch |  Switch changes position, products displayed with 'out of stock' included | Y |   |
-| 5           | User clicks in stock deslected switch |  Switch changes position, products displayed without 'out of stock' | Y |   |
+| 5           | User clicks in stock deselected switch |  Switch changes position, products displayed without 'out of stock' | Y |   |
 | 6           | User clicks show all button |  All filters reset | Y | Sorting function remains unchanged  |
-| 7           | User clicks on country filter |  Dropdown with country options opens | Y | Only countires which were already used by users during product creation are available.   |
+| 7           | User clicks on country filter |  Dropdown with country options opens | Y | Only countries which were already used by users during product creation are available.   |
 | 8           | User clicks on country option |  Products rendered with country selected by user | Y |  If product is 'out of stock' it will not be displayed, unless user uses in stock filter  |
-| 8           | User clicks on country option |  Products rendered with country selected by user | Y |  If product is 'out of stock' it will not be displayed, unless user uses in stock filter  |
-|             |   |   |  |          |
+| 9           | User clicks on sorting selection | Selection menu displayed with available options: Ascending/Descending - Created, Price, Title, Description, Avg Score, All Scores | Y |    |
+| 10          | User clicks on available option | Products are sorted as per selection | Y |  Tested on all options  |
 
 | **Profile Dropdown**     |                        |                  |      |             |
-| 1           | Permitted users to click Edit button | Redirects to Edit Task page | Y |      |
-| 2           | Permitted users click Delete button | Browser's confirm message appears to check user's decision | Y |      |
-| 3           | Any user opening modal | Title, Description and details dates are visible | Y |      |
+| 1           | Sign in user clicks on Profile Dropdown | Dropdown list popups with: 'signed in as' corresponding to currently logged user's username, Home link, Profile link, Settings link, Logout link | Y |      |
+| 2           | User clicks outside the list | Dropdown menu closes | Y |      |
+| 3           | User clicks the avatar button | Dropdown menu closes | Y |      |
+| 4           | User clicks the Home link | Redirection to home page | Y |  No refresh if user is already on the home page    |
+| 5           | User clicks the Profile link | Redirection to user's profile page | Y |  No refresh if user is already on the profile page    |
+| 6           | User clicks the Settings link | Redirection to user's setting's page (Account settings) | Y |  No refresh if user is already on the account page    |
+| 7           | User clicks the Logout link | Redirection to home page, user is logged-out, profile dropdown list is not available, Sign-in and Sign-up buttons displayed, alert displayed with confirmation message | Y |   |
+| 8           | User clicks the Logout link | Redirection to home page, user is logged-out, profile dropdown list is not available, Sign-in and Sign-up buttons displayed, alert displayed with confirmation message | Y |   |
 |             |   |   |  |          |
 
-| **Products Page**     |                        |                  |      |             |
-| 1           | User opens My Profile page | Account section is visible. Only tasks assigned to the user are displayed in the table. The top message reflects the current user's data | Y |      |
-| 2           | User clicks Account Edit button | Redirects to Edit Profile page | Y |      |
-| 3           | User clicks Account Delete button | Browser's confirm message appears to check user's decision | Y |      |
-| 4           | User clicks Ok in Browser's confirm box | Account is deleted, redirects to landing page | Y |      |
-| 5           | User clicks Cancel in Browser's confirm box | Redirects to previous page | Y |      |
-|             |   |   |  |          |
+| **The Products Component**     |                        |                  |      |             |
+| 1           | No products in the database | The ripper surfer icon with message indicates nothing for display | Y |      |
+| 2           | Less than 13 products in the database | Products render in three columns with three product cards per row | Y |      |
+| 3           | More than 12 products in the database | Pagination control displayed at the button with number of sites calculated base on amount of products in the database | Y |      |
+| 4           | User clicks on the right arrow button in the pagination control | Next page is displayed with paginated products | Y |  If last page is displayed nothing happens    |
+| 5           | User clicks on the left arrow button in the pagination control | Previous page is displayed with paginated products | Y |   If first page is displayed nothing happens   |
+| 6           | User clicks on the site number | Relevant site is displayed with paginated products for the site number | Y |   If current page is displayed nothing happens   |
+| 7           | User uses pagination buttons | Page is scrolled to the top | Y |   |
+| 8           | User clicks arrow in the carousel component (for product gallery) | Next/Previous image is displayed | Y |   |
 
-| **Create Product Form**     |                        |                  |      |             |
-| 1           | User opens Edit Profile page | Form is prefilled with current user data | Y |      |
-| 2           | User clicks Submit button | Form is prefilled with current user data | Y |  Browser's confirm message appears to check user's decision    |
-| 4           | User clicks Ok in Browser's confirm box without any changes | Redirects to My Profile page | Y |      |
-| 5           | User clicks Cancel in Browser's confirm box | Redirects to Edit Profile page | Y |      |
-| 6           | User clicks Ok in Browser's confirm box with any change except Rank | The fields are updated with user's new data | Y |      |
-| 7           | User clicks Cancel in Browser's confirm box with any change except Rank | Redirects to Edit Profile page | Y |      |
-| 8           | User clicks Ok in Browser's confirm box with Rank changed | Redirects to Account Inactive page as a profile is set to inactive. The profile can be set to active from the admin panel by Master | Y |   Rank change decision should be consulted first with the supervisor and he should be aware of this change   |
-| 9           | User clicks Cancel in Browser's confirm box with Rank changed | Redirects to Edit Profile page | Y |      |
-|             |   |   |  |          |
+| **The Product Card Component**     |                        |                  |      |             |
+| 1           | The Product Card for the available product with no gallery is displayed | Displayed: the default image, the product's title, horizontal rule, price, product's rating and counters for ratings and reviews | Y |      |
+| 2           | The Product Card for the available product with one image is displayed | Displayed: the product's image, title, horizontal rule, price, product's rating and counters for ratings and reviews | Y |      |
+| 3           | The Product Card for the available product with more than one image is displayed | Displayed: the Carousel component with product's images, title, horizontal rule, price, product's rating and counters for ratings and reviews | Y |      |
+| 4           | The Product Card for the unavailable product is displayed | 'Temporarily Out Of Stock' overlay is displayed on top of image section | Y |      |
+| 5           | The user clicks the product title | Redirection to the Product page | Y |      |
 
-| **Edit Product Form**     |                        |                  |      |             |
-| 1           | User clicks Change Password button with blank fields | Form validation is triggered highlighting fields which are empty | Y |      |
-| 2           | Typed in current password does not match with the password saved in database | The message is displayed informing a user of wrongly typed password | Y |      |
-| 3           | New Password does not match the New Password (again) | The message is displayed informing a user of mismatched passwords| Y |      |
-| 4           | User types correct values and presses Reset Password button | Redirects to Edit Profile page, the password is updated | Y |      |
-|             |   |   |  |          |
 
-| **Product Page**     |                        |                  |      |             |
-| 1           | Junior opens Add Task page | Form is rendered, assigned to the field has only current's user username option available | Y |      |
-| 2           | User opens Add Task page | Assigned to field default value is current user's username | Y |      |
-| 3           | Junior submit the form with valid data | Redirects to Tasks Home page, a new task is added with approval status Waiting to be approved | Y |      |
-| 4           | User submits a form with End Date before Start Date | Form validation is triggered, a message appears to inform the user of wrong entry | Y |      |
-| 5           | Senior opens Add Task page | Form is rendered, assigned to the field has all users available except Master | Y |      |
-| 6           | Senior submit the form with Priority Medium or Low | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-| 7           | Senior submit the form with Priority High | Redirects to Tasks Home page, a new task is added with approval status Waiting for approval | Y |      |
-| 8           | Master opens Add Task page | Form is rendered, assigned to the field has all users available including Master | Y |      |
-| 9           | Master submits the form with any Priority | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-|             |   |   |  |          |
+| **The Carousel Component**     |                        |                  |      |             |
+| 1           | Less than 2 images in product's gallery | Carousel component not displayed, Asset component used with the product's image source | Y |      |
+| 2           | More than 2 images in product's gallery | Carousel component displayed, tiles corresponds to length of gallery array  | Y |      |
+| 3           | Carousel displayed on the home/products page | Animation disabled  | Y |      |
+| 4           | Carousel displayed on the product page | Animation running  | Y |      |
+
+| **The Product Page Component**     |                        |                  |      |             |
+| 1           | The product page is displayed | Displayed: Carousel/Image/Default image, rating section, comment section, product info displayed  | Y |      |
+| 2           | The product's owner clicks the product title | Redirection to the product edit page | Y |      |
+| 3           | The user clicks the contact user link | Redirection to the owner's profile page | Y |      |
+| 4           | The user clicks the contact telephone link | The phone call function triggered | Y |      |
+| 5           | The user clicks the contact email link | The user's device default email app triggered | Y |      |
+| 5           | The user clicks the location link | Redirection to google maps service with the product's address, city and country provided | Y |      |
 
 | **Comments**     |                        |                  |      |             |
-| 1           | Junior opens Edit Task page | Form is rendered, assigned to the field has only current's user username option available | Y |      |
-| 2           | Junior submits the form for the task with N/R approval status | Redirects to Tasks Home page with task approval status Waiting for approval | Y |      |
-| 2           | Junior submits the form for the task with N/R approval status | Redirects to Tasks Home page with task approval status Waiting for approval | Y |      |
-| 4           | User submits a form with End Date before Start Date | Form validation is triggered, a message appears to inform the user of wrong entry | Y |      |
-| 5           | Senior opens Edit Task page | Form is rendered, assigned to the field has all users available except Master | Y |      |
-| 6           | Senior edit form and submits with Priority Medium or Low | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-| 7           | Senior edit form and submits with Priority High | Redirects to Tasks Home page, a new task is added with approval status Waiting for approval | Y |      |
-| 8           | Master opens Edit Task page | Form is rendered, assigned to the field has all users available including Master | Y |      |
-| 9           | Master edit form and submits with any Priority | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-|             |   |   |  |          |
+| 1           | Logged-in user clicks comment text in the Comment component on the product page | Input field active, user can type a comment | Y |      |
+| 2           | Logged-in user submits a comment | Comment is displayed, reviews counter is updated, more button is available next to submitted comment | Y |      |
+| 3           | The comment's owner clicks on the more button | Edit button and delete button is displayed in the popover | Y |      |
+| 4           | The comment's owner clicks on the edit button | Edit comment component is displayed with save and delete button | Y |      |
+| 5           | The comment's owner clicks the save button | The comment is updated if changes present | Y |      |
+| 6           | The comment's owner clicks the cancel button | The Edit Comment component disappears | Y |      |
+| 7           | The comment's owner clicks the delete button | Modal is rendered to confirm user's choice | Y |      |
+| 8           | The comment's owner clicks the delete button in the modal | The comment is deleted and not displayed in the product page. The review counter is updated | Y |      |
+| 9           | The comment's owner clicks the close button in the modal | Modal is closed, comment removal canceled | Y |      |
 
-| **Create Comment Form**     |                        |                  |      |             |
-| 1           | User clicks Back on the top button | The page is scrolled up to the top | Y |      |
-|             |   |   |  |          |
+| **The Profile Page**     |                        |                  |      |             |
+| 1           | The profile's owner clicks on the avatar | Redirection to the settings page | Y |      |
+| 2           | The Profile Page displayed to the logged-in user | Add product button displayed | Y |  Not available for anonymous users    |
+| 3           | The logged-in user clicks the add product button | Redirection to the create product page | Y |      |
+| 4           | The Profile Page owner has no products | No result's asset component is displayed | Y |      |
+| 5           | The Profile Page owner has products | The Products Page component is used to display products with owner filter applied | Y |  Tested for pagination - same as the Products component results    |
+| 6          | The page is displayed to any user | The profile's owner avatar, username, and counters for products, all ratings and the avg rating (if any) are displayed | Y |  If any of the values is zero, the sad emoticon is displayed    |
 
-| **Edit Comment Form**     |                        |                  |      |             |
-| 1           | User submits a valid request | Green message apears on top of the page. Automatically disapears after 5 seconds. | Y |      |
-|             |   |   |  |          |
+| **The Edit Profile Page**     |                        |                  |      |             |
+| 1           | The profile's owner enters the profile edit page | The profile edit page is rendered with: the personal information section including email address, inputs for username, first name, last name and phone number; the change password section with inputs for the new password and confirm password; the avatar component | Y |      | 
+| 2           | The profile's owner clicks edit button | Input fields are enabled and user can edit data; the save and cancel buttons are displayed, the edit button is hidden | Y |      |
+| 3           | The profile's owner submits the form with empty personal information data | The save function aborted, alerts displayed for empty fields | Y |  If user decides to edit data, empty data are not permitted, user can cancel and leave his profile without data    |
+| 4           | The profile's owner submits the form with empty Change Password data | The save option is allowed | Y |  Change password functionality is triggered only if data is fetched from the fields    |
+| 5           | The profile's owner clicks the avatar | The file input window pops up and user can select new image | Y |   |
+| 6           | The profile's owner clicks the avatar | The file input window pops up and user can select new image | Y |   |
+| 7           | The profile's owner clicks save button with the avatar image updated | The profile picture is updated, redirection to  | Y |   |
+| 8           | The profile's owner clicks save button with new password matching the confirmation password | The profile picture is updated | Y |   |
+| 9           | The profile's owner clicks save button with new password not matching the confirmation password | The saving is aborted, the alert for matching passwords is displayed | Y |   |
+| 10          | The profile's owner clicks save button with correct inputs in personal information section | The form is submitted, redirection to home page, alert displayed on successful update | Y |   |
+
+| **The Create Product Page**     |                        |                  |      |             |
+| 1           | The anonymous user enters create product page from URL | Redirection to home page | Y |      |
+| 2           | The logged-in user enters create product page from URL/profile page add product | The product creation component renders including: the product gallery component the product information component | Y |      |
+| 3           | The logged-in user clicks the plus button below the gallery component | The file selection window is displayed, users can select and add the images | Y |   Only images selection is allowed - tested   |
+| 4           | The logged-in user adds the image | The image is displayed in the preview and in the thumbnails, deletion button is displayed | Y |    |
+| 5           | The logged-in user clicks the deletion button | Users are prompted for choice confirmation, if removal is confirmed - image is removed, if cancelled then image remains unchanged| Y |    |
+| 6           | The logged-in user adds fifth picture | The add button is changed to cross button | Y |    |
+| 7           | The logged-in user clicks the cross button | The alert is displayed with message that only five pictures are allowed per product. The adding functionality is blocked | Y |    |
+| 8           | The logged-in user submits form with empty fields | The form is rejected, alerts for fields are displayed | Y |    |
+| 9           | The logged-in user submits form with valid data | The form is submitted, redirection to the product page | Y |    |
+
+
+
+| **The Edit Product Form**     |                        |                  |      |             |
+| 1           | The anonymous user enters edit product page from URL | Redirection to home page | Y |      |
+| 2           | The logged-in user enters edit product page from URL/product page title link | The product edit component renders including: the product gallery component the product information component with data fetched from database | Y |      |
+| 3           | The logged-in user clicks the plus button below the gallery component | The file selection window is displayed, users can select and add the images | Y |   If product has less than 5 images   |
+| 4           | The logged-in user adds the image | The image is displayed in the preview and in the thumbnails, deletion button is displayed | Y |    |
+| 5           | The logged-in user clicks the product's image deletion button | Users are prompted for choice confirmation, if removal is confirmed - image is removed, if cancelled then image remains unchanged| Y |    |
+| 6           | The logged-in user adds fifth picture | The add button is changed to cross button | Y |    |
+| 7           | The logged-in user clicks the cross button | The alert is displayed with message that only five pictures are allowed per product. The adding functionality is blocked | Y |    |
+| 8           | The logged-in user submits form with empty fields | The form is rejected, alerts for fields are displayed | Y |    |
+| 9           | The logged-in user submits form with valid data - unchanged | The form is submitted, redirection to the product page | Y |    |
+| 10           | The logged-in user submits form with valid data - changed | The form is submitted, redirection to the product page | Y |    |
+| 11           | The logged-in user clicks delete button | Users are prompted for choice confirmation, if removal is confirmed - product is removed, if cancelled then image remains unchanged | Y |    |
+
+
 
 | **Ratings**     |                        |                  |      |             |
-| 1           | Junior opens Edit Task page | Form is rendered, assigned to the field has only current's user username option available | Y |      |
-| 2           | Junior submits the form for the task with N/R approval status | Redirects to Tasks Home page with task approval status Waiting for approval | Y |      |
-| 2           | Junior submits the form for the task with N/R approval status | Redirects to Tasks Home page with task approval status Waiting for approval | Y |      |
-| 4           | User submits a form with End Date before Start Date | Form validation is triggered, a message appears to inform the user of wrong entry | Y |      |
-| 5           | Senior opens Edit Task page | Form is rendered, assigned to the field has all users available except Master | Y |      |
-| 6           | Senior edit form and submits with Priority Medium or Low | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-| 7           | Senior edit form and submits with Priority High | Redirects to Tasks Home page, a new task is added with approval status Waiting for approval | Y |      |
-| 8           | Master opens Edit Task page | Form is rendered, assigned to the field has all users available including Master | Y |      |
-| 9           | Master edit form and submits with any Priority | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-|             |   |   |  |          |
+| 1           | Anonymous user clicks on the rating's stars | Rating functionality not available | Y |      |
+| 2           | Logged-in user hovers over rating's stars | Selected stars are highlighted | Y |      |
+| 3           | Logged-in user clicks first time any star | The star counter is updated including counters for every star, alert is displayed that the rate was accepted | Y |      |
+| 4           | Logged-in user clicks next time any star | The star counter is updated including counters for every star, alert is displayed that the rate was accepted | Y |      |
 
-| **Product Gallery**     |                        |                  |      |             |
-| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
-| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
-| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
-|             |   |   |  |          |
-
-| **Edit Profile Form**     |                        |                  |      |             |
-| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
-| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
-| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
-|             |   |   |  |          |
-
-| **Change Password**     |                        |                  |      |             |
-| 1           | Type in correct email and press Rest Passwrod| Redirection to Password Rest done page | Y |   Tested with real email account       |
-| 2           | Type in incorrect email and press Reset Password | Validation message appears to inform the user of incorrect email | Y |          |
-| 3           | Press Reset Password with blank email field | Form validation triggered, submission aborted | Y |          |
-|             |   |   |  |          |
 
 | **Footer**     |                        |                  |      |             |
-| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
-| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
-| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
-|             |   |   |  |          |
+| 1           | Users click the logo in the footer | Redirection to home page | Y |  If home page already displayed - no refresh    |
+| 2           | Users click the email icon | The user's device default email service is triggered with creator's email address | Y |      |
+| 3           | Users click the LinkedIn icon | Redirection to creator's LinkedIn profile | Y |      |
+| 4           | Users click the GitHub icon | Redirection to creator's GitHub profile | Y |      |
+| 5           | Users scroll down to any page end | The footer is displayed | Y |      |
 
-| **Modals**     |                        |                  |      |             |
-| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
-| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
-| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
-|             |   |   |  |          |
-
-| **Alerts**     |                        |                  |      |             |
-| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
-| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
-| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
-|             |   |   |  |          |
 
 | **Not Found Page**     |                        |                  |      |             |
-| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
-| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
-| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
-|             |   |   |  |          |
+| 1           | User enters not valid URL with the website base URL present | The Not Found page component is rendered | Y |      |
+
+
 
 [Back to contents](#contents)
