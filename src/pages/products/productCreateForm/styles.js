@@ -64,7 +64,6 @@ export const TransparentInput = styled(Form.Control)`
   text-align: center;
   margin-bottom: ${(props) => (props.price ? null : "1rem")};
   text-align: ${(props) => (props.price ? "end" : null)};
-  max-width: ${(props) => (props.price ? "40%" : null)};
   cursor: pointer;
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -80,10 +79,6 @@ export const TransparentInput = styled(Form.Control)`
   &::-ms-input-placeholder {
     /* Microsoft Edge */
     color: black;
-  }
-
-  @media (min-width: 1200px) {
-    max-width: 30%;
   }
 `;
 
