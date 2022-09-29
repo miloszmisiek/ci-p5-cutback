@@ -218,8 +218,13 @@ const ProductPage = () => {
     <OverlayTrigger
       placement="top"
       overlay={
-        <Tooltip className={!is_owner && "d-none"} id={`tooltip-top`}>
-          You can't rate your own post!
+        <Tooltip
+          className={!currentUser || (!is_owner && "d-none")}
+          id={`tooltip-top`}
+        >
+          {currentUser
+            ? "You can't rate your own post!"
+            : "Only logged in users can vote on products"}
         </Tooltip>
       }
     >
