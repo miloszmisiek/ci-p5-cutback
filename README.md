@@ -58,12 +58,12 @@ With an authorised profile, they are ready to help save our planet by taking par
 | [#1](https://github.com/miloszmisiek/ci-p5-cutback/issues/1)   | As a user I can access the site's navigation from every page so that I can visit every page quickly all the time | **3. Create a platform with easy access to products.**, <br/> <br/> **4. Design a layout that is intuitive and focuses on content.**
 | [#2](https://github.com/miloszmisiek/ci-p5-cutback/issues/2)   | As a user I can create a new account so that I have access to all features for registered users | **6. Require an account for posting product offers to avoid fraudsters.**
 | [#3](https://github.com/miloszmisiek/ci-p5-cutback/issues/3)   | As a user I can sign in to the website so that I can use all features for logged-in users | **6. Require an account for posting product offers to avoid fraudsters.**
-| [#4](https://github.com/miloszmisiek/ci-p5-cutback/issues/4)   | As a user I can see my login status so that I can take action and log in if required | **6. Require an account for posting product offers to avoid fraudsters.**
+| [#4](https://github.com/miloszmisiek/ci-p5-cutback/issues/4)   | As a user I can see my login status so that I can take action and login if required | **6. Require an account for posting product offers to avoid fraudsters.**
 | [#5](https://github.com/miloszmisiek/ci-p5-cutback/issues/5)   |As a user, I can remain logged in until I decide to log out so that my session remains valid, and I can enjoy browsing the website without extra login actions | **3. Create a platform with easy access to products.**, <br/>  <br/> **9. Create a platform for modern needs.**
-| [#8](https://github.com/miloszmisiek/ci-p5-cutback/issues/8)   |As a user I can navigate through different pages smoothly so that I can explore site content without page refreshing | **3. Create a platform with easy access to products.**, <br/> <br/> **4. Design a layout that is intuitive and focuses on content.**, **9. Create a platform for modern needs.**
+| [#8](https://github.com/miloszmisiek/ci-p5-cutback/issues/8)   |As a user, I can navigate through different pages smoothly so that I can explore site content without page refreshing | **3. Create a platform with easy access to products.**, <br/> <br/> **4. Design a layout that is intuitive and focuses on content.**, **9. Create a platform for modern needs.**
 | [#9](https://github.com/miloszmisiek/ci-p5-cutback/issues/9)   | As a logged-out user I can see the sign-in and sign-up buttons so that I can change my login status | **6. Require an account for posting product offers to avoid fraudsters.**
 | [#10](https://github.com/miloszmisiek/ci-p5-cutback/issues/10)   | As a logged-in user I can see the Profile dropdown menu in the navbar so that I can have access to all relevant profile features from every page | **4. Design a layout that is intuitive and focuses on content.**
-| [#12](https://github.com/miloszmisiek/ci-p5-cutback/issues/12)   | As a logged-in user I can rate a product so that I can share my experience about a product and position it higher in ranks | **1. Build a project to help compare surfing equipment.**, <br/> <br/> **2. Help users to choose the best product they are looking for.**, **11. Give users the ability to vote and comment on the products.**
+| [#12](https://github.com/miloszmisiek/ci-p5-cutback/issues/12)   | As a logged-in user I can rate a product so that I can share my experience with a product and position it higher in ranks | **1. Build a project to help compare surfing equipment.**, <br/> <br/> **2. Help users to choose the best product they are looking for.**, **11. Give users the ability to vote and comment on the products.**
 | [#16](https://github.com/miloszmisiek/ci-p5-cutback/issues/16)   | As a logged-in user I can create products so that notice other users about my gear offer | **1. Build a project to help compare surfing equipment.**
 | [#17](https://github.com/miloszmisiek/ci-p5-cutback/issues/17)   | As a user, I can view the product details so that I have a better judgment on the offer | **2. Help users to choose the best product they are looking for.**
 | [#18](https://github.com/miloszmisiek/ci-p5-cutback/issues/18)   | As an owner of the product I can edit product details so that I can guarantee that the product details are latest and up-to-date | **10. Allow users to filter products by useful features.**
@@ -74,7 +74,7 @@ With an authorised profile, they are ready to help save our planet by taking par
 | [#24](https://github.com/miloszmisiek/ci-p5-cutback/issues/24)   | As an owner of the comment I can delete the comment so that I can remove my insights about a product if required | **1. Build a project to help compare surfing equipment.**, <br/> <br/> **2. Help users to choose the best product they are looking for.**,  <br/> <br/>**11. Give users the ability to vote and comment on the products.**
 | [#26](https://github.com/miloszmisiek/ci-p5-cutback/issues/26)   | As a logged-in user I can edit my profile so that I can change my profile picture and personal information | **6. Require an account for posting product offers to avoid fraudsters.**
 | [#27](https://github.com/miloszmisiek/ci-p5-cutback/issues/27)   | As an owner of the profile I can delete my profile so that I can control if I want to share my data in the app | **6. Require an account for posting product offers to avoid fraudsters.**
-| [#28](https://github.com/miloszmisiek/ci-p5-cutback/issues/28)   | As a user I can explore paginated products from the database so that I can focus my attention on the smaller chunks of displayed content | **3. Create a platform with easy access to products.**
+| [#28](https://github.com/miloszmisiek/ci-p5-cutback/issues/28)   | As a user, I can explore paginated products from the database so that I can focus my attention on the smaller chunks of displayed content | **3. Create a platform with easy access to products.**
 | [#31](https://github.com/miloszmisiek/ci-p5-cutback/issues/31)   | As a user, I can search for products with keywords so that I can find offers which I am most interested in | **3. Create a platform with easy access to products.**, <br/> <br/> **10. Allow users to filter products by useful features.**
 | [#32](https://github.com/miloszmisiek/ci-p5-cutback/issues/32)   | As a user, I can sort the products currently displayed so that I can see the products in the order I am most interested in | **3. Create a platform with easy access to products.**, **8. Give users quick access to the best offers.**, <br/> <br/> **10. Allow users to filter products by useful features.**
 | [#33](https://github.com/miloszmisiek/ci-p5-cutback/issues/33)   | As a user, I can display products by categories so that I can find products of my interest easier | **3. Create a platform with easy access to products.**
@@ -97,18 +97,18 @@ With an authorised profile, they are ready to help save our planet by taking par
 
 - ### Frameworks
 
-  - [ReactJS](https://reactjs.org/): was used for building user interface
-  - [React Bootstrap](https://react-bootstrap-v4.netlify.app/): was used as a supprotive toolkit for front-end styling.
+  - [ReactJS](https://reactjs.org/): was used for building a user interface
+  - [React Bootstrap](https://react-bootstrap-v4.netlify.app/): was used as a supportive toolkit for front-end styling.
 
 - ### Front-End Libraries
 
-  - [React Router](https://v5.reactrouter.com/): was used for handling differnt URLs rendering different pages. React Router allows for rendering pages inside Virtual DOM stopping the page from refreshing. This enhances UX.
-  - [Mock Service Worker](https://mswjs.io/): was used for testing API requests. With this tool the test server is created mocking the API requests, so that the real API request is not triggered.
+  - [React Router](https://v5.reactrouter.com/): was used for handling different URLs rendering different pages. React Router allows for rendering pages inside Virtual DOM stopping the page from refreshing. This enhances UX.
+  - [Mock Service Worker](https://mswjs.io/): was used for testing API requests. With this tool, the test server is created mocking the API requests, so that the real API request is not triggered.
   - [styled-components](https://styled-components.com/): was used to inject CSS styling directly to component.
     - No hunt across different files to find the styling affecting your component.
-    - Styled compoenents are independent of each other.
+    - Styled components are independent of each other.
     - Remove unused styles, even if they're declared in the code.
-    - Styled components generates unique class names for your styles.
+    - Styled components generate unique class names for your styles.
 
 - ### Other tools
 
@@ -122,16 +122,16 @@ With an authorised profile, they are ready to help save our planet by taking par
   - [Balsamiq](https://balsamiq.com/): was used to design wireframes during the design process.
   - [W3C Validator](https://validator.w3.org/): was used to validate HTML5 code for the website.
   - [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
-  - [JShint](https://jshint.com/): was used to validate JS code for the website.
-  - [Coolorc.co](https://coolors.co/): was used to choose pallete colors for website
-  - [CSSgradient.io](https://cssgradient.io/): was used for genertating background gradients
+  - [JShint](https://jshint.com/): was used to validate the JS code for the website.
+  - [Coolorc.co](https://coolors.co/): was used to choose pallet colors for website
+  - [CSSgradient.io](https://cssgradient.io/): was used for generating background gradients
   - [Grammarly](https://www.grammarly.com/): was used to check grammar and typo errors.
 
 - ### NPM packages & components
 
   - [react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input#formatphonenumbervalue-string-string): used for phone input in the profile edit form.
   - [react-paginate](https://www.npmjs.com/package/react-paginate): used for site pagination for the products and for comments
-  - [react-country-flag](https://www.npmjs.com/package/react-country-flag): used for displaying country flag in the Product page next to phone number and country location
+  - [react-country-flag](https://www.npmjs.com/package/react-country-flag): used for displaying the country flag on the Product page next to phone number and country location
 
 
 [Back to contents](#contents)
@@ -142,46 +142,46 @@ With an authorised profile, they are ready to help save our planet by taking par
 
 1. **The project files structure.**
 
-    Files organization is inspired by [Spectrum](https://github.com/withspectrum/spectrum/)'s code base, where [Max Stoiber](https://github.com/mxstbr), the creator of styled-components, contributes heavily on this project.
-    Components are saved in the seperate **index.js** files with **styles.js** including CSS-in-JS styling provided with [styled-components](https://styled-components.com/). This files are saved together in components directories named in camelCase convention.
+    Files organization is inspired by [Spectrum](https://github.com/withspectrum/spectrum/)'s code base, where [Max Stoiber](https://github.com/mxstbr), the creator of styled-components, contributes heavily to this project.
+    Components are saved in the separate **index.js** files with **styles.js** including CSS-in-JS styling provided with [styled-components](https://styled-components.com/). These files are saved together in component directories named in the camelCase convention.
 
 2. **The Component Reuse**
 
-    The [ReactJS](https://reactjs.org/) technology allows for creating components and use them across the app. The component can be suplied with props to get the data from the parent component and use them in different situation with different props.
+    The [ReactJS](https://reactjs.org/) technology allows for creating components and using them across the app. The component can be supplied with props to get the data from the parent component and use them in a different situations with different props.
 
-    For this project the functional approach was chosen with use of React hooks, mainly **useState** and **useEffect** for managing components states and lifecycles.
+    For this project, the functional approach was chosen with the use of React hooks, mainly **state** and **useEffect** for managing components' states and lifecycles.
 
-    This hooks were hevily used for the app development which is evident in the repository.
+    These hooks were heavily used for the app development which is evident in the repository.
 
     Some of the components which were reused with different scenarios are as followed:
 
-    - The Product Card component is reused in the profile page and is used to display products in the home page. The map function is used to implement fetched data from the API.
+    - The Product Card component is reused on the profile page and is used to display products on the home page. The map function is used to implement fetched data from the API.
 
-    - Buttons used in the app share common parent - the styling is adjusted for the certain needs.
+    - Buttons used in the app share a common parent - the styling is adjusted for certain needs.
 
-    - The rating component is used in the product card and in the product page.
+    - The rating component is used in the product card and on the product page.
 
-    - The carousel component is used in the product card and in the product create and edit pages.
+    - The carousel component is used in the product card and the product create and edit pages.
       
-    - The comments are rendered in the map function with data fetched from the API and displayed in the product page.
+    - The comments are rendered in the map function with data fetched from the API and displayed on the product page.
 
-    - The avatars used in the app are same component with adjusted sizes for the layout.
+    - The avatars used in the app are the same component with adjusted sizes for the layout.
 
-    The custom hook **useFetch** was created to fetch data from API endpoint for Categories and Countries select elements.
+    The custom hook **useFetch** was created to fetch data from the API endpoint for Categories and Countries select elements.
 
-    Custom **Contexts** were developed to allow for global use of **Alert** and **Modal** states and display different data i.e. removal of comments, products and images confirmation messages and alerts for changes to data.
+    Custom **Contexts** were developed to allow for global use of **Alert** and **Modal** states and display different data i.e. removal of comments, products and images confirmation messages and alerts for data changes.
 
 ## **Features**
 
 ---
 
-This websites serves as a product comparasion sites with surfers as the targeted audience.
+This website serves as a product comparison site with surfers as the targeted audience.
 
 ### Existing Features
 
 **- Navigation Bar**
 
-- Available at any page, includes the logo, search bar with categories selection and for logged-out users sign in and sign up button. For logged-in users the menu dropdown list allows users for navigation through different app sites.
+- Available on any page, includes the logo, search bar with categories selection and for logged-out users sign in and sign up button. For logged-in users, the menu dropdown list allows users to navigate through different app sites.
 
 - The navigation bar gives users access to all major navigation features. It is fully responsive on different screen sizes.
 
@@ -197,7 +197,7 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 **- Filters**
 
-- Filters provied functionality to display products based on availibilty or country.
+- Filters provided functionality to display products based on availability or country.
 
 ![Filters](documentation/features/filters.png)
 
@@ -205,31 +205,31 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 ![Country Selection](documentation/features/country-filter.png)
 
-- The sorting list provides users with functionality to display products in ascending and descending order with their selection.
+- The sorting list provides users with the functionality to display products in ascending and descending order with their selection.
 
 ![Sorting List](documentation/features/sorting-list.png)
 
-- The show all button resets all the filters, but sorting option remains unchanged in case user prefer to display products by the order of their choice.
+- The show-all button resets all the filters, but the sorting option remains unchanged in case users prefer to display products by the order of their choice.
 
 **- Home Page Products Display**
 
-- The main page displays the products that exist in the database. They are displayed in three columns and three proudcts per row. Maxiumium products displayed are 12 per page. If more products exist in the database, the pagination menu is displayed to allow users for navigation.
+- The main page displays the products that exist in the database. They are displayed in three columns and three products per row. Maximum products displayed are 12 per page. If more products exist in the database, the pagination menu is displayed to allow users to navigate.
 
   [Home Page Products Display](documentation/features/products-page.png)
 
 **- The Product Card**
 
-- The products on the main page and in the profile page are displayed in the form of cards to give access to the most important data and to fit the most of them on the page. The data displayed are products images, price, average rating and ratings and reviews counters.
+- The products on the main page and the profile page are displayed in the form of cards to give access to the most important data and to fit most of them on the page. The data displayed are product images, price, average rating and ratings and reviews counters.
 
 - The title is a link to the product page.
 
-- The product card serves as an entry point to explore the product more in the product page. It brings attention by the most important data about the product.
+- The product card serves as an entry point to explore the product more on the product page. It brings attention to the most important data about the product.
 
 ![The Product Card](documentation/features/product-card.png)
 
 **- The Product Page**
 
-- Accessed through title link in the product card.
+- Accessed through the title link in the product card.
   
 - Images are displayed with sliding animation or by arrows.
   
@@ -237,7 +237,7 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 - The rating component displays the average rating and counter for every given rating for the product. Users can see how many votes were submitted for every star and judge their opinion based on that.
   
-- Only registered users have rating have access to rating functionality.
+- Only registered users who have ratings have access to rating functionality.
   
 - Logged-in users can submit their ratings and update them if they change their opinion
   
@@ -245,9 +245,9 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 - Below the rating component users can find the comment section.
   
-- Logged-in users can post the comments, anonymous users can see the comments without create functionality.
+- Logged-in users can post the comments, and anonymous users can see the comments without creating functionality.
   
-- The comment owners can edit and delete their reviews. The functionality is accessed through three dots button.
+- The comment owners can edit and delete their reviews. The functionality is accessed through the three dots button.
   
 ---
 
@@ -257,39 +257,39 @@ This websites serves as a product comparasion sites with surfers as the targeted
   
 ---
 
-- The contact section contains the owner username or full name if user update his profile. The link will redirect user to the owner's profile.
+- The contact section contains the owner's username or full name if the user updates his profile. The link will redirect the user to the owner's profile.
   
-- If telephone is provided by the owner, it will be displayed below username. If user clicks the number, the number can be dialed.
+- If the telephone is provided by the owner, it will be displayed below the username. If a user clicks the number, the number can be dialled.
   
-- Below telephone the owner's email is displayed - if clicked, the user's device default email service will be open.
+- Below the telephone the owner's email is displayed - if clicked, the user's device's default email service will be open.
   
 ---
 
-- The location section contains the product's address, city and country. The location link can be clicked and user will be redirected to Google Maps service with the product's provided data.
+- The location section contains the product's address, city and country. The location link can be clicked and the user will be redirected to the Google Maps service with the product's provided data.
 
-- The product page allows user to read detailed information about the product to help them decide if they want to contact the owner for buying the product.
+- The product page allows users to read detailed information about the product to help them decide if they want to contact the owner for buying the product.
 
 ---
 
 **- The Product Creation Page**
 
-- Users can access the product creation page by clicking the plus button in the profile page.
+- Users can access the product creation page by clicking the plus button on the profile page.
 - The product creation page contains:
   
-  - The image adding section where users can add pictures. Maximum permitted are 5 pictures per product. When users reach the limit the add button turns red and changes the icon for cross. This limitation is implemented for database perfomance.
+  - The image adds a section where users can add pictures. The maximum permitted is 5 pictures per product. When users reach the limit the add button turns red and changes the icon for the cross. This limitation is implemented for database performance.
   - To change the image user must click the preview picture.
   - To delete the picture users must click the red minus button (displayed if at least one picture is added)
-  - Images will provide visitors with valuable information how product looks.
+  - Images will provide visitors with valuable information about how the product looks.
   
   - On the right side of the page user can enter product data by triggering relevant input fields.
   - To submit the form user must click the 'Add Product' button.
-  - To add product's title users must click on the title placeholder.
+  - To add the product's title users must click on the title placeholder.
   - The price field is validated on the frontend - only digits are allowed with two decimal places
-  - The categories select element gives users ability to select available options for categories.
-  - The countires select element gives user access to all known countries (fetched from API)
-  - To select if product is avalible the switch must be clicked in the relevant position.
+  - The categories select element gives users the ability to select available options for categories.
+  - The countries select element gives the user access to all known countries (fetched from API)
+  - To select if the product is available the switch must be clicked in the relevant position.
 
-- The product creation form is intuitive and gives users ability to post their products and compare with others.
+- The product creation form is intuitive and gives users the ability to post their products and compare them with others.
 
 ![Product Creation Page](documentation/features/product-createe.png)
 
@@ -297,8 +297,8 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 **- The Product Edit Page**
 
-- Users can access the product's edit page by clicking the title in the product page.
-- The product edit page has exactly same functionality as creation page. The data is fetched for the selected product.
+- Users can access the product's edit page by clicking the title on the product page.
+- The product edit page has the exactly same functionality as the creation page. The data is fetched for the selected product.
 - Users can save or delete the product with buttons under the product details form.
 
 ![Product Edit Page](documentation/features/product-edit.png)
@@ -309,7 +309,7 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 - The profile page provides users with the registered user's avatar, username products counter, average score and all ratings received.
 
-- Average score is calculated by average of all ratings given for all owner's products.
+- Average score is calculated by the average of all ratings given for all owner's products.
 
 - The profile's owner can add products from his profile page by clicking the green plus button.
 
@@ -325,15 +325,15 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 - The profile owner can edit his data on this page.
 
-- To enable edition users must click the edit button.
+- To enable the edition users must click the edit button.
 
-- To submit data all fields must be valid and not empty. Password fields does not need to be field to change personal information.
+- To submit data all fields must be valid and not empty. Password fields do not need to be fields to change personal information.
 
 - Users can change their profile picture by clicking on the avatar.
 
-- To change password user must type two matching passwords and submit the form with save button.
+- To change the password user must type two matching passwords and submit the form with the save button.
 
-- The profile edit page gives users ability to edit their data or add more personal information if they wish to be contacted.
+- The profile edit page gives users the ability to edit their data or add more personal information if they wish to be contacted.
 
 ![Profile Edit Page](documentation/features/profile-edit.png)
 
@@ -341,10 +341,10 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 **- Sign In Page**
 
-- Users can sign in by clicking the sign in button in the navbar.
-- The page has the background photo to bring attention of the visitors and encourage for login.
-- For small screens the background photo is hidden to declutter the form.
-- Users can login with username or email.
+- Users can sign in by clicking the sign-in button in the navbar.
+- The page has a background photo to bring the attention of the visitors and encourage login.
+- For small screens, the background photo is hidden to declutter the form.
+- Users can log in with a username or email.
 
 ![Sign In Page](documentation/features/sign-in.png)
 
@@ -352,19 +352,19 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 **- Sign Up Page**
 
-- Users can sign up by clicking the sign up button in the navbar.
-- The page has the background photo to bring attention of the visitors and encourage for signup.
-- For small screens the background photo is hidden to declutter the form.
+- Users can sign up by clicking the signup button in the navbar.
+- The page has a background photo to bring the attention of the visitors and encourage them to signup.
+- For small screens, the background photo is hidden to declutter the form.
 
-- Users must provide all the data requested in the form. Email verification is required to avoid frauders.
-- User will not be able to login without confirming his email.
-- Email sent have a link which redirects for login page.
+- Users must provide all the data requested in the form. Email verification is required to avoid fraud.
+- User will not be able to log in without confirming his email.
+- Email sent has a link which redirects to the login page.
 
 ![Sign Up Page](documentation/features/sign-up.png)
 
 **- Page not found**
 
-- If user enters incorrect URL the page not found will be displayed.
+- If the user enters an incorrect URL the page not found will be displayed.
 - The background image is displayed for enhanced UX
 
 ![Page Not Found](documentation/features/not-found-page.png)
@@ -377,22 +377,22 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 ### Features Left to implement
 
-- Profile deletion will be implemented in the next verison of the product.
-- The Best Deals component on top of the page to display 4-5 products with best rates.
-- Payment sevice to allow users for finalizing the deal through the app.
+- Profile deletion will be implemented in the next version of the product.
+- The Best Deals component on top of the page displays 4-5 products with the best rates.
+- Payment service to allow users for finalizing the deal through the app.
 
 ## **UX Design**
 
 ### Color Scheme
 
-The main theme of the page is in white, gray and black colors. Buttons are in toned green or where the attention is needed - red. The idea behind the layout was to be not cluttering to focus attention on the products. The background pictures send a message for the users which products they can expect to find on the site and are used to enhance UX.
+The main theme of the page is in white, grey and black colours. Buttons are in toned green or where the attention is needed - red. The idea behind the layout was to be not cluttered to focus attention on the products. The background pictures send a message to the users about which products they can expect to find on the site and are used to enhance UX.
 
 [Back to contents](#contents)
 
 ### Typography
 
-- The primary font used for the application is **Montserrat** - it is modern and elegant font-family used on most of the website.
-- The font-family used for the logo is **Permanent Marker** - it gives contrast to primary font-family.
+- The primary font used for the application is **Montserrat** - it is a modern and elegant font family used on the most website.
+- The font family used for the logo is **Permanent Marker** - it gives contrast to the primary font family.
 
 All fonts come from [Google Fonts](https://fonts.google.com/).
 
@@ -407,15 +407,15 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 ## **Deployment**
 
 ### Backend
-This project is deployed as a seperate backend service build with [Django Rest Framework](https://www.django-rest-framework.org/). It expose API endpoints for GET, POST, PUT, DELETE and OPTIONS functions. The databse is using relational database [PostgreSQL](https://www.postgresql.org/) and hosted to [Heroku](https://dashboard.heroku.com/) cloud PaaS.
+This project is deployed as a separate backend service build with [Django Rest Framework](https://www.django-rest-framework.org/). It exposes API endpoints for getting, POST, PUT, DELETE and OPTIONS functions. The database is using relational database [PostgreSQL](https://www.postgresql.org/) and hosted to [Heroku](https://dashboard.heroku.com/) cloud PaaS.
 
-The complete deployment process with backend project description is described in the seperate repository.
+The complete deployment process with the backend project description is described in the separate repository.
 
 The backend repository can be found [here](https://github.com/miloszmisiek/drf_api_cutback).
 
 ### Frontend
 
-The application's frontend was developed with use of [ReactJS](https://reactjs.org/) technology. The code was deployed to [Heroku](https://dashboard.heroku.com/) for production. The procedure for Heroku deployment was explained in details in the backend README.md. For Frontend the steps are almost identical, without the need to set **Config Vars** and installing Heroku Postgres dynos.
+The application's front end was developed with the use of [ReactJS](https://reactjs.org/) technology. The code was deployed to [Heroku](https://dashboard.heroku.com/) for production. The procedure for Heroku deployment was explained in detail in the backend README.md. For Frontend the steps are almost identical, without the need to set **Config Vars** and install Heroku Postgres dynos.
 
 **Procedure**
 
@@ -423,7 +423,7 @@ The application's frontend was developed with use of [ReactJS](https://reactjs.o
 
 1. `npm run build` was used to build a stable production version.
 2. **Procfile** was created to include the `web: serve -s build` command for Heroku build.
-3. In the **package.json** the following code was added to include heroku build script:
+3. In the **package.json** the following code was added to include Heroku build script:
 
 ```json
 "scripts": {
@@ -433,15 +433,15 @@ The application's frontend was developed with use of [ReactJS](https://reactjs.o
 ```
 
 4. To deploy the app the user must have an account in the **Heroku** service.
-5. GitHub deployment method was used from the **Deploy** tab in the app's Heroku page.
-6. After the repository was connected the manual deploment was used to build the production version of React app.
-7. After successful deploymnet the app is ready to use.
+5. GitHub deployment method was used from the **Deploy** tab on the app's Heroku page.
+6. After the repository was connected the manual deployment was used to build the production version of React app.
+7. After successful deployment the app is ready to use.
 
-**Deploymnet Troubleshooting**
+**Deployment Troubleshooting**
 
-- The app deployed in the first realese was not build for production, but remained in development state, which resulted with crashing after short time of usage. The problem was solved with running `npm run build` and deploying from the Heroku site instead of terminal command.
+- The app deployed in the first release was not built for production, but remained in a development state, which resulted in crashing after a short time of usage. The problem was solved by running `npm run build` and deploying from the Heroku site instead of the terminal command.
 
-- After testing the delete functionality for the user the backend crashed and was unable to restore afterwards. The databse was reset in the Heroku. The possible cause is the token validation for deleted user - after deleting browser's cookies the server responded with endpoints, but after another fetching tests it crashed again. After that the decision was made to rest the database and remove the profile delete functionality for this app realease and find solution to implement this feature in the safe enviroment.
+- After testing the delete functionality for the user the backend crashed and was unable to restore afterwards. The data was reset in Heroku. The possible cause is the token validation for the deleted user - after deleting the browser's cookies the server responded with endpoints, but after other fetching tests it crashed again. After that, the decision was made to rest the database and remove the profile delete functionality for this app release and find a solution to implement this feature in a safe environment.
 
 ## **Credits**
 
