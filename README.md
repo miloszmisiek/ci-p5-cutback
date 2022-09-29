@@ -135,7 +135,6 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
   - [react-paginate](https://www.npmjs.com/package/react-paginate): used for site pagination for the products and for comments
   - [react-country-flag](https://www.npmjs.com/package/react-country-flag): used for displaying the country flag on the Product page next to phone number and country location
 
-
 [Back to contents](#contents)
 
 ## **Project Architecture**
@@ -164,7 +163,7 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
     - The rating component is used in the product card and on the product page.
 
     - The carousel component is used in the product card and the product create and edit pages.
-      
+
     - The comments are rendered in the map function with data fetched from the API and displayed on the product page.
 
     - The avatars used in the app are the same component with adjusted sizes for the layout.
@@ -356,7 +355,6 @@ This website serves as a product comparison site with surfers as the targeted au
 
 [Back to contents](#contents)
 
-
 **- Sign Up Page**
 
 - Users can sign up by clicking the signup button in the navbar.
@@ -414,6 +412,7 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 ## **Deployment**
 
 ### Backend
+
 This project is deployed as a separate backend service build with [Django Rest Framework](https://www.django-rest-framework.org/). It exposes API endpoints for getting, POST, PUT, DELETE and OPTIONS functions. The database is using relational database [PostgreSQL](https://www.postgresql.org/) and hosted to [Heroku](https://dashboard.heroku.com/) cloud PaaS.
 
 The complete deployment process with the backend project description is described in the separate repository.
@@ -450,6 +449,10 @@ The application's front end was developed with the use of [ReactJS](https://reac
 - The app deployed in the first release was not built for production, but remained in a development state, which resulted in crashing after a short time of usage. The problem was solved by running `npm run build` and deploying from the Heroku site instead of the terminal command.
 
 - After testing the delete functionality for the user the backend crashed and was unable to restore afterwards. The data was reset in Heroku. The possible cause is the token validation for the deleted user - after deleting the browser's cookies the server responded with endpoints, but after other fetching tests it crashed again. After that, the decision was made to rest the database and remove the profile delete functionality for this app release and find a solution to implement this feature in a safe environment.
+
+**Note about console.log(err)**
+
+In the final production code the only commented out code left is `console.log(err)` for `trycatch` blocks. It does not clutter the code and can be quickly use in development if needed.
 
 ## **Credits**
 

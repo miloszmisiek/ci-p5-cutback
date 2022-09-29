@@ -43,7 +43,7 @@ import {
   parsePhoneNumber,
 } from "react-phone-number-input";
 
-const ProductPage = ({ itemsPerPage }) => {
+const ProductPage = () => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -214,16 +214,19 @@ const ProductPage = ({ itemsPerPage }) => {
       // console.log(err);
     }
   };
-
   const ratingProductPage = (
-    <RatingsWrapper>
-      <Rating>
-        <ProductAvgScore>{parseFloat(avg).toFixed(1)}</ProductAvgScore>
-        {is_owner ? (
-          <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip>You can't rate your own post!</Tooltip>}
-          >
+    <OverlayTrigger
+      placement="top"
+      overlay={
+        <Tooltip className={!is_owner && "d-none"} id={`tooltip-top`}>
+          You can't rate your own post!
+        </Tooltip>
+      }
+    >
+      <RatingsWrapper>
+        <Rating>
+          <ProductAvgScore>{parseFloat(avg).toFixed(1)}</ProductAvgScore>
+          {is_owner ? (
             <StarRatings
               rating={avg}
               starHoverColor="green"
@@ -232,43 +235,43 @@ const ProductPage = ({ itemsPerPage }) => {
               starEmptyColor="rgb(180,211,178)"
               starRatedColor="green"
             />
-          </OverlayTrigger>
-        ) : (
-          <StarRatings
-            rating={avg}
-            starHoverColor="green"
-            starDimension="20px"
-            starSpacing="2px"
-            starEmptyColor="rgb(180,211,178)"
-            starRatedColor="green"
-            changeRating={
-              rating_data?.some((rating) => rating.is_owner)
-                ? editCurrentUserRating
-                : currentUser && handleRating
-            }
-          />
-        )}
-      </Rating>
-      <ProductPageConters>
-        {" "}
-        {all_scores}
-        {all_scores !== 1 ? " ratings" : " rating"} and {comments_count}
-        {comments_count !== 1 ? " reviews" : " review"}
-      </ProductPageConters>
-      <Divider />
-      {Object.entries(scores).map((score) => (
-        <Rating key={parseInt(score[0].split("star_")[1])} scores>
-          <StarRatings
-            rating={parseInt(score[0].split("star_")[1])}
-            starDimension="20px"
-            starSpacing="2px"
-            starEmptyColor="rgb(180,211,178)"
-            starRatedColor="green"
-          />
-          <ProductAvgScore>{score[1]}</ProductAvgScore>
+          ) : (
+            <StarRatings
+              rating={avg}
+              starHoverColor="green"
+              starDimension="20px"
+              starSpacing="2px"
+              starEmptyColor="rgb(180,211,178)"
+              starRatedColor="green"
+              changeRating={
+                rating_data?.some((rating) => rating.is_owner)
+                  ? editCurrentUserRating
+                  : currentUser && handleRating
+              }
+            />
+          )}
         </Rating>
-      ))}
-    </RatingsWrapper>
+        <ProductPageConters>
+          {" "}
+          {all_scores}
+          {all_scores !== 1 ? " ratings" : " rating"} and {comments_count}
+          {comments_count !== 1 ? " reviews" : " review"}
+        </ProductPageConters>
+        <Divider />
+        {Object.entries(scores).map((score) => (
+          <Rating key={parseInt(score[0].split("star_")[1])} scores>
+            <StarRatings
+              rating={parseInt(score[0].split("star_")[1])}
+              starDimension="20px"
+              starSpacing="2px"
+              starEmptyColor="rgb(180,211,178)"
+              starRatedColor="green"
+            />
+            <ProductAvgScore>{score[1]}</ProductAvgScore>
+          </Rating>
+        ))}
+      </RatingsWrapper>
+    </OverlayTrigger>
   );
   const productPageTest = (
     <ProductPageColumn text="true" xs={12} md={{ span: 5, order: "last" }}>
