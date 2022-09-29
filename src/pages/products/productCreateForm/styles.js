@@ -58,6 +58,7 @@ export const TransparentInput = styled(Form.Control)`
   border: none;
   background-color: transparent;
   color: black;
+  text-overflow: ellipsis;
   font-size: ${(props) => (props.price ? "1.5rem" : "2rem")};
   letter-spacing: ${(props) => (props.price ? null : "0.1rem")};
   font-weight: 500;

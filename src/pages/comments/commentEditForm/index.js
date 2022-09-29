@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../../api/axiosDefaults";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 import { ActionButton, ActionButtonContainer } from "./styles";
 
 const CommentEditForm = ({ id, content, setShowEditForm, setComments }) => {
   const [formContent, setFormContent] = useState(content);
+  const { handleShowAlert } = useSetAlertContext();
 
   const handleChange = (e) => {
     setFormContent(e.target.value);
@@ -29,6 +31,8 @@ const CommentEditForm = ({ id, content, setShowEditForm, setComments }) => {
         }),
       }));
       setShowEditForm(false);
+      window.scrollTo(0, 0);
+      handleShowAlert("secondary", "Your comment has been updated.");
     } catch (err) {
       // console.log(err);
     }

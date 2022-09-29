@@ -396,52 +396,61 @@ const ProductPage = () => {
         />
       )}
       {ratingProductPage}
-      <CommentContainer>
-        {currentUser ? (
-          <CommentCreateForm
-            productData={productData}
-            comments={comments}
-            setProductData={setProductData}
-            setComments={setComments}
-          />
-        ) : !!comments.results?.length ? (
-          "Comments"
-        ) : null}
-        {!!comments.results?.length ? (
-          comments.results?.map((comment) => (
-            <Comment
-              key={comment.id}
+      <OverlayTrigger
+        placement="top"
+        overlay={
+          <Tooltip className={currentUser && "d-none"} id={`tooltip-top`}>
+            Only logged-in users can comment on products
+          </Tooltip>
+        }
+      >
+        <CommentContainer>
+          {currentUser ? (
+            <CommentCreateForm
+              productData={productData}
+              comments={comments}
               setProductData={setProductData}
               setComments={setComments}
-              {...comment}
             />
-          ))
-        ) : currentUser ? (
-          <span>No comments yet, be the first to comment!</span>
-        ) : (
-          <span>No comments... yet</span>
-        )}
-        <CommentPagination
-          nextLabel={<i className="fas fa-chevron-right"></i>}
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel={<i className="fas fa-chevron-left"></i>}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-        />
-      </CommentContainer>
+          ) : !!comments.results?.length ? (
+            "Comments"
+          ) : null}
+          {!!comments.results?.length ? (
+            comments.results?.map((comment) => (
+              <Comment
+                key={comment.id}
+                setProductData={setProductData}
+                setComments={setComments}
+                {...comment}
+              />
+            ))
+          ) : currentUser ? (
+            <span>No comments yet, be the first to comment!</span>
+          ) : (
+            <span>No comments... yet</span>
+          )}
+          <CommentPagination
+            nextLabel={<i className="fas fa-chevron-right"></i>}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel={<i className="fas fa-chevron-left"></i>}
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </CommentContainer>
+      </OverlayTrigger>
     </ProductPageColumn>
   );
 

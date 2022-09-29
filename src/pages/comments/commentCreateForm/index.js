@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useParams } from "react-router-dom";
 import { axiosRes } from "../../../api/axiosDefaults";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 
 import {
   CommentInput,
@@ -11,12 +12,10 @@ import {
   TypeBox,
 } from "./styles";
 
-const CommentCreateForm = ({
-  setProductData,
-  setComments,
-}) => {
+const CommentCreateForm = ({ setProductData, setComments }) => {
   const { id } = useParams();
   const [comment, setComment] = useState("");
+  const { handleShowAlert } = useSetAlertContext();
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     const commentFormData = new FormData();
@@ -36,6 +35,8 @@ const CommentCreateForm = ({
     } catch (err) {
       // console.log(err);
     }
+    window.scrollTo(0, 0);
+    handleShowAlert("success", "Your comment has been submitted!");
   };
   const handleCommentChange = (e) => {
     setComment(e.target.value);

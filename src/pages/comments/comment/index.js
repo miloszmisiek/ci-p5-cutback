@@ -12,7 +12,8 @@ import {
   UpdatedAtSpan,
 } from "./styles";
 import { useSetModalContext } from "../../../contexts/ModalContext";
-import { MoreDropdown} from "../../../components/moreDropdown";
+import { MoreDropdown } from "../../../components/moreDropdown";
+import { useSetAlertContext } from "../../../contexts/AlertContext";
 
 const Comment = (props) => {
   const {
@@ -28,6 +29,7 @@ const Comment = (props) => {
   } = props;
   const [showEditForm, setShowEditForm] = useState(false);
   const { handleClose, handleShow } = useSetModalContext();
+  const { handleShowAlert } = useSetAlertContext();
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`);
@@ -39,6 +41,8 @@ const Comment = (props) => {
       // console.log(err);
     }
     handleClose();
+    window.scrollTo(0, 0);
+    handleShowAlert("secondary", "Your comment has been deleted.");
   };
   return (
     <>

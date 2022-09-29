@@ -467,6 +467,8 @@ In the final production code the only commented out code left is `console.log(er
 
 - Function `checkIfEmailInString` copied from [Stack Overflow](https://stackoverflow.com/questions/16424659/check-if-a-string-contains-an-email-address).
 - Box-shadow CSS code was copied from [getcssscan.com](https://getcssscan.com/css-box-shadow-examples).
+- The ripper surfer images comes from [freepik.com](https://www.freepik.com/free-vector/skeleton-surfing-board_13340175.htm#query=skeleton%20surfer&position=2&from_view=keyword)
+- The sign-up, sign-in and not found images comes from [pixaby.com](https://pixabay.com/)
 
 ## **Acknowledgments**
 

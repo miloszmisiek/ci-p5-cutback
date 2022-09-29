@@ -23,7 +23,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
           <i className="fas fa-edit" />
         </ActionButton>
         <VerticalDivider></VerticalDivider>
-        <ActionButton onClick={handleDelete} aria-label="delete" delete>
+        <ActionButton onClick={handleDelete} aria-label="delete" delete="true">
           <i className="fas fa-trash-alt" />
         </ActionButton>
       </Dropdown.Menu>
