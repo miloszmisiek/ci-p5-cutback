@@ -41,7 +41,6 @@ const SignInForm = (props) => {
 
   const handleChange = (event) => {
     setsignInData({
-      // below you select the signInData and update only fields that are changing with the ... notation
       ...signInData,
       [event.target.name]: event.target.value,
     });

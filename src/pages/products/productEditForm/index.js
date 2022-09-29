@@ -91,8 +91,6 @@ const ProductEditForm = () => {
           in_stock,
         } = data;
 
-        // console.log(data);
-        // check if current user is post owner, else redirect to home page
         if (owner_profile.is_owner) {
           setProductData({
             category,
@@ -153,7 +151,6 @@ const ProductEditForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const productFormData = new FormData();
 
     for (const property in productData) {

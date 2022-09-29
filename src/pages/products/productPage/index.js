@@ -393,7 +393,6 @@ const ProductPage = ({ itemsPerPage }) => {
             comments={comments}
             setProductData={setProductData}
             setComments={setComments}
-            // setPageCount={setPageCount}
           />
         ) : !!comments.results?.length ? (
           "Comments"

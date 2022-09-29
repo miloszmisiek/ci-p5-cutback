@@ -24,12 +24,7 @@ import {
   ReactPaginateStyled,
 } from "./styles";
 
-const ProductsPage = ({
-  filter = "",
-  message,
-  heightcorrection,
-  visible = "true",
-}) => {
+const ProductsPage = ({ filter = "", heightcorrection, visible = "true" }) => {
   const [results, setResults] = useState([]);
   const [productCountries, setProductCountries] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -65,42 +60,6 @@ const ProductsPage = ({
             )
             .sort((a, b) => a.name.localeCompare(b.name))
         );
-
-        // if (ordering === "-price") {
-        //   const newFiltered = {
-        //     ...filtered,
-        //     results: filtered.results
-        //       ?.map((obj) => ({
-        //         ...obj,
-        //         price_euro: ConvertCurrency(
-        //           obj.price_currency,
-        //           parseFloat(obj.price)
-        //         ),
-        //       }))
-        //       .sort(
-        //         (a, b) => parseFloat(b.price_euro) - parseFloat(a.price_euro)
-        //       ),
-        //   };
-        //   setResults(newFiltered);
-        // } else if (ordering === "price") {
-        //   const newFiltered = {
-        //     ...filtered,
-        //     results: filtered.results
-        //       ?.map((obj) => ({
-        //         ...obj,
-        //         price_euro: ConvertCurrency(
-        //           obj.price_currency,
-        //           parseFloat(obj.price)
-        //         ),
-        //       }))
-        //       .sort((a, b) =>
-        //         parseFloat(a.price_euro - parseFloat(b.price_euro))
-        //       ),
-        //   };
-        //   setResults(newFiltered);
-        // } else {
-        //   setResults(filtered);
-        // }
         setResults(filtered);
         setPageCount(
           !!filtered.next
@@ -140,44 +99,6 @@ const ProductsPage = ({
           inStock ? inStock : ""
         }&${filter}&ordering=${ordering}&country=${filterSet}&search=${query}`
       );
-      // if (ordering === "-price") {
-      //   const newFiltered = {
-      //     ...data,
-      //     results: data.results
-      //       ?.map((obj) => ({
-      //         ...obj,
-      //         price_euro: ConvertCurrency(
-      //           obj.price_currency,
-      //           parseFloat(obj.price)
-      //         ),
-      //       }))
-      //       .sort(
-      //         (a, b) => parseFloat(b.price_euro) - parseFloat(a.price_euro)
-      //       ),
-      //   };
-      //   setResults(newFiltered);
-      // } else if (ordering === "price") {
-      //   const newFiltered = {
-      //     ...data,
-      //     results: data.results
-      //       ?.map((obj) => ({
-      //         ...obj,
-      //         price_euro: ConvertCurrency(
-      //           obj.price_currency,
-      //           parseFloat(obj.price)
-      //         ),
-      //       }))
-      //       .sort((a, b) =>
-      //         parseFloat(a.price_euro - parseFloat(b.price_euro))
-      //       ),
-      //   };
-      //   setResults(newFiltered);
-      // } else {
-      //   setResults(data);
-      // }
-      // setPageCount(
-      //   !!data.next ? Math.ceil(data?.count / data?.results?.length) : 0
-      // );
       setResults(data);
     } catch (err) {
       // console.log(err);
@@ -191,8 +112,6 @@ const ProductsPage = ({
 
   return (
     <>
-      {/* {hasLoaded ? (
-        <> */}
       <FiltersRow visible={visible}>
         <FiltersForm>
           <FilterContainer>
@@ -314,10 +233,6 @@ const ProductsPage = ({
       ) : (
         <Asset spinner />
       )}
-      {/* </>
-      ) : (
-        <Asset spinner />
-      )} */}
     </>
   );
 };

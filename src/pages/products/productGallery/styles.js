@@ -62,9 +62,6 @@ export const ImagePreview = styled(Card.Img)`
   opacity: 1;
   max-height: 300px;
   object-fit: contain;
-  /* &:hover {
-    opacity: 0.3;
-  } */
 `;
 
 export const Thumbnail = styled.img`

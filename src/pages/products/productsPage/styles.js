@@ -8,10 +8,6 @@ import styled from "styled-components";
 import { FormSwitch } from "../productEditForm/styles";
 
 export const ProductsPageRow = styled(Row)`
-  /* min-height: ${(props) =>
-    props.heightcorrection
-      ? `calc(100vh - ${props.heightcorrection})`
-      : "calc(100vh - 309px)"}; */
 `;
 
 export const CarouselImg = styled.img`
@@ -117,9 +113,6 @@ export const FiltersCountry = styled(Form.Control)`
   option {
     text-align: center;
   }
-  /* option {
-    text-align: left;
-  } */
 `;
 
 export const FilterInStock = styled(FormSwitch)`
@@ -141,7 +134,7 @@ export const FiltersTitle = styled.div`
   max-width: 7rem;
   padding: 0.375rem;
   cursor: pointer;
-  /* padding: 0 1rem; */
+
   @media (max-width: 767px) {
     position: static;
     display: flex;
@@ -157,6 +150,7 @@ export const FiltersDivide = styled.hr`
   display: ${(props) => (props.visible ? "block" : "none")};
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   width: 100%;
+
   @media (max-width: 767px) {
     display: block;
   }
@@ -165,7 +159,6 @@ export const FiltersDivide = styled.hr`
 export const AddProductBtn = styled.div`
   border: 1px solid rgba(180, 211, 178, 1);
   border-radius: 50%;
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,6 +170,7 @@ export const AddProductBtn = styled.div`
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   color: rgba(0, 0, 0, 0.8);
   background-color: rgba(180, 211, 178, 1);
+  
   &:hover {
     background-color: rgba(180, 193, 185, 1);
     border-color: rgba(180, 193, 185, 1);
@@ -249,7 +243,6 @@ export const AllProductsButton = styled.button`
   width: 100%;
   max-width: 8rem;
   padding: 0 0.5rem;
-  /* margin-bottom: 0.5rem; */
   margin-top: auto;
 
   &:hover {

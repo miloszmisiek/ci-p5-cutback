@@ -88,9 +88,7 @@ const ProductCreateForm = () => {
     for (const property in productData) {
       productFormData.append(`${property}`, productData[property]);
     }
-    // for (var pair of productFormData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
+    
     try {
       const { data } = await axiosRes.post("/products/", productFormData);
       history.push(`/products/${data.id}`);

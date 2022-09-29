@@ -52,10 +52,6 @@ export const ActionButton = styled.button`
   font-size: 1.5rem;
   color: ${(props) => (props.delete ? "red" : "color: rgba(0, 0, 0, 0.5)")};
   padding: 0 1rem;
-  /* border-left: ${(props) =>
-    props.delete ? "0.5px solid rgba(0,0,0,.2)" : "none"};
-  border-right: ${(props) =>
-    props.delete ? "none" : "0.5px solid rgba(0,0,0,.2)"}; */
 
   &:hover {
     animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;

@@ -1,5 +1,5 @@
 html {
-  overflow: auto; /* fallback */
+  overflow: auto;
   overflow: overlay;
 }
 
@@ -17,7 +17,6 @@ a:hover {
 }
 div {
   cursor: default;
-  /* word-break: break-all; */
   overflow-wrap: anywhere;
 }
 

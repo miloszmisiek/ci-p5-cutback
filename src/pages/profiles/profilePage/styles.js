@@ -5,7 +5,6 @@ export const ProfileInfoContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  /* border: 1px solid black; */
   padding: 1rem;
   gap: 1rem;
   align-items: center;
@@ -48,9 +47,6 @@ export const StatsContainer = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 2rem;
-  /* @media (max-width: 767px) {
-    flex-direction: column;
-  } */
 `;
 
 export const StatsTitle = styled.div`
@@ -74,7 +70,6 @@ export const AvatarContainer = styled.div`
 export const AddProductBtn = styled.div`
   border: 1px solid rgba(180, 211, 178, 1);
   border-radius: 50%;
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;

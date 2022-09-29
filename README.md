@@ -1,15 +1,23 @@
 # <div align='center'> Cutback :surfer: <!-- omit in toc --> </div>
 
-## Contents
+## **Contents**
 
+- [**Contents**](#contents)
+- [**About**](#about)
+- [**Project Goals**](#project-goals)
+- [**User Stories**](#user-stories)
 - [**Technologies Used**](#technologies-used)
-  - [## **Project Architecture**](#-project-architecture)
-  - [Features](#features)
-    - [Existing Features](#existing-features)
+- [**Project Architecture**](#project-architecture)
+- [**Features**](#features)
+  - [Existing Features](#existing-features)
+  - [Features Left to implement](#features-left-to-implement)
 - [**UX Design**](#ux-design)
   - [Color Scheme](#color-scheme)
   - [Typography](#typography)
   - [Wireframes](#wireframes)
+- [**Deployment**](#deployment)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
 - [**Credits**](#credits)
 - [**Acknowledgments**](#acknowledgments)
 
@@ -25,7 +33,7 @@ With an authorised profile, they are ready to help save our planet by taking par
 
 [Back to contents](#contents)
 
-## Project Goals
+## **Project Goals**
 
 ---
 
@@ -43,7 +51,7 @@ With an authorised profile, they are ready to help save our planet by taking par
 
 [Back to contents](#contents)
 
-## User Stories
+## **User Stories**
 
 | Issue ID    | User Story | Project Goal |
 | :------------:| --------------- | ---------- |
@@ -71,7 +79,7 @@ With an authorised profile, they are ready to help save our planet by taking par
 | [#32](https://github.com/miloszmisiek/ci-p5-cutback/issues/32)   | As a user, I can sort the products currently displayed so that I can see the products in the order I am most interested in | **3. Create a platform with easy access to products.**, **8. Give users quick access to the best offers.**, <br/> <br/> **10. Allow users to filter products by useful features.**
 | [#33](https://github.com/miloszmisiek/ci-p5-cutback/issues/33)   | As a user, I can display products by categories so that I can find products of my interest easier | **3. Create a platform with easy access to products.**
 | [#34](https://github.com/miloszmisiek/ci-p5-cutback/issues/34)   | As a user, I can view a footer from every page so that I can have easy access to all footer content on different pages | **4. Design a layout that is intuitive and focuses on content.**
-| [#36](https://github.com/miloszmisiek/ci-p5-cutback/issues/36)   | As a user I can explore the website as a guest so that I can review the app content | **3. Create a platform with easy access to products.**, 
+| [#36](https://github.com/miloszmisiek/ci-p5-cutback/issues/36)   | As a user I can explore the website as a guest so that I can review the app content | **3. Create a platform with easy access to products.**,
 | [#37](https://github.com/miloszmisiek/ci-p5-cutback/issues/36)   | As a user, I can use the app on different devices with various screen sizes so that I am not restricted to using it only on regular-size computers | **4. Design a layout that is intuitive and focuses on content.**, <br/> <br/> **5. Allow for responsiveness on different screen sizes to reach a further audience.**, <br/> <br/> **9. Create a platform for modern needs.**
 | [#38](https://github.com/miloszmisiek/ci-p5-cutback/issues/38)   | As a user I can identify the product's location so that I can decide if I can check the offer physically | **10. Allow users to filter products by useful features.**
 | [#39](https://github.com/miloszmisiek/ci-p5-cutback/issues/39)   | As a user I can see if the product is available so that I can decide to contact the offer owner | **10. Allow users to filter products by useful features.**
@@ -79,7 +87,7 @@ With an authorised profile, they are ready to help save our planet by taking par
 
 [Back to contents](#contents)
 
-# **Technologies Used**
+## **Technologies Used**
 
 - ### Languages
 
@@ -119,27 +127,62 @@ With an authorised profile, they are ready to help save our planet by taking par
   - [CSSgradient.io](https://cssgradient.io/): was used for genertating background gradients
   - [Grammarly](https://www.grammarly.com/): was used to check grammar and typo errors.
 
+- ### NPM packages & components
+
+  - [react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input#formatphonenumbervalue-string-string): used for phone input in the profile edit form.
+  - [react-paginate](https://www.npmjs.com/package/react-paginate): used for site pagination for the products and for comments
+  - [react-country-flag](https://www.npmjs.com/package/react-country-flag): used for displaying country flag in the Product page next to phone number and country location
+
+
 [Back to contents](#contents)
 
 ## **Project Architecture**
+
 ---
-<!-- Document the reuse of components -->
+
 1. **The project files structure.**
 
-   Files organization is inspired by [Spectrum](https://github.com/withspectrum/spectrum/)'s code base, where [Max Stoiber](https://github.com/mxstbr), the creator of styled-components, contributes heavily on this project.
+    Files organization is inspired by [Spectrum](https://github.com/withspectrum/spectrum/)'s code base, where [Max Stoiber](https://github.com/mxstbr), the creator of styled-components, contributes heavily on this project.
+    Components are saved in the seperate **index.js** files with **styles.js** including CSS-in-JS styling provided with [styled-components](https://styled-components.com/). This files are saved together in components directories named in camelCase convention.
 
-## Features
+2. **The Component Reuse**
+
+    The [ReactJS](https://reactjs.org/) technology allows for creating components and use them across the app. The component can be suplied with props to get the data from the parent component and use them in different situation with different props.
+
+    For this project the functional approach was chosen with use of React hooks, mainly **useState** and **useEffect** for managing components states and lifecycles.
+
+    This hooks were hevily used for the app development which is evident in the repository.
+
+    Some of the components which were reused with different scenarios are as followed:
+
+    - The Product Card component is reused in the profile page and is used to display products in the home page. The map function is used to implement fetched data from the API.
+
+    - Buttons used in the app share common parent - the styling is adjusted for the certain needs.
+
+    - The rating component is used in the product card and in the product page.
+
+    - The carousel component is used in the product card and in the product create and edit pages.
+      
+    - The comments are rendered in the map function with data fetched from the API and displayed in the product page.
+
+    - The avatars used in the app are same component with adjusted sizes for the layout.
+
+    The custom hook **useFetch** was created to fetch data from API endpoint for Categories and Countries select elements.
+
+    Custom **Contexts** were developed to allow for global use of **Alert** and **Modal** states and display different data i.e. removal of comments, products and images confirmation messages and alerts for changes to data.
+
+## **Features**
 
 ---
 
-This websites serves as a product comparasion sites with surfers as the targeted audience. 
+This websites serves as a product comparasion sites with surfers as the targeted audience.
 
 ### Existing Features
 
 **- Navigation Bar**
 
 - Available at any page, includes the logo, search bar with categories selection and for logged-out users sign in and sign up button. For logged-in users the menu dropdown list allows users for navigation through different app sites.
-    
+
 - The navigation bar gives users access to all major navigation features. It is fully responsive on different screen sizes.
 
 **Logged-In Users**
@@ -286,6 +329,8 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 - To submit data all fields must be valid and not empty. Password fields does not need to be field to change personal information.
 
+- Users can change their profile picture by clicking on the avatar.
+
 - To change password user must type two matching passwords and submit the form with save button.
 
 - The profile edit page gives users ability to edit their data or add more personal information if they wish to be contacted.
@@ -324,18 +369,27 @@ This websites serves as a product comparasion sites with surfers as the targeted
 
 ![Page Not Found](documentation/features/not-found-page.png)
 
+**- The Footer**
 
+- When users scroll to the bottom of the page the footer is displayed.
+- In the footer users can access the creator's social links and send the email.
+- Logo redirects to the home page.
 
+### Features Left to implement
 
-# **UX Design**
+- Profile deletion will be implemented in the next verison of the product.
+- The Best Deals component on top of the page to display 4-5 products with best rates.
+- Payment sevice to allow users for finalizing the deal through the app.
 
-<!-- The main theme of the application is designed to be toned, thus it gives a great contrast with elements of brighter colours requiring attention. The principle of the design is to bring a minimalistic approach to the page. -->
-## Color Scheme
-<!-- The colour scheme is based on pastel colours with the use of bold colours to bring the user's attention. -->
+## **UX Design**
+
+### Color Scheme
+
+The main theme of the page is in white, gray and black colors. Buttons are in toned green or where the attention is needed - red. The idea behind the layout was to be not cluttering to focus attention on the products. The background pictures send a message for the users which products they can expect to find on the site and are used to enhance UX.
 
 [Back to contents](#contents)
 
-## Typography
+### Typography
 
 - The primary font used for the application is **Montserrat** - it is modern and elegant font-family used on most of the website.
 - The font-family used for the logo is **Permanent Marker** - it gives contrast to primary font-family.
@@ -344,13 +398,52 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
 
 [Back to contents](#contents)
 
-## Wireframes
+### Wireframes
 
  Wireframes used in the design process can be found [here](documentation/wireframes/cutback-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
 
  [Back to contents](#contents)
 
-# **Credits**
+## **Deployment**
+
+### Backend
+This project is deployed as a seperate backend service build with [Django Rest Framework](https://www.django-rest-framework.org/). It expose API endpoints for GET, POST, PUT, DELETE and OPTIONS functions. The databse is using relational database [PostgreSQL](https://www.postgresql.org/) and hosted to [Heroku](https://dashboard.heroku.com/) cloud PaaS.
+
+The complete deployment process with backend project description is described in the seperate repository.
+
+The backend repository can be found [here](https://github.com/miloszmisiek/drf_api_cutback).
+
+### Frontend
+
+The application's frontend was developed with use of [ReactJS](https://reactjs.org/) technology. The code was deployed to [Heroku](https://dashboard.heroku.com/) for production. The procedure for Heroku deployment was explained in details in the backend README.md. For Frontend the steps are almost identical, without the need to set **Config Vars** and installing Heroku Postgres dynos.
+
+**Procedure**
+
+---
+
+1. `npm run build` was used to build a stable production version.
+2. **Procfile** was created to include the `web: serve -s build` command for Heroku build.
+3. In the **package.json** the following code was added to include heroku build script:
+
+```json
+"scripts": {
+    "heroku-prebuild": "npm install -g serve",
+    (...)
+    }
+```
+
+4. To deploy the app the user must have an account in the **Heroku** service.
+5. GitHub deployment method was used from the **Deploy** tab in the app's Heroku page.
+6. After the repository was connected the manual deploment was used to build the production version of React app.
+7. After successful deploymnet the app is ready to use.
+
+**Deploymnet Troubleshooting**
+
+- The app deployed in the first realese was not build for production, but remained in development state, which resulted with crashing after short time of usage. The problem was solved with running `npm run build` and deploying from the Heroku site instead of terminal command.
+
+- After testing the delete functionality for the user the backend crashed and was unable to restore afterwards. The databse was reset in the Heroku. The possible cause is the token validation for deleted user - after deleting browser's cookies the server responded with endpoints, but after another fetching tests it crashed again. After that the decision was made to rest the database and remove the profile delete functionality for this app realease and find solution to implement this feature in the safe enviroment.
+
+## **Credits**
 
 - Logo comes from [flaticon](https://www.flaticon.com/free-icon/surfboard_2045815?term=surfboard&page=1&position=1&page=1&position=1&related_id=2045815&origin=tag).
 - Elements inspired or copied from [Code Institute](https://codeinstitute.net/global/) Walkthrough **Moments** project by Adam Lapinski:
@@ -359,11 +452,12 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
   - Comment, CommentEditForm and CommentCreateForm components elements,
   - Avatar component structure,
   - Asset component structure,
-  - CurrentUserContext structure,
+  - useRedirect hook,
 
 - Function `checkIfEmailInString` copied from [Stack Overflow](https://stackoverflow.com/questions/16424659/check-if-a-string-contains-an-email-address).
+- Box-shadow CSS code was copied from [getcssscan.com](https://getcssscan.com/css-box-shadow-examples).
 
-# **Acknowledgments**
+## **Acknowledgments**
 
 1. My family for being my biggest supporters throughout the entire time!
 3. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project.

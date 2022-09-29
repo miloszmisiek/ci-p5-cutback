@@ -88,7 +88,6 @@ const ProfileEditPage = () => {
     });
   };
 
-
   const handlePasswordChange = async () => {
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", {
@@ -145,7 +144,6 @@ const ProfileEditPage = () => {
       {hasLoaded ? (
         <>
           <RowCustom>
-            {/* <ModalCustom /> */}
             <Col xs={12} md={{ span: 6, order: "last" }}>
               <AvatarContainer>
                 <Form.Group>

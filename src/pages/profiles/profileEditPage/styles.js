@@ -86,7 +86,6 @@ export const AvatarContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 100%;
-  /* max-height: 80%; */
   width: 100%;
   margin-top: 1rem;
 `;
@@ -115,7 +114,4 @@ export const RowCustom = styled(Row)`
 `;
 
 export const FormControl = styled(Form.Control)`
-  /* @media (max-width: 767px) {
-    text-align: center;
-  } */
 `;

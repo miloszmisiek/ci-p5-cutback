@@ -17,7 +17,6 @@ export const CarouselProductPage = styled(CarouselStyled)``;
 
 export const CarouselImgProductPage = styled(CarouselImg)`
   max-height: 400px;
-  /* box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px; */
 `;
 
 export const TextContainer = styled.div`
