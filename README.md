@@ -25,11 +25,13 @@
 
 ---
 
-The Cutback is a web application which allows users to compare surfing equipment and find the best deal for themselves. This project is built to help surfers trade their gear and encourage them to use second-hand equipment.
+**The Cutback** is a web application which allows users to compare surfing equipment and find the best deal for themselves. This project is built to help surfers trade their gear and encourage them to use second-hand equipment.
 
 Users can create posts with a gear they want to trade, but also compare products by the comments and 5-star rating system. All they need to do is create an account with an existing email.
 
 With an authorised profile, they are ready to help save our planet by taking part in a reusable community.
+
+You can find deployed site [here](https://cutback-project.herokuapp.com/).
 
 [Back to contents](#contents)
 
@@ -271,6 +273,8 @@ This website serves as a product comparison site with surfers as the targeted au
 
 ---
 
+[Back to contents](#contents)
+
 **- The Product Creation Page**
 
 - Users can access the product creation page by clicking the plus button on the profile page.
@@ -349,6 +353,9 @@ This website serves as a product comparison site with surfers as the targeted au
 ![Sign In Page](documentation/features/sign-in.png)
 
 ---
+
+[Back to contents](#contents)
+
 
 **- Sign Up Page**
 
