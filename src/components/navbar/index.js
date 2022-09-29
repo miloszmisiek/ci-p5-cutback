@@ -187,7 +187,7 @@ const NavBar = () => {
               }))
             }
           >
-            <StyledCategoriesDropdown id="dropdown-basic">
+            <StyledCategoriesDropdown id="dropdown-basic" aria-label="categories-dropdown">
               <span className="d-none" id="categories">
                 {displayName}
               </span>

@@ -134,30 +134,30 @@ Below are manual tests completed during the product development.
 | 8           | The logged-in user submits the form with empty fields | The form is rejected, alerts for fields are displayed | Y |    |
 | 9           | The logged-in user submits a form with valid data | The form is submitted, redirection to the product page | Y |    |
 | **The Edit Product Form**     |                        |                  |      |
-| 1           | The anonymous user enters edit product page from URL | Redirection to home page | Y |      |
+| 1           | The anonymous user enters edit product page from URL | Redirection to home page |Y||
 | 2           | The logged-in user enters edit product page from URL/product page title link | The product edit component renders including the product gallery component and the product information component with data fetched from database | Y |      |
 | 3           | The logged-in user clicks the plus button below the gallery component | The file selection window is displayed, and users can select and add the images | Y |   If the product has less than 5 images   |
-| 4           | The logged-in user adds the image | The image is displayed in the preview and the thumbnails, the deletion button is displayed | Y |    |
+| 4           | The logged-in user adds the image The image is displayed in the preview and the thumbnails, the deletion button is displayed |Y||
 | 5           | The logged-in user clicks the product's image deletion button | Users are prompted for choice confirmation, if removal is confirmed - the image is removed, if cancelled the image remains unchanged| Y |    |
-| 6           | The logged-in user adds a fifth picture | The add button is changed to the cross button | Y |    |
+| 6           | The logged-in user adds a fifth picture | The add button is changed to the cross button |Y||
 | 7           | The logged-in user clicks the cross button | The alert is displayed with a message that only five pictures are allowed per product. The adding functionality is blocked | Y |    |
 | 8           | The logged-in user submits a form with empty fields | The form is rejected, alerts for fields are displayed | Y |    |
 | 9           | The logged-in user submits a form with valid data - unchanged | The form is submitted, redirection to the product page | Y |    |
 | 10           | The logged-in user submits a form with valid data - changed | The form is submitted, redirection to the product page | Y |    |
 | 11           | The logged-in user clicks the delete button | Users are prompted for choice confirmation, if removal is confirmed - the product is removed, if cancelled then the image remains unchanged | Y |    |
-| **Ratings**     |                        |                  |      |
-| 1           | Anonymous user clicks on the rating's stars | Rating functionality not available | Y |      |
-| 2           | Logged-in user hovers over rating's stars | Selected stars are highlighted | Y |      |
-| 3           | Logged-in user clicks first time any star | The star counter is updated including counters for every star, an alert is displayed that the rate was accepted | Y |      |
-| 4           | Logged-in user clicks next time any star | The star counter is updated including counters for every star, an alert is displayed that the rate was accepted | Y |      |
-| **Footer**     |                        |                  |      |
+| **Ratings**||||
+| 1           | Anonymous user clicks on the rating's stars | Rating functionality not available |Y||
+| 2           | Logged-in user hovers over rating's stars | Selected stars are highlighted |Y||
+| 3           | Logged-in user clicks first time any star | The star counter is updated including counters for every star, an alert is displayed that the rate was accepted |Y||
+| 4           | Logged-in user clicks next time any star | The star counter is updated including counters for every star, an alert is displayed that the rate was accepted |Y||
+| **Footer**||||
 | 1           | Users click the logo in the footer | Redirection to home page | Y |  If the home page already displayed - no refresh    |
-| 2           | Users click the email icon | The user's device's default email service is triggered with the creator's email address | Y |      |
-| 3           | Users click the LinkedIn icon | Redirection to creator's LinkedIn profile | Y |      |
-| 4           | Users click the GitHub icon | Redirection to creator's GitHub profile | Y |      |
-| 5           | Users scroll down to any page end | The footer is displayed | Y |      |
-| **Not Found Page**     |                        |                  |      |
-| 1           | User enters not valid URL with the website base URL present | The Not Found page component is rendered | Y |      |
+| 2           | Users click the email icon | The user's device's default email service is triggered with the creator's email address | Y||
+| 3           | Users click the LinkedIn icon | Redirection to creator's LinkedIn profile | Y||
+| 4           | Users click the GitHub icon | Redirection to creator's GitHub profile | Y||
+| 5           | Users scroll down to any page end | The footer is displayed | Y||
+| **Not Found Page**||||
+| 1           | User enters not valid URL with the website base URL present | The Not Found page component is rendered |Y||
 
 [Back to contents](#contents)
 
