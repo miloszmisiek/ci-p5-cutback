@@ -15,6 +15,7 @@
   - [Color Scheme](#color-scheme)
   - [Typography](#typography)
   - [Wireframes](#wireframes)
+- [**Testing**](#testing)
 - [**Deployment**](#deployment)
   - [Backend](#backend)
   - [Frontend](#frontend)
@@ -22,8 +23,6 @@
 - [**Acknowledgments**](#acknowledgments)
 
 ## **About**
-
----
 
 **The Cutback** is a web application which allows users to compare surfing equipment and find the best deal for themselves. This project is built to help surfers trade their gear and encourage them to use second-hand equipment.
 
@@ -36,8 +35,6 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
 [Back to contents](#contents)
 
 ## **Project Goals**
-
----
 
 1. Build a project to help compare surfing equipment.
 2. Help users to choose the best product they are looking for.
@@ -120,7 +117,7 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
   - [GitHub](https://github.com/): used to host the website's source code.
   - [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
   - [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/): was used to debug the website.
-  - [Font Awesome](https://fontawesome.com/): was used to create the icons used in the website.
+  - [Font Awesome](https://fontawesome.com/): was used to create the icons used on the website.
   - [Balsamiq](https://balsamiq.com/): was used to design wireframes during the design process.
   - [W3C Validator](https://validator.w3.org/): was used to validate HTML5 code for the website.
   - [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
@@ -139,8 +136,6 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
 
 ## **Project Architecture**
 
----
-
 1. **The project files structure.**
 
     Files organization is inspired by [Spectrum](https://github.com/withspectrum/spectrum/)'s code base, where [Max Stoiber](https://github.com/mxstbr), the creator of styled-components, contributes heavily to this project.
@@ -148,7 +143,7 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
 
 2. **The Component Reuse**
 
-    The [ReactJS](https://reactjs.org/) technology allows for creating components and using them across the app. The component can be supplied with props to get the data from the parent component and use them in a different situations with different props.
+    The [ReactJS](https://reactjs.org/) technology allows for creating components and using them across the app. The component can be supplied with props to get the data from the parent component and use them in a different situation with different props.
 
     For this project, the functional approach was chosen with the use of React hooks, mainly **state** and **useEffect** for managing components' states and lifecycles.
 
@@ -172,9 +167,9 @@ You can find deployed site [here](https://cutback-project.herokuapp.com/).
 
     Custom **Contexts** were developed to allow for global use of **Alert** and **Modal** states and display different data i.e. removal of comments, products and images confirmation messages and alerts for data changes.
 
-## **Features**
+  The Entity Relationship Diagram is attached to backend project.
 
----
+## **Features**
 
 This website serves as a product comparison site with surfers as the targeted audience.
 
@@ -380,6 +375,8 @@ This website serves as a product comparison site with surfers as the targeted au
 - In the footer users can access the creator's social links and send the email.
 - Logo redirects to the home page.
 
+![Footer](documentation/features/footer.png)
+
 ### Features Left to implement
 
 - Profile deletion will be implemented in the next version of the product.
@@ -408,6 +405,10 @@ All fonts come from [Google Fonts](https://fonts.google.com/).
  Wireframes used in the design process can be found [here](documentation/wireframes/cutback-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
 
  [Back to contents](#contents)
+
+## **Testing**
+
+ Various test results are presented in the separate [TESTING](TESTING.md) file.
 
 ## **Deployment**
 
@@ -440,7 +441,7 @@ The application's front end was developed with the use of [ReactJS](https://reac
 ```
 
 4. To deploy the app the user must have an account in the **Heroku** service.
-5. GitHub deployment method was used from the **Deploy** tab on the app's Heroku page.
+5. GitHub's deployment method was used from the **Deploy** tab on the app's Heroku page.
 6. After the repository was connected the manual deployment was used to build the production version of React app.
 7. After successful deployment the app is ready to use.
 
@@ -457,6 +458,7 @@ In the final production code the only commented out code left is `console.log(er
 ## **Credits**
 
 - Logo comes from [flaticon](https://www.flaticon.com/free-icon/surfboard_2045815?term=surfboard&page=1&position=1&page=1&position=1&related_id=2045815&origin=tag).
+
 - Elements inspired or copied from [Code Institute](https://codeinstitute.net/global/) Walkthrough **Moments** project by Adam Lapinski:
   - SingUpForm component's submit, change and error handlers,
   - MoreDropdown component structure,
@@ -466,15 +468,19 @@ In the final production code the only commented out code left is `console.log(er
   - useRedirect hook,
 
 - Function `checkIfEmailInString` copied from [Stack Overflow](https://stackoverflow.com/questions/16424659/check-if-a-string-contains-an-email-address).
+
 - Box-shadow CSS code was copied from [getcssscan.com](https://getcssscan.com/css-box-shadow-examples).
+
 - The ripper surfer images comes from [freepik.com](https://www.freepik.com/free-vector/skeleton-surfing-board_13340175.htm#query=skeleton%20surfer&position=2&from_view=keyword)
+
 - The sign-up, sign-in and not found images comes from [pixaby.com](https://pixabay.com/)
 
 ## **Acknowledgments**
 
 1. My family for being my biggest supporters throughout the entire time!
-3. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project.
-4. [Stack Overflow](https://stackoverflow.com/) community for the best bug-solving space ever created!
+2. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project.
+3. [Stack Overflow](https://stackoverflow.com/) community for the best bug-solving space ever created!
+4. The Code Institute team for intensive, but most amazing time of my life I had learnig to code with you!
 
 [Back to contents](#contents)
 
