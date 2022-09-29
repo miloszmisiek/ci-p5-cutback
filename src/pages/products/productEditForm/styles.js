@@ -1,23 +1,22 @@
-import { Form } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import styled from "styled-components";
 import { AddProductButton, ButtonsWrapper } from "../productCreateForm/styles";
 
 export const EditButtonsWrapper = styled(ButtonsWrapper)`
-    justify-content: space-between;
+  justify-content: space-between;
 `;
 
 export const ProductDeleteButton = styled(AddProductButton)`
-    background-color: #df2c14 !important;
+  background-color: #df2c14 !important;
 `;
 
 export const Brand = styled(Form.Control)`
-    max-width: 50%;
-
+  max-width: 50%;
 `;
 
 export const FormSwitch = styled(Form.Switch)`
-width: 100%;
-text-align: center;
+  width: 100%;
+  text-align: center;
   .custom-control-input:checked ~ .custom-control-label::before {
     border-color: rgba(180, 211, 178, 1);
     background-color: rgba(180, 211, 178, 1);

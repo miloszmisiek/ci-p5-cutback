@@ -1,4 +1,5 @@
-import { Card, Form } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 import styled from "styled-components";
 import { Column } from "../productCard/styles";
 
@@ -56,7 +57,6 @@ export const Figure = styled.figure`
 export const FormLabel = styled(Form.Label)`
   margin-bottom: 0;
 `;
-
 
 export const ImagePreview = styled(Card.Img)`
   opacity: 1;

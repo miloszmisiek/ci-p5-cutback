@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Alert, Row } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";

@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Alert, Col, Form, OverlayTrigger } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { useHistory, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Form } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
 import {
   Header,
   SubmitButton,
@@ -52,8 +53,6 @@ const SignUpForm = (props) => {
     } catch (err) {
       setErrors(err.response?.data);
     }
-    
-
   };
 
   return (

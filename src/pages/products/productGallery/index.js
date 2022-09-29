@@ -13,7 +13,8 @@ import {
   Thumbnail,
   Thumbnails,
 } from "./styles";
-import { Alert, Form } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
 import Asset from "../../../components/asset";
 import { useSetModalContext } from "../../../contexts/ModalContext";
 import { useSetAlertContext } from "../../../contexts/AlertContext";

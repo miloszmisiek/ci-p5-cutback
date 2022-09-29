@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
 import { NotFound, NotFoundRow } from "./styles";
 
 const PageNotFound = ({ setBackground }) => {

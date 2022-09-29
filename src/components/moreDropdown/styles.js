@@ -1,4 +1,4 @@
-import { Dropdown } from "react-bootstrap";
+import Dropdown  from "react-bootstrap/Dropdown";
 import styled from "styled-components";
 
 export const DropdownCustom = styled(Dropdown)`

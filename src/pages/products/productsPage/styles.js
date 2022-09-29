@@ -1,14 +1,11 @@
 import ReactPaginate from "react-paginate";
-import {
-  Carousel,
-  Form,
-  Row,
-} from "react-bootstrap";
+import Carousel from "react-bootstrap/Carousel";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 import { FormSwitch } from "../productEditForm/styles";
 
-export const ProductsPageRow = styled(Row)`
-`;
+export const ProductsPageRow = styled(Row)``;
 
 export const CarouselImg = styled.img`
   display: block;
@@ -170,7 +167,7 @@ export const AddProductBtn = styled.div`
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   color: rgba(0, 0, 0, 0.8);
   background-color: rgba(180, 211, 178, 1);
-  
+
   &:hover {
     background-color: rgba(180, 193, 185, 1);
     border-color: rgba(180, 193, 185, 1);

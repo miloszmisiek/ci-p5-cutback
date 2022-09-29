@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
+import Carousel from "react-bootstrap/Carousel";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { Link, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../../api/axiosDefaults";
 import { FullRow } from "../../auth/signUpForm/styles";

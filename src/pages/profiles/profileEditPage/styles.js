@@ -3,7 +3,9 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { PostButton } from "../../comments/commentCreateForm/styles";
 import { ActionButton } from "../../comments/commentEditForm/styles";
-import { Form, Row, Tooltip } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export const PersonalInfo = styled.div`
   padding: 1rem 1rem 0;
@@ -113,5 +115,4 @@ export const RowCustom = styled(Row)`
   }
 `;
 
-export const FormControl = styled(Form.Control)`
-`;
+export const FormControl = styled(Form.Control)``;

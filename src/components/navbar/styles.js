@@ -1,13 +1,11 @@
-import {
-  Col,
-  Container,
-  Dropdown,
-  FormControl,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Row,
-} from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import FormControl from "react-bootstrap/FormControl";
+import Dropdown from "react-bootstrap/Dropdown";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 

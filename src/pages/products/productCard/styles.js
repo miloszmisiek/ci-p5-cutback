@@ -1,4 +1,5 @@
-import { Card, Col } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,7 +11,6 @@ export const Column = styled(Col)`
 export const CardWrapper = styled(Card)`
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 `;
-
 
 export const CardHeader = styled(Card.Header)`
   display: none;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import Carousel from "react-bootstrap/Carousel";
 import { CarouselImg, CarouselStyled } from "../productsPage/styles";
 import StarRatings from "react-star-ratings";
 import {
@@ -17,15 +17,7 @@ import {
 import Asset from "../../../components/asset";
 
 const ProductCard = (props) => {
-  const {
-    id,
-    gallery,
-    title,
-    price,
-    scores,
-    comments_count,
-    in_stock,
-  } = props;
+  const { id, gallery, title, price, scores, comments_count, in_stock } = props;
   return (
     <Column xs={12} sm={6} md={4}>
       <CardWrapper>

@@ -1,4 +1,5 @@
-import { Button, Media } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Media from "react-bootstrap/Media";
 import styled from "styled-components";
 
 export const MediaBody = styled(Media.Body)`

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Dropdown, Form, NavDropdown } from "react-bootstrap";
+import Dropdown from "react-bootstrap/Dropdown";
+import Form from "react-bootstrap/Form";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useSetAlertContext } from "../../contexts/AlertContext";
@@ -187,7 +189,10 @@ const NavBar = () => {
               }))
             }
           >
-            <StyledCategoriesDropdown id="dropdown-basic" aria-label="categories-dropdown">
+            <StyledCategoriesDropdown
+              id="dropdown-basic"
+              aria-label="categories-dropdown"
+            >
               <span className="d-none" id="categories">
                 {displayName}
               </span>

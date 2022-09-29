@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { OverlayTrigger } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { Link, useParams } from "react-router-dom";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Asset from "../../../components/asset";
