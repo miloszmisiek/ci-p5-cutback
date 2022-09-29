@@ -32,7 +32,6 @@ export const AppWrapper = styled.div`
 
 export const Main = styled.main`
   background-color: #f8f8f8;
-  /* height: ${(props) => (props.home ? null : "100%")}; */
   min-height: calc(100vh - 101px);
 `;
 

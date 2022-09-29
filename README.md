@@ -428,9 +428,10 @@ The application's front end was developed with the use of [ReactJS](https://reac
 
 ---
 
-1. `npm run build` was used to build a stable production version.
-2. **Procfile** was created to include the `web: serve -s build` command for Heroku build.
-3. In the **package.json** the following code was added to include Heroku build script:
+1. `<React.StrictMode>` was removed from the main **index.js** - it is a help during development process, serves additional checks, mainly for the unsafe component lifecycles, but it is not required for production.
+2. `npm run build` was used to build a stable production version.
+3. **Procfile** was created to include the `web: serve -s build` command for Heroku build.
+4. In the **package.json** the following code was added to include Heroku build script:
 
 ```json
 "scripts": {
